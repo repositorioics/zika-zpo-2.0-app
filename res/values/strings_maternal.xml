@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Eventos -->
+    <string name="maternal_events">Matriz de eventos para madres</string>
+    <string name="maternal_a_1">Ingreso</string>
+    <string name="maternal_a_2">12 Meses</string>
+    <string name="maternal_a_3">24 Meses</string>
+    <string name="maternal_a_4">Salida</string>
+    <!-- Formularios -->
+    <string name="maternal_b_1">Demografía</string>
+    <string name="maternal_b_2">Estado de Salud</string>
+    <string name="maternal_b_3">Historia Embarazo</string>
+    <string name="maternal_b_4">Muestras</string>
+    <string name="maternal_b_5">Visita Mensual</string>
+    <string name="maternal_b_6">Profesión, Hogar y Factores de Riesgo</string>
+    <string name="maternal_b_7">Exposición ambiental</string>
+    <string name="maternal_b_8">Pesticidas e Insecticidas</string>
+    <string name="maternal_b_10">Parto</string>
+    <string name="maternal_b_11">Posparto</string>
+    <string name="maternal_b_12">Datos Identificación</string>    
+    
+    
+    <string name="mat_search">Buscar Madre</string>
+    <string name="mat_data">Datos Embarazada</string>
+    <string name="mat_tam">Tamizaje</string>
+    <string name="mat_cons_title">Consentimiento verbal embarazada</string>
+    <!-- Campos materna -->
+    <string name="mat_id">Código de la participante</string>
+    <string name="mat_ini">Iniciales de la participante</string>
+    <string name="mat_numtam">Número de tamizaje</string>
+    <string name="mat_fec">Fecha de ingreso</string>
+    <string name="mat_exit">Fecha de salida</string>
+    <string name="mat_retired">Retirada del estudio</string>
+    <string name="mat_retire">Retirar a esta participante del estudio??</string>
+    <string name="mat_cons">La mujer dió consentimiento verbal para tamizaje? *</string>
+    <string name="cs">Centro de Salud *</string>
+    <string name="csHint">Requerido. Registrar la unidad de salud de la participante del estudio.</string>
+    <string name="nombre1">Nombre *</string>
+    <string name="nombre1Hint">Requerido. Registrar el nombre de la participante del estudio.</string>    
+	<string name="nombre2">Segundo Nombre</string>
+    <string name="nombre2Hint">No requerido. Registrar el segundo nombre de la participante del estudio.</string>    
+	<string name="apellido1">Apellido *</string>
+    <string name="apellido1Hint">Requerido. Registrar el apellido de la participante del estudio.</string>
+    <string name="apellido2">Segundo Apellido</string>
+    <string name="apellido2Hint">No requerido. Registrar el apellido de la participante del estudio.</string>
+    <string name="fechaNac">Fecha de Nacimiento</string>
+    <string name="fechaNacHint">No requerido. Registrar la fecha de nacimiento de la participante del estudio.</string>
+    <string name="direccion">Dirección *</string>
+    <string name="direccionHint">Requerido. Registrar la dirección de esta vivienda.</string>  
+    <string name="telefonoContacto">Teléfono</string>
+    <string name="telefonoContactoHint">No requerido. Registrar un teléfono de contacto para esta participante si está disponible.</string> 
+</resources>
