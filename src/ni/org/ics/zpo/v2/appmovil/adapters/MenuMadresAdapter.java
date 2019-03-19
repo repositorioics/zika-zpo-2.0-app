@@ -1,6 +1,7 @@
 package ni.org.ics.zpo.v2.appmovil.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -63,10 +64,27 @@ public class MenuMadresAdapter extends ArrayAdapter<String> {
             case 0:
                 img=getContext().getResources().getDrawable( R.drawable.ic_enroll);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                textView.setTextColor(Color.BLACK);
+                break;
+            case 1: case 3: case 5: case 7: case 9: case 11:
+                img=getContext().getResources().getDrawable( R.drawable.ic_calendar);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                textView.setTextColor(Color.BLACK);
+                break;
+            case 2: case 4: case 6: case 8: case 10:
+                img=getContext().getResources().getDrawable( R.drawable.ic_visit_call);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                textView.setTextColor(Color.BLACK);
+                break;
+            case 12:
+                img=getContext().getResources().getDrawable( R.drawable.ic_exit);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                textView.setTextColor(Color.BLACK);
                 break;
             default:
                 img=getContext().getResources().getDrawable( R.drawable.logo);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                textView.setTextColor(Color.BLACK);
                 break;
 		}
 

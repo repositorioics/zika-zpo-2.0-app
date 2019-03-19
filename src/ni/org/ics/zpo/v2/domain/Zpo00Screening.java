@@ -17,28 +17,15 @@ public class Zpo00Screening extends BaseMetaData {
     private String eventName;
     private Date scrVisitDate;
     private String scrConsentObta;
-    private String scrObDobDay;
-    private String scrObDobMon;
-    private Integer scrObDobYear;
-    private Integer scrObAge;
-    private String scrObAssent;
     private String scrConsentA; //envio muestras a EEUU
     private String scrConsentB; //USO FUTORO DE MUESTRAS BIOLOGICAS
     private String scrConsentC; //ESTUDIOS GENETICOS
-    private String scrName1Tutor;
-    private String scrName2Tutor;
-    private String scrLastName1Tutor;
-    private String scrLastName2Tutor;
-    private String scrFamilyRelationship;
-    private String scrFamilyRelOther;
-    private String scrIlliterate;
-    private String scrName1Witness;
-    private String scrName2Witness;
-    private String scrLastName1Witness;
-    private String scrLastName2Witness;
+    private String scrWitness;
+    private String scrAssistant;
     private String scrReasonNot;
     private String scrReasonOther;
     private String scrCs;
+    private String scrTipo;
 
     public String getRecordId() {
         return recordId;
@@ -72,46 +59,6 @@ public class Zpo00Screening extends BaseMetaData {
         this.scrConsentObta = scrConsentObta;
     }
 
-    public String getScrObDobDay() {
-        return scrObDobDay;
-    }
-
-    public void setScrObDobDay(String scrObDobDay) {
-        this.scrObDobDay = scrObDobDay;
-    }
-
-    public String getScrObDobMon() {
-        return scrObDobMon;
-    }
-
-    public void setScrObDobMon(String scrObDobMon) {
-        this.scrObDobMon = scrObDobMon;
-    }
-
-    public Integer getScrObDobYear() {
-        return scrObDobYear;
-    }
-
-    public void setScrObDobYear(Integer scrObDobYear) {
-        this.scrObDobYear = scrObDobYear;
-    }
-
-    public Integer getScrObAge() {
-        return scrObAge;
-    }
-
-    public void setScrObAge(Integer scrObAge) {
-        this.scrObAge = scrObAge;
-    }
-
-    public String getScrObAssent() {
-        return scrObAssent;
-    }
-
-    public void setScrObAssent(String scrObAssent) {
-        this.scrObAssent = scrObAssent;
-    }
-
     public String getScrConsentA() {
         return scrConsentA;
     }
@@ -136,92 +83,20 @@ public class Zpo00Screening extends BaseMetaData {
         this.scrConsentC = scrConsentC;
     }
 
-    public String getScrName1Tutor() {
-        return scrName1Tutor;
+    public String getScrWitness() {
+        return scrWitness;
     }
 
-    public void setScrName1Tutor(String scrName1Tutor) {
-        this.scrName1Tutor = scrName1Tutor;
+    public void setScrWitness(String scrWitness) {
+        this.scrWitness = scrWitness;
     }
 
-    public String getScrName2Tutor() {
-        return scrName2Tutor;
+    public String getScrAssistant() {
+        return scrAssistant;
     }
 
-    public void setScrName2Tutor(String scrName2Tutor) {
-        this.scrName2Tutor = scrName2Tutor;
-    }
-
-    public String getScrLastName1Tutor() {
-        return scrLastName1Tutor;
-    }
-
-    public void setScrLastName1Tutor(String scrLastName1Tutor) {
-        this.scrLastName1Tutor = scrLastName1Tutor;
-    }
-
-    public String getScrLastName2Tutor() {
-        return scrLastName2Tutor;
-    }
-
-    public void setScrLastName2Tutor(String scrLastName2Tutor) {
-        this.scrLastName2Tutor = scrLastName2Tutor;
-    }
-
-    public String getScrFamilyRelationship() {
-        return scrFamilyRelationship;
-    }
-
-    public void setScrFamilyRelationship(String scrFamilyRelationship) {
-        this.scrFamilyRelationship = scrFamilyRelationship;
-    }
-
-    public String getScrFamilyRelOther() {
-        return scrFamilyRelOther;
-    }
-
-    public void setScrFamilyRelOther(String scrFamilyRelOther) {
-        this.scrFamilyRelOther = scrFamilyRelOther;
-    }
-
-    public String getScrIlliterate() {
-        return scrIlliterate;
-    }
-
-    public void setScrIlliterate(String scrIlliterate) {
-        this.scrIlliterate = scrIlliterate;
-    }
-
-    public String getScrName1Witness() {
-        return scrName1Witness;
-    }
-
-    public void setScrName1Witness(String scrName1Witness) {
-        this.scrName1Witness = scrName1Witness;
-    }
-
-    public String getScrName2Witness() {
-        return scrName2Witness;
-    }
-
-    public void setScrName2Witness(String scrName2Witness) {
-        this.scrName2Witness = scrName2Witness;
-    }
-
-    public String getScrLastName1Witness() {
-        return scrLastName1Witness;
-    }
-
-    public void setScrLastName1Witness(String scrLastName1Witness) {
-        this.scrLastName1Witness = scrLastName1Witness;
-    }
-
-    public String getScrLastName2Witness() {
-        return scrLastName2Witness;
-    }
-
-    public void setScrLastName2Witness(String scrLastName2Witness) {
-        this.scrLastName2Witness = scrLastName2Witness;
+    public void setScrAssistant(String scrAssistant) {
+        this.scrAssistant = scrAssistant;
     }
 
     public String getScrReasonNot() {
@@ -246,6 +121,14 @@ public class Zpo00Screening extends BaseMetaData {
 
     public void setScrCs(String scrCs) {
         this.scrCs = scrCs;
+    }
+
+    public String getScrTipo() {
+        return scrTipo;
+    }
+
+    public void setScrTipo(String scrTipo) {
+        this.scrTipo = scrTipo;
     }
 
     @Override

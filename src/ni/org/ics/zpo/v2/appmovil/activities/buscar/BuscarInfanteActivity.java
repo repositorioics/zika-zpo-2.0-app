@@ -16,6 +16,7 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncListActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpo00ScreeningActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.paginas.MenuInfantesActivity;
 import ni.org.ics.zpo.v2.appmovil.adapters.ZpoInfantDataAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
@@ -33,7 +34,7 @@ public class BuscarInfanteActivity extends AbstractAsyncListActivity {
 	private EditText mParametroView;
 	private ImageButton mBarcodeButton;
 	private ImageButton mFindButton;
-	
+
 	public static final int BARCODE_CAPTURE = 2;
 
 	private ZpoAdapter zipA;
@@ -128,7 +129,6 @@ public class BuscarInfanteActivity extends AbstractAsyncListActivity {
 		});
 
 		mFindButton.setVisibility(View.GONE);
-
 	}
 	
 	private void showToast(String mensaje){

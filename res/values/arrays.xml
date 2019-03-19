@@ -12,6 +12,15 @@
         <item>@string/maternal_a_2</item>
         <item>@string/maternal_a_3</item>
         <item>@string/maternal_a_4</item>
+        <item>@string/maternal_a_5</item>
+        <item>@string/maternal_a_6</item>
+        <item>@string/maternal_a_7</item>
+        <item>@string/maternal_a_8</item>
+        <item>@string/maternal_a_9</item>
+        <item>@string/maternal_a_10</item>
+        <item>@string/maternal_a_11</item>
+        <item>@string/maternal_a_12</item>
+        <item>@string/maternal_a_13</item>
     </string-array>
     
     <string-array name="menu_maternal_ingreso">
@@ -35,8 +44,13 @@
         <item>@string/infant_a_4</item>
         <item>@string/infant_a_5</item>
         <item>@string/infant_a_6</item>
-        <item>@string/infant_a_11</item>
+        <item>@string/infant_a_7</item>
+        <item>@string/infant_a_8</item>
+        <item>@string/infant_a_9</item>
         <item>@string/infant_a_10</item>
+        <item>@string/infant_a_11</item>
+        <item>@string/infant_a_12</item>
+        <item>@string/infant_a_13</item>
     </string-array>
 
     <string-array name="menu_infant_visit">

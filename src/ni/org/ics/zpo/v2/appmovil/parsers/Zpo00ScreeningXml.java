@@ -22,43 +22,16 @@ public class Zpo00ScreeningXml {
     @Element(required=true)
     private String scrConsentObta;
     @Element(required=false)
-    private String scrObDobDay;
-    @Element(required=false)
-    private String scrObDobMon;
-    @Element(required=false)
-    private Integer scrObDobYear;
-    @Element(required=false)
-    private Integer scrObAge;
-    @Element(required=false)
-    private String scrObAssent;
-    @Element(required=false)
     private String scrConsentA; //envio muestras a EEUU
     @Element(required=false)
     private String scrConsentB; //USO FUTORO DE MUESTRAS BIOLOGICAS
     @Element(required=false)
     private String scrConsentC; //ESTUDIOS GENETICOS
     @Element(required=false)
-    private String scrName1Tutor;
+    private String scrWitness;
     @Element(required=false)
-    private String scrName2Tutor;
-    @Element(required=false)
-    private String scrLastName1Tutor;
-    @Element(required=false)
-    private String scrLastName2Tutor;
-    @Element(required=false)
-    private String scrFamilyRelationship;
-    @Element(required=false)
-    private String scrFamilyRelOther;
-    @Element(required=false)
-    private String scrIlliterate;
-    @Element(required=false)
-    private String scrName1Witness;
-    @Element(required=false)
-    private String scrName2Witness;
-    @Element(required=false)
-    private String scrLastName1Witness;
-    @Element(required=false)
-    private String scrLastName2Witness;
+    private String scrAssistant;
+
     @Element(required=false)
     private String scrReasonNot;
     @Element(required=false)
@@ -66,21 +39,8 @@ public class Zpo00ScreeningXml {
 
 	@Element(required=false)
     private String note1;
-	@Element(required=false)
-	private String note2;
-	@Element(required=false)
+    @Element(required=false)
     private String group1;
-	@Element(required=false)
-	private String group2;
-	@Element(required=false)
-	private String group3;
-	@Element(required=false)
-	private String group4;
-
-	@Element(required=false)
-    private String question1;
-	@Element(required=false)
-    private String question2;
 
 	@Attribute
 	private String id;
@@ -111,96 +71,96 @@ public class Zpo00ScreeningXml {
         return scrCs;
     }
 
+    public void setScrCs(String scrCs) {
+        this.scrCs = scrCs;
+    }
+
     public Date getScrVisitDate() {
         return scrVisitDate;
+    }
+
+    public void setScrVisitDate(Date scrVisitDate) {
+        this.scrVisitDate = scrVisitDate;
     }
 
     public String getScrConsentObta() {
         return scrConsentObta;
     }
 
-    public String getScrObDobDay() {
-        return scrObDobDay;
-    }
-
-    public String getScrObDobMon() {
-        return scrObDobMon;
-    }
-
-    public Integer getScrObDobYear() {
-        return scrObDobYear;
-    }
-
-    public Integer getScrObAge() {
-        return scrObAge;
-    }
-
-    public String getScrObAssent() {
-        return scrObAssent;
+    public void setScrConsentObta(String scrConsentObta) {
+        this.scrConsentObta = scrConsentObta;
     }
 
     public String getScrConsentA() {
         return scrConsentA;
     }
 
+    public void setScrConsentA(String scrConsentA) {
+        this.scrConsentA = scrConsentA;
+    }
+
     public String getScrConsentB() {
         return scrConsentB;
+    }
+
+    public void setScrConsentB(String scrConsentB) {
+        this.scrConsentB = scrConsentB;
     }
 
     public String getScrConsentC() {
         return scrConsentC;
     }
 
-    public String getScrName1Tutor() {
-        return scrName1Tutor;
+    public void setScrConsentC(String scrConsentC) {
+        this.scrConsentC = scrConsentC;
     }
 
-    public String getScrName2Tutor() {
-        return scrName2Tutor;
+    public String getScrWitness() {
+        return scrWitness;
     }
 
-    public String getScrLastName1Tutor() {
-        return scrLastName1Tutor;
+    public void setScrWitness(String scrWitness) {
+        this.scrWitness = scrWitness;
     }
 
-    public String getScrLastName2Tutor() {
-        return scrLastName2Tutor;
+    public String getScrAssistant() {
+        return scrAssistant;
     }
 
-    public String getScrFamilyRelationship() {
-        return scrFamilyRelationship;
-    }
-
-    public String getScrFamilyRelOther() {
-        return scrFamilyRelOther;
-    }
-
-    public String getScrIlliterate() {
-        return scrIlliterate;
-    }
-
-    public String getScrName1Witness() {
-        return scrName1Witness;
-    }
-
-    public String getScrName2Witness() {
-        return scrName2Witness;
-    }
-
-    public String getScrLastName1Witness() {
-        return scrLastName1Witness;
-    }
-
-    public String getScrLastName2Witness() {
-        return scrLastName2Witness;
+    public void setScrAssistant(String scrAssistant) {
+        this.scrAssistant = scrAssistant;
     }
 
     public String getScrReasonNot() {
         return scrReasonNot;
     }
 
+    public void setScrReasonNot(String scrReasonNot) {
+        this.scrReasonNot = scrReasonNot;
+    }
+
     public String getScrReasonOther() {
         return scrReasonOther;
+    }
+
+    public void setScrReasonOther(String scrReasonOther) {
+        this.scrReasonOther = scrReasonOther;
+    }
+
+    public String getNote1() {
+        return note1;
+    }
+
+    public void setNote1(String note1) {
+        this.note1 = note1;
+    }
+
+    public String getGroup1() {
+        return group1;
+    }
+
+    public void setGroup1(String group1) {
+        this.group1 = group1;
     }
 
     public String getId() {

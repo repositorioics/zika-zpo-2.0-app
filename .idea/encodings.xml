@@ -26,6 +26,7 @@
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/Zpo00ScreeningHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoControlConsentimientosRecepcionHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoControlConsentimientosSalidaHelper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoDatosMadreHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoEstadoInfanteHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoEstadoMadreHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoInfantDataHelper.java" charset="UTF-8" />

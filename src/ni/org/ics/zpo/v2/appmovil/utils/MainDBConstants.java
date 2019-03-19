@@ -98,58 +98,32 @@ public class MainDBConstants {
     public static final String eventName = "eventName";
     public static final String scrVisitDate = "scrVisitDate";
     public static final String scrConsentObta = "scrConsentObta";
-    public static final String scrObDobDay = "scrObDobDay";
-    public static final String scrObDobMon = "scrObDobMon";
-    public static final String scrObDobYear = "scrObDobYear";
-    public static final String scrObAge = "scrObAge";
-    public static final String scrObAssent = "scrObAssent";
     public static final String scrConsentA = "scrConsentA"; //envio muestras a EEUU
     public static final String scrConsentB = "scrConsentB"; //USO FUTORO DE MUESTRAS BIOLOGICAS
     public static final String scrConsentC = "scrConsentC"; //ESTUDIOS GENETICOS
-    public static final String scrName1Tutor = "scrName1Tutor";
-    public static final String scrName2Tutor = "scrName2Tutor";
-    public static final String scrLastName1Tutor = "scrLastName1Tutor";
-    public static final String scrLastName2Tutor = "scrLastName2Tutor";
-    public static final String scrFamilyRelationship = "scrFamilyRelationship";
-    public static final String scrFamilyRelOther = "scrFamilyRelOther";
-    public static final String scrIlliterate = "scrIlliterate";
-    public static final String scrName1Witness = "scrName1Witness";
-    public static final String scrName2Witness = "scrName2Witness";
-    public static final String scrLastName1Witness = "scrLastName1Witness";
-    public static final String scrLastName2Witness = "scrLastName2Witness";
+    public static final String scrWitness = "scrWitness";
+    public static final String scrAssistant = "scrAssistant";
     public static final String scrReasonNot = "scrReasonNot";
     public static final String scrReasonOther = "scrReasonOther";
     public static final String scrCs = "scrCs";
+    public static final String scrTipo = "scrTipo";
 
     //Crear tabla usuarios
     public static final String CREATE_SCREENING_TABLE = "create table if not exists "
             + SCREENING_TABLE + " ("
             + recordId + " text not null, "
             + eventName + " text not null, "
+            + scrCs + " text, "
             + scrVisitDate + " date, "
             + scrConsentObta  + " text, "
-            + scrObDobDay + " text, "
-            + scrObDobMon + " text, "
-            + scrObDobYear + " integer, "
-            + scrObAge + " integer, "
-            + scrObAssent + " text, "
             + scrConsentA + " text, "
             + scrConsentB + " text, "
             + scrConsentC + " text, "
-            + scrName1Tutor + " text, "
-            + scrName2Tutor + " text, "
-            + scrLastName1Tutor + " text, "
-            + scrLastName2Tutor + " text, "
-            + scrFamilyRelationship + " text, "
-            + scrFamilyRelOther + " text, "
-            + scrIlliterate  + " text, "
-            + scrName1Witness + " text, "
-            + scrName2Witness + " text, "
-            + scrLastName1Witness + " text, "
-            + scrLastName2Witness + " text, "
+            + scrWitness + " text, "
+            + scrAssistant + " text, "
             + scrReasonNot + " text, "
             + scrReasonOther + " text, "
-            + scrCs + " text, "
+            + scrTipo + " text, "
             + recordDate + " date, "
             + recordUser + " text, "
             + pasive + " text, "

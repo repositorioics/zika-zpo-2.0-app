@@ -23,10 +23,10 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.activities.paginas.MenuInfantesActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.paginas.MenuMadresActivity;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
-import ni.org.ics.zpo.v2.domain.Zpo00Screening;
-import ni.org.ics.zpo.v2.domain.ZpoEstadoEmbarazada;
+import ni.org.ics.zpo.v2.domain.*;
 import ni.org.ics.zpo.v2.appmovil.parsers.Zpo00ScreeningXml;
 import ni.org.ics.zpo.v2.appmovil.preferences.PreferencesActivity;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
@@ -37,6 +37,7 @@ import org.simpleframework.xml.core.Persister;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 
 public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
@@ -44,8 +45,12 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 	protected static final String TAG = NewZpo00ScreeningActivity.class.getSimpleName();
 	
 	private ZpoAdapter zipA;
+    private static ZpoDatosEmbarazada mDatosEmb = null;
+    private static List<ZpoInfantData> mDatosInfantes = null;
+
 	private static Zpo00Screening mTamizaje = null;
 	private static ZpoEstadoEmbarazada mEstado = null;
+    //private static ZpoEstadoInfante mZpoEstadoInfante = null;
 	
 	public static final int ADD_TAMIZAJE_ODK = 1;
 	public static final int BARCODE_CAPTURE_TAM = 2;
@@ -59,7 +64,7 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 	private boolean barcode;
 	private String username;
 	private String mRecordId = "";
-	
+    private boolean ingresoMadre;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,6 +80,7 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 				settings.getString(PreferencesActivity.KEY_USERNAME,
 						null);
 		String mPass = ((MyZpoApplication) this.getApplication()).getPassApp();
+        ingresoMadre = this.getIntent().getBooleanExtra("ingresoMadre", true);
 		zipA = new ZpoAdapter(this.getApplicationContext(),mPass,false,false);
 		createInitDialog();
 	}
@@ -162,7 +168,10 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 			mRecordId = intent.getStringExtra("SCAN_RESULT");
 			if (mRecordId != null && mRecordId.length() > 0) {
 				try{
-					if(!(mRecordId.matches("^ZPO-\\d{3}[0]$"))){
+                    String formatoCodigo = "";
+                    if (ingresoMadre) formatoCodigo = "^ZPO-\\d{3}[0]$";
+                    else formatoCodigo = "^ZPO-\\d{3}[1-3]$";
+					if(!(mRecordId.matches(formatoCodigo))){
 						Toast.makeText(getApplicationContext(),	getString(R.string.scan_error), Toast.LENGTH_LONG).show();
 						createInitDialog();
 						return;
@@ -222,7 +231,7 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 					"_id","jrFormId","displayName"};
 			//cursor que busca el formulario
 			Cursor c = getContentResolver().query(Constants.CONTENT_URI, projection,
-					"jrFormId = 'zpo00_screening' and displayName = 'Estudio ZPO Visita de Tamizaje'", null, null);
+					"jrFormId = 'zpo00_screening_v2' and displayName = 'Continuacion Estudio ZPO Visita de Tamizaje'", null, null);
 			c.moveToFirst();
 			//captura el id del formulario
 			Integer id = Integer.parseInt(c.getString(0));
@@ -256,27 +265,14 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 			mTamizaje.setEventName(Constants.SCREENING);
 			mTamizaje.setScrVisitDate(zp00Xml.getScrVisitDate());
 			mTamizaje.setScrConsentObta(zp00Xml.getScrConsentObta());
-			mTamizaje.setScrObDobDay(zp00Xml.getScrObDobDay());
-			mTamizaje.setScrObDobMon(zp00Xml.getScrObDobMon());
-			mTamizaje.setScrObDobYear(zp00Xml.getScrObDobYear());
-			mTamizaje.setScrObAge(zp00Xml.getScrObAge());
-			mTamizaje.setScrObAssent(zp00Xml.getScrObAssent());
 			mTamizaje.setScrConsentA(zp00Xml.getScrConsentA());
 			mTamizaje.setScrConsentB(zp00Xml.getScrConsentB());
 			mTamizaje.setScrConsentC(zp00Xml.getScrConsentC());
-			mTamizaje.setScrName1Tutor(zp00Xml.getScrName1Tutor());
-			mTamizaje.setScrName2Tutor(zp00Xml.getScrName2Tutor());
-			mTamizaje.setScrLastName1Tutor(zp00Xml.getScrLastName1Tutor());
-			mTamizaje.setScrLastName2Tutor(zp00Xml.getScrLastName2Tutor());
-			mTamizaje.setScrFamilyRelationship(zp00Xml.getScrFamilyRelationship());
-			mTamizaje.setScrFamilyRelOther(zp00Xml.getScrFamilyRelOther());
-			mTamizaje.setScrIlliterate(zp00Xml.getScrIlliterate());
-            mTamizaje.setScrName1Witness(zp00Xml.getScrName1Witness());
-            mTamizaje.setScrName2Witness(zp00Xml.getScrName2Witness());
-            mTamizaje.setScrLastName1Witness(zp00Xml.getScrLastName1Witness());
-            mTamizaje.setScrLastName2Witness(zp00Xml.getScrLastName2Witness());
+			mTamizaje.setScrWitness(zp00Xml.getScrWitness());
+			mTamizaje.setScrAssistant(zp00Xml.getScrAssistant());
             mTamizaje.setScrReasonNot(zp00Xml.getScrReasonNot());
 			mTamizaje.setScrReasonOther(zp00Xml.getScrReasonOther());
+            mTamizaje.setScrTipo("M"); //Madre
 			mTamizaje.setRecordDate(new Date());
 			mTamizaje.setRecordUser(username);
 			mTamizaje.setIdInstancia(idInstancia);
@@ -288,19 +284,27 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 			mTamizaje.setSimserial(zp00Xml.getSimserial());
 			mTamizaje.setPhonenumber(zp00Xml.getPhonenumber());
 			mTamizaje.setToday(zp00Xml.getToday());
-			mEstado = new ZpoEstadoEmbarazada();
-			mEstado.setRecordId(mRecordId);
-			mEstado.setRecordDate(new Date());
-			mEstado.setRecordUser(username);
-			mEstado.setIdInstancia(idInstancia);
-			mEstado.setInstancePath(instanceFilePath);
-			mEstado.setEstado(Constants.STATUS_NOT_SUBMITTED);
-			mEstado.setStart(zp00Xml.getStart());
-			mEstado.setEnd(zp00Xml.getEnd());
-			mEstado.setDeviceid(zp00Xml.getDeviceid());
-			mEstado.setSimserial(zp00Xml.getSimserial());
-			mEstado.setPhonenumber(zp00Xml.getPhonenumber());
-			mEstado.setToday(zp00Xml.getToday());
+
+            //if (ingresoMadre) {
+                mEstado = new ZpoEstadoEmbarazada();
+                mEstado.setRecordId(mRecordId);
+                mEstado.setRecordDate(new Date());
+                mEstado.setRecordUser(username);
+                mEstado.setIdInstancia(idInstancia);
+                mEstado.setInstancePath(instanceFilePath);
+                mEstado.setEstado(Constants.STATUS_NOT_SUBMITTED);
+                mEstado.setStart(zp00Xml.getStart());
+                mEstado.setEnd(zp00Xml.getEnd());
+                mEstado.setDeviceid(zp00Xml.getDeviceid());
+                mEstado.setSimserial(zp00Xml.getSimserial());
+                mEstado.setPhonenumber(zp00Xml.getPhonenumber());
+                mEstado.setToday(zp00Xml.getToday());
+            /*} else {
+                mZpoEstadoInfante = new ZpoEstadoInfante(mRecordId, '0', '0', '0', new Date(),
+                        username,'0',idInstancia,instanceFilePath,Constants.STATUS_NOT_SUBMITTED,zp00Xml.getStart(),
+                        zp00Xml.getEnd(),zp00Xml.getDeviceid(),zp00Xml.getSimserial(),zp00Xml.getPhonenumber(),zp00Xml.getToday());
+            }*/
+
 			new SaveDataTask().execute();
 			
 		} catch (Exception e) {
@@ -316,7 +320,8 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 		switch(dialog){
 		case ADD_TAM_MANUAL:
 			builder.setTitle(this.getString(R.string.add));
-			builder.setMessage(getString(R.string.enter)+ " " + getString(R.string.mat_id));
+			if (ingresoMadre) builder.setMessage(getString(R.string.enter)+ " " + getString(R.string.mat_id));
+            else builder.setMessage(getString(R.string.enter)+ " " + getString(R.string.inf_id));
 			builder.setIcon(android.R.drawable.ic_dialog_info);
 			// Set an EditText view to get user input 
 			final EditText input = new EditText(this);
@@ -325,8 +330,11 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 			builder.setPositiveButton(this.getString(R.string.ok), new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
-					mRecordId = input.getText().toString(); 
-					if(!(mRecordId.matches("^ZPO-\\d{3}[0]$"))){
+					mRecordId = input.getText().toString();
+                    String formatoCodigo = "";
+                    if (ingresoMadre) formatoCodigo = "^ZPO-\\d{3}[0]$";
+                    else formatoCodigo = "^ZPO-\\d{3}[1-3]$";
+					if(!(mRecordId.matches(formatoCodigo))){
 						Toast.makeText(getApplicationContext(),	getString(R.string.code_error), Toast.LENGTH_LONG).show();
 						createDialog(ADD_TAM_MANUAL);
 						return;
@@ -347,7 +355,9 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 			break;
 		case CONFIRM_NUM_TAMIZAJE:
 			builder.setTitle(this.getString(R.string.confirm));
-			builder.setMessage(this.getString(R.string.mat_id)+ " " + mRecordId + "?");
+            if (ingresoMadre) builder.setMessage(this.getString(R.string.mat_id)+ " " + mRecordId + "?");
+            else builder.setMessage(this.getString(R.string.inf_id)+ " " + mRecordId + "?");
+
 			builder.setIcon(android.R.drawable.ic_dialog_info);
 			builder.setPositiveButton(this.getString(R.string.ok), new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
@@ -386,7 +396,42 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 			try {
 				zipA.open();
 				zipA.crearZpo00Screening(mTamizaje);
-				zipA.crearZpoEstadoMadre(mEstado);
+                zipA.crearZpoEstadoMadre(mEstado);
+                for(ZpoInfantData infante: mDatosInfantes){
+                    Zpo00Screening tamizajeInf = new Zpo00Screening();
+                    tamizajeInf.setRecordId(infante.getRecordId());
+                    tamizajeInf.setScrCs(mTamizaje.getScrCs());
+                    tamizajeInf.setEventName(Constants.SCREENING);
+                    tamizajeInf.setScrVisitDate(mTamizaje.getScrVisitDate());
+                    tamizajeInf.setScrConsentObta(mTamizaje.getScrConsentObta());
+                    tamizajeInf.setScrConsentA(mTamizaje.getScrConsentA());
+                    tamizajeInf.setScrConsentB(mTamizaje.getScrConsentB());
+                    tamizajeInf.setScrConsentC(mTamizaje.getScrConsentC());
+                    tamizajeInf.setScrWitness(mTamizaje.getScrWitness());
+                    tamizajeInf.setScrAssistant(mTamizaje.getScrAssistant());
+                    tamizajeInf.setScrReasonNot(mTamizaje.getScrReasonNot());
+                    tamizajeInf.setScrReasonOther(mTamizaje.getScrReasonOther());
+                    tamizajeInf.setRecordDate(new Date());
+                    tamizajeInf.setRecordUser(username);
+                    tamizajeInf.setIdInstancia(mTamizaje.getIdInstancia());
+                    tamizajeInf.setInstancePath(mTamizaje.getInstancePath());
+                    tamizajeInf.setEstado(Constants.STATUS_NOT_SUBMITTED);
+                    tamizajeInf.setStart(mTamizaje.getStart());
+                    tamizajeInf.setEnd(mTamizaje.getEnd());
+                    tamizajeInf.setDeviceid(mTamizaje.getDeviceid());
+                    tamizajeInf.setSimserial(mTamizaje.getSimserial());
+                    tamizajeInf.setPhonenumber(mTamizaje.getPhonenumber());
+                    tamizajeInf.setToday(mTamizaje.getToday());
+                    tamizajeInf.setScrTipo("I");//infante
+
+                    zipA.crearZpo00Screening(tamizajeInf);
+
+                    ZpoEstadoInfante mZpoEstadoInfante = new ZpoEstadoInfante(infante.getRecordId(), '0', '0', '0', new Date(),
+                            username,'0',mEstado.getIdInstancia(),mEstado.getInstancePath(),Constants.STATUS_NOT_SUBMITTED,mEstado.getStart(),
+                            mEstado.getEnd(),mEstado.getDeviceid(),mEstado.getSimserial(),mEstado.getPhonenumber(),mEstado.getToday());
+                    zipA.crearZpoEstadoInfante(mZpoEstadoInfante);
+                }
+
 				zipA.close();
 			} catch (Exception e) {
 				Log.e(TAG, e.getLocalizedMessage(), e);
@@ -401,10 +446,7 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 			showResult(resultado);
 			if (mTamizaje.getScrConsentObta().equals("0")){
                 Toast.makeText(getApplicationContext(),	getString(R.string.notelegible), Toast.LENGTH_LONG).show();
-            }else if(mTamizaje.getScrConsentObta().equals("1") && mTamizaje.getScrObAge()<18){
-                if(mTamizaje.getScrObAssent()==null || mTamizaje.getScrObAssent().matches("0"))
-                    Toast.makeText(getApplicationContext(),	getString(R.string.notelegible), Toast.LENGTH_LONG).show();
-                else
+            }else if(mTamizaje.getScrConsentObta().equals("1")){
                     cargarMenu();
             }else{
                 cargarMenu();
@@ -417,9 +459,12 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
     private void cargarMenu(){
         Bundle arguments = new Bundle();
         if (mTamizaje!=null) arguments.putSerializable(Constants.OBJECTO_ZP00 , mTamizaje);
-        Intent i = new Intent(getApplicationContext(),
-                MenuMadresActivity.class);
-        i.putExtras(arguments);
+        Intent i = null;
+            i = new Intent(getApplicationContext(),
+                    MenuMadresActivity.class);
+            i.putExtras(arguments);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         startActivity(i);
     }
 	// ***************************************
@@ -446,6 +491,8 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 			try {
 				zipA.open();
 				mTamizaje = zipA.getZpo00Screening(filtro, null);
+                mDatosEmb = zipA.getZpoDatosEmbarazada(filtro, null);
+                mDatosInfantes = zipA.getZpoInfantDatas(MainDBConstants.pregnantId + "='" + values[0] + "'", null);
 				zipA.close();
 			} catch (Exception e) {
 				Log.e(TAG, e.getLocalizedMessage(), e);
@@ -460,7 +507,13 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 			if(mTamizaje!=null){
 				Toast.makeText(getApplicationContext(),	getString(R.string.err_duplicated), Toast.LENGTH_LONG).show();
 				finish();
-			}
+			}else if (mDatosEmb == null){
+                Toast.makeText(getApplicationContext(),	getString(R.string.mother_code_notfound), Toast.LENGTH_LONG).show();
+                finish();
+            }else if (mDatosInfantes == null || mDatosInfantes.size()==0){
+                Toast.makeText(getApplicationContext(),	getString(R.string.infant_code_notfound), Toast.LENGTH_LONG).show();
+                finish();
+            }
 			else{
 				addTamizaje();
 			}

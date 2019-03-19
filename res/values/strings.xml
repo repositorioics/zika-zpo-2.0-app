@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Estudio ZPO 2.0</string>
-    <string name="main_header">Zika en infantes y en el embarazo (Continuación Estudio ZPO)</string>
+    <string name="main_header">Transmisión Materno-Fetal del Virus Zika y sus Complicaciones</string>
     <string name="desc_logo">Instituto de Ciencias Sostenibles</string>
     
     <string name="success">Operación exitosa!</string>
@@ -32,6 +32,8 @@
     <string name="search_hint">Ingresar texto de búsqueda</string>
     <string name="code_error">Identificador inválido!</string>
     <string name="code_notfound">Identificador no encontrado!</string>
+    <string name="mother_code_notfound">Identificador de la madre no encontrado!</string>
+    <string name="infant_code_notfound">Identificador del infante no encontrado!</string>
     <string name="scan_error">Esta lectura es inválida!</string>
     <string name="no_items">No hay registros!</string>
     <string name="today_items">Registros de hoy</string>

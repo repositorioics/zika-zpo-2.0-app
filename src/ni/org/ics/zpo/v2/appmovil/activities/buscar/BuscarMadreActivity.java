@@ -142,6 +142,7 @@ public class BuscarMadreActivity extends AbstractAsyncListActivity {
 			public void onClick(View v) {
 				Intent i = new Intent(getApplicationContext(),
 						NewZpo00ScreeningActivity.class);
+                i.putExtra("ingresoMadre", true);
 				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(i);
 			}
@@ -181,10 +182,7 @@ public class BuscarMadreActivity extends AbstractAsyncListActivity {
 		Zpo00Screening mTamizaje = (Zpo00Screening) getListAdapter().getItem(position);
         if (mTamizaje.getScrConsentObta().equals("0")){
             showToast(getString(R.string.notelegible));
-        }else if(mTamizaje.getScrConsentObta().equals("1") && mTamizaje.getScrObAge()<18){
-            if(mTamizaje.getScrObAssent()==null || mTamizaje.getScrObAssent().matches("0"))
-                showToast(getString(R.string.notelegible));
-            else
+        }else if(mTamizaje.getScrConsentObta().equals("1")){
                 cargarMenu(mTamizaje);
         }else{
             cargarMenu(mTamizaje);

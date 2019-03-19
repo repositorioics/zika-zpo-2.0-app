@@ -247,6 +247,40 @@ public class ZpoAdapter {
     }
 
     /**
+     * Metodos para ZpoDatosEmbarazada en la base de datos
+     *
+     * @param estado
+     *            Objeto ZpoDatosEmbarazada que contiene la informacion
+     *
+     */
+    //Crear nuevo ZpoDatosEmbarazada en la base de datos
+    public void crearZpoDatosEmbarazada (ZpoDatosEmbarazada estado) {
+        ContentValues cv = ZpoDatosMadreHelper.crearZpoDatosEmbarazadaValues(estado);
+        mDb.insertOrThrow(MainDBConstants.DATA_MOTHER_TABLE, null, cv);
+    }
+    //Editar ZpoDatosEmbarazada existente en la base de datos
+    public boolean editarZpoDatosEmbarazada (ZpoDatosEmbarazada estado) {
+        ContentValues cv = ZpoDatosMadreHelper.crearZpoDatosEmbarazadaValues(estado);
+        return mDb.update(MainDBConstants.DATA_MOTHER_TABLE, cv, MainDBConstants.recordId + "='"
+                + estado.getRecordId()+"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoDatosEmbarazada de la base de datos
+    public boolean borrarZpoDatosEmbarazada () {
+        return mDb.delete(MainDBConstants.DATA_MOTHER_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoDatosEmbarazada de la base de datos
+    public ZpoDatosEmbarazada getZpoDatosEmbarazada (String filtro, String orden) throws SQLException {
+        ZpoDatosEmbarazada mEstado = null;
+        Cursor cursorEstado = crearCursor(MainDBConstants.DATA_MOTHER_TABLE, filtro, null, orden);
+        if (cursorEstado != null && cursorEstado.getCount() > 0) {
+            cursorEstado.moveToFirst();
+            mEstado=ZpoDatosMadreHelper.crearZpoDatosEmbarazada(cursorEstado);
+        }
+        if (!cursorEstado.isClosed()) cursorEstado.close();
+        return mEstado;
+    }
+
+    /**
      * Metodos para ZpoEstadoMadre en la base de datos
      *
      * @param estado
@@ -256,7 +290,7 @@ public class ZpoAdapter {
     //Crear nuevo ZpoEstadoMadre en la base de datos
     public void crearZpoEstadoMadre (ZpoEstadoEmbarazada estado) {
         ContentValues cv = ZpoEstadoMadreHelper.crearZpoEstadoMadreValues(estado);
-        mDb.insert(MainDBConstants.STATUS_MOTHER_TABLE, null, cv);
+        mDb.insertOrThrow(MainDBConstants.STATUS_MOTHER_TABLE, null, cv);
     }
     //Editar ZpoEstadoMadre existente en la base de datos
     public boolean editarZpoEstadoMadre (ZpoEstadoEmbarazada estado) {
@@ -304,7 +338,7 @@ public class ZpoAdapter {
     //Crear nuevo ZpoInfantData en la base de datos
     public void crearZpoInfantData(ZpoInfantData mZpoInfantData) {
         ContentValues cv = ZpoInfantDataHelper.crearZpoInfantData(mZpoInfantData);
-        mDb.insert(MainDBConstants.INFANTDATA_TABLE, null, cv);
+        mDb.insertOrThrow(MainDBConstants.INFANTDATA_TABLE, null, cv);
     }
     //Editar ZpoInfantData existente en la base de datos
     public boolean editarZpoInfantData(ZpoInfantData mZpoInfantData) {
@@ -351,7 +385,7 @@ public class ZpoAdapter {
     //Crear nuevo ZpoEstadoInfante en la base de datos
     public void crearZpoEstadoInfante(ZpoEstadoInfante mZpoEstadoInfante) {
         ContentValues cv = ZpoEstadoInfanteHelper.crearZpoEstadoInfante(mZpoEstadoInfante);
-        mDb.insert(MainDBConstants.INFANTSTATUS_TABLE, null, cv);
+        mDb.insertOrThrow(MainDBConstants.INFANTSTATUS_TABLE, null, cv);
     }
     //Editar ZpoEstadoInfante existente en la base de datos
     public boolean editarZpoEstadoInfante(ZpoEstadoInfante mZpoEstadoInfante) {
@@ -402,7 +436,7 @@ public class ZpoAdapter {
     //Crear nuevo ZpoControlConsentimientosSalida en la base de datos
     public void crearZpoControlConsentimientosSalida(ZpoControlConsentimientosSalida datos) {
         ContentValues cv = ZpoControlConsentimientosSalidaHelper.crearZpoControlConsentimientosSalida(datos);
-        mDb.insert(MainDBConstants.DATA_CONSSAL_TABLE, null, cv);
+        mDb.insertOrThrow(MainDBConstants.DATA_CONSSAL_TABLE, null, cv);
     }
     //Editar ZpoControlConsentimientosSalida existente en la base de datos
     public boolean editarZpoControlConsentimientosSalida(ZpoControlConsentimientosSalida datos) {
@@ -451,7 +485,7 @@ public class ZpoAdapter {
     //Crear nuevo ZpoControlConsentimientosRecepcion en la base de datos
     public void crearZpoControlConsentimientosRecepcion(ZpoControlConsentimientosRecepcion datos) {
         ContentValues cv = ZpoControlConsentimientosRecepcionHelper.crearZpoControlConsentimientosRecepcion(datos);
-        mDb.insert(MainDBConstants.DATA_CONSREC_TABLE, null, cv);
+        mDb.insertOrThrow(MainDBConstants.DATA_CONSREC_TABLE, null, cv);
     }
     //Editar ZpoControlConsentimientosRecepcion existente en la base de datos
     public boolean editarZpoControlConsentimientosRecepcion(ZpoControlConsentimientosRecepcion datos) {
@@ -500,7 +534,7 @@ public class ZpoAdapter {
     //Crear nuevo ZpoVisitaFallida en la base de datos
     public void crearZpoVisitaFallida(ZpoVisitaFallida datos) {
         ContentValues cv = ZpoVisitaFallidaHelper.crearZpoVisitaFallida(datos);
-        mDb.insert(MainDBConstants.FAIL_VISIT_TABLE, null, cv);
+        mDb.insertOrThrow(MainDBConstants.FAIL_VISIT_TABLE, null, cv);
     }
     //Editar ZpoVisitaFallida existente en la base de datos
     public boolean editarZpoVisitaFallida(ZpoVisitaFallida datos) {

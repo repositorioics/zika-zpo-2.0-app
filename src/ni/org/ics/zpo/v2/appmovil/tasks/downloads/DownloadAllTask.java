@@ -27,34 +27,36 @@ public class DownloadAllTask extends DownloadTask {
 	private ZpoAdapter zpoA = null;
     private static final String TOTAL_TASK = "22";
 
+    private List<ZpoDatosEmbarazada> mDatosEmb = null;
     private List<Zpo00Screening> mTamizajes = null;
     private List<ZpoEstadoEmbarazada> mStatus = null;
     private List<ZpoInfantData> mInfantData = null;
     private List<ZpoEstadoInfante> mEstadoInfante = null;
 
-    public static final int TAMIZAJE = 1;
+    public static final int DAT_MADRE = 1;
     public static final int ESTADO = 2;
     public static final int DAT_INFANTE = 3;
     public static final int ESTADO_INFANTE = 4;
-    public static final int INGRESO1 = 5;
-    public static final int INGRESO2 = 6;
-    public static final int INGRESO3 = 7;
-    public static final int EXTENDED1 = 8;
-    public static final int EXTENDED2 = 9;
-    public static final int EXTENDED3 = 10;
-    public static final int PARTO = 11;
-    public static final int EVAL_INFANTE = 12;
-    public static final int OPHTH_RESULTS = 13;
-    public static final int AUDIO_RESULTS = 14;
-    public static final int IMAGE_STUDIES = 15;
-    public static final int BAYLEY_SCALES = 16;
-    public static final int MUESTRAS = 17;
-    public static final int CONSSAL = 18;
-    public static final int CONSREC = 19;
-    public static final int SALIDA = 20;
-    public static final int VISITA_FALL = 21;
-    public static final int OTOEMI = 22;
-    public static final int EXTENDEDAF = 23;
+    public static final int TAMIZAJE = 5;
+    public static final int INGRESO1 = 6;
+    public static final int INGRESO2 = 7;
+    public static final int INGRESO3 = 8;
+    public static final int EXTENDED1 = 9;
+    public static final int EXTENDED2 = 10;
+    public static final int EXTENDED3 = 11;
+    public static final int PARTO = 12;
+    public static final int EVAL_INFANTE = 13;
+    public static final int OPHTH_RESULTS = 14;
+    public static final int AUDIO_RESULTS = 15;
+    public static final int IMAGE_STUDIES = 16;
+    public static final int BAYLEY_SCALES = 17;
+    public static final int MUESTRAS = 18;
+    public static final int CONSSAL = 19;
+    public static final int CONSREC = 20;
+    public static final int SALIDA = 21;
+    public static final int VISITA_FALL = 22;
+    public static final int OTOEMI = 23;
+    public static final int EXTENDEDAF = 24;
     
 	private String error = null;
 	private String url = null;
@@ -80,6 +82,7 @@ public class DownloadAllTask extends DownloadTask {
 		zpoA = new ZpoAdapter(mContext, password, false,false);
 		zpoA.open();
         //Borrar los datos de la base de datos
+        zpoA.borrarZpoDatosEmbarazada();
         zpoA.borrarZpo00Screening();
         zpoA.borrarZpoEstadoMadre();
         zpoA.borrarZpoControlConsentimientosSalida();
@@ -90,12 +93,12 @@ public class DownloadAllTask extends DownloadTask {
 
         try {
 
-            if (mTamizajes != null){
-                v = mTamizajes.size();
-                ListIterator<Zpo00Screening> iter = mTamizajes.listIterator();
+            if (mDatosEmb != null){
+                v = mDatosEmb.size();
+                ListIterator<ZpoDatosEmbarazada> iter = mDatosEmb.listIterator();
                 while (iter.hasNext()){
-                    zpoA.crearZpo00Screening(iter.next());
-                    publishProgress("Insertando tamizajes en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
+                    zpoA.crearZpoDatosEmbarazada(iter.next());
+                    publishProgress("Insertando datos de las madres en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
                             .valueOf(v).toString());
                 }
             }
@@ -123,6 +126,15 @@ public class DownloadAllTask extends DownloadTask {
                 while (iter.hasNext()){
                     zpoA.crearZpoEstadoInfante(iter.next());
                     publishProgress("Insertando datos de estado de infantes en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
+                            .valueOf(v).toString());
+                }
+            }
+            if (mTamizajes != null){
+                v = mTamizajes.size();
+                ListIterator<Zpo00Screening> iter = mTamizajes.listIterator();
+                while (iter.hasNext()){
+                    zpoA.crearZpo00Screening(iter.next());
+                    publishProgress("Insertando tamizajes en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
                             .valueOf(v).toString());
                 }
             }
@@ -154,14 +166,14 @@ public class DownloadAllTask extends DownloadTask {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
 
-            //Descargar tamizajes
-            urlRequest = url + "/movil/zpo00Screenings/{username}";
-            publishProgress("Solicitando tamizajes",String.valueOf(TAMIZAJE),TOTAL_TASK);
+            //Descargar datos de infantes
+            urlRequest = url + "/movil/zpDatosEmb";
+            publishProgress("Solicitando datos de madres",String.valueOf(DAT_MADRE),TOTAL_TASK);
             // Perform the HTTP GET request
-            ResponseEntity<Zpo00Screening[]> responseEntityZpo00Screening = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
-                    Zpo00Screening[].class, username);
+            ResponseEntity<ZpoDatosEmbarazada[]> responseZpoEmbData = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoDatosEmbarazada[].class, username);
             // convert the array to a list and return it
-            mTamizajes = Arrays.asList(responseEntityZpo00Screening.getBody());
+            mDatosEmb = Arrays.asList(responseZpoEmbData.getBody());
 
             //Descargar estado de embarazadas
             urlRequest = url + "/movil/zpoEstadoEmb/{username}";
@@ -173,7 +185,7 @@ public class DownloadAllTask extends DownloadTask {
             mStatus = Arrays.asList(responseZpoEstadoEmbarazada.getBody());
 
             //Descargar datos de infantes
-            urlRequest = url + "/movil/zpoInfants/{username}";
+            urlRequest = url + "/movil/zpoInfants";
             publishProgress("Solicitando datos de infantes",String.valueOf(DAT_INFANTE),TOTAL_TASK);
             // Perform the HTTP GET request
             ResponseEntity<ZpoInfantData[]> responseZpoInfantData = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
@@ -189,6 +201,17 @@ public class DownloadAllTask extends DownloadTask {
                     ZpoEstadoInfante[].class, username);
             // convert the array to a list and return it
             mEstadoInfante = Arrays.asList(responseZpoEstadoInfante.getBody());
+
+            //Descargar tamizajes
+            urlRequest = url + "/movil/zpo00Screenings/{username}";
+            publishProgress("Solicitando tamizajes",String.valueOf(TAMIZAJE),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<Zpo00Screening[]> responseEntityZpo00Screening = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    Zpo00Screening[].class, username);
+            // convert the array to a list and return it
+            mTamizajes = Arrays.asList(responseEntityZpo00Screening.getBody());
+
+
             return null;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
