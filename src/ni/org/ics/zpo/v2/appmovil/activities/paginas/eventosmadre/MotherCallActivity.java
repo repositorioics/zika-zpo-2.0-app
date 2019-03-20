@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,18 +20,23 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
-import ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre.IngresoAdapter;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
+import ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre.MotherCallAdapter;
+import ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre.VisitAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoEmbarazada;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
+import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
 import java.text.SimpleDateFormat;
 
-public class IngresoActivity extends AbstractAsyncActivity {
+public class MotherCallActivity extends AbstractAsyncActivity {
 	private ZpoAdapter zpoA;
 	private static Zpo00Screening zp00 = new Zpo00Screening();
 	private static ZpoEstadoEmbarazada zpEstado = new ZpoEstadoEmbarazada();
+    private static ZpoV2RecoleccionMuestra zpoV2Muestra= null;
 
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
 	private static String evento;
@@ -71,7 +77,7 @@ public class IngresoActivity extends AbstractAsyncActivity {
 		textView.setText(getString(R.string.forms)+"\n"+
 				getString(R.string.mat_id)+": "+zp00.getRecordId()+"\n"+
 						getString(R.string.mat_fec)+": "+ mDateFormat.format(zp00.getScrVisitDate()));
-		menu_maternal_info = getResources().getStringArray(R.array.menu_maternal_ingreso);
+		menu_maternal_info = getResources().getStringArray(R.array.menu_maternal_call);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -79,69 +85,20 @@ public class IngresoActivity extends AbstractAsyncActivity {
 					int position, long id) {
 				Bundle arguments = new Bundle();
 				Intent i;
-				arguments.putString(Constants.EVENT, Constants.ENTRY);
+				arguments.putString(Constants.EVENT, evento);
                 arguments.putString(Constants.RECORDID, zp00.getRecordId());
-				/*switch(position){
-                    case 0: // DEMOGRAFIA
+				switch(position){
+                    case 0: //MUESTRAS
                         i = new Intent(getApplicationContext(),
-                                NewZpo01StudyEntrySectionAtoBActivity.class);
-                        //Se pone el evento y el objeto en caso de que no sea nulo...
-                        if (zp01a!=null) arguments.putSerializable(Constants.OBJECTO_ZP01A, zp01a);
-                        i.putExtras(arguments);
-                        startActivity(i);
-                        break;
-                    case 1: // ESTADO SALUD
-                        i = new Intent(getApplicationContext(),
-                                NewZpo01StudyEntrySectionCActivity.class);
-                        if (zp01c !=null) arguments.putSerializable(Constants.OBJECTO_ZP01E , zp01c);
-                        i.putExtras(arguments);
-                        startActivity(i);
-                        break;
-                    case 2: // HISTORIA EMBARAZO
-                        i = new Intent(getApplicationContext(),
-                                NewZpo01StudyEntrySectionDtoFActivity.class);
-                        if (zp01f!=null) arguments.putSerializable(Constants.OBJECTO_ZP01F , zp01f);
-                        i.putExtras(arguments);
-                        startActivity(i);
-                        break;
-                    case 3: //MUESTRAS
-                        i = new Intent(getApplicationContext(),
-                                NewZpo02BiospecimenCollectionActivity.class);
-                        if (zp02!=null) arguments.putSerializable(Constants.OBJECTO_ZP02 , zp02);
-                        i.putExtras(arguments);
-                        startActivity(i);
-                        break;
-                    case 4: //PROFESION
-                        i = new Intent(getApplicationContext(),
-                                NewZpo04ExtendedSectionAtoDActivity.class);
-                        if (zp04a!=null) arguments.putSerializable(Constants.OBJECTO_ZP04A , zp04a);
-                        i.putExtras(arguments);
-                        startActivity(i);
-                        break;
-                    case 5: //EXPOSICION
-                        i = new Intent(getApplicationContext(),
-                                NewZpo04ExtendedSectionEActivity.class);
-                        if (zp04e!=null) arguments.putSerializable(Constants.OBJECTO_ZP04E , zp04e);
-                        i.putExtras(arguments);
-                        startActivity(i);
-                        break;
-                    case 6: //PESTICIDAS
-                        i = new Intent(getApplicationContext(),
-                                NewZpo04ExtendedSectionFActivity.class);
-                        if (zp04f!=null) arguments.putSerializable(Constants.OBJECTO_ZP04F , zp04f);
-                        i.putExtras(arguments);
-                        startActivity(i);
-                        break;
-                    case 7: //PARTO
-                        i = new Intent(getApplicationContext(),
-                                NewZpo05DeliveryActivity.class);
-                        if (zp05 !=null) arguments.putSerializable(Constants.OBJECTO_ZP06 , zp05);
+                                NewZpoV2RecoleccionMuestraActivity.class);
+                        if (zpoV2Muestra!=null) arguments.putSerializable(Constants.OBJECTO_ZP02 , zpoV2Muestra);
+                        arguments.putBoolean("ES_MADRE", true);
                         i.putExtras(arguments);
                         startActivity(i);
                         break;
                     default:
                         break;
-				}*/
+				}
 			}
 		});
 
@@ -272,34 +229,30 @@ public class IngresoActivity extends AbstractAsyncActivity {
 			@Override
 			protected String doInBackground(String... values) {
 				eventoaFiltrar = values[0];
-				/*try {
+				try {
 					zpoA.open();
-					filtro = MainDBConstants.recordId + "='" + zp00.getRecordId() + "'";
-					zp01a = zpoA.getZpo01StudyEntrySectionAtoB(filtro, MainDBConstants.recordId);
-					zp01c = zpoA.getZpo01StudyEntrySectionC(filtro, null);
-					zp01f = zpoA.getZpo01StudyEntrySectionDtoF(filtro, null);
 					filtro = MainDBConstants.recordId + "='" + zp00.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
-					zp02 = zpoA.getZpo02BiospecimenCollection(filtro, MainDBConstants.recordId);
-					zp04a = zpoA.getZpo04ExtendedSectionAtoD(filtro, null);
-					zp04e = zpoA.getZpo04ExtendedSectionE(filtro, null);
-					zp04f = zpoA.getZpo04ExtendedSectionF(filtro, null);
-                    zp05 = zpoA.getZpo05Delivery(filtro, null);
-					if (zp01a!=null && zp01c !=null && zp01f!=null && zp02!=null &&
-							zp04a!=null && zp04e!=null && zp04f!=null){
-						zpEstado.setIngreso('1');
+                    zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
+					if (zpoV2Muestra!=null){
+                        if(eventoaFiltrar.matches(Constants.MONTH24)){
+                            zpEstado.setMes12('1');
+                        }
+                        if(eventoaFiltrar.matches(Constants.MONTH36)){
+                            zpEstado.setMes24('1');
+                        }
 						zpoA.editarZpoEstadoMadre(zpEstado);
 					}
 					zpoA.close();
 				} catch (Exception e) {
 					Log.e(TAG, e.getLocalizedMessage(), e);
 					return "Error";
-				}*/
+				}
 				return "Exito";
 			}
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new IngresoAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info));
+				gridView.setAdapter(new MotherCallAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpoV2Muestra));
 				dismissProgressDialog();
 			}
 

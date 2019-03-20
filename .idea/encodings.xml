@@ -6,13 +6,16 @@
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpo00ScreeningActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoControlConsentimientosRecepcionActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoControlConsentimientosSalidaActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2RecoleccionMuestraActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoVisitaFallidaActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuControlConsentimientosActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuInfantesActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuMadresActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantEntryActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisit7284Activity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisitActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/IngresoActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/MotherCallActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/MotherVisitActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/MenuControlConsentimientosAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/MenuInfantesAdapter.java" charset="UTF-8" />
@@ -20,8 +23,10 @@
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/ScreeningAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/ZpoInfantDataAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantEntryAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisit7284Adapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisitAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosmadre/IngresoAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosmadre/MotherCallAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosmadre/VisitAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/Zpo00ScreeningHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoControlConsentimientosRecepcionHelper.java" charset="UTF-8" />
@@ -30,8 +35,10 @@
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoEstadoInfanteHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoEstadoMadreHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoInfantDataHelper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoV2RecoleccionMuestraHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/Meta.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/Zpo00ScreeningXml.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/ZpoV2RecoleccionMuestraXml.java" charset="UTF-8" />
   </component>
 </project>
 

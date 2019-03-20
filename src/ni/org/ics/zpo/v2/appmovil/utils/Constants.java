@@ -60,8 +60,19 @@ public class Constants {
 	public static final String ENTRY = "entry_arm_1";
 	public static final String EXIT = "study_exit_arm_1";
 	
-	public static final String MONTH12 = "12_months_arm_2";
-    public static final String MONTH24 = "24_months_arm_2";
+	public static final String MONTH24 = "24_months_visit";
+    public static final String MONTH36 = "36_months_visit";
+    public static final String MONTH48 = "48_months_visit";
+    public static final String MONTH60 = "60_months_visit";
+    public static final String MONTH72 = "72_months_visit";
+    public static final String MONTH84 = "84_months_visit";
+    //llamadas
+    public static final String MONTH30 = "30_months_call";
+    public static final String MONTH42 = "42_months_call";
+    public static final String MONTH54 = "54_months_call";
+    public static final String MONTH66 = "66_months_call";
+    public static final String MONTH78 = "78_months_call";
+
     public static final String RECORDID = "recordId";
 	public static final String UNSHED1 = "unscheduled_visit_1";
 	public static final String UNSHED2 = "unscheduled_visit_2";

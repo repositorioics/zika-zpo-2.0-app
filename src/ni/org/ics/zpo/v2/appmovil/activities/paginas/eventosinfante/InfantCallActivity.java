@@ -19,14 +19,15 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
-import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.UnscheduledInfantVisitAdapter;
+import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantCallAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
-import ni.org.ics.zpo.v2.domain.*;
 
 import java.text.SimpleDateFormat;
 
-public class UnscheduledInfantVisitActivity extends AbstractAsyncActivity {
+public class InfantCallActivity extends AbstractAsyncActivity {
 	private ZpoAdapter zipA;
 	private static ZpoInfantData zpInfante = new ZpoInfantData();
 	private static ZpoEstadoInfante zpEstado = new ZpoEstadoInfante();
@@ -70,7 +71,7 @@ public class UnscheduledInfantVisitActivity extends AbstractAsyncActivity {
 		textView.setText(getString(R.string.forms)+"\n"+
 				getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
 						getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(zpInfante.getInfantBirthDate()):"ND"));
-		menu_infante_info = getResources().getStringArray(R.array.menu_infant_visit);
+		menu_infante_info = getResources().getStringArray(R.array.menu_infant_call);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -297,10 +298,10 @@ public class UnscheduledInfantVisitActivity extends AbstractAsyncActivity {
 					zp04AF = zipA.getZpo04ExtendedSectionAtoF( filtro, MainDBConstants.recordId);
 
 					if (zp02 !=null && zp07!=null && zp07a!=null && zp07b!=null && zp07c!=null && zp07d!=null && zp07OAE!=null && zp04AF!=null){
-						if(eventoaFiltrar.matches(Constants.MONTH12)){
+						if(eventoaFiltrar.matches(Constants.MONTH24)){
 							zpEstado.setMes12('1');
 						}
-						if(eventoaFiltrar.matches(Constants.MONTH24)){
+						if(eventoaFiltrar.matches(Constants.MONTH36)){
 							zpEstado.setMes24('1');
 						}
 						zipA.editarZpoEstadoInfante(zpEstado);
@@ -315,7 +316,7 @@ public class UnscheduledInfantVisitActivity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new UnscheduledInfantVisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info));
+				gridView.setAdapter(new InfantCallAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info));
 				dismissProgressDialog();
 			}
 

@@ -374,4 +374,54 @@ public class MainDBConstants {
             + TODAY  + " date, "
             + "primary key (" + id  +"));";
 
+    //Tabla Zp02BiospecimenCollection
+    public static final String BIOCOLLECTION_TABLE = "zpoV2_recoleccion_muestra";
+
+    //Campos Zp02BiospecimenCollection
+    public static final String bscDov = "bscDov";
+    public static final String bscVisit = "bscVisit";
+    public static final String bscMatBldCol1 = "bscMatBldCol1";
+    public static final String bscMatBldId1 = "bscMatBldId1";
+    public static final String bscMatBldRsn1 = "bscMatBldRsn1";
+    public static final String bscMatBldRsnOther1 = "bscMatBldRsnOther1";
+    public static final String bscMatBldVol1 = "bscMatBldVol1";
+    public static final String bscMatBldCol2 = "bscMatBldCol2";
+    public static final String bscMatBldId2 = "bscMatBldId2";
+    public static final String bscMatBldRsn2 = "bscMatBldRsn2";
+    public static final String bscMatBldRsnOther2 = "bscMatBldRsnOther2";
+    public static final String bscMatBldVol2 = "bscMatBldVol2";
+    public static final String bscPhlebotomist = "bscPhlebotomist";
+
+    //Crear tabla Zp02BiospecimenCollection
+    public static final String CREATE_BIOCOLLECTION_TABLE = "create table if not exists "
+            + BIOCOLLECTION_TABLE + " ("
+            + recordId + " text not null, "
+            + eventName + " text, "
+            + bscDov + " date, "
+            + bscVisit + " text, "
+            + bscMatBldCol1  + " text, "
+            + bscMatBldId1 + " text, "
+            + bscMatBldRsn1  + " text, "
+            + bscMatBldRsnOther1  + " text, "
+            + bscMatBldVol1 + " double, "
+            + bscMatBldCol2 + " text, "
+            + bscMatBldId2 + " text, "
+            + bscMatBldRsn2 + " text, "
+            + bscMatBldRsnOther2 + " text, "
+            + bscMatBldVol2 + " double, "
+            + bscPhlebotomist + " text, "
+            + MainDBConstants.recordDate + " date, "
+            + MainDBConstants.recordUser + " text, "
+            + MainDBConstants.pasive + " text, "
+            + MainDBConstants.ID_INSTANCIA + " integer,"
+            + MainDBConstants.FILE_PATH + " text,"
+            + MainDBConstants.STATUS + " text not null, "
+            + MainDBConstants.START  + " text, "
+            + MainDBConstants.END  + " text, "
+            + MainDBConstants.DEVICE_ID  + " text, "
+            + MainDBConstants.SIM_SERIAL + " text, "
+            + MainDBConstants.PHONE_NUMBER  + " text, "
+            + MainDBConstants.TODAY  + " date, "
+            + "primary key (" + recordId + ", "+eventName+"));";
+
 }

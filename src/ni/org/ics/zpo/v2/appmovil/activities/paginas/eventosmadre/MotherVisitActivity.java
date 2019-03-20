@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,10 +20,14 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre.VisitAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
+import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoEmbarazada;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
-import ni.org.ics.zpo.v2.domain.*;
+import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
 import java.text.SimpleDateFormat;
 
@@ -30,6 +35,7 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 	private ZpoAdapter zpoA;
 	private static Zpo00Screening zp00 = new Zpo00Screening();
 	private static ZpoEstadoEmbarazada zpEstado = new ZpoEstadoEmbarazada();
+    private static ZpoV2RecoleccionMuestra zpoV2Muestra= null;
 
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
 	private static String evento;
@@ -70,7 +76,7 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 		textView.setText(getString(R.string.forms)+"\n"+
 				getString(R.string.mat_id)+": "+zp00.getRecordId()+"\n"+
 						getString(R.string.mat_fec)+": "+ mDateFormat.format(zp00.getScrVisitDate()));
-		menu_maternal_info = getResources().getStringArray(R.array.menu_maternal_visita);
+		menu_maternal_info = getResources().getStringArray(R.array.menu_maternal_visit);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -80,17 +86,18 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 				Intent i;
 				arguments.putString(Constants.EVENT, evento);
                 arguments.putString(Constants.RECORDID, zp00.getRecordId());
-				/*switch(position){
-                    case 0: //MUESTRAS
+				switch(position){
+                    case 2: //MUESTRAS
                         i = new Intent(getApplicationContext(),
-                                NewZpo02BiospecimenCollectionActivity.class);
-                        if (zp02!=null) arguments.putSerializable(Constants.OBJECTO_ZP02 , zp02);
+                                NewZpoV2RecoleccionMuestraActivity.class);
+                        if (zpoV2Muestra!=null) arguments.putSerializable(Constants.OBJECTO_ZP02 , zpoV2Muestra);
+                        arguments.putBoolean("ES_MADRE", true);
                         i.putExtras(arguments);
                         startActivity(i);
                         break;
                     default:
                         break;
-				}*/
+				}
 			}
 		});
 
@@ -221,15 +228,15 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 			@Override
 			protected String doInBackground(String... values) {
 				eventoaFiltrar = values[0];
-				/*try {
+				try {
 					zpoA.open();
 					filtro = MainDBConstants.recordId + "='" + zp00.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
-					zp02 = zpoA.getZpo02BiospecimenCollection(filtro, MainDBConstants.recordId);
-					if (zp02!=null){
-                        if(eventoaFiltrar.matches(Constants.MONTH12)){
+                    zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
+					if (zpoV2Muestra!=null){
+                        if(eventoaFiltrar.matches(Constants.MONTH24)){
                             zpEstado.setMes12('1');
                         }
-                        if(eventoaFiltrar.matches(Constants.MONTH24)){
+                        if(eventoaFiltrar.matches(Constants.MONTH36)){
                             zpEstado.setMes24('1');
                         }
 						zpoA.editarZpoEstadoMadre(zpEstado);
@@ -238,13 +245,13 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 				} catch (Exception e) {
 					Log.e(TAG, e.getLocalizedMessage(), e);
 					return "Error";
-				}*/
+				}
 				return "Exito";
 			}
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new VisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info));
+				gridView.setAdapter(new VisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpoV2Muestra));
 				dismissProgressDialog();
 			}
 

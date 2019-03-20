@@ -12,14 +12,14 @@ import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
 
-public class VisitAdapter extends ArrayAdapter<String> {
+public class MotherCallAdapter extends ArrayAdapter<String> {
 
     private final Context context;
     private final String[] values;
     private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
 
-    public VisitAdapter(Context context, int textViewResourceId,
-                        String[] values, ZpoV2RecoleccionMuestra zpoMuestra) {
+    public MotherCallAdapter(Context context, int textViewResourceId,
+                             String[] values, ZpoV2RecoleccionMuestra zpoMuestra) {
         super(context, textViewResourceId, values);
         this.context = context;
         this.values = values;
@@ -42,7 +42,7 @@ public class VisitAdapter extends ArrayAdapter<String> {
         // Change icon based on position
         Drawable img = null;
         switch (position){
-            case 2:
+            case 3:
                 if(mZpoV2Muestra!=null){
                     textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
                 }

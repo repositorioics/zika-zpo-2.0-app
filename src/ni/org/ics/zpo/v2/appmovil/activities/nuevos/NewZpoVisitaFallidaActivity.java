@@ -23,7 +23,7 @@ import ni.org.ics.zpo.v2.appmovil.preferences.PreferencesActivity;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.DeviceInfo;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
-import ni.org.ics.zpo.v2.domain.ZpoVisitaFallida;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoVisitaFallida;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

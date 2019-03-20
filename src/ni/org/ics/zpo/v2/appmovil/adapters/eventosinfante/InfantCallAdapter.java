@@ -11,13 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
 
-public class UnscheduledInfantVisitAdapter extends ArrayAdapter<String> {
+public class InfantCallAdapter extends ArrayAdapter<String> {
 
 	private final Context context;
 	private final String[] values;
 
-	public UnscheduledInfantVisitAdapter(Context context, int textViewResourceId,
-                                         String[] values) {
+	public InfantCallAdapter(Context context, int textViewResourceId,
+                             String[] values) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;

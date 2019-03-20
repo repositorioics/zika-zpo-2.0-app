@@ -23,7 +23,7 @@ import ni.org.ics.zpo.v2.appmovil.adapters.ScreeningAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
-import ni.org.ics.zpo.v2.domain.Zpo00Screening;
+import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
 
 import java.util.ArrayList;
 import java.util.List;

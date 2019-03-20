@@ -15,11 +15,11 @@ import android.database.Cursor;
 import android.database.SQLException;
 import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteQueryBuilder;
+import ni.org.ics.zpo.v2.appmovil.domain.*;
 import ni.org.ics.zpo.v2.appmovil.domain.users.Authority;
 import ni.org.ics.zpo.v2.appmovil.domain.users.UserSistema;
 import ni.org.ics.zpo.v2.appmovil.helpers.*;
 import ni.org.ics.zpo.v2.appmovil.utils.*;
-import ni.org.ics.zpo.v2.domain.*;
 
 public class ZpoAdapter {
 
@@ -58,6 +58,7 @@ public class ZpoAdapter {
             db.execSQL(MainDBConstants.CREATE_DATA_CONSREC_TABLE);
             db.execSQL(MainDBConstants.CREATE_DATA_CONSSAL_TABLE);
             db.execSQL(MainDBConstants.CREATE_FAIL_VISIT_TABLE);
+            db.execSQL(MainDBConstants.CREATE_BIOCOLLECTION_TABLE);
 		}
 
 		@Override
@@ -571,5 +572,52 @@ public class ZpoAdapter {
         }
         if (!cursorStatus.isClosed()) cursorStatus.close();
         return zpoVisitaFallidas;
+    }
+
+    /**
+     * Metodos para ZpoV2RecoleccionMuestra en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2RecoleccionMuestra en la base de datos
+    public void crearZpoV2RecoleccionMuestra(ZpoV2RecoleccionMuestra biospecimenCollection) {
+        ContentValues cv = ZpoV2RecoleccionMuestraHelper.crearZpoV2RecoleccionMuestra(biospecimenCollection);
+        mDb.insert(MainDBConstants.BIOCOLLECTION_TABLE, null, cv);
+    }
+    //Editar ZpoV2RecoleccionMuestra existente en la base de datos
+    public boolean editarZpoV2RecoleccionMuestra(ZpoV2RecoleccionMuestra biospecimenCollection) {
+        ContentValues cv = ZpoV2RecoleccionMuestraHelper.crearZpoV2RecoleccionMuestra(biospecimenCollection);
+        return mDb.update(MainDBConstants.BIOCOLLECTION_TABLE, cv, MainDBConstants.recordId + "='"
+                + biospecimenCollection.getRecordId() + "' and " + MainDBConstants.eventName + "='" + biospecimenCollection.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2RecoleccionMuestra de la base de datos
+    public boolean borrarZpoV2RecoleccionMuestra() {
+        return mDb.delete(MainDBConstants.BIOCOLLECTION_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2RecoleccionMuestra de la base de datos
+    public ZpoV2RecoleccionMuestra getZpoV2RecoleccionMuestra(String filtro, String orden) throws SQLException {
+        ZpoV2RecoleccionMuestra biospecimenCollection = null;
+        Cursor cursorBC = crearCursor(MainDBConstants.BIOCOLLECTION_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            biospecimenCollection=ZpoV2RecoleccionMuestraHelper.crearZpoV2RecoleccionMuestra(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return biospecimenCollection;
+    }
+    //Obtener una lista de ZpoV2RecoleccionMuestra de la base de datos
+    public List<ZpoV2RecoleccionMuestra> getZpoV2RecoleccionMuestras(String filtro, String orden) throws SQLException {
+        List<ZpoV2RecoleccionMuestra> biospecimenCollections = new ArrayList<ZpoV2RecoleccionMuestra>();
+        Cursor cursorBC = crearCursor(MainDBConstants.BIOCOLLECTION_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            biospecimenCollections.clear();
+            do{
+                ZpoV2RecoleccionMuestra biospecimenCollection = null;
+                biospecimenCollection = ZpoV2RecoleccionMuestraHelper.crearZpoV2RecoleccionMuestra(cursorBC);
+                biospecimenCollections.add(biospecimenCollection);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return biospecimenCollections;
     }
 }

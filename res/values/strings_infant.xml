@@ -18,17 +18,20 @@
 
     
     <!-- Formularios -->
-    <string name="infant_b_1">Evaluación</string>
-    <string name="infant_b_2">Muestras</string>
-    <string name="infant_b_3">Evaluación Oftalmológica</string>
-    <string name="infant_b_4">Evaluación Psicológica</string>
-    <string name="infant_b_5">Resultados Oftalmológicos</string>
-    <string name="infant_b_6">Resultados Audiológicos</string>
-    <string name="infant_b_7">Estudios de Imágenes</string>
-    <string name="infant_b_8">Escala de Bayley</string>
-    <string name="infant_b_9">Emisiones Otoacústicas</string>
-    <string name="infant_b_10">Factores de Riesgo</string>
-    
+    <string name="infant_b_1">Cuestionario Infante</string>
+    <string name="infant_b_2">Examen Físico</string>
+    <string name="infant_b_3">Indicadores del Cuidado de la Familia</string>
+    <string name="infant_b_4">Muestras</string>
+    <string name="infant_b_5">Emisiones Otoacústicas</string>
+    <string name="infant_b_6">Evaluación Oftalmológica</string>
+    <string name="infant_b_7">Escala Mullen de Aprendizaje Temprano</string>
+    <string name="infant_b_8">Batería de Evaluación de Kaufman II</string>
+    <string name="infant_b_9">Examen de Variables de Atención</string>
+    <string name="infant_b_10">Estado Socioeconómico del Hogar</string>
+    <string name="infant_b_11">Tamizaje de Edades y Etapas</string>
+
+    <string name="infant_b_12">Factores de Riesgo</string>
+
     <string name="inf_id">Código del bebé</string>
     <string name="inf_search">Buscar bebé</string>
     <string name="inf_dob">Fecha de nacimiento</string>

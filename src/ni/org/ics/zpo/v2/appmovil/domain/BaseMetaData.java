@@ -1,4 +1,4 @@
-package ni.org.ics.zpo.v2.domain;
+package ni.org.ics.zpo.v2.appmovil.domain;
 
 import java.io.Serializable;
 import java.util.Date;

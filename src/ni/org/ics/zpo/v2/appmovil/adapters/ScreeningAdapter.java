@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
-import ni.org.ics.zpo.v2.domain.Zpo00Screening;
+import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
 
 import java.text.SimpleDateFormat;
 import java.util.List;

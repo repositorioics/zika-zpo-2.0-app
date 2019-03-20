@@ -25,8 +25,8 @@ import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosmadre.*;
 import ni.org.ics.zpo.v2.appmovil.adapters.MenuMadresAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
-import ni.org.ics.zpo.v2.domain.Zpo00Screening;
-import ni.org.ics.zpo.v2.domain.ZpoEstadoEmbarazada;
+import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoEmbarazada;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
@@ -126,6 +126,7 @@ public class MenuMadresActivity extends AbstractAsyncActivity {
 				else{
 					entrarPantalla(position);
 				}*/
+                entrarPantalla(position);
 			}
 		});
 		
@@ -246,12 +247,30 @@ public class MenuMadresActivity extends AbstractAsyncActivity {
                 i.putExtras(arguments);
                 startActivity(i);
                 break;
-            case 1:case 2:
+            case 1:case 3: case 5: case 7: case 9: case 11:
                 i = new Intent(getApplicationContext(),
                         MotherVisitActivity.class);
                 //Aca se pasa evento, tamizaje y estado
-                if(position==1)	arguments.putString(Constants.EVENT, Constants.MONTH12);
-                if(position==2)	arguments.putString(Constants.EVENT, Constants.MONTH24);
+                if(position==1)	arguments.putString(Constants.EVENT, Constants.MONTH24);
+                if(position==3)	arguments.putString(Constants.EVENT, Constants.MONTH36);
+                if(position==5)	arguments.putString(Constants.EVENT, Constants.MONTH48);
+                if(position==7)	arguments.putString(Constants.EVENT, Constants.MONTH60);
+                if(position==9)	arguments.putString(Constants.EVENT, Constants.MONTH72);
+                if(position==11)	arguments.putString(Constants.EVENT, Constants.MONTH84);
+                if (zp00!=null) arguments.putSerializable(Constants.OBJECTO_ZP00 , zp00);
+                if (zpEstado!=null) arguments.putSerializable(Constants.OBJECTO_ZPEST , zpEstado);
+                i.putExtras(arguments);
+                startActivity(i);
+                break;
+            case 2:case 4: case 6:case 8: case 10:
+                i = new Intent(getApplicationContext(),
+                        MotherCallActivity.class);
+                //Aca se pasa evento, tamizaje y estado
+                if(position==2)	arguments.putString(Constants.EVENT, Constants.MONTH30);
+                if(position==4)	arguments.putString(Constants.EVENT, Constants.MONTH42);
+                if(position==6)	arguments.putString(Constants.EVENT, Constants.MONTH54);
+                if(position==8)	arguments.putString(Constants.EVENT, Constants.MONTH66);
+                if(position==10)	arguments.putString(Constants.EVENT, Constants.MONTH78);
                 if (zp00!=null) arguments.putSerializable(Constants.OBJECTO_ZP00 , zp00);
                 if (zpEstado!=null) arguments.putSerializable(Constants.OBJECTO_ZPEST , zpEstado);
                 i.putExtras(arguments);

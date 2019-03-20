@@ -55,6 +55,8 @@
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosmadre.MotherVisitActivity"
                   android:screenOrientation="portrait" />
+        <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosmadre.MotherCallActivity"
+                  android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpo00ScreeningActivity"
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.buscar.BuscarInfanteActivity"
@@ -62,6 +64,8 @@
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.MenuInfantesActivity"
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantVisitActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantVisit7284Activity"
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantEntryActivity"
                   android:screenOrientation="portrait" />
@@ -73,7 +77,9 @@
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoVisitaFallidaActivity"
                   android:screenOrientation="portrait" />
-        <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.UnscheduledInfantVisitActivity"
+        <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.paginas.eventosinfante.InfantCallActivity"
                   android:screenOrientation="portrait" />
     </application>
 

@@ -3,7 +3,7 @@ package ni.org.ics.zpo.v2.appmovil.helpers;
 import android.content.ContentValues;
 import android.database.Cursor;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
-import ni.org.ics.zpo.v2.domain.ZpoEstadoInfante;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
 
 import java.util.Date;
 

@@ -10,17 +10,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
 
 public class InfantVisitAdapter extends ArrayAdapter<String> {
 
 	private final Context context;
 	private final String[] values;
+    private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
 
 	public InfantVisitAdapter(Context context, int textViewResourceId,
-                              String[] values) {
+                              String[] values, ZpoV2RecoleccionMuestra zpoMuestra) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
+        this.mZpoV2Muestra = zpoMuestra;
 
 	}
 
@@ -41,8 +44,15 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
 		Drawable img = null;
 		switch (position) {
 
-            case 0:
-                img = getContext().getResources().getDrawable(R.drawable.ic_monthly);
+            case 3:
+                if(mZpoV2Muestra!=null){
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+                }
+                else{
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+                }
+                img=getContext().getResources().getDrawable( R.drawable.ic_sample);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
             default:

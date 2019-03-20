@@ -2,7 +2,7 @@ package ni.org.ics.zpo.v2.appmovil.domain.users;
 
 import java.util.Date;
 
-import ni.org.ics.zpo.v2.domain.BaseMetaData;
+import ni.org.ics.zpo.v2.appmovil.domain.BaseMetaData;
 
 /**
  * Simple objeto de dominio que representa un rol para un usuario

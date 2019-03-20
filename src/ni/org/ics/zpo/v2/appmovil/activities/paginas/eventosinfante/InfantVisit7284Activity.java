@@ -21,6 +21,7 @@ import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
+import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantVisit7284Adapter;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantVisitAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
@@ -31,8 +32,8 @@ import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
 import java.text.SimpleDateFormat;
 
-//activity para mostrar menú para visitas 24, 36, 48 y 60 meses de edad
-public class InfantVisitActivity extends AbstractAsyncActivity {
+//activity para mostrar menú para visitas 72 y 84 meses de edad
+public class InfantVisit7284Activity extends AbstractAsyncActivity {
 	private ZpoAdapter zipA;
 	private static ZpoInfantData zpInfante = new ZpoInfantData();
 	private static ZpoEstadoInfante zpEstado = new ZpoEstadoInfante();
@@ -78,7 +79,7 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 		textView.setText(getString(R.string.forms)+"\n"+
 				getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
 						getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(zpInfante.getInfantBirthDate()):"ND"));
-		menu_infante_info = getResources().getStringArray(R.array.menu_infant_visit1);
+		menu_infante_info = getResources().getStringArray(R.array.menu_infant_visit2);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -324,7 +325,7 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new InfantVisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra));
+				gridView.setAdapter(new InfantVisit7284Adapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra));
 				dismissProgressDialog();
 			}
 

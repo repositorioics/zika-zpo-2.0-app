@@ -16,18 +16,11 @@
     <string name="maternal_a_12">84 Meses</string>
     <string name="maternal_a_13">Salida</string>
     <!-- Formularios -->
-    <string name="maternal_b_1">Demografía</string>
-    <string name="maternal_b_2">Estado de Salud</string>
-    <string name="maternal_b_3">Historia Embarazo</string>
-    <string name="maternal_b_4">Muestras</string>
-    <string name="maternal_b_5">Visita Mensual</string>
-    <string name="maternal_b_6">Profesión, Hogar y Factores de Riesgo</string>
-    <string name="maternal_b_7">Exposición ambiental</string>
-    <string name="maternal_b_8">Pesticidas e Insecticidas</string>
-    <string name="maternal_b_10">Parto</string>
-    <string name="maternal_b_11">Posparto</string>
-    <string name="maternal_b_12">Datos Identificación</string>    
-    
+    <string name="maternal_b_1">Cuestionario materno</string>
+    <string name="maternal_b_2">Examen Físico</string>
+    <string name="maternal_b_3">Muestras</string>
+    <string name="maternal_b_4">Estado Socioeconómico del Hogar</string>
+
     
     <string name="mat_search">Buscar Madre</string>
     <string name="mat_data">Datos Embarazada</string>

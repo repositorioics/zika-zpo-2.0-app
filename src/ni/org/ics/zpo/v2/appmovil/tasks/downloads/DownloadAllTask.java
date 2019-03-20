@@ -3,8 +3,8 @@ package ni.org.ics.zpo.v2.appmovil.tasks.downloads;
 import android.content.Context;
 import android.util.Log;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
+import ni.org.ics.zpo.v2.appmovil.domain.*;
 import ni.org.ics.zpo.v2.appmovil.tasks.DownloadTask;
-import ni.org.ics.zpo.v2.domain.*;
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -90,6 +90,7 @@ public class DownloadAllTask extends DownloadTask {
         zpoA.borrarZpoVisitaFallida();
         zpoA.borrarZpoInfantData();
         zpoA.borrarZpoEstadoInfante();
+        zpoA.borrarZpoV2RecoleccionMuestra();
 
         try {
 

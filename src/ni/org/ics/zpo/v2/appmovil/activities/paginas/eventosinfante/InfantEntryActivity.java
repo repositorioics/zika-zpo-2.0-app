@@ -21,8 +21,9 @@ import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantEntryAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
-import ni.org.ics.zpo.v2.domain.*;
 
 import java.text.SimpleDateFormat;
 
@@ -229,10 +230,10 @@ public class InfantEntryActivity extends AbstractAsyncActivity {
 						if(eventoaFiltrar.matches(Constants.ENTRY)){
 							zpEstado.setIngreso('1');
 						}
-						if(eventoaFiltrar.matches(Constants.MONTH12)){
+						if(eventoaFiltrar.matches(Constants.MONTH24)){
 							zpEstado.setMes12('1');
 						}
-						if(eventoaFiltrar.matches(Constants.MONTH24)){
+						if(eventoaFiltrar.matches(Constants.MONTH36)){
 							zpEstado.setMes24('1');
 						}
 						zipA.editarZpoEstadoInfante(zpEstado);
