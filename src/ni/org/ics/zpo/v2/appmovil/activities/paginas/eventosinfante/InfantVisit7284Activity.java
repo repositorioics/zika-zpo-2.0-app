@@ -20,12 +20,13 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoInfantOtoacousticEmissionsActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantVisit7284Adapter;
-import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantVisitAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2InfantOtoacousticEmissions;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
@@ -50,6 +51,7 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 	String[] menu_infante_info;
 
     private static ZpoV2RecoleccionMuestra zpoV2Muestra = null;
+    private static ZpoV2InfantOtoacousticEmissions zpoOtoE = null;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -104,13 +106,6 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-					case 2: //EVALUACION PSICOLOGICA
-						i = new Intent(getApplicationContext(),
-								NewZpo07InfantAssessmentVisitPsyActivity.class);
-						if (zp07 != null) arguments.putSerializable(Constants.OBJECTO_ZP07, zp07);
-						i.putExtras(arguments);
-						startActivity(i);
-						break;
 */
 					case 3: //MUESTRAS
 						i = new Intent(getApplicationContext(),
@@ -147,15 +142,15 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 						if (zp07d != null) arguments.putSerializable(Constants.OBJECTO_ZP07D, zp07d);
 						i.putExtras(arguments);
 						startActivity(i);
-						break;
-					case 8: //EMISIONES OTOACUSTICAS
+						break;*/
+					case 4: //EMISIONES OTOACUSTICAS
 						i = new Intent(getApplicationContext(),
-								NewZpo07InfantOtoacousticEmissionsActivity.class);
-						if (zp07OtoE != null) arguments.putSerializable(Constants.OBJECTO_ZPO07OtoE, zp07OtoE);
+								NewZpoInfantOtoacousticEmissionsActivity.class);
+						if (zpoOtoE != null) arguments.putSerializable(Constants.OBJECTO_ZPO07OtoE, zpoOtoE);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-					case 9: //FACTORES DE RIESGO
+					/*case 9: //FACTORES DE RIESGO
 						i = new Intent(getApplicationContext(),
 								NewZpo04ExtendedSectionAtoFActivity.class);
 						if (zp04AF != null) arguments.putSerializable(Constants.OBJECTO_ZP04AF, zp04AF);
@@ -303,10 +298,11 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 					zp07b = zipA.getZpo07bInfantAudioResult(filtro, MainDBConstants.recordId);
 					zp07c = zipA.getZpo07cInfantImageSt(filtro, MainDBConstants.recordId);
 					zp07d = zipA.getZpo07dInfantBayleySc(filtro, MainDBConstants.recordId);
-					zp07OtoE = zipA.getZpo07InfantOtoacousticE(filtro, MainDBConstants.recordId);
-					zp04AF = zipA.getZpo04ExtendedSectionAtoF( filtro, MainDBConstants.recordId);
-*/
-					if (zpoV2Muestra !=null) {// && zp07!=null && zp07a!=null && zp07b!=null && zp07c!=null && zp07d!=null && zp07OtoE!=null && zp04AF!=null){
+					*/
+                    zpoOtoE = zipA.getZpoInfantOtoacousticE(filtro, MainDBConstants.recordId);
+					//zp04AF = zipA.getZpo04ExtendedSectionAtoF( filtro, MainDBConstants.recordId);
+
+					if (zpoV2Muestra !=null) {// && zp07!=null && zp07a!=null && zp07b!=null && zp07c!=null && zp07d!=null && zpoOtoE!=null && zp04AF!=null){
 						if(eventoaFiltrar.matches(Constants.MONTH24)){
 							zpEstado.setMes12('1');
 						}
@@ -325,7 +321,7 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new InfantVisit7284Adapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra));
+				gridView.setAdapter(new InfantVisit7284Adapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra, zpoOtoE));
 				dismissProgressDialog();
 			}
 

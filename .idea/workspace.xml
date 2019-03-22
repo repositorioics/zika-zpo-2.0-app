@@ -30,61 +30,36 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="098719c1-18d7-4cc6-bed3-1a984e392257" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisit7284Activity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisit7284Adapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/MotherCallActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosmadre/MotherCallAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2RecoleccionMuestraActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2RecoleccionMuestra.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoV2RecoleccionMuestraHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/ZpoV2RecoleccionMuestraXml.java" />
-      <change type="MOVED" beforePath="C:\MSalinas\Repositorio\GIT\ZPO2.0\zika-zpo-2.0-app\src\ni\org\ics\zpo\v2\appmovil\activities\paginas\eventosinfante\UnscheduledInfantVisitActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantCallActivity.java" />
-      <change type="MOVED" beforePath="C:\MSalinas\Repositorio\GIT\ZPO2.0\zika-zpo-2.0-app\src\ni\org\ics\zpo\v2\appmovil\adapters\eventosinfante\UnscheduledInfantVisitAdapter.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantCallAdapter.java" />
-      <change type="MOVED" beforePath="C:\MSalinas\Repositorio\GIT\ZPO2.0\zika-zpo-2.0-app\src\ni\org\ics\zpo\v2\domain\BaseMetaData.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/BaseMetaData.java" />
-      <change type="MOVED" beforePath="C:\MSalinas\Repositorio\GIT\ZPO2.0\zika-zpo-2.0-app\src\ni\org\ics\zpo\v2\domain\Zpo00Screening.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/Zpo00Screening.java" />
-      <change type="MOVED" beforePath="C:\MSalinas\Repositorio\GIT\ZPO2.0\zika-zpo-2.0-app\src\ni\org\ics\zpo\v2\domain\ZpoControlConsentimientosRecepcion.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoControlConsentimientosRecepcion.java" />
-      <change type="MOVED" beforePath="C:\MSalinas\Repositorio\GIT\ZPO2.0\zika-zpo-2.0-app\src\ni\org\ics\zpo\v2\domain\ZpoControlConsentimientosSalida.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoControlConsentimientosSalida.java" />
-      <change type="MOVED" beforePath="C:\MSalinas\Repositorio\GIT\ZPO2.0\zika-zpo-2.0-app\src\ni\org\ics\zpo\v2\domain\ZpoDatosEmbarazada.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoDatosEmbarazada.java" />
-      <change type="MOVED" beforePath="C:\MSalinas\Repositorio\GIT\ZPO2.0\zika-zpo-2.0-app\src\ni\org\ics\zpo\v2\domain\ZpoEstadoEmbarazada.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoEstadoEmbarazada.java" />
-      <change type="MOVED" beforePath="C:\MSalinas\Repositorio\GIT\ZPO2.0\zika-zpo-2.0-app\src\ni\org\ics\zpo\v2\domain\ZpoEstadoInfante.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoEstadoInfante.java" />
-      <change type="MOVED" beforePath="C:\MSalinas\Repositorio\GIT\ZPO2.0\zika-zpo-2.0-app\src\ni\org\ics\zpo\v2\domain\ZpoInfantData.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoInfantData.java" />
-      <change type="MOVED" beforePath="C:\MSalinas\Repositorio\GIT\ZPO2.0\zika-zpo-2.0-app\src\ni\org\ics\zpo\v2\domain\ZpoVisitaFallida.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoVisitaFallida.java" />
+    <list default="true" id="098719c1-18d7-4cc6-bed3-1a984e392257" name="Default" comment="faltaban">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoInfantOtoacousticEmissionsActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2InfantAssessmentVisitOphtActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2InfantAssessmentVisitPsyActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/ZpoInfantOtoacousticEXml.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoInfantOtoacousticEmissionsHelper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/ZpoOphthaEvalDBConstants.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/ZpoOtoEDBConstants.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/ZpoPsychoEvalDBConstants.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoV2InfantOphthalmologicEvalHelper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/ZpoV2InfantOphthalmologicEvalXml.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2InfantOphthalmologicEvaluation.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2InfantOtoacousticEmissions.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoV2InfantPsychologicalEvalHelper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/ZpoV2InfantPsychologicalEvalXml.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2InfantPsychologicalEvaluation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/users/Authority.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/users/Authority.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/buscar/BuscarInfanteActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/buscar/BuscarInfanteActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/buscar/BuscarMadreActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/buscar/BuscarMadreActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/Constants.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/Constants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/downloads/DownloadAllTask.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/downloads/DownloadAllTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantEntryActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantEntryActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantCallActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantCallActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantCallAdapter.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantCallAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisit7284Activity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisit7284Activity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisit7284Adapter.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisit7284Adapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisitActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisitActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisitAdapter.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisitAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/IngresoActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/IngresoActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/MainDBConstants.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/MainDBConstants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuInfantesActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuInfantesActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuMadresActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuMadresActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/MotherVisitActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/MotherVisitActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpo00ScreeningActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpo00ScreeningActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoControlConsentimientosRecepcionActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoControlConsentimientosRecepcionActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoControlConsentimientosSalidaActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoControlConsentimientosSalidaActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoVisitaFallidaActivity.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoVisitaFallidaActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/ScreeningAdapter.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/ScreeningAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/uploads/UploadAllTask.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/uploads/UploadAllTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosmadre/VisitAdapter.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosmadre/VisitAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/Zpo00ScreeningHelper.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/Zpo00ScreeningHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/database/ZpoAdapter.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/database/ZpoAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoControlConsentimientosRecepcionHelper.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoControlConsentimientosRecepcionHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoControlConsentimientosSalidaHelper.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoControlConsentimientosSalidaHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoDatosMadreHelper.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoDatosMadreHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoEstadoInfanteHelper.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoEstadoInfanteHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoEstadoMadreHelper.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoEstadoMadreHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/ZpoInfantDataAdapter.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/ZpoInfantDataAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoInfantDataHelper.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoInfantDataHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoVisitaFallidaHelper.java" afterPath="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoVisitaFallidaHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/arrays.xml" afterPath="$PROJECT_DIR$/res/values/arrays.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings_infant.xml" afterPath="$PROJECT_DIR$/res/values/strings_infant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings_maternal.xml" afterPath="$PROJECT_DIR$/res/values/strings_maternal.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings_preferences.xml" afterPath="$PROJECT_DIR$/res/values/strings_preferences.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="zika-zpo-app.iws" />
@@ -108,103 +83,101 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="VisitAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosmadre/VisitAdapter.java">
+      <file leaf-file-name="NewZpoV2InfantAssessmentVisitOphtActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2InfantAssessmentVisitOphtActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1020">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4046" max-vertical-offset="5287">
+              <caret line="238" column="55" selection-start-line="238" selection-start-column="55" selection-end-line="238" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InfantVisit7284Adapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisit7284Adapter.java">
+      <file leaf-file-name="UploadAllActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/server/UploadAllActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="3315">
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InfantVisitActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisitActivity.java">
+      <file leaf-file-name="BuscarMadreActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/buscar/BuscarMadreActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-64.21429" vertical-offset="888" max-vertical-offset="5083">
-              <caret line="193" column="31" selection-start-line="193" selection-start-column="31" selection-end-line="193" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3769" max-vertical-offset="4641">
+              <caret line="274" column="17" selection-start-line="274" selection-start-column="17" selection-end-line="274" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewZpoV2RecoleccionMuestraActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2RecoleccionMuestraActivity.java">
+      <file leaf-file-name="InfantVisit7284Activity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisit7284Activity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2120" max-vertical-offset="4794">
-              <caret line="94" column="90" selection-start-line="94" selection-start-column="90" selection-end-line="94" selection-end-column="90" />
-              <folding>
-                <element signature="e#3506#3538#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MotherVisitActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/MotherVisitActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8173077" vertical-offset="459" max-vertical-offset="3842">
-              <caret line="99" column="17" selection-start-line="99" selection-start-column="17" selection-end-line="99" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1511" max-vertical-offset="4998">
+              <caret line="108" column="2" selection-start-line="108" selection-start-column="2" selection-end-line="108" selection-end-column="2" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings_maternal.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/strings_maternal.xml">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.08" vertical-offset="63" max-vertical-offset="1003">
-              <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.5108173" vertical-offset="0" max-vertical-offset="1700">
+              <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings_infant.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/strings_infant.xml">
+      <file leaf-file-name="UploadAllTask.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/uploads/UploadAllTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.68" vertical-offset="351" max-vertical-offset="765">
-              <caret line="29" column="26" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3774" max-vertical-offset="9452">
+              <caret line="222" column="22" selection-start-line="222" selection-start-column="22" selection-end-line="222" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="arrays.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/arrays.xml">
+      <file leaf-file-name="Zpo00Screening.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/Zpo00Screening.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.68" vertical-offset="714" max-vertical-offset="3910">
-              <caret line="68" column="44" selection-start-line="68" selection-start-column="44" selection-end-line="68" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="2720">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InfantVisitAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisitAdapter.java">
+      <file leaf-file-name="DownloadAllTask.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/downloads/DownloadAllTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1054">
-              <caret line="42" column="40" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3247" max-vertical-offset="5627">
+              <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuMadresActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuMadresActivity.java">
+      <file leaf-file-name="NewZpoInfantOtoacousticEmissionsActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoInfantOtoacousticEmissionsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3128" max-vertical-offset="5134">
-              <caret line="278" column="16" selection-start-line="278" selection-start-column="16" selection-end-line="278" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4811" max-vertical-offset="5389">
+              <caret line="283" column="8" selection-start-line="283" selection-start-column="8" selection-end-line="283" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings_preferences.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/values/strings_preferences.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="408">
+              <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -224,26 +197,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/tasks/uploads/UploadAllTask.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/activities/paginas/eventosinfante/InfantEntryActivity.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/activities/paginas/eventosinfante/InfantVisitActivity.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/activities/paginas/eventosinfante/UnscheduledInfantVisitActivity.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/activities/paginas/eventosmadre/IngresoActivity.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/activities/paginas/eventosmadre/MotherVisitActivity.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/activities/paginas/MenuInfantesActivity.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/activities/paginas/MenuMadresActivity.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/helpers/ZpoEstadoMadreHelper.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/database/ZpoAdapter.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/tasks/downloads/DownloadAllTask.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/appmovil/utils/MainDBConstants.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/AbstractAsyncActivity.java" />
-        <option value="$PROJECT_DIR$/project.properties" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/Zpo00ScreeningXml.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoDatosMadreHelper.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/buscar/BuscarMadreActivity.java" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/MenuMadresAdapter.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/MenuInfantesAdapter.java" />
         <option value="$PROJECT_DIR$/res/layout/selec_inf_list.xml" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/buscar/BuscarInfanteActivity.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/domain/Zpo00Screening.java" />
@@ -251,30 +204,50 @@
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpo00ScreeningActivity.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2MuestraMaterna.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2RecoleccionMuestra.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/MainDBConstants.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoV2RecoleccionMuestraHelper.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/ZpoV2RecoleccionMuestraXml.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/database/ZpoAdapter.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/downloads/DownloadAllTask.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/Constants.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisitAdapter.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/UnscheduledInfantVisitActivity.java" />
         <option value="$PROJECT_DIR$/res/values/strings_infant.xml" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantCallActivity.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/UnscheduledInfantVisitAdapter.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantCallAdapter.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisitActivity.java" />
-        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisit7284Activity.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuInfantesActivity.java" />
         <option value="$PROJECT_DIR$/res/values/strings_maternal.xml" />
-        <option value="$PROJECT_DIR$/res/values/arrays.xml" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosmadre/MotherCallAdapter.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/MotherCallActivity.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuMadresActivity.java" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosmadre/VisitAdapter.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2RecoleccionMuestraActivity.java" />
         <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/MotherVisitActivity.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoInfantOtoacousticEmissionsHelper.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisit7284Adapter.java" />
+        <option value="$PROJECT_DIR$/res/values/arrays.xml" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoInfantOtoacousticEmissionsActivity.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/MainDBConstants.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/Zpo07InfantAssessmentVisitHelper.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoInfantOphthalmologicEvaluation.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoV2InfantOphthalmologicEvaluationHelper.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoV2InfantPsychologicalEvaluationHelper.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpo07InfantAssessmentVisitOphtActivity.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/ZpoV2InfantPsychologicalEvalXml.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpo07InfantAssessmentVisitPsyActivity.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantCallAdapter.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisitActivity.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantCallActivity.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisitAdapter.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2InfantAssessmentVisitPsyActivity.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2InfantAssessmentVisitOphtActivity.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoV2InfantOphthalmologicEvalHelper.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/database/ZpoAdapter.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/ZpoV2InfantOphthalmologicEvalXml.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2InfantOphthalmologicEvaluation.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2InfantPsychologicalEvaluation.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/ZpoOphthaEvalDBConstants.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/ZpoPsychoEvalDBConstants.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/uploads/UploadAllTask.java" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/downloads/DownloadAllTask.java" />
+        <option value="$PROJECT_DIR$/res/values/strings_preferences.xml" />
+        <option value="$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisit7284Activity.java" />
       </list>
     </option>
   </component>
@@ -368,7 +341,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
+              <option name="myItemId" value="tasks" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -390,7 +363,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="adapters" />
+              <option name="myItemId" value="tasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uploads" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -412,141 +389,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="adapters" />
+              <option name="myItemId" value="tasks" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="eventosmadre" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zika-zpo-2.0-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zika-zpo-2.0-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appmovil" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="adapters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eventosinfante" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zika-zpo-2.0-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zika-zpo-2.0-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appmovil" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zika-zpo-2.0-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zika-zpo-2.0-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appmovil" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="paginas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zika-zpo-2.0-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zika-zpo-2.0-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appmovil" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="paginas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eventosmadre" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zika-zpo-2.0-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zika-zpo-2.0-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appmovil" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nuevos" />
+              <option name="myItemId" value="downloads" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -590,10 +437,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre" />
-      <recent name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosmadre" />
-      <recent name="ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante" />
-      <recent name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante" />
+      <recent name="ni.org.ics.zpo.v2.appmovil.parsers" />
+      <recent name="ni.org.ics.zpo.v2.appmovil.utils" />
+      <recent name="ni.org.ics.zpo.v2.appmovil.helpers" />
+      <recent name="ni.org.ics.zpo.v2.appmovil.domain" />
       <recent name="ni.org.ics.zpo.v2.appmovil.activities.nuevos" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -913,7 +760,12 @@
       <workItem from="1553015782791" duration="377000" />
       <workItem from="1553017534925" duration="7687000" />
       <workItem from="1553037684345" duration="20000" />
-      <workItem from="1553093231874" duration="16197000" />
+      <workItem from="1553093231874" duration="17455000" />
+      <workItem from="1553177458241" duration="20754000" />
+      <workItem from="1553263421710" duration="1127000" />
+      <workItem from="1553271974340" duration="278000" />
+      <workItem from="1553279637721" duration="6636000" />
+      <workItem from="1553295962410" duration="633000" />
     </task>
     <task id="LOCAL-00001" summary="Parte 1: Madres">
       <created>1510095713968</created>
@@ -971,7 +823,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="236722000" />
+    <option name="totallyTimeSpent" value="267408000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -998,7 +850,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5949367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.59483725" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1032,14 +884,14 @@
     <layout-to-restore>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5949367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51964086" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51964086" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32770744" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26307365" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1058,8 +910,8 @@
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.80583614" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -1096,13 +948,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/downloads/DownloadAllTask.java</url>
-          <line>143</line>
+          <url>file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/uploads/UploadAllTask.java</url>
+          <line>241</line>
           <properties />
-          <option name="timeStamp" value="88" />
+          <option name="timeStamp" value="98" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="92" />
+      <option name="time" value="99" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -1110,161 +962,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/zika-zpo-2.0-app.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
-          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/ic_enroll.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/ic_tubes.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/ic_visit_call.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable-mdpi/ic_visit_call.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.063197024" vertical-offset="0" max-vertical-offset="807">
-          <caret line="3" column="29" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoDatosMadreHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/Zpo00ScreeningXml.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2431">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/server/DownloadAllActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="624" max-vertical-offset="2856">
-          <caret line="71" column="31" selection-start-line="71" selection-start-column="31" selection-end-line="71" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoDatosEmbarazada.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1547">
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/selec_emb_list.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0714285" vertical-offset="1069" max-vertical-offset="1870">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="76" selection-end-column="65" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1547">
-          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/MenuInfantesAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="579" max-vertical-offset="1666">
-          <caret line="79" column="19" selection-start-line="79" selection-start-column="19" selection-end-line="79" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/selec_inf_list.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="652" max-vertical-offset="1428">
-          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/buscar/BuscarInfanteActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4488" max-vertical-offset="4777">
-          <caret line="264" column="22" selection-start-line="264" selection-start-column="22" selection-end-line="264" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoInfantData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.9411058" vertical-offset="1089" max-vertical-offset="2329">
-          <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/buscar/BuscarMadreActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2431" max-vertical-offset="5287">
-          <caret line="143" column="37" selection-start-line="143" selection-start-column="37" selection-end-line="143" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/Zpo00ScreeningHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="326" max-vertical-offset="1275">
-          <caret line="57" column="114" selection-start-line="57" selection-start-column="114" selection-end-line="57" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/MenuMadresAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1649">
-          <caret line="61" column="28" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/Zpo00Screening.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="1870">
-          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpo00ScreeningActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4029" max-vertical-offset="9010">
-          <caret line="237" column="28" selection-start-line="237" selection-start-column="28" selection-end-line="237" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/BaseMetaData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1887">
@@ -1272,27 +969,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/MainDBConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5951" max-vertical-offset="7106">
-          <caret line="384" column="63" selection-start-line="384" selection-start-column="63" selection-end-line="384" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2RecoleccionMuestra.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3026">
-          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoV2RecoleccionMuestraHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="16" max-vertical-offset="1581">
           <caret line="15" column="60" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1300,55 +980,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2146" max-vertical-offset="5219">
           <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/database/ZpoAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="10098">
-          <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/downloads/DownloadAllTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3638">
-          <caret line="89" column="38" selection-start-line="89" selection-start-column="38" selection-end-line="89" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="562" max-vertical-offset="1479">
-          <caret line="73" column="56" selection-start-line="73" selection-start-column="56" selection-end-line="73" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantCallAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="35" max-vertical-offset="867">
-          <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisit7284Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4251" max-vertical-offset="5083">
-          <caret line="333" column="1" selection-start-line="333" selection-start-column="1" selection-end-line="333" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuInfantesActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.5" vertical-offset="2643" max-vertical-offset="4777">
-          <caret line="229" column="33" selection-start-line="229" selection-start-column="33" selection-end-line="229" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1356,7 +987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="86" max-vertical-offset="918">
           <caret line="38" column="40" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1364,7 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.75600964" vertical-offset="0" max-vertical-offset="867">
           <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1372,7 +1001,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3859">
           <caret line="45" column="45" selection-start-line="45" selection-start-column="45" selection-end-line="46" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1380,17 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="4726">
           <caret line="79" column="48" selection-start-line="79" selection-start-column="48" selection-end-line="79" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantCallActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4608" max-vertical-offset="5440">
-          <caret line="309" column="39" selection-start-line="309" selection-start-column="39" selection-end-line="309" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1398,7 +1015,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="137" max-vertical-offset="1020">
           <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1406,76 +1022,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3010" max-vertical-offset="3842">
           <caret line="249" column="31" selection-start-line="249" selection-start-column="31" selection-end-line="249" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="613" max-vertical-offset="1547">
-          <caret line="57" column="109" selection-start-line="57" selection-start-column="109" selection-end-line="57" selection-end-column="109" />
-          <folding>
-            <element signature="e#1252#1270#0" expanded="true" />
-            <element signature="e#1425#1443#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisit7284Adapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings_infant.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.68" vertical-offset="351" max-vertical-offset="765">
-          <caret line="29" column="26" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/arrays.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.68" vertical-offset="714" max-vertical-offset="3910">
-          <caret line="68" column="44" selection-start-line="68" selection-start-column="44" selection-end-line="68" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisitAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1054">
-          <caret line="42" column="40" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisitActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-64.21429" vertical-offset="888" max-vertical-offset="5083">
-          <caret line="193" column="31" selection-start-line="193" selection-start-column="31" selection-end-line="193" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings_maternal.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.08" vertical-offset="63" max-vertical-offset="1003">
+        <state vertical-scroll-proportion="0.0" vertical-offset="63" max-vertical-offset="1003">
           <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2RecoleccionMuestraActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2120" max-vertical-offset="4794">
-          <caret line="94" column="90" selection-start-line="94" selection-start-column="90" selection-end-line="94" selection-end-column="90" />
-          <folding>
-            <element signature="e#3506#3538#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1483,7 +1036,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3128" max-vertical-offset="5134">
           <caret line="278" column="16" selection-start-line="278" selection-start-column="16" selection-end-line="278" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1491,14 +1043,472 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1020">
           <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosmadre/MotherVisitActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8173077" vertical-offset="459" max-vertical-offset="3842">
-          <caret line="99" column="17" selection-start-line="99" selection-start-column="17" selection-end-line="99" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2960" max-vertical-offset="3842">
+          <caret line="246" column="35" selection-start-line="246" selection-start-column="35" selection-end-line="246" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisit7284Adapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
+          <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/MainDBConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7106">
+          <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="647" max-vertical-offset="1479">
+          <caret line="60" column="57" selection-start-line="60" selection-start-column="57" selection-end-line="60" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/MenuInfantesActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2439" max-vertical-offset="4777">
+          <caret line="214" column="33" selection-start-line="214" selection-start-column="33" selection-end-line="214" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/ZpoV2InfantPsychologicalEvalXml.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2142856" vertical-offset="1559" max-vertical-offset="7803">
+          <caret line="97" column="28" selection-start-line="97" selection-start-column="28" selection-end-line="97" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3040#3041#0" expanded="false" />
+            <element signature="e#3079#3080#0" expanded="false" />
+            <element signature="e#3141#3142#0" expanded="false" />
+            <element signature="e#3197#3198#0" expanded="false" />
+            <element signature="e#3237#3238#0" expanded="false" />
+            <element signature="e#3273#3274#0" expanded="false" />
+            <element signature="e#3331#3332#0" expanded="false" />
+            <element signature="e#3381#3382#0" expanded="false" />
+            <element signature="e#3420#3421#0" expanded="false" />
+            <element signature="e#3457#3458#0" expanded="false" />
+            <element signature="e#3515#3516#0" expanded="false" />
+            <element signature="e#3567#3568#0" expanded="false" />
+            <element signature="e#3606#3607#0" expanded="false" />
+            <element signature="e#3641#3642#0" expanded="false" />
+            <element signature="e#3697#3698#0" expanded="false" />
+            <element signature="e#3745#3746#0" expanded="false" />
+            <element signature="e#3788#3789#0" expanded="false" />
+            <element signature="e#3827#3828#0" expanded="false" />
+            <element signature="e#3891#3892#0" expanded="false" />
+            <element signature="e#3947#3948#0" expanded="false" />
+            <element signature="e#3988#3989#0" expanded="false" />
+            <element signature="e#4025#4026#0" expanded="false" />
+            <element signature="e#4085#4086#0" expanded="false" />
+            <element signature="e#4137#4138#0" expanded="false" />
+            <element signature="e#4179#4180#0" expanded="false" />
+            <element signature="e#4218#4219#0" expanded="false" />
+            <element signature="e#4281#4282#0" expanded="false" />
+            <element signature="e#4337#4338#0" expanded="false" />
+            <element signature="e#4377#4378#0" expanded="false" />
+            <element signature="e#4414#4415#0" expanded="false" />
+            <element signature="e#4473#4474#0" expanded="false" />
+            <element signature="e#4525#4526#0" expanded="false" />
+            <element signature="e#4564#4565#0" expanded="false" />
+            <element signature="e#4600#4601#0" expanded="false" />
+            <element signature="e#4657#4658#0" expanded="false" />
+            <element signature="e#4707#4708#0" expanded="false" />
+            <element signature="e#4749#4750#0" expanded="false" />
+            <element signature="e#4788#4789#0" expanded="false" />
+            <element signature="e#4851#4852#0" expanded="false" />
+            <element signature="e#4907#4908#0" expanded="false" />
+            <element signature="e#4950#4951#0" expanded="false" />
+            <element signature="e#4990#4991#0" expanded="false" />
+            <element signature="e#5055#5056#0" expanded="false" />
+            <element signature="e#5113#5114#0" expanded="false" />
+            <element signature="e#5155#5156#0" expanded="false" />
+            <element signature="e#5193#5194#0" expanded="false" />
+            <element signature="e#5255#5256#0" expanded="false" />
+            <element signature="e#5309#5310#0" expanded="false" />
+            <element signature="e#5348#5349#0" expanded="false" />
+            <element signature="e#5384#5385#0" expanded="false" />
+            <element signature="e#5441#5442#0" expanded="false" />
+            <element signature="e#5491#5492#0" expanded="false" />
+            <element signature="e#5530#5531#0" expanded="false" />
+            <element signature="e#5565#5566#0" expanded="false" />
+            <element signature="e#5621#5622#0" expanded="false" />
+            <element signature="e#5669#5670#0" expanded="false" />
+            <element signature="e#5708#5709#0" expanded="false" />
+            <element signature="e#5744#5745#0" expanded="false" />
+            <element signature="e#5801#5802#0" expanded="false" />
+            <element signature="e#5851#5852#0" expanded="false" />
+            <element signature="e#5890#5891#0" expanded="false" />
+            <element signature="e#5925#5926#0" expanded="false" />
+            <element signature="e#5981#5982#0" expanded="false" />
+            <element signature="e#6029#6030#0" expanded="false" />
+            <element signature="e#6068#6069#0" expanded="false" />
+            <element signature="e#6104#6105#0" expanded="false" />
+            <element signature="e#6161#6162#0" expanded="false" />
+            <element signature="e#6211#6212#0" expanded="false" />
+            <element signature="e#6250#6251#0" expanded="false" />
+            <element signature="e#6285#6286#0" expanded="false" />
+            <element signature="e#6341#6342#0" expanded="false" />
+            <element signature="e#6389#6390#0" expanded="false" />
+            <element signature="e#6428#6429#0" expanded="false" />
+            <element signature="e#6464#6465#0" expanded="false" />
+            <element signature="e#6521#6522#0" expanded="false" />
+            <element signature="e#6571#6572#0" expanded="false" />
+            <element signature="e#6610#6611#0" expanded="false" />
+            <element signature="e#6645#6646#0" expanded="false" />
+            <element signature="e#6701#6702#0" expanded="false" />
+            <element signature="e#6749#6750#0" expanded="false" />
+            <element signature="e#6788#6789#0" expanded="false" />
+            <element signature="e#6824#6825#0" expanded="false" />
+            <element signature="e#6881#6882#0" expanded="false" />
+            <element signature="e#6931#6932#0" expanded="false" />
+            <element signature="e#6970#6971#0" expanded="false" />
+            <element signature="e#7005#7006#0" expanded="false" />
+            <element signature="e#7061#7062#0" expanded="false" />
+            <element signature="e#7109#7110#0" expanded="false" />
+            <element signature="e#7152#7153#0" expanded="false" />
+            <element signature="e#7191#7192#0" expanded="false" />
+            <element signature="e#7255#7256#0" expanded="false" />
+            <element signature="e#7311#7312#0" expanded="false" />
+            <element signature="e#7353#7354#0" expanded="false" />
+            <element signature="e#7391#7392#0" expanded="false" />
+            <element signature="e#7453#7454#0" expanded="false" />
+            <element signature="e#7507#7508#0" expanded="false" />
+            <element signature="e#7549#7550#0" expanded="false" />
+            <element signature="e#7588#7589#0" expanded="false" />
+            <element signature="e#7651#7652#0" expanded="false" />
+            <element signature="e#7707#7708#0" expanded="false" />
+            <element signature="e#7755#7756#0" expanded="false" />
+            <element signature="e#7799#7800#0" expanded="false" />
+            <element signature="e#7984#7985#0" expanded="false" />
+            <element signature="e#8025#8026#0" expanded="false" />
+            <element signature="e#8093#8094#0" expanded="false" />
+            <element signature="e#8153#8154#0" expanded="false" />
+            <element signature="e#8197#8198#0" expanded="false" />
+            <element signature="e#8237#8238#0" expanded="false" />
+            <element signature="e#8303#8304#0" expanded="false" />
+            <element signature="e#8361#8362#0" expanded="false" />
+            <element signature="e#8405#8406#0" expanded="false" />
+            <element signature="e#8445#8446#0" expanded="false" />
+            <element signature="e#8511#8512#0" expanded="false" />
+            <element signature="e#8569#8570#0" expanded="false" />
+            <element signature="e#8602#8603#0" expanded="false" />
+            <element signature="e#8631#8632#0" expanded="false" />
+            <element signature="e#8675#8676#0" expanded="false" />
+            <element signature="e#8711#8712#0" expanded="false" />
+            <element signature="e#8744#8745#0" expanded="false" />
+            <element signature="e#8773#8774#0" expanded="false" />
+            <element signature="e#8817#8818#0" expanded="false" />
+            <element signature="e#8853#8854#0" expanded="false" />
+            <element signature="e#8886#8887#0" expanded="false" />
+            <element signature="e#8915#8916#0" expanded="false" />
+            <element signature="e#8959#8960#0" expanded="false" />
+            <element signature="e#8995#8996#0" expanded="false" />
+            <element signature="e#9029#9030#0" expanded="false" />
+            <element signature="e#9059#9060#0" expanded="false" />
+            <element signature="e#9105#9106#0" expanded="false" />
+            <element signature="e#9143#9144#0" expanded="false" />
+            <element signature="e#9175#9176#0" expanded="false" />
+            <element signature="e#9203#9204#0" expanded="false" />
+            <element signature="e#9245#9246#0" expanded="false" />
+            <element signature="e#9279#9280#0" expanded="false" />
+            <element signature="e#9311#9312#0" expanded="false" />
+            <element signature="e#9339#9340#0" expanded="false" />
+            <element signature="e#9381#9382#0" expanded="false" />
+            <element signature="e#9415#9416#0" expanded="false" />
+            <element signature="e#9444#9445#0" expanded="false" />
+            <element signature="e#9469#9470#0" expanded="false" />
+            <element signature="e#9504#9505#0" expanded="false" />
+            <element signature="e#9532#9533#0" expanded="false" />
+            <element signature="e#9565#9566#0" expanded="false" />
+            <element signature="e#9595#9596#0" expanded="false" />
+            <element signature="e#9640#9641#0" expanded="false" />
+            <element signature="e#9678#9679#0" expanded="false" />
+            <element signature="e#9706#9707#0" expanded="false" />
+            <element signature="e#9733#9734#0" expanded="false" />
+            <element signature="e#9770#9771#0" expanded="false" />
+            <element signature="e#9802#9803#0" expanded="false" />
+            <element signature="e#9833#9834#0" expanded="false" />
+            <element signature="e#9861#9862#0" expanded="false" />
+            <element signature="e#9902#9903#0" expanded="false" />
+            <element signature="e#9936#9937#0" expanded="false" />
+            <element signature="e#9965#9966#0" expanded="false" />
+            <element signature="e#9991#9992#0" expanded="false" />
+            <element signature="e#10028#10029#0" expanded="false" />
+            <element signature="e#10058#10059#0" expanded="false" />
+            <element signature="e#10092#10093#0" expanded="false" />
+            <element signature="e#10123#10124#0" expanded="false" />
+            <element signature="e#10170#10171#0" expanded="false" />
+            <element signature="e#10210#10211#0" expanded="false" />
+            <element signature="e#10245#10246#0" expanded="false" />
+            <element signature="e#10277#10278#0" expanded="false" />
+            <element signature="e#10326#10327#0" expanded="false" />
+            <element signature="e#10368#10369#0" expanded="false" />
+            <element signature="e#10405#10406#0" expanded="false" />
+            <element signature="e#10439#10440#0" expanded="false" />
+            <element signature="e#10492#10493#0" expanded="false" />
+            <element signature="e#10538#10539#0" expanded="false" />
+            <element signature="e#10568#10569#0" expanded="false" />
+            <element signature="e#10595#10596#0" expanded="false" />
+            <element signature="e#10634#10635#0" expanded="false" />
+            <element signature="e#10666#10667#0" expanded="false" />
+            <element signature="e#10695#10696#0" expanded="false" />
+            <element signature="e#10723#10724#0" expanded="false" />
+            <element signature="e#10762#10763#0" expanded="false" />
+            <element signature="e#10796#10797#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/arrays.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.12" vertical-offset="1227" max-vertical-offset="3910">
+          <caret line="90" column="25" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings_infant.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.6" vertical-offset="0" max-vertical-offset="765">
+          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantCallActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="63" max-vertical-offset="5015">
+          <caret line="47" column="31" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisitActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4183" max-vertical-offset="5015">
+          <caret line="311" column="21" selection-start-line="311" selection-start-column="21" selection-end-line="311" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantCallAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="273" max-vertical-offset="1105">
+          <caret line="60" column="22" selection-start-line="50" selection-start-column="12" selection-end-line="60" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/adapters/eventosinfante/InfantVisitAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="681" max-vertical-offset="1513">
+          <caret line="78" column="111" selection-start-line="78" selection-start-column="111" selection-end-line="78" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2RecoleccionMuestraActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2091" max-vertical-offset="4794">
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2InfantAssessmentVisitPsyActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2728" max-vertical-offset="5576">
+          <caret line="207" column="66" selection-start-line="207" selection-start-column="66" selection-end-line="207" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/ZpoOtoEDBConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31199068" vertical-offset="344" max-vertical-offset="1343">
+          <caret line="36" column="31" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/database/ZpoAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4034" max-vertical-offset="12699">
+          <caret line="268" column="69" selection-start-line="268" selection-start-column="69" selection-end-line="268" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/server/DownloadAllActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="494" max-vertical-offset="2856">
+          <caret line="71" column="34" selection-start-line="71" selection-start-column="34" selection-end-line="71" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2InfantOtoacousticEmissions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15832363" vertical-offset="0" max-vertical-offset="2023">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2InfantOphthalmologicEvaluation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2572759" vertical-offset="0" max-vertical-offset="1666">
+          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2InfantPsychologicalEvaluation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3383">
+          <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/ZpoV2RecoleccionMuestra.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1972">
+          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoInfantOtoacousticEmissionsHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1598">
+          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoV2InfantOphthalmologicEvalHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1309">
+          <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/ZpoOphthaEvalDBConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1003">
+          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/helpers/ZpoV2InfantPsychologicalEvalHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2040">
+          <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/utils/ZpoPsychoEvalDBConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="613" max-vertical-offset="1700">
+          <caret line="59" column="42" selection-start-line="59" selection-start-column="42" selection-end-line="59" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/parsers/ZpoV2InfantOphthalmologicEvalXml.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="2380">
+          <caret line="74" column="24" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoV2InfantAssessmentVisitOphtActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3075" max-vertical-offset="4675">
+          <caret line="238" column="55" selection-start-line="238" selection-start-column="55" selection-end-line="238" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/UploadTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53125" vertical-offset="0" max-vertical-offset="832">
+          <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/server/UploadAllActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3026">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/downloads/DownloadAllTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3247" max-vertical-offset="5627">
+          <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/nuevos/NewZpoInfantOtoacousticEmissionsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3945" max-vertical-offset="4777">
+          <caret line="283" column="8" selection-start-line="283" selection-start-column="8" selection-end-line="283" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings_preferences.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="408">
+          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/tasks/uploads/UploadAllTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3774" max-vertical-offset="9452">
+          <caret line="222" column="22" selection-start-line="222" selection-start-column="22" selection-end-line="222" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/domain/Zpo00Screening.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1802">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/buscar/BuscarMadreActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3769" max-vertical-offset="4641">
+          <caret line="274" column="17" selection-start-line="274" selection-start-column="17" selection-end-line="274" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ni/org/ics/zpo/v2/appmovil/activities/paginas/eventosinfante/InfantVisit7284Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1511" max-vertical-offset="4998">
+          <caret line="108" column="2" selection-start-line="108" selection-start-column="2" selection-end-line="108" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5108173" vertical-offset="0" max-vertical-offset="1700">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
           <folding />
         </state>
       </provider>

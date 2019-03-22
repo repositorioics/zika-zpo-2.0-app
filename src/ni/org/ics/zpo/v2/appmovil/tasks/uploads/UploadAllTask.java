@@ -25,7 +25,7 @@ public class UploadAllTask extends UploadTask {
 	}
 
 	protected static final String TAG = UploadAllTask.class.getSimpleName();
-    private static final String TOTAL_TASK = "24";
+    private static final String TOTAL_TASK = "25";
 	private ZpoAdapter zpoA = null;
 
     private List<Zpo00Screening> mTamizajes = new ArrayList<Zpo00Screening>();
@@ -33,6 +33,10 @@ public class UploadAllTask extends UploadTask {
     private List<ZpoInfantData> mInfantData = new ArrayList<ZpoInfantData>();
     private List<ZpoEstadoInfante> mEstadoInfante = new ArrayList<ZpoEstadoInfante>();
     private List<ZpoV2Mullen> mMullen = new ArrayList<ZpoV2Mullen>();
+    private List<ZpoV2RecoleccionMuestra> mMuestras = new ArrayList<ZpoV2RecoleccionMuestra>();
+    private List<ZpoV2InfantOphthalmologicEvaluation> mOphthaEvals= new ArrayList<ZpoV2InfantOphthalmologicEvaluation>();
+    private List<ZpoV2InfantPsychologicalEvaluation> mPsychoEvals = new ArrayList<ZpoV2InfantPsychologicalEvaluation>();
+    private List<ZpoV2InfantOtoacousticEmissions> mOtoacusEms = new ArrayList<ZpoV2InfantOtoacousticEmissions>();
 
 	private String url = null;
 	private String username = null;
@@ -64,6 +68,8 @@ public class UploadAllTask extends UploadTask {
     public static final int OTO_EMI = 22;
     public static final int EXTENDEDAF = 23;
     public static final int MULLEN = 24;
+    public static final int OFTA_EVAL = 24;
+    public static final int PSICO_EVAL = 25;
 
     @Override
 	protected String doInBackground(String... values) {
@@ -82,6 +88,10 @@ public class UploadAllTask extends UploadTask {
             mInfantData = zpoA.getZpoInfantDatas(filtro,null);
             mEstadoInfante = zpoA.getZpoEstadoInfantes(filtro, MainDBConstants.recordId);
             mMullen = zpoA.getZpoV2Mullens(filtro,MainDBConstants.recordId);
+            mMuestras = zpoA.getZpoV2RecoleccionMuestras(filtro, MainDBConstants.recordId);
+            mOtoacusEms = zpoA.getZpoInfantOtoacousticEms(filtro, MainDBConstants.recordId);
+            mOphthaEvals = zpoA.getZpoV2InfantOphthalmologicEvaluations(filtro, MainDBConstants.recordId);
+            mPsychoEvals = zpoA.getZpoV2InfantPsychologicalEvaluations(filtro, MainDBConstants.recordId);
 
 			publishProgress("Datos completos!", "2", "2");
             actualizarBaseDatos(Constants.STATUS_SUBMITTED, TAMIZAJE);
@@ -114,6 +124,30 @@ public class UploadAllTask extends UploadTask {
                 actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, MULLEN);
                 return error;
             }
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, MUESTRAS);
+            error = uploadMuestras(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, MUESTRAS);
+                return error;
+            }
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, OTO_EMI);
+            error = uploadOtoacousticEmissions(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, OTO_EMI);
+                return error;
+            }
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, OFTA_EVAL);
+            error = uploadInfantOphthaEvals(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, OFTA_EVAL);
+                return error;
+            }
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, PSICO_EVAL);
+            error = uploadInfantPsychoEvals(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, PSICO_EVAL);
+                return error;
+            }
             zpoA.close();
 		} catch (Exception e1) {
 			zpoA.close();
@@ -131,7 +165,7 @@ public class UploadAllTask extends UploadTask {
                 for (Zpo00Screening tamizaje : mTamizajes) {
                     tamizaje.setEstado(estado);
                     zpoA.editarZpo00Screening(tamizaje);
-                    publishProgress("Actualizando tamizajes base de datos local", Integer.valueOf(mTamizajes.indexOf(tamizaje)).toString(), Integer
+                    publishProgress("Actualizando tamizajes en base de datos local", Integer.valueOf(mTamizajes.indexOf(tamizaje)).toString(), Integer
                             .valueOf(c).toString());
                 }
             }
@@ -144,6 +178,50 @@ public class UploadAllTask extends UploadTask {
                     mullen.setEstado(estado);
                     zpoA.editarZpoV2Mullen(mullen);
                     publishProgress("Actualizando Evaluaciones Mullen base de datos local", Integer.valueOf(mMullen.indexOf(mullen)).toString(), Integer
+                            .valueOf(c).toString());
+                }
+            }
+        }
+        if(opcion==MUESTRAS){
+            c = mMuestras.size();
+            if(c>0){
+                for (ZpoV2RecoleccionMuestra muestra : mMuestras) {
+                    muestra.setEstado(estado);
+                    zpoA.editarZpoV2RecoleccionMuestra(muestra);
+                    publishProgress("Actualizando muestras en base de datos local", Integer.valueOf(mMuestras.indexOf(muestra)).toString(), Integer
+                            .valueOf(c).toString());
+                }
+            }
+        }
+        if(opcion==OTO_EMI){
+            c = mOtoacusEms.size();
+            if(c>0){
+                for (ZpoV2InfantOtoacousticEmissions otoacousticEmissions : mOtoacusEms) {
+                    otoacousticEmissions.setEstado(estado);
+                    zpoA.editarZpoInfantOtoacousticEm(otoacousticEmissions);
+                    publishProgress("Actualizando eval otoacústicas en base de datos local", Integer.valueOf(mOtoacusEms.indexOf(otoacousticEmissions)).toString(), Integer
+                            .valueOf(c).toString());
+                }
+            }
+        }
+        if(opcion==OFTA_EVAL){
+            c = mOphthaEvals.size();
+            if(c>0){
+                for (ZpoV2InfantOphthalmologicEvaluation ophthalmologicEvaluation : mOphthaEvals) {
+                    ophthalmologicEvaluation.setEstado(estado);
+                    zpoA.editarZpoV2InfantOphthalmologicEvaluation(ophthalmologicEvaluation);
+                    publishProgress("Actualizando eval oftalmológicas en base de datos local", Integer.valueOf(mOphthaEvals.indexOf(ophthalmologicEvaluation)).toString(), Integer
+                            .valueOf(c).toString());
+                }
+            }
+        }
+        if(opcion==PSICO_EVAL){
+            c = mPsychoEvals.size();
+            if(c>0){
+                for (ZpoV2InfantPsychologicalEvaluation psychologicalEvaluation : mPsychoEvals) {
+                    psychologicalEvaluation.setEstado(estado);
+                    zpoA.editarZpoV2InfantPsychologicalEvaluation(psychologicalEvaluation);
+                    publishProgress("Actualizando eval psicológicas en base de datos local", Integer.valueOf(mPsychoEvals.indexOf(psychologicalEvaluation)).toString(), Integer
                             .valueOf(c).toString());
                 }
             }
@@ -278,6 +356,146 @@ public class UploadAllTask extends UploadTask {
                 requestHeaders.setAuthorization(authHeader);
                 HttpEntity<ZpoEstadoInfante[]> requestEntity =
                         new HttpEntity<ZpoEstadoInfante[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
+    /***************************************************/
+    /********************* ZpoV2RecoleccionMuestra******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadMuestras(String url, String username,
+                                        String password) throws Exception {
+        try {
+            if(mMuestras.size()>0){
+                publishProgress("Enviando muestras!", String.valueOf(MUESTRAS), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/zpoV2Muestras";
+                ZpoV2RecoleccionMuestra[] envio = mMuestras.toArray(new ZpoV2RecoleccionMuestra[mMuestras.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2RecoleccionMuestra[]> requestEntity =
+                        new HttpEntity<ZpoV2RecoleccionMuestra[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
+    /***************************************************/
+    /********************* ZpoV2InfantOtoacousticEmissions******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadOtoacousticEmissions(String url, String username,
+                                    String password) throws Exception {
+        try {
+            if(mOtoacusEms.size()>0){
+                publishProgress("Enviando evaluación emisiones otoacústicas!", String.valueOf(OTO_EMI), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/zpoInfantOtoacousticEms";
+                ZpoV2InfantOtoacousticEmissions[] envio = mOtoacusEms.toArray(new ZpoV2InfantOtoacousticEmissions[mOtoacusEms.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2InfantOtoacousticEmissions[]> requestEntity =
+                        new HttpEntity<ZpoV2InfantOtoacousticEmissions[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
+    /***************************************************/
+    /********************* ZpoV2InfantOphthalmologicEvaluation******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadInfantOphthaEvals(String url, String username,
+                                                String password) throws Exception {
+        try {
+            if(mOphthaEvals.size()>0){
+                publishProgress("Enviando evaluaciones oftalmológicas!", String.valueOf(OFTA_EVAL), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/zpoV2InfantOphthaEvals";
+                ZpoV2InfantOphthalmologicEvaluation[] envio = mOphthaEvals.toArray(new ZpoV2InfantOphthalmologicEvaluation[mOphthaEvals.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2InfantOphthalmologicEvaluation[]> requestEntity =
+                        new HttpEntity<ZpoV2InfantOphthalmologicEvaluation[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
+    /***************************************************/
+    /********************* ZpoV2InfantPsychologicalEvaluation******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadInfantPsychoEvals(String url, String username,
+                                             String password) throws Exception {
+        try {
+            if(mPsychoEvals.size()>0){
+                publishProgress("Enviando evaluaciones oftalmológicas!", String.valueOf(PSICO_EVAL), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/zpoV2InfantPsychoEvals";
+                ZpoV2InfantPsychologicalEvaluation[] envio = mPsychoEvals.toArray(new ZpoV2InfantPsychologicalEvaluation[mPsychoEvals.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2InfantPsychologicalEvaluation[]> requestEntity =
+                        new HttpEntity<ZpoV2InfantPsychologicalEvaluation[]>(envio, requestHeaders);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
                 restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());

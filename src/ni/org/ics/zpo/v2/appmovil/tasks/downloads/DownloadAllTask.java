@@ -25,7 +25,7 @@ public class DownloadAllTask extends DownloadTask {
 	
 	protected static final String TAG = DownloadAllTask.class.getSimpleName();
 	private ZpoAdapter zpoA = null;
-    private static final String TOTAL_TASK = "25";
+    private static final String TOTAL_TASK = "22";
 
     private List<ZpoDatosEmbarazada> mDatosEmb = null;
     private List<Zpo00Screening> mTamizajes = null;
@@ -33,6 +33,10 @@ public class DownloadAllTask extends DownloadTask {
     private List<ZpoInfantData> mInfantData = null;
     private List<ZpoEstadoInfante> mEstadoInfante = null;
     private List<ZpoV2Mullen> mMullen = null;
+    private List<ZpoV2RecoleccionMuestra> mMuestras = null;
+    private List<ZpoV2InfantOphthalmologicEvaluation> mOphthaEvals= null;
+    private List<ZpoV2InfantPsychologicalEvaluation> mPsychoEvals = null;
+    private List<ZpoV2InfantOtoacousticEmissions> mOtoacusEms = null;
 
     public static final int DAT_MADRE = 1;
     public static final int ESTADO = 2;
@@ -59,6 +63,8 @@ public class DownloadAllTask extends DownloadTask {
     public static final int OTOEMI = 23;
     public static final int EXTENDEDAF = 24;
     public static final int MULLEN = 25;
+    public static final int OFTA_EVAL = 25;
+    public static final int PSICO_EVAL = 26;
     
 	private String error = null;
 	private String url = null;
@@ -94,6 +100,9 @@ public class DownloadAllTask extends DownloadTask {
         zpoA.borrarZpoEstadoInfante();
         zpoA.borrarZpoV2RecoleccionMuestra();
         zpoA.borrarZpoV2Mullen();
+        zpoA.borrarZpoInfantOtoacousticE();
+        zpoA.borrarZpoV2InfantOphthalmologicEvaluation();
+        zpoA.borrarZpoV2InfantPsychologicalEvaluation();
 
         try {
 
@@ -148,6 +157,45 @@ public class DownloadAllTask extends DownloadTask {
                 while (iter.hasNext()){
                     zpoA.crearZpoV2Mullen(iter.next());
                     publishProgress("Insertando Evaluaciones Mullen en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
+                            .valueOf(v).toString());
+                }
+            }
+            if (mMuestras != null){
+                v = mMuestras.size();
+                ListIterator<ZpoV2RecoleccionMuestra> iter = mMuestras.listIterator();
+                while (iter.hasNext()){
+                    zpoA.crearZpoV2RecoleccionMuestra(iter.next());
+                    publishProgress("Insertando muestras en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
+                            .valueOf(v).toString());
+                }
+            }
+
+            if (mOtoacusEms != null){
+                v = mOtoacusEms.size();
+                ListIterator<ZpoV2InfantOtoacousticEmissions> iter = mOtoacusEms.listIterator();
+                while (iter.hasNext()){
+                    zpoA.crearZpoInfantOtoacousticEm(iter.next());
+                    publishProgress("Insertando eval emisiones otoac en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
+                            .valueOf(v).toString());
+                }
+            }
+
+            if (mOphthaEvals != null){
+                v = mOphthaEvals.size();
+                ListIterator<ZpoV2InfantOphthalmologicEvaluation> iter = mOphthaEvals.listIterator();
+                while (iter.hasNext()){
+                    zpoA.crearZpoV2InfantOphthalmologicEvaluation(iter.next());
+                    publishProgress("Insertando eval oftalmologicas en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
+                            .valueOf(v).toString());
+                }
+            }
+
+            if (mPsychoEvals != null){
+                v = mPsychoEvals.size();
+                ListIterator<ZpoV2InfantPsychologicalEvaluation> iter = mPsychoEvals.listIterator();
+                while (iter.hasNext()){
+                    zpoA.crearZpoV2InfantPsychologicalEvaluation(iter.next());
+                    publishProgress("Insertando eval psicologicas en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
                             .valueOf(v).toString());
                 }
             }
@@ -232,6 +280,41 @@ public class DownloadAllTask extends DownloadTask {
                     ZpoV2Mullen[].class, username);
             // convert the array to a list and return it
             mMullen = Arrays.asList(responseEntityZpoMullen.getBody());
+            //Descargar muestras
+            urlRequest = url + "/movil/zpoV2Muestras";
+            publishProgress("Solicitando muestras",String.valueOf(MUESTRAS),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2RecoleccionMuestra[]> responseEntityZpoMx = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2RecoleccionMuestra[].class, username);
+            // convert the array to a list and return it
+            mMuestras = Arrays.asList(responseEntityZpoMx.getBody());
+
+            //Descargar emisiones otoacusticas
+            urlRequest = url + "/movil/zpoInfantOtoacousticEms";
+            publishProgress("Solicitando eval emisiones otoacusticas",String.valueOf(OTOEMI),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2InfantOtoacousticEmissions[]> responseEntityZpoOto = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2InfantOtoacousticEmissions[].class, username);
+            // convert the array to a list and return it
+            mOtoacusEms = Arrays.asList(responseEntityZpoOto.getBody());
+
+            //Descargar evaluaciones oftalmológicas
+            urlRequest = url + "/movil/zpoV2InfantOphthaEvals";
+            publishProgress("Solicitando eval oftalmologicas",String.valueOf(OFTA_EVAL),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2InfantOphthalmologicEvaluation[]> responseEntityZpoOfta = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2InfantOphthalmologicEvaluation[].class, username);
+            // convert the array to a list and return it
+            mOphthaEvals = Arrays.asList(responseEntityZpoOfta.getBody());
+
+            //Descargar evaluaciones psicologicas
+            urlRequest = url + "/movil/zpoV2InfantPsychoEvals";
+            publishProgress("Solicitando eval psicologicas",String.valueOf(PSICO_EVAL),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2InfantPsychologicalEvaluation[]> responseEntityZpoPsico = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2InfantPsychologicalEvaluation[].class, username);
+            // convert the array to a list and return it
+            mPsychoEvals = Arrays.asList(responseEntityZpoPsico.getBody());
 
             return null;
         } catch (Exception e) {

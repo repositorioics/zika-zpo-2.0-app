@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2InfantOtoacousticEmissions;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
 
 public class InfantVisit7284Adapter extends ArrayAdapter<String> {
@@ -17,14 +18,17 @@ public class InfantVisit7284Adapter extends ArrayAdapter<String> {
 	private final Context context;
 	private final String[] values;
     private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
+    private final ZpoV2InfantOtoacousticEmissions mZpoOtoE;
 
 	public InfantVisit7284Adapter(Context context, int textViewResourceId,
-                                  String[] values, ZpoV2RecoleccionMuestra zpoMuestra) {
+                                  String[] values,
+                                  ZpoV2RecoleccionMuestra zpoMuestra,
+                                  ZpoV2InfantOtoacousticEmissions mZpo07OtoE) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
         this.mZpoV2Muestra = zpoMuestra;
-
+        this.mZpoOtoE = mZpo07OtoE;
 	}
 
 	@Override
@@ -53,6 +57,16 @@ public class InfantVisit7284Adapter extends ArrayAdapter<String> {
                     textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
                 }
                 img=getContext().getResources().getDrawable( R.drawable.ic_sample);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
+            case 4:
+                if (mZpoOtoE != null) {
+                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.done));
+                } else {
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.pending));
+                }
+                img = getContext().getResources().getDrawable(R.drawable.ic_oae);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
             default:
