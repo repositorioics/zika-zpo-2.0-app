@@ -59,6 +59,7 @@ public class ZpoAdapter {
             db.execSQL(MainDBConstants.CREATE_DATA_CONSSAL_TABLE);
             db.execSQL(MainDBConstants.CREATE_FAIL_VISIT_TABLE);
             db.execSQL(MainDBConstants.CREATE_BIOCOLLECTION_TABLE);
+            db.execSQL(ZpoV2MullenConstants.CREATE_MULLEN_ADD_TABLE);
 		}
 
 		@Override
@@ -184,6 +185,8 @@ public class ZpoAdapter {
         c = crearCursor(MainDBConstants.INFANTDATA_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(MainDBConstants.INFANTSTATUS_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2MullenConstants.MULLEN_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c.close();
         return false;
@@ -619,5 +622,52 @@ public class ZpoAdapter {
         }
         if (!cursorBC.isClosed()) cursorBC.close();
         return biospecimenCollections;
+    }
+
+    /**
+     * Metodos para ZpoV2Mullen en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2Mullen en la base de datos
+    public void crearZpoV2Mullen(ZpoV2Mullen mullen) {
+        ContentValues cv = ZpoV2MullenHelper.crearZpoV2Mullen(mullen);
+        mDb.insert(ZpoV2MullenConstants.MULLEN_TABLE, null, cv);
+    }
+    //Editar ZpoV2Mullen existente en la base de datos
+    public boolean editarZpoV2Mullen(ZpoV2Mullen mullen) {
+        ContentValues cv = ZpoV2MullenHelper.crearZpoV2Mullen(mullen);
+        return mDb.update(ZpoV2MullenConstants.MULLEN_TABLE, cv, MainDBConstants.recordId + "='"
+                + mullen.getRecordId() + "' and " + MainDBConstants.eventName + "='" + mullen.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2Mullen de la base de datos
+    public boolean borrarZpoV2Mullen() {
+        return mDb.delete(ZpoV2MullenConstants.MULLEN_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2Mullen de la base de datos
+    public ZpoV2Mullen getZpoV2Mullen(String filtro, String orden) throws SQLException {
+        ZpoV2Mullen mullen = null;
+        Cursor cursorBC = crearCursor(ZpoV2MullenConstants.MULLEN_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            mullen=ZpoV2MullenHelper.crearZpoV2Mullen(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return mullen;
+    }
+    //Obtener una lista de ZpoV2Mullen de la base de datos
+    public List<ZpoV2Mullen> getZpoV2Mullens(String filtro, String orden) throws SQLException {
+        List<ZpoV2Mullen> mullens = new ArrayList<ZpoV2Mullen>();
+        Cursor cursorBC = crearCursor(ZpoV2MullenConstants.MULLEN_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            mullens.clear();
+            do{
+                ZpoV2Mullen mullen = null;
+                mullen = ZpoV2MullenHelper.crearZpoV2Mullen(cursorBC);
+                mullens.add(mullen);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return mullens;
     }
 }

@@ -3,10 +3,7 @@ package ni.org.ics.zpo.v2.appmovil.tasks.uploads;
 import android.content.Context;
 import android.util.Log;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
-import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoEmbarazada;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
+import ni.org.ics.zpo.v2.appmovil.domain.*;
 import ni.org.ics.zpo.v2.appmovil.listeners.UploadListener;
 import ni.org.ics.zpo.v2.appmovil.tasks.UploadTask;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
@@ -28,13 +25,14 @@ public class UploadAllTask extends UploadTask {
 	}
 
 	protected static final String TAG = UploadAllTask.class.getSimpleName();
-    private static final String TOTAL_TASK = "21";
+    private static final String TOTAL_TASK = "24";
 	private ZpoAdapter zpoA = null;
 
     private List<Zpo00Screening> mTamizajes = new ArrayList<Zpo00Screening>();
     private List<ZpoEstadoEmbarazada> mStatus = new ArrayList<ZpoEstadoEmbarazada>();
     private List<ZpoInfantData> mInfantData = new ArrayList<ZpoInfantData>();
     private List<ZpoEstadoInfante> mEstadoInfante = new ArrayList<ZpoEstadoInfante>();
+    private List<ZpoV2Mullen> mMullen = new ArrayList<ZpoV2Mullen>();
 
 	private String url = null;
 	private String username = null;
@@ -65,6 +63,7 @@ public class UploadAllTask extends UploadTask {
     public static final int VISITA_FALL = 21;
     public static final int OTO_EMI = 22;
     public static final int EXTENDEDAF = 23;
+    public static final int MULLEN = 24;
 
     @Override
 	protected String doInBackground(String... values) {
@@ -82,6 +81,7 @@ public class UploadAllTask extends UploadTask {
             mStatus = zpoA.getZpoEstadoMadres(filtro, MainDBConstants.recordId);
             mInfantData = zpoA.getZpoInfantDatas(filtro,null);
             mEstadoInfante = zpoA.getZpoEstadoInfantes(filtro, MainDBConstants.recordId);
+            mMullen = zpoA.getZpoV2Mullens(filtro,MainDBConstants.recordId);
 
 			publishProgress("Datos completos!", "2", "2");
             actualizarBaseDatos(Constants.STATUS_SUBMITTED, TAMIZAJE);
@@ -108,6 +108,12 @@ public class UploadAllTask extends UploadTask {
                 actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, ESTADO_INFANTE);
                 return error;
             }
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, MULLEN);
+            error = cargarMullens(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, MULLEN);
+                return error;
+            }
             zpoA.close();
 		} catch (Exception e1) {
 			zpoA.close();
@@ -126,6 +132,18 @@ public class UploadAllTask extends UploadTask {
                     tamizaje.setEstado(estado);
                     zpoA.editarZpo00Screening(tamizaje);
                     publishProgress("Actualizando tamizajes base de datos local", Integer.valueOf(mTamizajes.indexOf(tamizaje)).toString(), Integer
+                            .valueOf(c).toString());
+                }
+            }
+        }
+
+        if(opcion==MULLEN){
+            c = mMullen.size();
+            if(c>0){
+                for (ZpoV2Mullen mullen : mMullen) {
+                    mullen.setEstado(estado);
+                    zpoA.editarZpoV2Mullen(mullen);
+                    publishProgress("Actualizando Evaluaciones Mullen base de datos local", Integer.valueOf(mMullen.indexOf(mullen)).toString(), Integer
                             .valueOf(c).toString());
                 }
             }
@@ -276,4 +294,40 @@ public class UploadAllTask extends UploadTask {
             return e.getMessage();
         }
     }
+
+    /***************************************************/
+    /********************* ZpoV2Mullen ************************/
+    /***************************************************/
+    // url, username, password
+    protected String cargarMullens(String url, String username,
+                                     String password) throws Exception {
+        try {
+            if(mMullen.size()>0){
+                publishProgress("Enviando Evaluaciones Mullen!", String.valueOf(MULLEN), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/zpoMullens";
+                ZpoV2Mullen[] envio = mMullen.toArray(new ZpoV2Mullen[mMullen.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2Mullen[]> requestEntity =
+                        new HttpEntity<ZpoV2Mullen[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
 }

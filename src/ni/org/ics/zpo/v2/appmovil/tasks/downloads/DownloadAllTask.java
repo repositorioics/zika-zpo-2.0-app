@@ -25,13 +25,14 @@ public class DownloadAllTask extends DownloadTask {
 	
 	protected static final String TAG = DownloadAllTask.class.getSimpleName();
 	private ZpoAdapter zpoA = null;
-    private static final String TOTAL_TASK = "22";
+    private static final String TOTAL_TASK = "25";
 
     private List<ZpoDatosEmbarazada> mDatosEmb = null;
     private List<Zpo00Screening> mTamizajes = null;
     private List<ZpoEstadoEmbarazada> mStatus = null;
     private List<ZpoInfantData> mInfantData = null;
     private List<ZpoEstadoInfante> mEstadoInfante = null;
+    private List<ZpoV2Mullen> mMullen = null;
 
     public static final int DAT_MADRE = 1;
     public static final int ESTADO = 2;
@@ -57,6 +58,7 @@ public class DownloadAllTask extends DownloadTask {
     public static final int VISITA_FALL = 22;
     public static final int OTOEMI = 23;
     public static final int EXTENDEDAF = 24;
+    public static final int MULLEN = 25;
     
 	private String error = null;
 	private String url = null;
@@ -91,6 +93,7 @@ public class DownloadAllTask extends DownloadTask {
         zpoA.borrarZpoInfantData();
         zpoA.borrarZpoEstadoInfante();
         zpoA.borrarZpoV2RecoleccionMuestra();
+        zpoA.borrarZpoV2Mullen();
 
         try {
 
@@ -136,6 +139,15 @@ public class DownloadAllTask extends DownloadTask {
                 while (iter.hasNext()){
                     zpoA.crearZpo00Screening(iter.next());
                     publishProgress("Insertando tamizajes en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
+                            .valueOf(v).toString());
+                }
+            }
+            if (mMullen != null){
+                v = mMullen.size();
+                ListIterator<ZpoV2Mullen> iter = mMullen.listIterator();
+                while (iter.hasNext()){
+                    zpoA.crearZpoV2Mullen(iter.next());
+                    publishProgress("Insertando Evaluaciones Mullen en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
                             .valueOf(v).toString());
                 }
             }
@@ -212,6 +224,14 @@ public class DownloadAllTask extends DownloadTask {
             // convert the array to a list and return it
             mTamizajes = Arrays.asList(responseEntityZpo00Screening.getBody());
 
+            //Descargar Mullens
+            urlRequest = url + "/movil/zpoMullens/{username}";
+            publishProgress("Solicitando Evaluaciones Mullen",String.valueOf(MULLEN),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2Mullen[]> responseEntityZpoMullen = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2Mullen[].class, username);
+            // convert the array to a list and return it
+            mMullen = Arrays.asList(responseEntityZpoMullen.getBody());
 
             return null;
         } catch (Exception e) {
