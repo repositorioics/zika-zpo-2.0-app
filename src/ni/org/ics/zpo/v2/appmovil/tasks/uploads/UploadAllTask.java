@@ -37,6 +37,7 @@ public class UploadAllTask extends UploadTask {
     private List<ZpoV2InfantOphthalmologicEvaluation> mOphthaEvals= new ArrayList<ZpoV2InfantOphthalmologicEvaluation>();
     private List<ZpoV2InfantPsychologicalEvaluation> mPsychoEvals = new ArrayList<ZpoV2InfantPsychologicalEvaluation>();
     private List<ZpoV2InfantOtoacousticEmissions> mOtoacusEms = new ArrayList<ZpoV2InfantOtoacousticEmissions>();
+    private List<ZpoV2InfantOphtResults> mAInfantOphtResults = new ArrayList<ZpoV2InfantOphtResults>();
 
 	private String url = null;
 	private String username = null;
@@ -92,6 +93,7 @@ public class UploadAllTask extends UploadTask {
             mOtoacusEms = zpoA.getZpoInfantOtoacousticEms(filtro, MainDBConstants.recordId);
             mOphthaEvals = zpoA.getZpoV2InfantOphthalmologicEvaluations(filtro, MainDBConstants.recordId);
             mPsychoEvals = zpoA.getZpoV2InfantPsychologicalEvaluations(filtro, MainDBConstants.recordId);
+            mAInfantOphtResults = zpoA.getZpoV2InfantOphtResults(filtro, MainDBConstants.recordId);
 
 			publishProgress("Datos completos!", "2", "2");
             actualizarBaseDatos(Constants.STATUS_SUBMITTED, TAMIZAJE);
@@ -148,6 +150,12 @@ public class UploadAllTask extends UploadTask {
                 actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, PSICO_EVAL);
                 return error;
             }
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, OPHTH_RESULTS);
+            error = uploadInfantOphtResults(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, OPHTH_RESULTS);
+                return error;
+            }
             zpoA.close();
 		} catch (Exception e1) {
 			zpoA.close();
@@ -171,7 +179,7 @@ public class UploadAllTask extends UploadTask {
             }
         }
 
-        if(opcion==MULLEN){
+        else if(opcion==MULLEN){
             c = mMullen.size();
             if(c>0){
                 for (ZpoV2Mullen mullen : mMullen) {
@@ -182,7 +190,7 @@ public class UploadAllTask extends UploadTask {
                 }
             }
         }
-        if(opcion==MUESTRAS){
+        else if(opcion==MUESTRAS){
             c = mMuestras.size();
             if(c>0){
                 for (ZpoV2RecoleccionMuestra muestra : mMuestras) {
@@ -193,7 +201,7 @@ public class UploadAllTask extends UploadTask {
                 }
             }
         }
-        if(opcion==OTO_EMI){
+        else if(opcion==OTO_EMI){
             c = mOtoacusEms.size();
             if(c>0){
                 for (ZpoV2InfantOtoacousticEmissions otoacousticEmissions : mOtoacusEms) {
@@ -204,7 +212,7 @@ public class UploadAllTask extends UploadTask {
                 }
             }
         }
-        if(opcion==OFTA_EVAL){
+        else if(opcion==OFTA_EVAL){
             c = mOphthaEvals.size();
             if(c>0){
                 for (ZpoV2InfantOphthalmologicEvaluation ophthalmologicEvaluation : mOphthaEvals) {
@@ -215,13 +223,24 @@ public class UploadAllTask extends UploadTask {
                 }
             }
         }
-        if(opcion==PSICO_EVAL){
+        else if(opcion==PSICO_EVAL){
             c = mPsychoEvals.size();
             if(c>0){
                 for (ZpoV2InfantPsychologicalEvaluation psychologicalEvaluation : mPsychoEvals) {
                     psychologicalEvaluation.setEstado(estado);
                     zpoA.editarZpoV2InfantPsychologicalEvaluation(psychologicalEvaluation);
                     publishProgress("Actualizando eval psicológicas en base de datos local", Integer.valueOf(mPsychoEvals.indexOf(psychologicalEvaluation)).toString(), Integer
+                            .valueOf(c).toString());
+                }
+            }
+        }
+        else if(opcion==OPHTH_RESULTS){
+            c = mAInfantOphtResults.size();
+            if(c>0){
+                for (ZpoV2InfantOphtResults aInfantOphtResult : mAInfantOphtResults) {
+                    aInfantOphtResult.setEstado(estado);
+                    zpoA.editarZpoV2InfantOphtResults(aInfantOphtResult);
+                    publishProgress("Actualizando resultados oftalmologicos de infantes de base de datos local", Integer.valueOf(mAInfantOphtResults.indexOf(aInfantOphtResult)).toString(), Integer
                             .valueOf(c).toString());
                 }
             }
@@ -548,4 +567,38 @@ public class UploadAllTask extends UploadTask {
         }
     }
 
+    /***************************************************/
+    /********************* ZpoV2InfantOphtResults******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadInfantOphtResults(String url, String username,
+                                             String password) throws Exception {
+        try {
+            if( mAInfantOphtResults.size()>0){
+                publishProgress("Enviando resultado oftalmologico infantes!", String.valueOf(OPHTH_RESULTS), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/zpoV2InfantOphtResults";
+                ZpoV2InfantOphtResults[] envio = mAInfantOphtResults.toArray(new ZpoV2InfantOphtResults[mAInfantOphtResults.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2InfantOphtResults[]> requestEntity =
+                        new HttpEntity<ZpoV2InfantOphtResults[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
 }

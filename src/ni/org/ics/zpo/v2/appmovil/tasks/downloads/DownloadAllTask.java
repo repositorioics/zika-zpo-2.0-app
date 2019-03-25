@@ -37,6 +37,7 @@ public class DownloadAllTask extends DownloadTask {
     private List<ZpoV2InfantOphthalmologicEvaluation> mOphthaEvals= null;
     private List<ZpoV2InfantPsychologicalEvaluation> mPsychoEvals = null;
     private List<ZpoV2InfantOtoacousticEmissions> mOtoacusEms = null;
+    private List<ZpoV2InfantOphtResults> mAInfantOphtResult = null;
 
     public static final int DAT_MADRE = 1;
     public static final int ESTADO = 2;
@@ -103,7 +104,7 @@ public class DownloadAllTask extends DownloadTask {
         zpoA.borrarZpoInfantOtoacousticE();
         zpoA.borrarZpoV2InfantOphthalmologicEvaluation();
         zpoA.borrarZpoV2InfantPsychologicalEvaluation();
-
+        zpoA.borrarZpoV2InfantOphtResults();
         try {
 
             if (mDatosEmb != null){
@@ -196,6 +197,16 @@ public class DownloadAllTask extends DownloadTask {
                 while (iter.hasNext()){
                     zpoA.crearZpoV2InfantPsychologicalEvaluation(iter.next());
                     publishProgress("Insertando eval psicologicas en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
+                            .valueOf(v).toString());
+                }
+            }
+
+            if (mAInfantOphtResult != null){
+                v = mAInfantOphtResult.size();
+                ListIterator<ZpoV2InfantOphtResults> iter = mAInfantOphtResult.listIterator();
+                while (iter.hasNext()){
+                    zpoA.crearZpoV2InfantOphtResults(iter.next());
+                    publishProgress("Insertando resultados oftalmologicos de infantes...", Integer.valueOf(iter.nextIndex()).toString(), Integer
                             .valueOf(v).toString());
                 }
             }
@@ -316,6 +327,14 @@ public class DownloadAllTask extends DownloadTask {
             // convert the array to a list and return it
             mPsychoEvals = Arrays.asList(responseEntityZpoPsico.getBody());
 
+            //Descargar resultados oftalmologicos
+            urlRequest = url + "/movil/zpoV2InfantOphtResults";
+            publishProgress("Solicitando resultados oftalmologicos de infantes",String.valueOf(OPHTH_RESULTS),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2InfantOphtResults[]> responseZpo07aOphtResults = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2InfantOphtResults[].class, username);
+            // convert the array to a list and return it
+            mAInfantOphtResult = Arrays.asList(responseZpo07aOphtResults.getBody());
             return null;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);

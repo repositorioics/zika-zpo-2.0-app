@@ -81,7 +81,7 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 		textView.setText(getString(R.string.forms)+"\n"+
 				getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
 						getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(zpInfante.getInfantBirthDate()):"ND"));
-		menu_infante_info = getResources().getStringArray(R.array.menu_infant_visit2);
+		menu_infante_info = getResources().getStringArray(R.array.menu_infant_visit3);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -117,7 +117,7 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 						break;
 /*					case 4: //RESULTADOS OFTALMOLOGICOS
 						i = new Intent(getApplicationContext(),
-								NewZpo07aInfantOphtResultsActivity.class);
+								NewZpoV2InfantOphtResultsActivity.class);
 						if (zp07a != null) arguments.putSerializable(Constants.OBJECTO_ZP07A, zp07a);
 						i.putExtras(arguments);
 						startActivity(i);
@@ -294,7 +294,7 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 					filtro = MainDBConstants.recordId + "='" + zpInfante.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
 					zpoV2Muestra = zipA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
 					/*zp07 = zipA.getZpo07InfantAssessmentVisit(filtro, MainDBConstants.recordId);
-					zp07a = zipA.getZpo07aInfantOphtResult(filtro, MainDBConstants.recordId);
+					zp07a = zipA.getZpoV2InfantOphtResult(filtro, MainDBConstants.recordId);
 					zp07b = zipA.getZpo07bInfantAudioResult(filtro, MainDBConstants.recordId);
 					zp07c = zipA.getZpo07cInfantImageSt(filtro, MainDBConstants.recordId);
 					zp07d = zipA.getZpo07dInfantBayleySc(filtro, MainDBConstants.recordId);

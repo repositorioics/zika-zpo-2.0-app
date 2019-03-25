@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2InfantOphtResults;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2InfantOtoacousticEmissions;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2InfantOphthalmologicEvaluation;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
@@ -21,18 +22,21 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
     private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
     private final ZpoV2InfantOtoacousticEmissions mZpoOtoE;
     private final ZpoV2InfantOphthalmologicEvaluation mZpoV2IOE;
+    private final ZpoV2InfantOphtResults mZpoIOER;
 
 	public InfantVisitAdapter(Context context, int textViewResourceId,
                               String[] values,
                               ZpoV2RecoleccionMuestra zpoMuestra,
                               ZpoV2InfantOtoacousticEmissions mZpo07OtoE,
-                              ZpoV2InfantOphthalmologicEvaluation mZpoV2IOE) {
+                              ZpoV2InfantOphthalmologicEvaluation mZpoV2IOE,
+                              ZpoV2InfantOphtResults mZpoIOER) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
         this.mZpoV2Muestra = zpoMuestra;
         this.mZpoOtoE = mZpo07OtoE;
         this.mZpoV2IOE = mZpoV2IOE;
+        this.mZpoIOER = mZpoIOER;
 	}
 
 	@Override
@@ -82,6 +86,17 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
                     textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
                 }
                 img=getContext().getResources().getDrawable( R.drawable.ic_monthly);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
+            case 7:
+                if(mZpoIOER!=null){
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+                }
+                else{
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+                }
+                img=getContext().getResources().getDrawable( R.drawable.ic_opht);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
             default:

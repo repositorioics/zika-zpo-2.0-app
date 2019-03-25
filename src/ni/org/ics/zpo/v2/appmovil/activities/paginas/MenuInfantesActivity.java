@@ -20,10 +20,7 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
-import ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantCallActivity;
-import ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantEntryActivity;
-import ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantVisit7284Activity;
-import ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantVisitActivity;
+import ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.*;
 import ni.org.ics.zpo.v2.appmovil.adapters.MenuInfantesAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
@@ -214,16 +211,23 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
                 i.putExtras(arguments);
                 startActivity(i);
                 break;
-            case 1:case 3: case 5:case 7:
+            case 1:case 3:
                 i = new Intent(getApplicationContext(),
                         InfantVisitActivity.class);
                 //Aca se pasa evento, infante y estado
                 if(position==1)	arguments.putString(Constants.EVENT, Constants.MONTH24);
                 if(position==3)	arguments.putString(Constants.EVENT, Constants.MONTH36);
+                if (zpInfante!=null) arguments.putSerializable(Constants.OBJECTO_ZPINFDATA , zpInfante);
+                if (zpEstado!=null) arguments.putSerializable(Constants.OBJECTO_ZPESTINF , zpEstado);
+                i.putExtras(arguments);
+                startActivity(i);
+                break;
+            case 5:case 7:
+                i = new Intent(getApplicationContext(),
+                        InfantVisit4860Activity.class);
+                //Aca se pasa evento, infante y estado
                 if(position==5)	arguments.putString(Constants.EVENT, Constants.MONTH48);
                 if(position==7)	arguments.putString(Constants.EVENT, Constants.MONTH60);
-                if(position==9)	arguments.putString(Constants.EVENT, Constants.MONTH72);
-                if(position==11) arguments.putString(Constants.EVENT, Constants.MONTH84);
                 if (zpInfante!=null) arguments.putSerializable(Constants.OBJECTO_ZPINFDATA , zpInfante);
                 if (zpEstado!=null) arguments.putSerializable(Constants.OBJECTO_ZPESTINF , zpEstado);
                 i.putExtras(arguments);

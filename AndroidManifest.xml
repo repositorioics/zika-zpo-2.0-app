@@ -65,6 +65,8 @@
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantVisitActivity"
                   android:screenOrientation="portrait" />
+        <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantVisit4860Activity"
+                  android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantVisit7284Activity"
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantEntryActivity"
@@ -88,6 +90,8 @@
         <activity android:name=".activities.paginas.eventosinfante.InfantCallActivity"
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2MullenActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2InfantOphtResultsActivity"
                   android:screenOrientation="portrait" />
 
     </application>

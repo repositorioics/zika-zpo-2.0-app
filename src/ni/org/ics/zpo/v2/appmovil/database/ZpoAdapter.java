@@ -63,6 +63,7 @@ public class ZpoAdapter {
             db.execSQL(ZpoOtoEDBConstants.CREATE_INFANT_OTO_EMS_TABLE);
             db.execSQL(ZpoOphthaEvalDBConstants.CREATE_INFANT_OPHTHALMOLOGICEVAL_TABLE);
             db.execSQL(ZpoPsychoEvalDBConstants.CREATE_INFANT_PSYCHOLOGICALEVAL_TABLE);
+            db.execSQL(ZpoOphthaResDBConstants.CREATE_AINFANT_OPHTRESULTS_TABLE);
 		}
 
 		@Override
@@ -198,6 +199,8 @@ public class ZpoAdapter {
         c = crearCursor(ZpoOphthaEvalDBConstants.INFANT_OPHTHALMOLOGICEVAL_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoPsychoEvalDBConstants.INFANT_PSYCHOLOGICALEVAL_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c.close();
         return false;
@@ -822,5 +825,52 @@ public class ZpoAdapter {
         }
         if (!cursor.isClosed()) cursor.close();
         return infantAssessmentVisits;
+    }
+
+    /**
+     * Metodos para ZpoV2InfantOphtResults en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2InfantOphtResults en la base de datos
+    public void crearZpoV2InfantOphtResults(ZpoV2InfantOphtResults aInfantOpthResults) {
+        ContentValues cv = ZpoV2InfantOphtResultsHelper.crearZpoV2InfantOpthResults(aInfantOpthResults);
+        mDb.insert(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, null, cv);
+    }
+    //Editar ZpoV2InfantOphtResults existente en la base de datos
+    public boolean editarZpoV2InfantOphtResults(ZpoV2InfantOphtResults aInfantOpthResults) {
+        ContentValues cv = ZpoV2InfantOphtResultsHelper.crearZpoV2InfantOpthResults(aInfantOpthResults);
+        return mDb.update(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, cv, ZpoOphthaResDBConstants.recordId + "='"
+                + aInfantOpthResults.getRecordId() + "' and " + ZpoOphthaResDBConstants.eventName + "='" + aInfantOpthResults.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2InfantOphtResults de la base de datos
+    public boolean borrarZpoV2InfantOphtResults() {
+        return mDb.delete(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2InfantOphtResults de la base de datos
+    public ZpoV2InfantOphtResults getZpoV2InfantOphtResult(String filtro, String orden) throws SQLException {
+        ZpoV2InfantOphtResults aInfantOpthResults = null;
+        Cursor cursor = crearCursor(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, filtro, null, orden);
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            aInfantOpthResults= ZpoV2InfantOphtResultsHelper.crearZpoV2InfantOphtResults(cursor);
+        }
+        if (!cursor.isClosed()) cursor.close();
+        return aInfantOpthResults;
+    }
+    //Obtener una lista de ZpoV2InfantOphtResults de la base de datos
+    public List<ZpoV2InfantOphtResults> getZpoV2InfantOphtResults(String filtro, String orden) throws SQLException {
+        List<ZpoV2InfantOphtResults> aInfantOpthResults = new ArrayList<ZpoV2InfantOphtResults>();
+        Cursor cursor = crearCursor(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, filtro, null, orden);
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            aInfantOpthResults.clear();
+            do{
+                ZpoV2InfantOphtResults aInfantOpthResult = null;
+                aInfantOpthResult = ZpoV2InfantOphtResultsHelper.crearZpoV2InfantOphtResults(cursor);
+                aInfantOpthResults.add(aInfantOpthResult);
+            } while (cursor.moveToNext());
+        }
+        if (!cursor.isClosed()) cursor.close();
+        return aInfantOpthResults;
     }
 }

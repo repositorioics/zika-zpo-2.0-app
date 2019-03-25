@@ -20,6 +20,7 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2InfantOphtResultsActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2InfantAssessmentVisitOphtActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoInfantOtoacousticEmissionsActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
@@ -51,6 +52,7 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
     private static ZpoV2RecoleccionMuestra zpoV2Muestra = null;
     private static ZpoV2InfantOtoacousticEmissions zpoOtoE = null;
     private static ZpoV2InfantOphthalmologicEvaluation zp07 = null;
+    private static ZpoV2InfantOphtResults zp07a = null;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -114,14 +116,14 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-/*					case 4: //RESULTADOS OFTALMOLOGICOS
+					case 7: //RESULTADOS OFTALMOLOGICOS
 						i = new Intent(getApplicationContext(),
-								NewZpo07aInfantOphtResultsActivity.class);
+								NewZpoV2InfantOphtResultsActivity.class);
 						if (zp07a != null) arguments.putSerializable(Constants.OBJECTO_ZP07A, zp07a);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-					case 5: //RESULTADOS AUDIOLOGICOS
+					/*case 5: //RESULTADOS AUDIOLOGICOS
 						i = new Intent(getApplicationContext(),
 								NewZpo07bInfantAudioResultsActivity.class);
 						if (zp07b != null) arguments.putSerializable(Constants.OBJECTO_ZP07B, zp07b);
@@ -293,8 +295,8 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 					filtro = MainDBConstants.recordId + "='" + zpInfante.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
 					zpoV2Muestra = zipA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
 					zp07 = zipA.getZpoV2InfantOphthalmologicEvaluation(filtro, MainDBConstants.recordId);
-					/*zp07a = zipA.getZpo07aInfantOphtResult(filtro, MainDBConstants.recordId);
-					zp07b = zipA.getZpo07bInfantAudioResult(filtro, MainDBConstants.recordId);
+					zp07a = zipA.getZpoV2InfantOphtResult(filtro, MainDBConstants.recordId);
+					/*zp07b = zipA.getZpo07bInfantAudioResult(filtro, MainDBConstants.recordId);
 					zp07c = zipA.getZpo07cInfantImageSt(filtro, MainDBConstants.recordId);
 					zp07d = zipA.getZpo07dInfantBayleySc(filtro, MainDBConstants.recordId);
 					*/
@@ -320,7 +322,7 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new InfantVisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra, zpoOtoE, zp07));
+				gridView.setAdapter(new InfantVisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra, zpoOtoE, zp07, zp07a));
 				dismissProgressDialog();
 			}
 
