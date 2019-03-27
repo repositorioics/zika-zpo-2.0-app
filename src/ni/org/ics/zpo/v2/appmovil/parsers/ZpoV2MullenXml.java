@@ -10,112 +10,101 @@ import java.util.Date;
  */
 public class ZpoV2MullenXml {
 
-    @Element(required=true)
-    private String recordId;
-    @Element(required=true)
-    private String eventName;
-    @Element(required=true)
+    @Element(required=false)
     private String sexMsel;
-    @Element(required=true)
+    @Element(required=false)
     private String raNameMsel;
-    @Element(required=true)
+    @Element(required=false)
     private String visitMonthsMsel;
-    @Element(required=true)
+    @Element(required=false)
     private String visProbMsel;
-    @Element(required=true)
+    @Element(required=false)
     private String desVisProbMsel;
-    @Element(required=true)
+    @Element(required=false)
     private String hearProbMsel;
-    @Element(required=true)
+    @Element(required=false)
     private String desHearProbMsel;
-    @Element(required=true)
+    @Element(required=false)
     private Date testingDateMsel;
-    @Element(required=true)
+    @Element(required=false)
     private Date eddMsel;
-    @Element(required=true)
+    @Element(required=false)
     private String adjAgeMsel;
-    @Element(required=true)
+    @Element(required=false)
     private Date actDobMsel;
-    @Element(required=true)
+    @Element(required=false)
     private String gmRaw;
-    @Element(required=true)
+    @Element(required=false)
     private String gmTScore;
     @Element(required=true)
     private String gmBoe;
-    @Element(required=true)
+    @Element(required=false)
     private String gmPerRank;
-    @Element(required=true)
+    @Element(required=false)
     private String gmDesCat;
-    @Element(required=true)
+    @Element(required=false)
     private String gmAgeEqu;
-    @Element(required=true)
+    @Element(required=false)
     private String vrRaw;
-    @Element(required=true)
+    @Element(required=false)
     private String vrTScore;
-    @Element(required=true)
+    @Element(required=false)
     private String vrBoe;
-    @Element(required=true)
+    @Element(required=false)
     private String vrPerRank;
-    @Element(required=true)
+    @Element(required=false)
     private String vrDesCat;
-    @Element(required=true)
+    @Element(required=false)
     private String vrAgeEqu;
-    @Element(required=true)
+    @Element(required=false)
     private String fmRaw;
-    @Element(required=true)
+    @Element(required=false)
     private String fmTScore;
-    @Element(required=true)
+    @Element(required=false)
     private String fmBoe;
-    @Element(required=true)
+    @Element(required=false)
     private String fmPerRank;
-    @Element(required=true)
+    @Element(required=false)
     private String fmDesCat;
-    @Element(required=true)
+    @Element(required=false)
     private String fmAgeEqu;
-    @Element(required=true)
+    @Element(required=false)
     private String rlRaw;
-    @Element(required=true)
+    @Element(required=false)
     private String rlTScore;
-    @Element(required=true)
+    @Element(required=false)
     private String rlBoe;
-    @Element(required=true)
+    @Element(required=false)
     private String rlPerRank;
-    @Element(required=true)
+    @Element(required=false)
     private String rlDesCat;
-    @Element(required=true)
+    @Element(required=false)
     private String rlAgeEqu;
-    @Element(required=true)
+    @Element(required=false)
     private String elRaw;
-    @Element(required=true)
+    @Element(required=false)
     private String elTScore;
-    @Element(required=true)
+    @Element(required=false)
     private String elBoe;
-    @Element(required=true)
+    @Element(required=false)
     private String elPerRank;
-    @Element(required=true)
+    @Element(required=false)
     private String elDesCat;
-    @Element(required=true)
+    @Element(required=false)
     private String elAgeEqu;
-    @Element(required=true)
+    @Element(required=false)
     private String cognTScoreSum;
-    @Element(required=true)
+    @Element(required=false)
     private String elcStandScore;
-    @Element(required=true)
+    @Element(required=false)
     private String elcBoe;
-    @Element(required=true)
+    @Element(required=false)
     private String elcPerRank;
-    @Element(required=true)
+    @Element(required=false)
     private String elcDesCat;
-    @Element(required=true)
+    @Element(required=false)
     private String mselComment;
 
-    public String getRecordId() {
-        return recordId;
-    }
-
-    public String getEventName() {
-        return eventName;
-    }
 
     public String getSexMsel() {
         return sexMsel;

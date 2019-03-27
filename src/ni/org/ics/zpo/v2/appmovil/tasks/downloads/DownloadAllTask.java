@@ -284,7 +284,7 @@ public class DownloadAllTask extends DownloadTask {
             mTamizajes = Arrays.asList(responseEntityZpo00Screening.getBody());
 
             //Descargar Mullens
-            urlRequest = url + "/movil/zpoMullens/{username}";
+            urlRequest = url + "/movil/zpoMullens/";
             publishProgress("Solicitando Evaluaciones Mullen",String.valueOf(MULLEN),TOTAL_TASK);
             // Perform the HTTP GET request
             ResponseEntity<ZpoV2Mullen[]> responseEntityZpoMullen = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,

@@ -64,6 +64,7 @@ public class ZpoAdapter {
             db.execSQL(ZpoOphthaEvalDBConstants.CREATE_INFANT_OPHTHALMOLOGICEVAL_TABLE);
             db.execSQL(ZpoPsychoEvalDBConstants.CREATE_INFANT_PSYCHOLOGICALEVAL_TABLE);
             db.execSQL(ZpoOphthaResDBConstants.CREATE_AINFANT_OPHTRESULTS_TABLE);
+            db.execSQL(ZpoV2MullenConstants.CREATE_MULLEN_ADD_TABLE);
 		}
 
 		@Override
