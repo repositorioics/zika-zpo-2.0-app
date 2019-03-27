@@ -234,10 +234,10 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
                     zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
 					if (zpoV2Muestra!=null){
                         if(eventoaFiltrar.matches(Constants.MONTH24)){
-                            zpEstado.setMes12('1');
+                            zpEstado.setMes24('1');
                         }
                         if(eventoaFiltrar.matches(Constants.MONTH36)){
-                            zpEstado.setMes24('1');
+                            zpEstado.setMes36('1');
                         }
 						zpoA.editarZpoEstadoMadre(zpEstado);
 					}

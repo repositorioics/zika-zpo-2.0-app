@@ -16,6 +16,18 @@ public class ZpoEstadoMadreHelper {
         ContentValues cv = new ContentValues();
         cv.put(MainDBConstants.recordId, estado.getRecordId());
         cv.put(MainDBConstants.ingreso, String.valueOf(estado.getIngreso()));
+        cv.put(MainDBConstants.mes24, String.valueOf(estado.getMes24()));
+        cv.put(MainDBConstants.mes30, String.valueOf(estado.getMes30()));
+        cv.put(MainDBConstants.mes36, String.valueOf(estado.getMes36()));
+        cv.put(MainDBConstants.mes42, String.valueOf(estado.getMes42()));
+        cv.put(MainDBConstants.mes48, String.valueOf(estado.getMes48()));
+        cv.put(MainDBConstants.mes54, String.valueOf(estado.getMes54()));
+        cv.put(MainDBConstants.mes60, String.valueOf(estado.getMes60()));
+        cv.put(MainDBConstants.mes66, String.valueOf(estado.getMes66()));
+        cv.put(MainDBConstants.mes72, String.valueOf(estado.getMes72()));
+        cv.put(MainDBConstants.mes78, String.valueOf(estado.getMes78()));
+        cv.put(MainDBConstants.mes84, String.valueOf(estado.getMes84()));
+
         if (estado.getRecordDate() != null) cv.put(MainDBConstants.recordDate, estado.getRecordDate().getTime());
         cv.put(MainDBConstants.recordUser, estado.getRecordUser());
         cv.put(MainDBConstants.pasive, String.valueOf(estado.getPasive()));
@@ -35,6 +47,18 @@ public class ZpoEstadoMadreHelper {
         ZpoEstadoEmbarazada mEstado = new ZpoEstadoEmbarazada();
         mEstado.setRecordId(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.recordId)));
         mEstado.setIngreso(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.ingreso)).charAt(0));
+        mEstado.setMes24(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.mes24)).charAt(0));
+        mEstado.setMes30(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.mes30)).charAt(0));
+        mEstado.setMes36(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.mes36)).charAt(0));
+        mEstado.setMes42(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.mes42)).charAt(0));
+        mEstado.setMes48(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.mes48)).charAt(0));
+        mEstado.setMes54(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.mes54)).charAt(0));
+        mEstado.setMes60(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.mes60)).charAt(0));
+        mEstado.setMes66(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.mes66)).charAt(0));
+        mEstado.setMes72(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.mes72)).charAt(0));
+        mEstado.setMes78(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.mes78)).charAt(0));
+        mEstado.setMes84(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.mes84)).charAt(0));
+
         if(cursorEstado.getLong(cursorEstado.getColumnIndex(MainDBConstants.recordDate))>0) mEstado.setRecordDate(new Date(cursorEstado.getLong(cursorEstado.getColumnIndex(MainDBConstants.recordDate))));
         mEstado.setRecordUser(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.recordUser)));
         mEstado.setPasive(cursorEstado.getString(cursorEstado.getColumnIndex(MainDBConstants.pasive)).charAt(0));

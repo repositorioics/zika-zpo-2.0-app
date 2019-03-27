@@ -302,12 +302,12 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
                     zpoOtoE = zipA.getZpoInfantOtoacousticE(filtro, MainDBConstants.recordId);
 					//zp04AF = zipA.getZpo04ExtendedSectionAtoF( filtro, MainDBConstants.recordId);
 
-					if (zpoV2Muestra !=null) {// && zp07!=null && zp07a!=null && zp07b!=null && zp07c!=null && zp07d!=null && zpoOtoE!=null && zp04AF!=null){
-						if(eventoaFiltrar.matches(Constants.MONTH24)){
-							zpEstado.setMes12('1');
+					if (zpoV2Muestra !=null && zpoOtoE!=null) {// && zp07!=null && zp07a!=null && zp07b!=null && zp07c!=null && zp07d!=null && zpoOtoE!=null && zp04AF!=null){
+						if(eventoaFiltrar.matches(Constants.MONTH72)){
+							zpEstado.setMes72('1');
 						}
-						if(eventoaFiltrar.matches(Constants.MONTH36)){
-							zpEstado.setMes24('1');
+						if(eventoaFiltrar.matches(Constants.MONTH84)){
+							zpEstado.setMes84('1');
 						}
 						zipA.editarZpoEstadoInfante(zpEstado);
 					}

@@ -290,13 +290,22 @@ public class InfantCallActivity extends AbstractAsyncActivity {
 					zp07 = zipA.getZpoV2InfantPsychologicalEvaluation(filtro, MainDBConstants.recordId);
 
 					if (zp07!=null){
-						if(eventoaFiltrar.matches(Constants.MONTH24)){
-							zpEstado.setMes12('1');
+						if(eventoaFiltrar.matches(Constants.MONTH30)){
+							zpEstado.setMes30('1');
 						}
-						if(eventoaFiltrar.matches(Constants.MONTH36)){
-							zpEstado.setMes24('1');
+						if(eventoaFiltrar.matches(Constants.MONTH42)){
+							zpEstado.setMes42('1');
 						}
-						zipA.editarZpoEstadoInfante(zpEstado);
+                        if(eventoaFiltrar.matches(Constants.MONTH54)){
+                            zpEstado.setMes54('1');
+                        }
+                        if(eventoaFiltrar.matches(Constants.MONTH66)){
+                            zpEstado.setMes66('1');
+                        }
+                        if(eventoaFiltrar.matches(Constants.MONTH78)){
+                            zpEstado.setMes78('1');
+                        }
+                        zipA.editarZpoEstadoInfante(zpEstado);
 					}
 					zipA.close();
 				} catch (Exception e) {

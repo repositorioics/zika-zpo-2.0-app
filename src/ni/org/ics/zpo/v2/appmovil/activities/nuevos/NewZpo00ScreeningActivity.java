@@ -425,7 +425,7 @@ public class NewZpo00ScreeningActivity extends AbstractAsyncActivity {
 
                     zipA.crearZpo00Screening(tamizajeInf);
 
-                    ZpoEstadoInfante mZpoEstadoInfante = new ZpoEstadoInfante(infante.getRecordId(), '0', '0', '0', new Date(),
+                    ZpoEstadoInfante mZpoEstadoInfante = new ZpoEstadoInfante(infante.getRecordId(), '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', new Date(),
                             username,'0',mEstado.getIdInstancia(),mEstado.getInstancePath(),Constants.STATUS_NOT_SUBMITTED,mEstado.getStart(),
                             mEstado.getEnd(),mEstado.getDeviceid(),mEstado.getSimserial(),mEstado.getPhonenumber(),mEstado.getToday());
                     zipA.crearZpoEstadoInfante(mZpoEstadoInfante);

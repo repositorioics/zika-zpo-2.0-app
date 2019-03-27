@@ -36,11 +36,11 @@ public class MenuControlConsentimientosAdapter extends ArrayAdapter<String> {
 		// Change icon based on position
 		Drawable img = null;
 		switch (position){
-		case 0: 
+		/*case 0:
 			img=getContext().getResources().getDrawable( R.drawable.ic_departure);
 			textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
-			break;
-		case 1: 
+			break;*/
+		case 0:
 			img=getContext().getResources().getDrawable( R.drawable.ic_arrival);
 			textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
 			break;

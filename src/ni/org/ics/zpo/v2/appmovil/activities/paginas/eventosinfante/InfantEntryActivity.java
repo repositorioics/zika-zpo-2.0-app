@@ -231,10 +231,10 @@ public class InfantEntryActivity extends AbstractAsyncActivity {
 							zpEstado.setIngreso('1');
 						}
 						if(eventoaFiltrar.matches(Constants.MONTH24)){
-							zpEstado.setMes12('1');
+							zpEstado.setMes36('1');
 						}
 						if(eventoaFiltrar.matches(Constants.MONTH36)){
-							zpEstado.setMes24('1');
+							zpEstado.setMes36('1');
 						}
 						zipA.editarZpoEstadoInfante(zpEstado);
 					}

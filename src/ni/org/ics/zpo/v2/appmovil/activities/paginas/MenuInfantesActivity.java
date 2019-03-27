@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +24,7 @@ import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.*;
 import ni.org.ics.zpo.v2.appmovil.adapters.MenuInfantesAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
+import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
@@ -38,6 +40,7 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
 
     private static ZpoInfantData zpInfante = new ZpoInfantData();
     private static ZpoEstadoInfante zpEstado = new ZpoEstadoInfante();
+    private static Zpo00Screening screening = new Zpo00Screening();
     private GridView gridView;
     private TextView textView;
     private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -93,14 +96,68 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
                         if(diff>15) habilitado = false;
                         break;
                     case 1:
-                        fechaIngreso.add(Calendar.DATE, 365);fechaEvento = fechaIngreso.getTime();
-                        fechaIngreso.add(Calendar.DATE, -365);
+                        fechaIngreso.add(Calendar.MONTH, 24);fechaEvento = fechaIngreso.getTime();
+                        fechaIngreso.add(Calendar.MONTH, -24);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
                     case 2:
-                        fechaIngreso.add(Calendar.DATE, 730);fechaEvento = fechaIngreso.getTime();
-                        fechaIngreso.add(Calendar.DATE, -730);
+                        fechaIngreso.add(Calendar.MONTH, 30);fechaEvento = fechaIngreso.getTime();
+                        fechaIngreso.add(Calendar.MONTH, -30);
+                        diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
+                        if(diff<-7||diff>7) habilitado = false;
+                        break;
+                    case 3:
+                        fechaIngreso.add(Calendar.MONTH, 36);fechaEvento = fechaIngreso.getTime();
+                        fechaIngreso.add(Calendar.MONTH, -36);
+                        diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
+                        if(diff<-7||diff>7) habilitado = false;
+                        break;
+                    case 4:
+                        fechaIngreso.add(Calendar.MONTH, 42);fechaEvento = fechaIngreso.getTime();
+                        fechaIngreso.add(Calendar.MONTH, -42);
+                        diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
+                        if(diff<-7||diff>7) habilitado = false;
+                        break;
+                    case 5:
+                        fechaIngreso.add(Calendar.MONTH, 48);fechaEvento = fechaIngreso.getTime();
+                        fechaIngreso.add(Calendar.MONTH, -48);
+                        diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
+                        if(diff<-7||diff>7) habilitado = false;
+                        break;
+                    case 6:
+                        fechaIngreso.add(Calendar.MONTH, 54);fechaEvento = fechaIngreso.getTime();
+                        fechaIngreso.add(Calendar.MONTH, -54);
+                        diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
+                        if(diff<-7||diff>7) habilitado = false;
+                        break;
+                    case 7:
+                        fechaIngreso.add(Calendar.MONTH, 60);fechaEvento = fechaIngreso.getTime();
+                        fechaIngreso.add(Calendar.MONTH, -60);
+                        diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
+                        if(diff<-7||diff>7) habilitado = false;
+                        break;
+                    case 8:
+                        fechaIngreso.add(Calendar.MONTH, 66);fechaEvento = fechaIngreso.getTime();
+                        fechaIngreso.add(Calendar.MONTH, -66);
+                        diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
+                        if(diff<-7||diff>7) habilitado = false;
+                        break;
+                    case 9:
+                        fechaIngreso.add(Calendar.MONTH, 72);fechaEvento = fechaIngreso.getTime();
+                        fechaIngreso.add(Calendar.MONTH, -72);
+                        diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
+                        if(diff<-7||diff>7) habilitado = false;
+                        break;
+                    case 10:
+                        fechaIngreso.add(Calendar.MONTH, 78);fechaEvento = fechaIngreso.getTime();
+                        fechaIngreso.add(Calendar.MONTH, -78);
+                        diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
+                        if(diff<-7||diff>7) habilitado = false;
+                        break;
+                    case 11:
+                        fechaIngreso.add(Calendar.MONTH, 84);fechaEvento = fechaIngreso.getTime();
+                        fechaIngreso.add(Calendar.MONTH, -84);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
@@ -291,16 +348,17 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
         @Override
         protected String doInBackground(String... values) {
             filtro = values[0];
-            /*try {
+            try {
                 zipA.open();
                 zpEstado = zipA.getZpoEstadoInfante(filtro, MainDBConstants.recordId);
-                zpSalida = zipA.getZpo08StudyExit(filtro, null);
-                entryD = zipA.getZpo01StudyEntrySectionDtoF(MainDBConstants.recordId + "='" + zpInfante.getPregnantId() + "'", null);
+                screening = zipA.getZpo00Screening(filtro, MainDBConstants.recordId);
+                //zpSalida = zipA.getZpo08StudyExit(filtro, null);
+                //entryD = zipA.getZpo01StudyEntrySectionDtoF(MainDBConstants.recordId + "='" + zpInfante.getPregnantId() + "'", null);
                 zipA.close();
             } catch (Exception e) {
                 Log.e(TAG, e.getLocalizedMessage(), e);
                 return "error";
-            }*/
+            }
             return "exito";
         }
 
@@ -311,7 +369,7 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
             textView.setText(getString(R.string.infant_events)+"\n"+
                     getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
                     getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(zpInfante.getInfantBirthDate()):"ND"));
-            gridView.setAdapter(new MenuInfantesAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info));
+            gridView.setAdapter(new MenuInfantesAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpInfante, zpEstado, screening));
             /*if (zpSalida != null){
                 textView.setTextColor(Color.RED);
                 textView.setText(textView.getText()+"\n"+getString(R.string.inf_retired)

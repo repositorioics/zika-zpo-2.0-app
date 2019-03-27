@@ -22,7 +22,6 @@ import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre.MotherCallAdapter;
-import ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre.VisitAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoEmbarazada;
@@ -235,10 +234,10 @@ public class MotherCallActivity extends AbstractAsyncActivity {
                     zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
 					if (zpoV2Muestra!=null){
                         if(eventoaFiltrar.matches(Constants.MONTH24)){
-                            zpEstado.setMes12('1');
+                            zpEstado.setMes24('1');
                         }
                         if(eventoaFiltrar.matches(Constants.MONTH36)){
-                            zpEstado.setMes24('1');
+                            zpEstado.setMes36('1');
                         }
 						zpoA.editarZpoEstadoMadre(zpEstado);
 					}

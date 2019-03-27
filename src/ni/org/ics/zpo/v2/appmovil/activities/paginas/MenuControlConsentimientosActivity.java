@@ -51,12 +51,12 @@ public class MenuControlConsentimientosActivity extends AbstractAsyncActivity {
 					int position, long id) {
 				Intent i;
 				switch(position){
-				case 0:
+				/*case 0:
 					i = new Intent(getApplicationContext(),
 							NewZpoControlConsentimientosSalidaActivity.class);
 					startActivity(i);
-					break;
-				case 1:
+					break;*/
+				case 0:
 					i = new Intent(getApplicationContext(),
 							NewZpoControlConsentimientosRecepcionActivity.class);
 					startActivity(i);

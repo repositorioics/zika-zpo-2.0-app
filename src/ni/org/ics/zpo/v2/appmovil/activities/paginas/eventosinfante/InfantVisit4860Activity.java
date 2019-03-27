@@ -273,11 +273,11 @@ public class InfantVisit4860Activity extends AbstractAsyncActivity {
 					//zp04AF = zipA.getZpo04ExtendedSectionAtoF( filtro, MainDBConstants.recordId);
 
 					if (zpoV2Muestra !=null) {// && zp07!=null && zp07a!=null && zp07b!=null && zp07c!=null && zp07d!=null && zpoOtoE!=null && zp04AF!=null){
-						if(eventoaFiltrar.matches(Constants.MONTH24)){
-							zpEstado.setMes12('1');
+						if(eventoaFiltrar.matches(Constants.MONTH48)){
+							zpEstado.setMes48('1');
 						}
-						if(eventoaFiltrar.matches(Constants.MONTH36)){
-							zpEstado.setMes24('1');
+						if(eventoaFiltrar.matches(Constants.MONTH60)){
+							zpEstado.setMes60('1');
 						}
 						zipA.editarZpoEstadoInfante(zpEstado);
 					}

@@ -94,7 +94,6 @@ public class DownloadAllTask extends DownloadTask {
         zpoA.borrarZpoDatosEmbarazada();
         zpoA.borrarZpo00Screening();
         zpoA.borrarZpoEstadoMadre();
-        zpoA.borrarZpoControlConsentimientosSalida();
         zpoA.borrarZpoControlConsentimientosRecepcion();
         zpoA.borrarZpoVisitaFallida();
         zpoA.borrarZpoInfantData();

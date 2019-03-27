@@ -111,9 +111,9 @@
         <item>@string/specimen_1</item>
         <item>@string/specimen_2</item>
     </string-array>
-    
+
+    <!--Sólo recepción-->
     <string-array name="menu_consent">
-        <item>@string/consent_1</item>
         <item>@string/consent_2</item>
     </string-array>
     

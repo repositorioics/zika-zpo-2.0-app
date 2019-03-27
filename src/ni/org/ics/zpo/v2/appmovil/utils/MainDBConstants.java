@@ -186,16 +186,34 @@ public class MainDBConstants {
     public static final String STATUS_MOTHER_TABLE = "estado_madre";
     //Campos estado embarazada
     public static final String ingreso = "ingreso";
-    public static final String mes12 = "mes12";
     public static final String mes24 = "mes24";
+    public static final String mes30 = "mes30";
+    public static final String mes36 = "mes36";
+    public static final String mes42 = "mes42";
+    public static final String mes48 = "mes48";
+    public static final String mes54 = "mes54";
+    public static final String mes60 = "mes60";
+    public static final String mes66 = "mes66";
+    public static final String mes72 = "mes72";
+    public static final String mes78 = "mes78";
+    public static final String mes84 = "mes84";
 
     //Crear tabla estado embarazada
     public static final String CREATE_STATUS_MOTHER_TABLE = "create table if not exists "
             + STATUS_MOTHER_TABLE + " ("
             + recordId + " text not null, "
             + ingreso + " text, "
-            + mes12 + " text, "
             + mes24 + " text, "
+            + mes30 + " text, "
+            + mes36 + " text, "
+            + mes42 + " text, "
+            + mes48 + " text, "
+            + mes54 + " text, "
+            + mes60 + " text, "
+            + mes66 + " text, "
+            + mes72 + " text, "
+            + mes78 + " text, "
+            + mes84 + " text, "
             + recordDate + " date, "
             + recordUser + " text, "
             + pasive + " text, "
@@ -270,8 +288,17 @@ public class MainDBConstants {
             + INFANTSTATUS_TABLE + " ("
             + recordId + " text not null, "
             + ingreso + " text, "
-            + mes12 + " text, "
             + mes24 + " text, "
+            + mes30 + " text, "
+            + mes36 + " text, "
+            + mes42 + " text, "
+            + mes48 + " text, "
+            + mes54 + " text, "
+            + mes60 + " text, "
+            + mes66 + " text, "
+            + mes72 + " text, "
+            + mes78 + " text, "
+            + mes84 + " text, "
             + MainDBConstants.recordDate + " date, "
             + MainDBConstants.recordUser + " text, "
             + MainDBConstants.pasive + " text, "
