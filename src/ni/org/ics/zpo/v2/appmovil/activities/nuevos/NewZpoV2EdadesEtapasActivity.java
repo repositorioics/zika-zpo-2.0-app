@@ -1,14 +1,18 @@
 package ni.org.ics.zpo.v2.appmovil.activities.nuevos;
 
 import android.app.Dialog;
-import android.content.*;
+import android.content.ContentUris;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,11 +21,11 @@ import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
-import ni.org.ics.zpo.v2.appmovil.parsers.ZpoV2MullenXml;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2EdadesEtapas;
+import ni.org.ics.zpo.v2.appmovil.parsers.ZpoV2EdadesEtapasXml;
 import ni.org.ics.zpo.v2.appmovil.preferences.PreferencesActivity;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.FileUtils;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2Mullen;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
@@ -31,15 +35,15 @@ import java.util.Date;
 /**
  * @author ics
  */
-public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
+public class NewZpoV2EdadesEtapasActivity extends AbstractAsyncActivity {
 
     protected static final String TAG = NewZpo00ScreeningActivity.class.getSimpleName();
 
     private ZpoAdapter zpoA;
-    private static ZpoV2Mullen mZpoV2Mullen = new ZpoV2Mullen();
+    private static ZpoV2EdadesEtapas mZpoV2EE = new ZpoV2EdadesEtapas();
 
-    public static final int ADD_ZPOM_ODK = 1;
-    public static final int EDIT_ZPOM_ODK = 2;
+    public static final int ADD_ZPOEE_ODK = 1;
+    public static final int EDIT_ZPOEE_ODK = 2;
 
     Dialog dialogInit;
     private SharedPreferences settings;
@@ -65,7 +69,7 @@ public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
         zpoA = new ZpoAdapter(this.getApplicationContext(), mPass, false, false);
         mRecordId = getIntent().getExtras().getString(Constants.RECORDID);
         event = getIntent().getExtras().getString(Constants.EVENT);
-        mZpoV2Mullen = (ZpoV2Mullen) getIntent().getExtras().getSerializable(Constants.OBJECTO_ZPOMULLEN );
+        mZpoV2EE = (ZpoV2EdadesEtapas) getIntent().getExtras().getSerializable(Constants.OBJECT_ZPOEDADESETAPAS);
         createInitDialog();
     }
 
@@ -80,14 +84,13 @@ public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
 
         //to set the message
         TextView message = (TextView) dialogInit.findViewById(R.id.yesnotext);
-        if (mZpoV2Mullen != null) {
-            message.setText(getString(R.string.edit) + " " + getString(R.string.infant_b_7) + "?");
+        if (mZpoV2EE != null) {
+            message.setText(getString(R.string.edit) + " " + getString(R.string.infant_b_11) + "?");
         } else {
-            message.setText(getString(R.string.add) + " " + getString(R.string.infant_b_7) + "?");
+            message.setText(getString(R.string.add) + " " + getString(R.string.infant_b_11) + "?");
         }
 
         //add some action to the buttons
-
         Button yes = (Button) dialogInit.findViewById(R.id.yesnoYes);
         yes.setOnClickListener(new View.OnClickListener() {
 
@@ -135,7 +138,7 @@ public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent intent) {
-        if (requestCode == ADD_ZPOM_ODK || requestCode == EDIT_ZPOM_ODK) {
+        if (requestCode == ADD_ZPOEE_ODK || requestCode == EDIT_ZPOEE_ODK) {
             if (resultCode == RESULT_OK) {
                 Uri instanceUri = intent.getData();
                 //Busca la instancia resultado
@@ -168,13 +171,13 @@ public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
     private void addZpoMullen() {
         try {
             Uri formUri;
-            if (mZpoV2Mullen == null) {
+            if (mZpoV2EE == null) {
                 //campos de proveedor de collect
                 String[] projection = new String[]{
                         "_id", "jrFormId", "displayName"};
                 //cursor que busca el formulario
                 Cursor c = getContentResolver().query(Constants.CONTENT_URI, projection,
-                        "jrFormId = 'ZPoV2_Mullen' and displayName = 'Continuacion Estudio ZPO Escala Mullen de Aprendizaje Temprano'", null, null);
+                        "jrFormId = 'ZPoV2_EdadesEtapas' and displayName = 'Continuacion Estudio ZPO Tamizaje de Edades y Etapas'", null, null);
                 c.moveToFirst();
                 //captura el id del formulario
                 Integer id = Integer.parseInt(c.getString(0));
@@ -183,12 +186,12 @@ public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
                     c.close();
                 }
                 formUri = ContentUris.withAppendedId(Constants.CONTENT_URI, id);
-                accion = ADD_ZPOM_ODK;
+                accion = ADD_ZPOEE_ODK;
             } else {
                 //forma el uri para la instancia en ODK Collect
-                Integer id = mZpoV2Mullen.getIdInstancia();
+                Integer id = mZpoV2EE.getIdInstancia();
                 formUri = ContentUris.withAppendedId(Constants.CONTENT_URI_I, id);
-                accion = EDIT_ZPOM_ODK;
+                accion = EDIT_ZPOEE_ODK;
             }
             Intent odkA = new Intent(Intent.ACTION_EDIT, formUri);
             //Arranca la actividad proveedor de instancias de ODK Collect en busca de resultado
@@ -205,70 +208,37 @@ public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
         Serializer serializer = new Persister();
         File source = new File(instanceFilePath);
         try {
-            ZpoV2MullenXml zpoV2MullenXml = new ZpoV2MullenXml();
-            zpoV2MullenXml = serializer.read(ZpoV2MullenXml.class, source);
-            if (accion==ADD_ZPOM_ODK) mZpoV2Mullen = new ZpoV2Mullen();
-            mZpoV2Mullen.setRecordId(mRecordId);
-            mZpoV2Mullen.setEventName(event);
-            mZpoV2Mullen.setSexMsel( zpoV2MullenXml.getSexMsel());
-            mZpoV2Mullen.setRaNameMsel( zpoV2MullenXml.getRaNameMsel());
-            mZpoV2Mullen.setVisitMonthsMsel( zpoV2MullenXml.getVisitMonthsMsel());
-            mZpoV2Mullen.setVisProbMsel( zpoV2MullenXml.getVisProbMsel());
-            mZpoV2Mullen.setDesVisProbMsel( zpoV2MullenXml.getDesVisProbMsel());
-            mZpoV2Mullen.setHearProbMsel(zpoV2MullenXml.getHearProbMsel());
-            mZpoV2Mullen.setDesHearProbMsel(zpoV2MullenXml.getDesHearProbMsel());
-            mZpoV2Mullen.setTestingDateMsel(zpoV2MullenXml.getTestingDateMsel());
-            mZpoV2Mullen.setEddMsel(zpoV2MullenXml.getEddMsel());
-            mZpoV2Mullen.setAdjAgeMsel(zpoV2MullenXml.getAdjAgeMsel());
-            mZpoV2Mullen.setActDobMsel(zpoV2MullenXml.getActDobMsel());
-            mZpoV2Mullen.setGmRaw(zpoV2MullenXml.getGmRaw());
-            mZpoV2Mullen.setGmTScore(zpoV2MullenXml.getGmTScore());
-            mZpoV2Mullen.setGmBoe(zpoV2MullenXml.getGmBoe());
-            mZpoV2Mullen.setGmPerRank(zpoV2MullenXml.getGmPerRank());
-            mZpoV2Mullen.setGmDesCat(zpoV2MullenXml.getGmDesCat());
-            mZpoV2Mullen.setGmAgeEqu(zpoV2MullenXml.getGmAgeEqu());
-            mZpoV2Mullen.setVrRaw(zpoV2MullenXml.getVrRaw());
-            mZpoV2Mullen.setVrTScore(zpoV2MullenXml.getVrTScore());
-            mZpoV2Mullen.setVrBoe(zpoV2MullenXml.getVrBoe());
-            mZpoV2Mullen.setVrPerRank(zpoV2MullenXml.getVrPerRank());
-            mZpoV2Mullen.setVrDesCat(zpoV2MullenXml.getVrDesCat());
-            mZpoV2Mullen.setVrAgeEqu(zpoV2MullenXml.getVrAgeEqu());
-            mZpoV2Mullen.setFmRaw(zpoV2MullenXml.getFmRaw());
-            mZpoV2Mullen.setFmTScore(zpoV2MullenXml.getFmTScore());
-            mZpoV2Mullen.setFmBoe(zpoV2MullenXml.getFmBoe());
-            mZpoV2Mullen.setFmPerRank(zpoV2MullenXml.getFmPerRank());
-            mZpoV2Mullen.setFmDesCat(zpoV2MullenXml.getFmDesCat());
-            mZpoV2Mullen.setFmAgeEqu(zpoV2MullenXml.getFmAgeEqu());
-            mZpoV2Mullen.setRlRaw(zpoV2MullenXml.getRlRaw());
-            mZpoV2Mullen.setRlTScore(zpoV2MullenXml.getRlTScore());
-            mZpoV2Mullen.setRlBoe(zpoV2MullenXml.getRlBoe());
-            mZpoV2Mullen.setRlPerRank(zpoV2MullenXml.getRlPerRank());
-            mZpoV2Mullen.setRlDesCat(zpoV2MullenXml.getRlDesCat());
-            mZpoV2Mullen.setRlAgeEqu(zpoV2MullenXml.getRlAgeEqu());
-            mZpoV2Mullen.setElRaw(zpoV2MullenXml.getElRaw());
-            mZpoV2Mullen.setElTScore(zpoV2MullenXml.getElTScore());
-            mZpoV2Mullen.setElBoe(zpoV2MullenXml.getElBoe());
-            mZpoV2Mullen.setElPerRank(zpoV2MullenXml.getElPerRank());
-            mZpoV2Mullen.setElDesCat(zpoV2MullenXml.getElDesCat());
-            mZpoV2Mullen.setElAgeEqu(zpoV2MullenXml.getElAgeEqu());
-            mZpoV2Mullen.setCognTScoreSum(zpoV2MullenXml.getCognTScoreSum());
-            mZpoV2Mullen.setElcStandScore(zpoV2MullenXml.getElcStandScore());
-            mZpoV2Mullen.setElcBoe(zpoV2MullenXml.getElcBoe());
-            mZpoV2Mullen.setElcPerRank(zpoV2MullenXml.getElcPerRank());
-            mZpoV2Mullen.setElcDesCat(zpoV2MullenXml.getElcDesCat());
-            mZpoV2Mullen.setMselComment(zpoV2MullenXml.getMselComment());
+            ZpoV2EdadesEtapasXml zpoV2EEXml = new ZpoV2EdadesEtapasXml();
+            zpoV2EEXml = serializer.read(ZpoV2EdadesEtapasXml.class, source);
+            if (accion== ADD_ZPOEE_ODK) mZpoV2EE = new ZpoV2EdadesEtapas();
+            mZpoV2EE.setRecordId(mRecordId);
+            mZpoV2EE.setEventName(event);
+            mZpoV2EE.setVisitDate(zpoV2EEXml.getVisitDate());
+            mZpoV2EE.setComunicacion4Meses(zpoV2EEXml.getComunicacion4Meses());
+            mZpoV2EE.setMotoraGruesa4Meses(zpoV2EEXml.getMotoraGruesa4Meses());
+            mZpoV2EE.setMotoraFina4Meses(zpoV2EEXml.getMotoraFina4Meses());
+            mZpoV2EE.setResProb4Meses(zpoV2EEXml.getResProb4Meses());
+            mZpoV2EE.setSocioInd4Meses(zpoV2EEXml.getSocioInd4Meses());
+            mZpoV2EE.setAbnormalResults(zpoV2EEXml.getAbnormalResults());
+            mZpoV2EE.setAreaComunicacion(zpoV2EEXml.getAreaComunicacion());
+            mZpoV2EE.setAreaMotoraGruesa(zpoV2EEXml.getAreaMotoraGruesa());
+            mZpoV2EE.setAreaMotoraFina(zpoV2EEXml.getAreaMotoraFina());
+            mZpoV2EE.setAreaSolucionProblemas(zpoV2EEXml.getAreaSolucionProblemas());
+            mZpoV2EE.setAreaSocioIndividual(zpoV2EEXml.getAreaSocioIndividual());
+            mZpoV2EE.setComGenObs4Meses(zpoV2EEXml.getComGenObs4Meses());
+            mZpoV2EE.setIdCompleted(zpoV2EEXml.getIdCompleted());
 
-            mZpoV2Mullen.setRecordDate(new Date());
-            mZpoV2Mullen.setRecordUser(username);
-            mZpoV2Mullen.setIdInstancia(idInstancia);
-            mZpoV2Mullen.setInstancePath(instanceFilePath);
-            mZpoV2Mullen.setEstado(Constants.STATUS_NOT_SUBMITTED);
-            mZpoV2Mullen.setStart( zpoV2MullenXml.getStart());
-            mZpoV2Mullen.setEnd( zpoV2MullenXml.getEnd());
-            mZpoV2Mullen.setDeviceid( zpoV2MullenXml.getDeviceid());
-            mZpoV2Mullen.setSimserial( zpoV2MullenXml.getSimserial());
-            mZpoV2Mullen.setPhonenumber( zpoV2MullenXml.getPhonenumber());
-            mZpoV2Mullen.setToday( zpoV2MullenXml.getToday());
+            mZpoV2EE.setRecordDate(new Date());
+            mZpoV2EE.setRecordUser(username);
+            mZpoV2EE.setIdInstancia(idInstancia);
+            mZpoV2EE.setInstancePath(instanceFilePath);
+            mZpoV2EE.setEstado(Constants.STATUS_NOT_SUBMITTED);
+            mZpoV2EE.setStart( zpoV2EEXml.getStart());
+            mZpoV2EE.setEnd( zpoV2EEXml.getEnd());
+            mZpoV2EE.setDeviceid( zpoV2EEXml.getDeviceid());
+            mZpoV2EE.setSimserial( zpoV2EEXml.getSimserial());
+            mZpoV2EE.setPhonenumber( zpoV2EEXml.getPhonenumber());
+            mZpoV2EE.setToday( zpoV2EEXml.getToday());
             new SaveDataTask().execute(accion);
 
         } catch (Exception e) {
@@ -295,11 +265,11 @@ public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
             accionaRealizar = values[0];
             try {
                 zpoA.open();
-                if (accionaRealizar == ADD_ZPOM_ODK){
-                    zpoA.crearZpoV2Mullen(mZpoV2Mullen);
+                if (accionaRealizar == ADD_ZPOEE_ODK){
+                    zpoA.crearZpoV2EdadesEtapas(mZpoV2EE);
                 }
                 else{
-                    zpoA.editarZpoV2Mullen(mZpoV2Mullen);
+                    zpoA.editarZpoV2EdadesEtapas(mZpoV2EE);
                 }
                 zpoA.close();
             } catch (Exception e) {

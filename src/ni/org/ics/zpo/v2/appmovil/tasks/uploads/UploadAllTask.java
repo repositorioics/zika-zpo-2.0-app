@@ -25,7 +25,7 @@ public class UploadAllTask extends UploadTask {
 	}
 
 	protected static final String TAG = UploadAllTask.class.getSimpleName();
-    private static final String TOTAL_TASK = "25";
+    private static final String TOTAL_TASK = "12";
 	private ZpoAdapter zpoA = null;
 
     private List<Zpo00Screening> mTamizajes = new ArrayList<Zpo00Screening>();
@@ -39,6 +39,7 @@ public class UploadAllTask extends UploadTask {
     private List<ZpoV2InfantOtoacousticEmissions> mOtoacusEms = new ArrayList<ZpoV2InfantOtoacousticEmissions>();
     private List<ZpoV2InfantOphtResults> mAInfantOphtResults = new ArrayList<ZpoV2InfantOphtResults>();
     private List<ZpoControlConsentimientosRecepcion> mRecepcionesCons = new ArrayList<ZpoControlConsentimientosRecepcion>();
+    private List<ZpoV2EdadesEtapas> mEdadesEtapas = new ArrayList<ZpoV2EdadesEtapas>();
 
 	private String url = null;
 	private String username = null;
@@ -50,28 +51,15 @@ public class UploadAllTask extends UploadTask {
     public static final int ESTADO = 2;
     public static final int DAT_INFANTE = 3;
     public static final int ESTADO_INFANTE = 4;
-    public static final int INGRESO1 = 5;
-    public static final int INGRESO2 = 6;
-    public static final int INGRESO3 = 7;
-    public static final int EXTENDED1 = 8;
-    public static final int EXTENDED2 = 9;
-    public static final int EXTENDED3 = 10;
-    public static final int PARTO = 11;
-    public static final int EVAL_INFANTE = 12;
-    public static final int OPHTH_RESULTS = 13;
-    public static final int AUDIO_RESULTS = 14;
-    public static final int IMAGE_STUDIES = 15;
-    public static final int BAYLEY_SCALES = 16;
-    public static final int MUESTRAS = 17;
-    public static final int CONSSAL = 18;
-    public static final int CONSREC = 19;
-    public static final int SALIDA = 20;
-    public static final int VISITA_FALL = 21;
-    public static final int OTO_EMI = 22;
-    public static final int EXTENDEDAF = 23;
-    public static final int MULLEN = 24;
-    public static final int OFTA_EVAL = 24;
-    public static final int PSICO_EVAL = 25;
+    public static final int OPHTH_RESULTS = 5;
+    public static final int MUESTRAS = 6;
+    public static final int CONSREC = 7;
+    public static final int OTO_EMI = 8;
+    public static final int MULLEN = 9;
+    public static final int OFTA_EVAL = 10;
+    public static final int PSICO_EVAL = 11;
+    public static final int EDADES_ETAPAS = 12;
+
 
     @Override
 	protected String doInBackground(String... values) {
@@ -96,6 +84,7 @@ public class UploadAllTask extends UploadTask {
             mPsychoEvals = zpoA.getZpoV2InfantPsychologicalEvaluations(filtro, MainDBConstants.recordId);
             mAInfantOphtResults = zpoA.getZpoV2InfantOphtResults(filtro, MainDBConstants.recordId);
             mRecepcionesCons = zpoA.getZpoControlConsentimientosRecepciones(filtro, null);
+            mEdadesEtapas = zpoA.getZpoV2EEs(filtro,null);
 
 			publishProgress("Datos completos!", "2", "2");
             actualizarBaseDatos(Constants.STATUS_SUBMITTED, TAMIZAJE);
@@ -162,6 +151,12 @@ public class UploadAllTask extends UploadTask {
             error = uploadControlConsentimientosRecepcion(url, username, password);
             if (!error.matches("Datos recibidos!")){
                 actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, CONSREC);
+                return error;
+            }
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, EDADES_ETAPAS);
+            error = uploadEdadesEtapas(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, EDADES_ETAPAS);
                 return error;
             }
             zpoA.close();
@@ -253,6 +248,17 @@ public class UploadAllTask extends UploadTask {
                 }
             }
         }
+       else if(opcion==EDADES_ETAPAS){
+           c = mEdadesEtapas.size();
+           if(c>0){
+               for (ZpoV2EdadesEtapas ee : mEdadesEtapas) {
+                   ee.setEstado(estado);
+                   zpoA.editarZpoV2EdadesEtapas(ee);
+                   publishProgress("Actualizando Edades y Etapas de base de datos local", Integer.valueOf(mEdadesEtapas.indexOf(ee)).toString(), Integer
+                           .valueOf(c).toString());
+               }
+           }
+       }
     }
 
 
@@ -644,4 +650,40 @@ public class UploadAllTask extends UploadTask {
             return e.getMessage();
         }
     }
+
+    /***************************************************/
+    /********************* ZpoV2EdadesEtapas******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadEdadesEtapas(String url, String username,
+                                                           String password) throws Exception {
+        try {
+            if(mEdadesEtapas.size()>0){
+                publishProgress("Enviando Tamizaje de Edades y Etapas!", String.valueOf(EDADES_ETAPAS), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/zpoV2EE";
+                ZpoV2EdadesEtapas[] envio = mEdadesEtapas.toArray(new ZpoV2EdadesEtapas[mEdadesEtapas.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2EdadesEtapas[]> requestEntity =
+                        new HttpEntity<ZpoV2EdadesEtapas[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
 }

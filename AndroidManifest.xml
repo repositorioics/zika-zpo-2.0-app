@@ -93,6 +93,9 @@
                   android:screenOrientation="portrait" />
         <activity android:name=".activities.nuevos.NewZpoV2InfantOphtResultsActivity"
                   android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2EdadesEtapasActivity"
+                  android:screenOrientation="portrait" />
+
 
     </application>
 

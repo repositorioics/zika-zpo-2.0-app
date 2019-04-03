@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2Mullen;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
 
 public class InfantVisit4860Adapter extends ArrayAdapter<String> {
@@ -17,14 +18,16 @@ public class InfantVisit4860Adapter extends ArrayAdapter<String> {
 	private final Context context;
 	private final String[] values;
     private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
+    private final ZpoV2Mullen mZpoMullen;
 
 	public InfantVisit4860Adapter(Context context, int textViewResourceId,
                                   String[] values,
-                                  ZpoV2RecoleccionMuestra zpoMuestra) {
+                                  ZpoV2RecoleccionMuestra zpoMuestra, ZpoV2Mullen zpoMullen) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
         this.mZpoV2Muestra = zpoMuestra;
+        this.mZpoMullen = zpoMullen;
 	}
 
 	@Override
@@ -54,6 +57,19 @@ public class InfantVisit4860Adapter extends ArrayAdapter<String> {
                 img=getContext().getResources().getDrawable( R.drawable.ic_sample);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
+
+
+			case 4:
+				if(mZpoMullen!=null){
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+				}
+				else{
+					textView.setTextColor(Color.RED);
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+				}
+				img=getContext().getResources().getDrawable( R.drawable.ic_mullen);
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+				break;
             default:
                 img = getContext().getResources().getDrawable(R.drawable.logo);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);

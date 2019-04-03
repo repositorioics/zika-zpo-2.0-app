@@ -25,7 +25,7 @@ public class DownloadAllTask extends DownloadTask {
 	
 	protected static final String TAG = DownloadAllTask.class.getSimpleName();
 	private ZpoAdapter zpoA = null;
-    private static final String TOTAL_TASK = "22";
+    private static final String TOTAL_TASK = "12";
 
     private List<ZpoDatosEmbarazada> mDatosEmb = null;
     private List<Zpo00Screening> mTamizajes = null;
@@ -38,34 +38,21 @@ public class DownloadAllTask extends DownloadTask {
     private List<ZpoV2InfantPsychologicalEvaluation> mPsychoEvals = null;
     private List<ZpoV2InfantOtoacousticEmissions> mOtoacusEms = null;
     private List<ZpoV2InfantOphtResults> mAInfantOphtResult = null;
+    private List<ZpoV2EdadesEtapas> mEdadesEtapas = null;
+
 
     public static final int DAT_MADRE = 1;
     public static final int ESTADO = 2;
     public static final int DAT_INFANTE = 3;
     public static final int ESTADO_INFANTE = 4;
     public static final int TAMIZAJE = 5;
-    public static final int INGRESO1 = 6;
-    public static final int INGRESO2 = 7;
-    public static final int INGRESO3 = 8;
-    public static final int EXTENDED1 = 9;
-    public static final int EXTENDED2 = 10;
-    public static final int EXTENDED3 = 11;
-    public static final int PARTO = 12;
-    public static final int EVAL_INFANTE = 13;
-    public static final int OPHTH_RESULTS = 14;
-    public static final int AUDIO_RESULTS = 15;
-    public static final int IMAGE_STUDIES = 16;
-    public static final int BAYLEY_SCALES = 17;
-    public static final int MUESTRAS = 18;
-    public static final int CONSSAL = 19;
-    public static final int CONSREC = 20;
-    public static final int SALIDA = 21;
-    public static final int VISITA_FALL = 22;
-    public static final int OTOEMI = 23;
-    public static final int EXTENDEDAF = 24;
-    public static final int MULLEN = 25;
-    public static final int OFTA_EVAL = 25;
-    public static final int PSICO_EVAL = 26;
+    public static final int OPHTH_RESULTS = 6;
+    public static final int MUESTRAS = 7;
+    public static final int OTOEMI = 8;
+    public static final int MULLEN = 9;
+    public static final int OFTA_EVAL = 10;
+    public static final int PSICO_EVAL = 11;
+    public static final int EDADES_ETAPAS = 12;
     
 	private String error = null;
 	private String url = null;
@@ -104,6 +91,7 @@ public class DownloadAllTask extends DownloadTask {
         zpoA.borrarZpoV2InfantOphthalmologicEvaluation();
         zpoA.borrarZpoV2InfantPsychologicalEvaluation();
         zpoA.borrarZpoV2InfantOphtResults();
+        zpoA.borrarZpoV2EdadesEtapas();
         try {
 
             if (mDatosEmb != null){
@@ -190,23 +178,33 @@ public class DownloadAllTask extends DownloadTask {
                 }
             }
 
-            if (mPsychoEvals != null){
+            if (mPsychoEvals != null) {
                 v = mPsychoEvals.size();
                 ListIterator<ZpoV2InfantPsychologicalEvaluation> iter = mPsychoEvals.listIterator();
-                while (iter.hasNext()){
-                    zpoA.crearZpoV2InfantPsychologicalEvaluation(iter.next());
-                    publishProgress("Insertando eval psicologicas en la base de datos...", Integer.valueOf(iter.nextIndex()).toString(), Integer
-                            .valueOf(v).toString());
+                while (iter.hasNext()) {
+                    zpoA.crearZpoV2InfantPsychologicalEvaluation( iter.next() );
+                    publishProgress( "Insertando eval psicologicas en la base de datos...", Integer.valueOf( iter.nextIndex() ).toString(), Integer
+                            .valueOf( v ).toString() );
                 }
             }
 
-            if (mAInfantOphtResult != null){
+            if (mAInfantOphtResult != null) {
                 v = mAInfantOphtResult.size();
                 ListIterator<ZpoV2InfantOphtResults> iter = mAInfantOphtResult.listIterator();
-                while (iter.hasNext()){
-                    zpoA.crearZpoV2InfantOphtResults(iter.next());
-                    publishProgress("Insertando resultados oftalmologicos de infantes...", Integer.valueOf(iter.nextIndex()).toString(), Integer
-                            .valueOf(v).toString());
+                while (iter.hasNext()) {
+                    zpoA.crearZpoV2InfantOphtResults( iter.next() );
+                    publishProgress( "Insertando resultados oftalmologicos de infantes...", Integer.valueOf( iter.nextIndex() ).toString(), Integer
+                            .valueOf( v ).toString() );
+                }
+            }
+
+            if (mEdadesEtapas != null) {
+                v = mEdadesEtapas.size();
+                ListIterator<ZpoV2EdadesEtapas> iter = mEdadesEtapas.listIterator();
+                while (iter.hasNext()) {
+                    zpoA.crearZpoV2EdadesEtapas( iter.next() );
+                    publishProgress( "Insertando tamizaje Edades y Etapas...", Integer.valueOf( iter.nextIndex() ).toString(), Integer
+                            .valueOf( v ).toString() );
                 }
             }
         } catch (Exception e) {
@@ -215,9 +213,9 @@ public class DownloadAllTask extends DownloadTask {
             zpoA.close();
             return e.getLocalizedMessage();
         }
-		zpoA.close();
-		return error;
-	}
+        zpoA.close();
+        return error;
+    }
 
     // url, username, password
     protected String descargarDatos() throws Exception {
@@ -334,6 +332,15 @@ public class DownloadAllTask extends DownloadTask {
                     ZpoV2InfantOphtResults[].class, username);
             // convert the array to a list and return it
             mAInfantOphtResult = Arrays.asList(responseZpo07aOphtResults.getBody());
+
+            //Descargar edades y etapas
+            urlRequest = url + "/movil/zpoV2EdadesEtapas";
+            publishProgress("Solicitando Tamizaje de Edades y Etapas",String.valueOf(EDADES_ETAPAS),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2EdadesEtapas[]> responseZpoEE = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2EdadesEtapas[].class, username);
+            // convert the array to a list and return it
+            mEdadesEtapas = Arrays.asList(responseZpoEE.getBody());
             return null;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);

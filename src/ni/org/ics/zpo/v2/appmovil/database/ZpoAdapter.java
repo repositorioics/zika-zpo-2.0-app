@@ -65,6 +65,7 @@ public class ZpoAdapter {
             db.execSQL(ZpoPsychoEvalDBConstants.CREATE_INFANT_PSYCHOLOGICALEVAL_TABLE);
             db.execSQL(ZpoOphthaResDBConstants.CREATE_AINFANT_OPHTRESULTS_TABLE);
             db.execSQL(ZpoV2MullenConstants.CREATE_MULLEN_ADD_TABLE);
+            db.execSQL(ZpoV2EdadesEtapasConstants.CREATE_EDADES_ETAPA_TABLE);
 		}
 
 		@Override
@@ -873,5 +874,52 @@ public class ZpoAdapter {
         }
         if (!cursor.isClosed()) cursor.close();
         return aInfantOpthResults;
+    }
+
+    /**
+     * Metodos para ZpoV2EdadesEtapas en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2EdadesEtapas en la base de datos
+    public void crearZpoV2EdadesEtapas(ZpoV2EdadesEtapas edadesEtapas) {
+        ContentValues cv = ZPoV2EdadesEtapasHelper.crearZpoEdadesEtapas(edadesEtapas);
+        mDb.insert(ZpoV2EdadesEtapasConstants.EDADES_ETAPAS_TABLE, null, cv);
+    }
+    //Editar ZpoV2EdadesEtapas existente en la base de datos
+    public boolean editarZpoV2EdadesEtapas(ZpoV2EdadesEtapas edadesEtapas) {
+        ContentValues cv = ZPoV2EdadesEtapasHelper.crearZpoEdadesEtapas(edadesEtapas);
+        return mDb.update(ZpoV2EdadesEtapasConstants.EDADES_ETAPAS_TABLE, cv, MainDBConstants.recordId + "='"
+                + edadesEtapas.getRecordId() + "' and " + MainDBConstants.eventName + "='" + edadesEtapas.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2EdadesEtapas de la base de datos
+    public boolean borrarZpoV2EdadesEtapas() {
+        return mDb.delete(ZpoV2EdadesEtapasConstants.EDADES_ETAPAS_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2EdadesEtapas de la base de datos
+    public ZpoV2EdadesEtapas getZpoV2EdadesEtapas(String filtro, String orden) throws SQLException {
+        ZpoV2EdadesEtapas ee = null;
+        Cursor cursorBC = crearCursor(ZpoV2EdadesEtapasConstants.EDADES_ETAPAS_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            ee=ZPoV2EdadesEtapasHelper.crearZpoV2EdadesEtapas(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return ee;
+    }
+    //Obtener una lista de ZpoV2EdadesEtapas de la base de datos
+    public List<ZpoV2EdadesEtapas> getZpoV2EEs(String filtro, String orden) throws SQLException {
+        List<ZpoV2EdadesEtapas> ees = new ArrayList<ZpoV2EdadesEtapas>();
+        Cursor cursorBC = crearCursor(ZpoV2EdadesEtapasConstants.EDADES_ETAPAS_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            ees.clear();
+            do{
+                ZpoV2EdadesEtapas ee = null;
+                ee = ZPoV2EdadesEtapasHelper.crearZpoV2EdadesEtapas(cursorBC);
+                ees.add(ee);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return ees;
     }
 }

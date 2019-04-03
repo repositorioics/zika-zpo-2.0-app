@@ -118,7 +118,7 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 					case 6: //EVALUACION MULLEN
 						i = new Intent(getApplicationContext(),
 								NewZpoV2MullenActivity.class);
-						if (zpoMullen != null) arguments.putSerializable(Constants.OBJECTO_ZP0MULLEN, zpoMullen);
+						if (zpoMullen != null) arguments.putSerializable(Constants.OBJECTO_ZPOMULLEN, zpoMullen);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;

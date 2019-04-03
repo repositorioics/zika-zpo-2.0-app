@@ -36,7 +36,7 @@ public class ZpoV2MullenXml {
     private String gmRaw;
     @Element(required=false)
     private String gmTScore;
-    @Element(required=true)
+    @Element(required=false)
     private String gmBoe;
     @Element(required=false)
     private String gmPerRank;
