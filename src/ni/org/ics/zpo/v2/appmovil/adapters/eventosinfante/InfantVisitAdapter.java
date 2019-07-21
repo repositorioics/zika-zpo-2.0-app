@@ -21,6 +21,9 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
     private final ZpoV2InfantOphthalmologicEvaluation mZpoV2IOE;
     private final ZpoV2InfantOphtResults mZpoIOER;
     private final ZpoV2Mullen mZpoMullen;
+    private final ZpoV2IndCuidadoFamilia mZpoICF;
+    private final ZpoV2CuestionarioDemografico mZpoCDemo;
+    private final ZpoV2CuestSaludInfantil mZpoCuestSaInf;
 
 	public InfantVisitAdapter(Context context, int textViewResourceId,
                               String[] values,
@@ -28,7 +31,10 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
                               ZpoV2InfantOtoacousticEmissions mZpo07OtoE,
                               ZpoV2InfantOphthalmologicEvaluation mZpoV2IOE,
                               ZpoV2InfantOphtResults mZpoIOER,
-                              ZpoV2Mullen mZpoMullen) {
+                              ZpoV2Mullen mZpoMullen,
+                              ZpoV2IndCuidadoFamilia mZpoICF,
+                              ZpoV2CuestionarioDemografico zpoCDemo,
+                              ZpoV2CuestSaludInfantil zpoCSI) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
@@ -37,6 +43,9 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
         this.mZpoV2IOE = mZpoV2IOE;
         this.mZpoIOER = mZpoIOER;
         this.mZpoMullen = mZpoMullen;
+        this.mZpoICF = mZpoICF;
+        this.mZpoCDemo = zpoCDemo;
+        this.mZpoCuestSaInf = zpoCSI;
 	}
 
 	@Override
@@ -55,7 +64,39 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
 		// Change icon based on position
 		Drawable img = null;
 		switch (position) {
+            case 0:
+                if (mZpoCDemo!=null){
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+                }else{
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+                }
+                img=getContext().getResources().getDrawable( R.drawable.ic_demo_update);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
+            case 1:
+                if(mZpoCuestSaInf!=null){
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+                }
+                else{
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+                }
+                img=getContext().getResources().getDrawable( R.drawable.ic_child_health_upd);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
 
+            case 2:
+                if(mZpoICF!=null){
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+                }
+                else{
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+                }
+                img=getContext().getResources().getDrawable( R.drawable.ic_icf);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
             case 3:
                 if(mZpoV2Muestra!=null){
                     textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));

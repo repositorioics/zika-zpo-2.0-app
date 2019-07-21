@@ -20,14 +20,12 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2ActCuestSaludInfantilActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2EdadesEtapasActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2InfantAssessmentVisitPsyActivity;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantCallAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2EdadesEtapas;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2InfantPsychologicalEvaluation;
+import ni.org.ics.zpo.v2.appmovil.domain.*;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
@@ -51,6 +49,7 @@ public class InfantCallActivity extends AbstractAsyncActivity {
 
     private static ZpoV2InfantPsychologicalEvaluation zp07 = null;
     private static ZpoV2EdadesEtapas zpoEE = null;
+    private static ZpoV2CuestSaludInfantil zpoCuestSaInf;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -91,14 +90,14 @@ public class InfantCallActivity extends AbstractAsyncActivity {
 				arguments.putString(Constants.EVENT, evento);
                 arguments.putString(Constants.RECORDID, zpInfante.getRecordId());
 				switch(position){
-                /*case 0: //EVALUACION
+                case 0: //ACTUALIZACION CUESTIONARIO SALUD INFANTIL
                 	i = new Intent(getApplicationContext(),
-                			NewZpo07InfantAssessmentVisitActivity.class);
-                    if (zp07!=null) arguments.putSerializable(Constants.OBJECTO_ZP07 , zp07);
+                			NewZpoV2ActCuestSaludInfantilActivity.class);
+                    if (zpoCuestSaInf!=null) arguments.putSerializable(Constants.OBJECT_CUEST_SA_INF , zpoCuestSaInf);
 					i.putExtras(arguments);
 					startActivity(i);
 					break;
-					case 1: //EVALUACION OFTALMOLOGICA
+				/*	case 1: //EVALUACION OFTALMOLOGICA
 						i = new Intent(getApplicationContext(),
 								NewZpo07InfantAssessmentVisitOphtActivity.class);
 						if (zp07 != null) arguments.putSerializable(Constants.OBJECTO_ZP07, zp07);
@@ -285,8 +284,9 @@ public class InfantCallActivity extends AbstractAsyncActivity {
 					filtro = MainDBConstants.recordId + "='" + zpInfante.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
 					zp07 = zipA.getZpoV2InfantPsychologicalEvaluation(filtro, MainDBConstants.recordId);
 					zpoEE = zipA.getZpoV2EdadesEtapas(filtro, MainDBConstants.recordId);
+					zpoCuestSaInf = zipA.getZpoV2CuestSaludInf(filtro, MainDBConstants.recordId);
 
-					if (zp07!=null && zpoEE != null){
+					if (zp07!=null && zpoEE != null && zpoCuestSaInf != null){
 						if(eventoaFiltrar.matches(Constants.MONTH30)){
 							zpEstado.setMes30('1');
 						}
@@ -314,7 +314,7 @@ public class InfantCallActivity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new InfantCallAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoEE));
+				gridView.setAdapter(new InfantCallAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoEE, zpoCuestSaInf));
 				dismissProgressDialog();
 			}
 

@@ -51,8 +51,6 @@
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.MenuMadresActivity"
                   android:screenOrientation="portrait" />
-        <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosmadre.IngresoActivity"
-                  android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosmadre.MotherVisitActivity"
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosmadre.MotherCallActivity"
@@ -68,8 +66,6 @@
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantVisit4860Activity"
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantVisit7284Activity"
-                  android:screenOrientation="portrait" />
-        <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.InfantEntryActivity"
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.MenuControlConsentimientosActivity"
                   android:screenOrientation="portrait" />
@@ -95,7 +91,26 @@
                   android:screenOrientation="portrait" />
         <activity android:name=".activities.nuevos.NewZpoV2EdadesEtapasActivity"
                   android:screenOrientation="portrait" />
-
+        <activity android:name=".activities.nuevos.NewZpoV2IndCuidadoFamiliaActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2CuestDemograficoActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.paginas.eventosinfante.InfantEntryActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2ActCuestDemogActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2CuestSaludInfantilActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2ActCuestSaludInfantilActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2CuestSaludMaternaActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosmadre.IngresoActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2ActCuestSaludMaternaActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2CuestSocioeconomicoActivity"
+                  android:screenOrientation="portrait" />
 
     </application>
 

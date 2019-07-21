@@ -25,7 +25,7 @@ public class DownloadAllTask extends DownloadTask {
 	
 	protected static final String TAG = DownloadAllTask.class.getSimpleName();
 	private ZpoAdapter zpoA = null;
-    private static final String TOTAL_TASK = "12";
+    private static final String TOTAL_TASK = "17";
 
     private List<ZpoDatosEmbarazada> mDatosEmb = null;
     private List<Zpo00Screening> mTamizajes = null;
@@ -39,6 +39,11 @@ public class DownloadAllTask extends DownloadTask {
     private List<ZpoV2InfantOtoacousticEmissions> mOtoacusEms = null;
     private List<ZpoV2InfantOphtResults> mAInfantOphtResult = null;
     private List<ZpoV2EdadesEtapas> mEdadesEtapas = null;
+    private List<ZpoV2IndCuidadoFamilia> mIndCuidadoFam = null;
+    private List<ZpoV2CuestionarioDemografico> mCuestDemo = null;
+    private List<ZpoV2CuestSaludInfantil> mCuestSaInf = null;
+    private List<ZpoV2CuestionarioSaludMaterna> mCuestSaMat = null;
+    private List<ZpoV2CuestionarioSocioeconomico> mCuestSocioeco = null;
 
 
     public static final int DAT_MADRE = 1;
@@ -53,6 +58,12 @@ public class DownloadAllTask extends DownloadTask {
     public static final int OFTA_EVAL = 10;
     public static final int PSICO_EVAL = 11;
     public static final int EDADES_ETAPAS = 12;
+    public static final int IND_CUI_FAM = 13;
+    public static final int CUEST_DEMO = 14;
+    public static final int CUEST_SA_INF = 15;
+    public static final int CUEST_SA_MAT = 16;
+    public static final int CUEST_SOE = 17;
+
     
 	private String error = null;
 	private String url = null;
@@ -92,6 +103,11 @@ public class DownloadAllTask extends DownloadTask {
         zpoA.borrarZpoV2InfantPsychologicalEvaluation();
         zpoA.borrarZpoV2InfantOphtResults();
         zpoA.borrarZpoV2EdadesEtapas();
+        zpoA.borrarZpoV2IndCuidadoFam();
+        zpoA.borrarZpoV2CuestDemo();
+        zpoA.borrarZpoV2CuestSaludInfantil();
+        zpoA.borrarZpoV2CuestSaludMaterna();
+        zpoA.borrarZpoV2CuestSocioeco();
         try {
 
             if (mDatosEmb != null){
@@ -204,6 +220,57 @@ public class DownloadAllTask extends DownloadTask {
                 while (iter.hasNext()) {
                     zpoA.crearZpoV2EdadesEtapas( iter.next() );
                     publishProgress( "Insertando tamizaje Edades y Etapas...", Integer.valueOf( iter.nextIndex() ).toString(), Integer
+                            .valueOf( v ).toString() );
+                }
+            }
+
+            if (mIndCuidadoFam != null) {
+                v = mIndCuidadoFam.size();
+                ListIterator<ZpoV2IndCuidadoFamilia> iter = mIndCuidadoFam.listIterator();
+                while (iter.hasNext()) {
+                    zpoA.crearZpoV2IndCuidadoFamilia(iter.next());
+                    publishProgress( "Insertando Encuestas de Indicadores del Cuidado de la Familia...", Integer.valueOf( iter.nextIndex() ).toString(), Integer
+                            .valueOf( v ).toString() );
+                }
+            }
+
+            if (mCuestDemo != null) {
+                v = mCuestDemo.size();
+                ListIterator<ZpoV2CuestionarioDemografico> iter = mCuestDemo.listIterator();
+                while (iter.hasNext()) {
+                    zpoA.crearZpoV2CuestDemografico(iter.next());
+                    publishProgress( "Insertando Cuestionarios Demográficos...", Integer.valueOf( iter.nextIndex() ).toString(), Integer
+                            .valueOf( v ).toString() );
+                }
+            }
+
+            if (mCuestSaInf != null) {
+                v = mCuestSaInf.size();
+                ListIterator<ZpoV2CuestSaludInfantil> iter = mCuestSaInf.listIterator();
+                while (iter.hasNext()) {
+                    zpoA.crearZpoV2CuestSaludInfantil(iter.next());
+                    publishProgress( "Insertando Cuestionarios de Salud Infantil...", Integer.valueOf( iter.nextIndex() ).toString(), Integer
+                            .valueOf( v ).toString() );
+                }
+            }
+
+            if (mCuestSaMat != null) {
+                v = mCuestSaMat.size();
+                ListIterator<ZpoV2CuestionarioSaludMaterna> iter = mCuestSaMat.listIterator();
+                while (iter.hasNext()) {
+                    zpoA.crearZpoV2CuestSaludMaterna(iter.next());
+                    publishProgress( "Insertando Cuestionarios de Salud Materna...", Integer.valueOf( iter.nextIndex() ).toString(), Integer
+                            .valueOf( v ).toString() );
+                }
+            }
+
+
+            if (mCuestSocioeco != null) {
+                v = mCuestSocioeco.size();
+                ListIterator<ZpoV2CuestionarioSocioeconomico> iter = mCuestSocioeco.listIterator();
+                while (iter.hasNext()) {
+                    zpoA.crearZpoV2CuestSocioeco(iter.next());
+                    publishProgress( "Insertando Cuestionarios Socioeconomicos...", Integer.valueOf( iter.nextIndex() ).toString(), Integer
                             .valueOf( v ).toString() );
                 }
             }
@@ -341,6 +408,54 @@ public class DownloadAllTask extends DownloadTask {
                     ZpoV2EdadesEtapas[].class, username);
             // convert the array to a list and return it
             mEdadesEtapas = Arrays.asList(responseZpoEE.getBody());
+
+            //Descargar encuestas de indicadores de cuidado de familia
+            urlRequest = url + "/movil/zpoIndCuidadoFams";
+            publishProgress("Solicitando Encuestas de Indicadores de Cuidado de la Familia",String.valueOf(IND_CUI_FAM),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2IndCuidadoFamilia[]> responseZpoIndCuidadoFam = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2IndCuidadoFamilia[].class, username);
+            // convert the array to a list and return it
+            mIndCuidadoFam = Arrays.asList(responseZpoIndCuidadoFam.getBody());
+
+            //Descargar cuestionarios demograficos
+            urlRequest = url + "/movil/zpoCuestDemograficos";
+            publishProgress("Solicitando Cuestionarios Demográficos ",String.valueOf(CUEST_DEMO),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2CuestionarioDemografico[]> responseZpoCuestDemo = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2CuestionarioDemografico[].class, username);
+            // convert the array to a list and return it
+            mCuestDemo = Arrays.asList(responseZpoCuestDemo.getBody());
+
+
+            //Descargar cuestionarios de Salud Infantil
+            urlRequest = url + "/movil/zpoCuestSaludInfantil";
+            publishProgress("Solicitando Cuestionarios de Salud Infantil ",String.valueOf(CUEST_SA_INF),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2CuestSaludInfantil[]> responseZpoCuestSaInf = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2CuestSaludInfantil[].class, username);
+            // convert the array to a list and return it
+            mCuestSaInf = Arrays.asList(responseZpoCuestSaInf.getBody());
+
+            //Descargar cuestionarios de Salud Materna
+            urlRequest = url + "/movil/zpoCuestSaludMaterna";
+            publishProgress("Solicitando Cuestionarios de Salud Materna ",String.valueOf(CUEST_SA_MAT),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2CuestionarioSaludMaterna[]> responseZpoCuestSaMat = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2CuestionarioSaludMaterna[].class, username);
+            // convert the array to a list and return it
+            mCuestSaMat = Arrays.asList(responseZpoCuestSaMat.getBody());
+
+            //Descargar cuestionarios socioeconomicos
+            urlRequest = url + "/movil/zpoCuestSocioecs";
+            publishProgress("Solicitando Cuestionarios Socioeconomicos ",String.valueOf(CUEST_SOE),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2CuestionarioSocioeconomico[]> responseZpoCuestSocioeco = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2CuestionarioSocioeconomico[].class, username);
+            // convert the array to a list and return it
+            mCuestSocioeco = Arrays.asList(responseZpoCuestSocioeco.getBody());
+
+
             return null;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);

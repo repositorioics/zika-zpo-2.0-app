@@ -10,17 +10,29 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestionarioSaludMaterna;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestionarioSocioeconomico;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
 
 public class IngresoAdapter extends ArrayAdapter<String> {
 
     private final Context context;
     private final String[] values;
 
+    private final ZpoV2CuestionarioSaludMaterna mZpoV2CuestSaMat;
+    private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
+    private final ZpoV2CuestionarioSocioeconomico mZpoV2CuestSoe;
+
     public IngresoAdapter(Context context, int textViewResourceId,
-                          String[] values) {
-        super(context, textViewResourceId, values);
+                          String[] values, ZpoV2CuestionarioSaludMaterna zpoCuestSaMat,
+                          ZpoV2CuestionarioSocioeconomico zpoV2CuestSoe,
+                          ZpoV2RecoleccionMuestra zpoMuestra) {
+        super( context, textViewResourceId, values );
         this.context = context;
         this.values = values;
+        this.mZpoV2CuestSaMat = zpoCuestSaMat;
+        this.mZpoV2CuestSoe = zpoV2CuestSoe;
+        this.mZpoV2Muestra = zpoMuestra;
     }
 
     @Override
@@ -40,7 +52,34 @@ public class IngresoAdapter extends ArrayAdapter<String> {
         Drawable img = null;
         switch (position){
             case 0:
-                img=getContext().getResources().getDrawable( R.drawable.ic_demog);
+                if (mZpoV2CuestSaMat!=null){
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+                }else{
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+                }
+                img=getContext().getResources().getDrawable( R.drawable.ic_women_health);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
+
+            case 1:
+                if (mZpoV2CuestSoe!=null){
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+                }else{
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+                }
+                img=getContext().getResources().getDrawable( R.drawable.ic_socioec);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
+            case 2:
+                if (mZpoV2Muestra!=null){
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+                }else{
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+                }
+                img=getContext().getResources().getDrawable( R.drawable.ic_sample);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
             default:

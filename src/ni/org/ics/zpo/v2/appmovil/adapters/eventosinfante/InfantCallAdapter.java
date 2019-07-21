@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestSaludInfantil;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2EdadesEtapas;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2InfantPsychologicalEvaluation;
 
@@ -18,14 +19,16 @@ public class InfantCallAdapter extends ArrayAdapter<String> {
 	private final Context context;
 	private final String[] values;
     private final ZpoV2EdadesEtapas mZpoV2EE;
+    private final ZpoV2CuestSaludInfantil mZpoV2CSI;
 
 	public InfantCallAdapter(Context context, int textViewResourceId,
                              String[] values,
-                             ZpoV2EdadesEtapas mZpoV2EE) {
+                             ZpoV2EdadesEtapas mZpoV2EE, ZpoV2CuestSaludInfantil zpoV2CSI) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
         this.mZpoV2EE = mZpoV2EE;
+        this.mZpoV2CSI = zpoV2CSI;
 	}
 
 	@Override
@@ -46,8 +49,15 @@ public class InfantCallAdapter extends ArrayAdapter<String> {
 		switch (position) {
 
             case 0:
-                img = getContext().getResources().getDrawable(R.drawable.ic_monthly);
-                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+				if(mZpoV2CSI !=null){
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+				}
+				else{
+					textView.setTextColor(Color.RED);
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+				}
+				img=getContext().getResources().getDrawable( R.drawable.ic_child_health_upd);
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
             case 1:
                 if(mZpoV2EE !=null){

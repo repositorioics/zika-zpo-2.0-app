@@ -48,6 +48,11 @@ public class Constants {
 	public static final String OBJECTO_ZP04AF = "zp04af";
 	public static final String OBJECTO_ZPOMULLEN = "zpoMullen";
 	public static final String OBJECT_ZPOEDADESETAPAS = "zpoEdadesEtapas";
+	public static final String OBJECT_INDCUIFAM = "zpoIndCuidadoFamilia";
+	public static final String OBJECT_CUEST_DEMO = "zpoCuestDemografico";
+	public static final String OBJECT_CUEST_SA_INF = "zpoCuestSaludInfantil";
+	public static final String OBJECT_CUEST_SA_MAT = "zpoCuestSaludMaterna";
+	public static final String OBJECT_CUEST_SOE = "zpoCuestSocioeconomico";
 
 	public static final String OBJECTO_ZPEST = "zpestado";
 	public static final String OBJECTO_ZPDATA = "zpdatos";

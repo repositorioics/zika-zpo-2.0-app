@@ -25,7 +25,7 @@ public class UploadAllTask extends UploadTask {
 	}
 
 	protected static final String TAG = UploadAllTask.class.getSimpleName();
-    private static final String TOTAL_TASK = "12";
+    private static final String TOTAL_TASK = "17";
 	private ZpoAdapter zpoA = null;
 
     private List<Zpo00Screening> mTamizajes = new ArrayList<Zpo00Screening>();
@@ -40,6 +40,11 @@ public class UploadAllTask extends UploadTask {
     private List<ZpoV2InfantOphtResults> mAInfantOphtResults = new ArrayList<ZpoV2InfantOphtResults>();
     private List<ZpoControlConsentimientosRecepcion> mRecepcionesCons = new ArrayList<ZpoControlConsentimientosRecepcion>();
     private List<ZpoV2EdadesEtapas> mEdadesEtapas = new ArrayList<ZpoV2EdadesEtapas>();
+    private List<ZpoV2IndCuidadoFamilia> mIndCuidadoFam = new ArrayList<ZpoV2IndCuidadoFamilia>();
+    private List<ZpoV2CuestionarioDemografico> mCuestDemo = new ArrayList<ZpoV2CuestionarioDemografico>();
+    private List<ZpoV2CuestSaludInfantil> mCuestSaInf = new ArrayList<ZpoV2CuestSaludInfantil>();
+    private List<ZpoV2CuestionarioSaludMaterna> mCuestSaMat = new ArrayList<ZpoV2CuestionarioSaludMaterna>();
+    private List<ZpoV2CuestionarioSocioeconomico> mCuestSocie = new ArrayList<ZpoV2CuestionarioSocioeconomico>();
 
 	private String url = null;
 	private String username = null;
@@ -59,6 +64,11 @@ public class UploadAllTask extends UploadTask {
     public static final int OFTA_EVAL = 10;
     public static final int PSICO_EVAL = 11;
     public static final int EDADES_ETAPAS = 12;
+    public static final int IND_CUIDADO_FAM = 13;
+    public static final int CUEST_DEMO = 14;
+    public static final int CUEST_SA_INF = 15;
+    public static final int CUEST_SA_MAT = 16;
+    public static final int CUEST_SOE = 17;
 
 
     @Override
@@ -85,6 +95,11 @@ public class UploadAllTask extends UploadTask {
             mAInfantOphtResults = zpoA.getZpoV2InfantOphtResults(filtro, MainDBConstants.recordId);
             mRecepcionesCons = zpoA.getZpoControlConsentimientosRecepciones(filtro, null);
             mEdadesEtapas = zpoA.getZpoV2EEs(filtro,null);
+            mIndCuidadoFam = zpoA.getZpoV2IndCuidadoFams(filtro, null);
+            mCuestDemo = zpoA.getZpoV2CuestDemograficos( filtro, null);
+            mCuestSaInf = zpoA.getZpoV2CuestSaludInfantils( filtro, null);
+            mCuestSaMat = zpoA.getZpoV2CuestSaludMats( filtro, null);
+            mCuestSocie = zpoA.getZpoV2CuestSocioecos(filtro, null);
 
 			publishProgress("Datos completos!", "2", "2");
             actualizarBaseDatos(Constants.STATUS_SUBMITTED, TAMIZAJE);
@@ -159,6 +174,40 @@ public class UploadAllTask extends UploadTask {
                 actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, EDADES_ETAPAS);
                 return error;
             }
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, IND_CUIDADO_FAM);
+            error = uploadIndCuidadoFam(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, IND_CUIDADO_FAM);
+                return error;
+            }
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, CUEST_DEMO);
+            error = uploadCuestDemo(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, CUEST_DEMO);
+                return error;
+            }
+
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, CUEST_SA_INF);
+            error = uploadCuestSaInf(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, CUEST_SA_INF);
+                return error;
+            }
+
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, CUEST_SA_MAT);
+            error = uploadCuestSaMat(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, CUEST_SA_MAT);
+                return error;
+            }
+
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, CUEST_SOE);
+            error = uploadCuestSocioeco(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, CUEST_SOE);
+                return error;
+            }
+
             zpoA.close();
 		} catch (Exception e1) {
 			zpoA.close();
@@ -259,6 +308,68 @@ public class UploadAllTask extends UploadTask {
                }
            }
        }
+       else if(opcion==IND_CUIDADO_FAM){
+           c = mIndCuidadoFam.size();
+           if(c>0){
+               for (ZpoV2IndCuidadoFamilia icf : mIndCuidadoFam) {
+                   icf.setEstado(estado);
+                   zpoA.editarZpoV2IndCuidadoFam(icf);
+                   publishProgress("Actualizando Encuestas de Indicadores de la Familia de base de datos local", Integer.valueOf(mIndCuidadoFam.indexOf(icf)).toString(), Integer
+                           .valueOf(c).toString());
+               }
+           }
+       }
+
+       else if(opcion==CUEST_DEMO){
+           c = mCuestDemo.size();
+           if(c>0){
+               for (ZpoV2CuestionarioDemografico cDemo : mCuestDemo) {
+                   cDemo.setEstado(estado);
+                   zpoA.editarZpoV2CuestDemo(cDemo);
+                   publishProgress("Actualizando Cuestionarios Demográficos de base de datos local", Integer.valueOf(mCuestDemo.indexOf(cDemo)).toString(), Integer
+                           .valueOf(c).toString());
+               }
+           }
+       }
+
+
+       else if(opcion==CUEST_SA_INF){
+           c = mCuestSaInf.size();
+           if(c>0){
+               for (ZpoV2CuestSaludInfantil cSaInf : mCuestSaInf) {
+                   cSaInf.setEstado(estado);
+                   zpoA.editarZpoV2CuestSaludInfantil(cSaInf);
+                   publishProgress("Actualizando Cuestionarios de Salud Infantil de base de datos local", Integer.valueOf(mCuestSaInf.indexOf(cSaInf)).toString(), Integer
+                           .valueOf(c).toString());
+               }
+           }
+       }
+
+
+       else if(opcion==CUEST_SA_MAT){
+           c = mCuestSaMat.size();
+           if(c>0){
+               for (ZpoV2CuestionarioSaludMaterna cSaMat : mCuestSaMat) {
+                   cSaMat.setEstado(estado);
+                   zpoA.editarZpoV2CuestSaludMaterna(cSaMat);
+                   publishProgress("Actualizando Cuestionarios de Salud Materna de base de datos local", Integer.valueOf( mCuestSaMat.indexOf(cSaMat)).toString(), Integer
+                           .valueOf(c).toString());
+               }
+           }
+       }
+
+       else if(opcion==CUEST_SOE){
+           c = mCuestSocie.size();
+           if(c>0){
+               for (ZpoV2CuestionarioSocioeconomico cSoe : mCuestSocie) {
+                   cSoe.setEstado(estado);
+                   zpoA.editarZpoV2CuestSocioeco(cSoe);
+                   publishProgress("Actualizando Cuestionarios Socioeconomicos de base de datos local", Integer.valueOf( mCuestSocie.indexOf(cSoe)).toString(), Integer
+                           .valueOf(c).toString());
+               }
+           }
+       }
+
     }
 
 
@@ -669,6 +780,185 @@ public class UploadAllTask extends UploadTask {
                 requestHeaders.setAuthorization(authHeader);
                 HttpEntity<ZpoV2EdadesEtapas[]> requestEntity =
                         new HttpEntity<ZpoV2EdadesEtapas[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
+
+    /***************************************************/
+    /********************* ZpoV2IndicadoresCuidadoFamilia******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadIndCuidadoFam(String url, String username,
+                                        String password) throws Exception {
+        try {
+            if(mIndCuidadoFam.size()>0){
+                publishProgress("Enviando Encuestas de Indicadores del Cuidado de la Familia!", String.valueOf(IND_CUIDADO_FAM), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/saveZpoIndCuidadoFams";
+                ZpoV2IndCuidadoFamilia[] envio = mIndCuidadoFam.toArray(new ZpoV2IndCuidadoFamilia[mIndCuidadoFam.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2IndCuidadoFamilia[]> requestEntity =
+                        new HttpEntity<ZpoV2IndCuidadoFamilia[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
+
+    /***************************************************/
+    /********************* ZpoV2CuestionarioDemografico******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadCuestDemo(String url, String username,
+                                         String password) throws Exception {
+        try {
+            if(mCuestDemo.size()>0){
+                publishProgress("Enviando Cuestionarios Demográficos!", String.valueOf(CUEST_DEMO), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/saveCuestDemograficos";
+                ZpoV2CuestionarioDemografico[] envio = mCuestDemo.toArray(new ZpoV2CuestionarioDemografico[mCuestDemo.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2CuestionarioDemografico[]> requestEntity =
+                        new HttpEntity<ZpoV2CuestionarioDemografico[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
+
+    /***************************************************/
+    /********************* ZpoV2CuestSaludInfantil******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadCuestSaInf(String url, String username,
+                                     String password) throws Exception {
+        try {
+            if(mCuestSaInf.size()>0){
+                publishProgress("Enviando Cuestionarios de Salud Infantil!", String.valueOf(CUEST_SA_INF), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/saveZpoCuestSaludInfantil";
+                ZpoV2CuestSaludInfantil[] envio = mCuestSaInf.toArray(new ZpoV2CuestSaludInfantil[mCuestSaInf.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2CuestSaludInfantil[]> requestEntity =
+                        new HttpEntity<ZpoV2CuestSaludInfantil[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
+
+    /***************************************************/
+    /********************* ZpoV2CuestionarioSaludMaterna******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadCuestSaMat(String url, String username,
+                                      String password) throws Exception {
+        try {
+            if(mCuestSaMat.size()>0){
+                publishProgress("Enviando Cuestionarios de Salud Materna!", String.valueOf(CUEST_SA_MAT), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/saveZpoCuestSaludMaterna";
+                ZpoV2CuestionarioSaludMaterna[] envio = mCuestSaMat.toArray(new ZpoV2CuestionarioSaludMaterna[mCuestSaMat.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2CuestionarioSaludMaterna[]> requestEntity =
+                        new HttpEntity<ZpoV2CuestionarioSaludMaterna[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
+    /***************************************************/
+    /********************* ZpoV2CuestionarioSocioeconomico******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadCuestSocioeco(String url, String username,
+                                      String password) throws Exception {
+        try {
+            if(mCuestSocie.size()>0){
+                publishProgress("Enviando Cuestionarios Socieconomicos!", String.valueOf(CUEST_SOE), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/saveCuestSocioecs";
+                ZpoV2CuestionarioSocioeconomico[] envio = mCuestSocie.toArray(new ZpoV2CuestionarioSocioeconomico[mCuestSocie.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2CuestionarioSocioeconomico[]> requestEntity =
+                        new HttpEntity<ZpoV2CuestionarioSocioeconomico[]>(envio, requestHeaders);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
                 restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());

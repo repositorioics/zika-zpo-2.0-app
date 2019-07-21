@@ -33,7 +33,7 @@ import java.util.Date;
  */
 public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
 
-    protected static final String TAG = NewZpo00ScreeningActivity.class.getSimpleName();
+    protected static final String TAG = NewZpoV2MullenActivity.class.getSimpleName();
 
     private ZpoAdapter zpoA;
     private static ZpoV2Mullen mZpoV2Mullen = new ZpoV2Mullen();

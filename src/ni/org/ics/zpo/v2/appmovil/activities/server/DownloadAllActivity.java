@@ -42,7 +42,7 @@ public class DownloadAllActivity extends Activity implements DownloadListener{
 				+ getString(R.string.download));
 
 		if (!FileUtils.storageReady()) {
-			Toast toast = Toast.makeText(getApplicationContext(),getString(R.string.error, R.string.storage_error),Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(getApplicationContext(),getString(R.string.error) + "," +  getString(R.string.storage_error),Toast.LENGTH_LONG);
 			toast.show();
 			setResult(RESULT_CANCELED);
 			finish();

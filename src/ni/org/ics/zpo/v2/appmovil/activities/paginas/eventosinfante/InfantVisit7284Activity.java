@@ -20,14 +20,10 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
-import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoInfantOtoacousticEmissionsActivity;
-import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.*;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantVisit7284Adapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2InfantOtoacousticEmissions;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
+import ni.org.ics.zpo.v2.appmovil.domain.*;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
@@ -38,6 +34,9 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 	private ZpoAdapter zipA;
 	private static ZpoInfantData zpInfante = new ZpoInfantData();
 	private static ZpoEstadoInfante zpEstado = new ZpoEstadoInfante();
+	private static ZpoV2IndCuidadoFamilia zpoICF = new ZpoV2IndCuidadoFamilia();
+	private static ZpoV2CuestionarioDemografico zpoCDemo = new ZpoV2CuestionarioDemografico();
+	private static ZpoV2CuestSaludInfantil zpoCSaInf = new ZpoV2CuestSaludInfantil();
 
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
 	private static String evento;
@@ -91,7 +90,27 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 				Intent i;
 				arguments.putString(Constants.EVENT, evento);
                 arguments.putString(Constants.RECORDID, zpInfante.getRecordId());
-				switch(position){ 
+				switch(position){
+					case 0: //ACTUALIZACION CUESTIONARIO DEMOGRAFICO
+						i = new Intent(getApplicationContext(),
+								NewZpoV2ActCuestDemogActivity.class);
+						if (zpoCDemo!=null) arguments.putSerializable(Constants.OBJECT_CUEST_DEMO , zpoCDemo);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;
+					case 1: //ACTUALIZACION CUESTIONARIO SALUND INFANTIL
+						i = new Intent(getApplicationContext(),
+								NewZpoV2ActCuestSaludInfantilActivity.class);
+						if (zpoCSaInf!=null) arguments.putSerializable(Constants.OBJECT_CUEST_SA_INF , zpoCSaInf);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;
+					case 2:
+						i = new Intent( getApplicationContext(), NewZpoV2IndCuidadoFamiliaActivity.class);
+						if (zpoICF != null) arguments.putSerializable(Constants.OBJECT_INDCUIFAM, zpoICF);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;
 /*                case 0: //EVALUACION
                 	i = new Intent(getApplicationContext(),
                 			NewZpo07InfantAssessmentVisitActivity.class);
@@ -293,16 +312,12 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 					zipA.open();
 					filtro = MainDBConstants.recordId + "='" + zpInfante.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
 					zpoV2Muestra = zipA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
-					/*zp07 = zipA.getZpo07InfantAssessmentVisit(filtro, MainDBConstants.recordId);
-					zp07a = zipA.getZpoV2InfantOphtResult(filtro, MainDBConstants.recordId);
-					zp07b = zipA.getZpo07bInfantAudioResult(filtro, MainDBConstants.recordId);
-					zp07c = zipA.getZpo07cInfantImageSt(filtro, MainDBConstants.recordId);
-					zp07d = zipA.getZpo07dInfantBayleySc(filtro, MainDBConstants.recordId);
-					*/
-                    zpoOtoE = zipA.getZpoInfantOtoacousticE(filtro, MainDBConstants.recordId);
-					//zp04AF = zipA.getZpo04ExtendedSectionAtoF( filtro, MainDBConstants.recordId);
+					zpoICF = zipA.getZpoV2IndCuidadoFam(filtro, MainDBConstants.recordId);
+					zpoOtoE = zipA.getZpoInfantOtoacousticE(filtro, MainDBConstants.recordId);
+					zpoCDemo = zipA.getZpoV2CuestDemo(filtro, MainDBConstants.recordId);
+					zpoCSaInf = zipA.getZpoV2CuestSaludInf(filtro, MainDBConstants.recordId);
 
-					if (zpoV2Muestra !=null && zpoOtoE!=null) {// && zp07!=null && zp07a!=null && zp07b!=null && zp07c!=null && zp07d!=null && zpoOtoE!=null && zp04AF!=null){
+					if (zpoV2Muestra !=null && zpoOtoE!=null && zpoCDemo!=null && zpoCSaInf!=null) {// && zp07!=null && zp07a!=null && zp07b!=null && zp07c!=null && zp07d!=null && zpoOtoE!=null && zp04AF!=null){
 						if(eventoaFiltrar.matches(Constants.MONTH72)){
 							zpEstado.setMes72('1');
 						}
@@ -321,7 +336,7 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new InfantVisit7284Adapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra, zpoOtoE));
+				gridView.setAdapter(new InfantVisit7284Adapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra, zpoOtoE, zpoICF, zpoCDemo, zpoCSaInf));
 				dismissProgressDialog();
 			}
 

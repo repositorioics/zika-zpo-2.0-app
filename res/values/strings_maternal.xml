@@ -2,8 +2,8 @@
 <resources>
     <!-- Eventos -->
     <string name="maternal_events">Matriz de eventos para madres</string>
-    <string name="maternal_a_1">Ingreso</string>
-    <string name="maternal_a_2">24 Meses</string>
+    <!--<string name="maternal_a_1">Ingreso</string>-->
+    <string name="maternal_a_2">Ingreso</string>
     <string name="maternal_a_3">30 Meses</string>
     <string name="maternal_a_4">36 Meses</string>
     <string name="maternal_a_5">42 Meses</string>
@@ -16,10 +16,10 @@
     <string name="maternal_a_12">84 Meses</string>
     <string name="maternal_a_13">Salida</string>
     <!-- Formularios -->
-    <string name="maternal_b_1">Cuestionario materno</string>
-    <string name="maternal_b_2">Examen Físico</string>
+    <string name="maternal_b_1">Cuestionario Salud Materna</string>
+    <string name="maternal_b_2">Actualización Cuestionario Salud Materna</string>
     <string name="maternal_b_3">Muestras</string>
-    <string name="maternal_b_4">Estado Socioeconómico del Hogar</string>
+    <string name="maternal_b_4">Cuestionario Socioeconómico del Hogar</string>
 
     
     <string name="mat_search">Buscar Madre</string>

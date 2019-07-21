@@ -20,12 +20,12 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2ActCuestSaludMaternaActivity;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2CuestSocioeconomicoActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre.VisitAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
-import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoEmbarazada;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
+import ni.org.ics.zpo.v2.appmovil.domain.*;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
@@ -36,6 +36,8 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 	private static Zpo00Screening zp00 = new Zpo00Screening();
 	private static ZpoEstadoEmbarazada zpEstado = new ZpoEstadoEmbarazada();
     private static ZpoV2RecoleccionMuestra zpoV2Muestra= null;
+	private static ZpoV2CuestionarioSaludMaterna zpoV2CuestSaMat= null;
+	private static ZpoV2CuestionarioSocioeconomico zpoV2CuestSoe = null;
 
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
 	private static String evento;
@@ -87,6 +89,21 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 				arguments.putString(Constants.EVENT, evento);
                 arguments.putString(Constants.RECORDID, zp00.getRecordId());
 				switch(position){
+					case 0: //ACTUALIZACION CUESTIONARIO SALUD MATERNA
+						i = new Intent(getApplicationContext(),
+								NewZpoV2ActCuestSaludMaternaActivity.class);
+						if (zpoV2CuestSaMat!=null) arguments.putSerializable(Constants.OBJECT_CUEST_SA_MAT , zpoV2CuestSaMat);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;
+
+					case 1: // CUESTIONARIO SOCIECONOMIGO DEL HOGAR
+						i = new Intent(getApplicationContext(),
+								NewZpoV2CuestSocioeconomicoActivity.class);
+						if (zpoV2CuestSoe!=null) arguments.putSerializable(Constants.OBJECT_CUEST_SOE, zpoV2CuestSoe);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;
                     case 2: //MUESTRAS
                         i = new Intent(getApplicationContext(),
                                 NewZpoV2RecoleccionMuestraActivity.class);
@@ -231,14 +248,32 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 				try {
 					zpoA.open();
 					filtro = MainDBConstants.recordId + "='" + zp00.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
-                    zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
-					if (zpoV2Muestra!=null){
-                        if(eventoaFiltrar.matches(Constants.MONTH24)){
-                            zpEstado.setMes24('1');
-                        }
+					zpoV2CuestSaMat = zpoA.getZpoV2CuestSaludMat(filtro, MainDBConstants.recordId);
+					zpoV2CuestSoe = zpoA.getZpoV2CuestSocieco(filtro, MainDBConstants.recordId);
+					zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
+
+					if (zpoV2CuestSaMat!=null && zpoV2CuestSoe!=null && zpoV2Muestra!= null){
+
                         if(eventoaFiltrar.matches(Constants.MONTH36)){
                             zpEstado.setMes36('1');
                         }
+						if(eventoaFiltrar.matches(Constants.MONTH48)){
+							zpEstado.setMes48('1');
+						}
+
+						if(eventoaFiltrar.matches(Constants.MONTH60)){
+							zpEstado.setMes60('1');
+						}
+
+						if(eventoaFiltrar.matches(Constants.MONTH72)){
+							zpEstado.setMes72('1');
+						}
+
+						if(eventoaFiltrar.matches(Constants.MONTH84)){
+							zpEstado.setMes84('1');
+						}
+
+
 						zpoA.editarZpoEstadoMadre(zpEstado);
 					}
 					zpoA.close();
@@ -251,7 +286,7 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new VisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpoV2Muestra));
+				gridView.setAdapter(new VisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpoV2CuestSaMat, zpoV2CuestSoe, zpoV2Muestra));
 				dismissProgressDialog();
 			}
 

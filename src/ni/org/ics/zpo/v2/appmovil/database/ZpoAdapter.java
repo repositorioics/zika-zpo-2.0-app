@@ -66,6 +66,11 @@ public class ZpoAdapter {
             db.execSQL(ZpoOphthaResDBConstants.CREATE_AINFANT_OPHTRESULTS_TABLE);
             db.execSQL(ZpoV2MullenConstants.CREATE_MULLEN_ADD_TABLE);
             db.execSQL(ZpoV2EdadesEtapasConstants.CREATE_EDADES_ETAPA_TABLE);
+            db.execSQL(ZpoV2IndCuidadoFamConstants.CREATE_ICFAM_TABLE);
+            db.execSQL(ZpoV2CuestDemograficoConstants.CREATE_CDEMO_TABLE);
+            db.execSQL(ZpoV2CuestSaludInfantilConstants.CREATE_CSI_TABLE);
+            db.execSQL(ZpoV2CuestSaludMaternaConstants.CREATE_CSM_TABLE);
+            db.execSQL(ZpoV2CuestSocioeconomicoConstants.CREATE_CSOE_TABLE);
 		}
 
 		@Override
@@ -198,11 +203,23 @@ public class ZpoAdapter {
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoOtoEDBConstants.INFANT_OTO_EMS_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2EdadesEtapasConstants.EDADES_ETAPAS_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2IndCuidadoFamConstants.IND_CFAM_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoOphthaEvalDBConstants.INFANT_OPHTHALMOLOGICEVAL_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoPsychoEvalDBConstants.INFANT_PSYCHOLOGICALEVAL_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2CuestDemograficoConstants.CUEST_DEMO_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2CuestSaludInfantilConstants.CUEST_SAL_INF_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2CuestSaludMaternaConstants.CUEST_SAL_MAT_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2CuestSocioeconomicoConstants.CUEST_SOE_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c.close();
         return false;
@@ -922,4 +939,242 @@ public class ZpoAdapter {
         if (!cursorBC.isClosed()) cursorBC.close();
         return ees;
     }
+
+
+    /**
+     * Metodos para ZpoV2IndicadoresCuidadoFamilia en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2IndicadoresCuidadoFamilia en la base de datos
+    public void crearZpoV2IndCuidadoFamilia(ZpoV2IndCuidadoFamilia icf) {
+        ContentValues cv = ZpoV2IndCuidadoFamHelper.crearZpoV2IndCuidadoFam(icf);
+        mDb.insert(ZpoV2IndCuidadoFamConstants.IND_CFAM_TABLE, null, cv);
+    }
+    //Editar ZpoV2IndicadoresCuidadoFamilia existente en la base de datos
+    public boolean editarZpoV2IndCuidadoFam(ZpoV2IndCuidadoFamilia icf) {
+        ContentValues cv = ZpoV2IndCuidadoFamHelper.crearZpoV2IndCuidadoFam(icf);
+        return mDb.update(ZpoV2IndCuidadoFamConstants.IND_CFAM_TABLE, cv, MainDBConstants.recordId + "='"
+                + icf.getRecordId() + "' and " + MainDBConstants.eventName + "='" + icf.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2IndicadoresCuidadoFamilia de la base de datos
+    public boolean borrarZpoV2IndCuidadoFam() {
+        return mDb.delete(ZpoV2IndCuidadoFamConstants.IND_CFAM_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2IndicadoresCuidadoFamilia de la base de datos
+    public ZpoV2IndCuidadoFamilia getZpoV2IndCuidadoFam(String filtro, String orden) throws SQLException {
+        ZpoV2IndCuidadoFamilia icf = null;
+        Cursor cursorBC = crearCursor(ZpoV2IndCuidadoFamConstants.IND_CFAM_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            icf=ZpoV2IndCuidadoFamHelper.crearZpoV2IndCuidadoFam(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return icf;
+    }
+    //Obtener una lista de ZpoV2IndicadoresCuidadoFamilia de la base de datos
+    public List<ZpoV2IndCuidadoFamilia> getZpoV2IndCuidadoFams(String filtro, String orden) throws SQLException {
+        List<ZpoV2IndCuidadoFamilia> icfs = new ArrayList<ZpoV2IndCuidadoFamilia>();
+        Cursor cursorBC = crearCursor(ZpoV2IndCuidadoFamConstants.IND_CFAM_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            icfs.clear();
+            do{
+                ZpoV2IndCuidadoFamilia icf = null;
+                icf = ZpoV2IndCuidadoFamHelper.crearZpoV2IndCuidadoFam(cursorBC);
+                icfs.add(icf);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return icfs;
+    }
+
+    /**
+     * Metodos para ZpoV2CuestionarioDemografico en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2CuestionarioDemografico en la base de datos
+    public void crearZpoV2CuestDemografico(ZpoV2CuestionarioDemografico cDemo) {
+        ContentValues cv = ZpoV2CuestDemograficoHelper.crearZpoV2CuestDemografico(cDemo);
+        mDb.insert(ZpoV2CuestDemograficoConstants.CUEST_DEMO_TABLE, null, cv);
+    }
+    //Editar ZpoV2CuestionarioDemografico existente en la base de datos
+    public boolean editarZpoV2CuestDemo(ZpoV2CuestionarioDemografico cDemo) {
+        ContentValues cv = ZpoV2CuestDemograficoHelper.crearZpoV2CuestDemografico(cDemo);
+        return mDb.update(ZpoV2CuestDemograficoConstants.CUEST_DEMO_TABLE, cv, MainDBConstants.recordId + "='"
+                + cDemo.getRecordId() + "' and " + MainDBConstants.eventName + "='" + cDemo.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2CuestionarioDemografico de la base de datos
+    public boolean borrarZpoV2CuestDemo() {
+        return mDb.delete(ZpoV2CuestDemograficoConstants.CUEST_DEMO_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2CuestionarioDemografico de la base de datos
+    public ZpoV2CuestionarioDemografico getZpoV2CuestDemo(String filtro, String orden) throws SQLException {
+        ZpoV2CuestionarioDemografico cDemo = null;
+        Cursor cursorBC = crearCursor(ZpoV2CuestDemograficoConstants.CUEST_DEMO_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            cDemo=ZpoV2CuestDemograficoHelper.crearZpoV2CuestDemografico(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return cDemo;
+    }
+    //Obtener una lista de ZpoV2CuestionarioDemografico de la base de datos
+    public List<ZpoV2CuestionarioDemografico> getZpoV2CuestDemograficos(String filtro, String orden) throws SQLException {
+        List<ZpoV2CuestionarioDemografico> cDemos = new ArrayList<ZpoV2CuestionarioDemografico>();
+        Cursor cursorBC = crearCursor(ZpoV2CuestDemograficoConstants.CUEST_DEMO_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            cDemos.clear();
+            do{
+                ZpoV2CuestionarioDemografico cDemo = null;
+                cDemo = ZpoV2CuestDemograficoHelper.crearZpoV2CuestDemografico(cursorBC);
+                cDemos.add(cDemo);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return cDemos;
+    }
+
+
+    /**
+     * Metodos para ZpoV2CuestSaludInfantil en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2CuestSaludInfantil en la base de datos
+    public void crearZpoV2CuestSaludInfantil(ZpoV2CuestSaludInfantil cuestSaInf) {
+        ContentValues cv = ZpoV2CuestSaludInfantilHelper.crearZpoV2CuestSaludInfantil(cuestSaInf);
+        mDb.insert(ZpoV2CuestSaludInfantilConstants.CUEST_SAL_INF_TABLE, null, cv);
+    }
+    //Editar ZpoV2CuestSaludInfantil existente en la base de datos
+    public boolean editarZpoV2CuestSaludInfantil(ZpoV2CuestSaludInfantil cuestSaInf) {
+        ContentValues cv = ZpoV2CuestSaludInfantilHelper.crearZpoV2CuestSaludInfantil(cuestSaInf);
+        return mDb.update(ZpoV2CuestSaludInfantilConstants.CUEST_SAL_INF_TABLE, cv, MainDBConstants.recordId + "='"
+                + cuestSaInf.getRecordId() + "' and " + MainDBConstants.eventName + "='" + cuestSaInf.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2CuestSaludInfantil de la base de datos
+    public boolean borrarZpoV2CuestSaludInfantil() {
+        return mDb.delete(ZpoV2CuestSaludInfantilConstants.CUEST_SAL_INF_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2CuestSaludInfantil de la base de datos
+    public ZpoV2CuestSaludInfantil getZpoV2CuestSaludInf(String filtro, String orden) throws SQLException {
+        ZpoV2CuestSaludInfantil cuestSaInf = null;
+        Cursor cursorBC = crearCursor(ZpoV2CuestSaludInfantilConstants.CUEST_SAL_INF_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            cuestSaInf=ZpoV2CuestSaludInfantilHelper.crearZpoV2CuestSaludInfantil(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return cuestSaInf;
+    }
+    //Obtener una lista de ZpoV2CuestSaludInfantil de la base de datos
+    public List<ZpoV2CuestSaludInfantil> getZpoV2CuestSaludInfantils(String filtro, String orden) throws SQLException {
+        List<ZpoV2CuestSaludInfantil> cuestSI = new ArrayList<ZpoV2CuestSaludInfantil>();
+        Cursor cursorBC = crearCursor(ZpoV2CuestSaludInfantilConstants.CUEST_SAL_INF_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            cuestSI.clear();
+            do{
+                ZpoV2CuestSaludInfantil cuestSaludInf = null;
+                cuestSaludInf = ZpoV2CuestSaludInfantilHelper.crearZpoV2CuestSaludInfantil(cursorBC);
+                cuestSI.add(cuestSaludInf);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return cuestSI;
+    }
+
+    /**
+     * Metodos para ZpoV2CuestionarioSaludMaterna en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2CuestionarioSaludMaterna en la base de datos
+    public void crearZpoV2CuestSaludMaterna(ZpoV2CuestionarioSaludMaterna cuestSaMat) {
+        ContentValues cv = ZpoV2CuestSaludMaternaHelper.crearZpoV2CuestSaludMaterna(cuestSaMat);
+        mDb.insert(ZpoV2CuestSaludMaternaConstants.CUEST_SAL_MAT_TABLE, null, cv);
+    }
+    //Editar ZpoV2CuestionarioSaludMaterna existente en la base de datos
+    public boolean editarZpoV2CuestSaludMaterna(ZpoV2CuestionarioSaludMaterna cuestSaMat) {
+        ContentValues cv = ZpoV2CuestSaludMaternaHelper.crearZpoV2CuestSaludMaterna(cuestSaMat);
+        return mDb.update(ZpoV2CuestSaludMaternaConstants.CUEST_SAL_MAT_TABLE, cv, MainDBConstants.recordId + "='"
+                + cuestSaMat.getRecordId() + "' and " + MainDBConstants.eventName + "='" + cuestSaMat.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2CuestionarioSaludMaterna de la base de datos
+    public boolean borrarZpoV2CuestSaludMaterna() {
+        return mDb.delete(ZpoV2CuestSaludMaternaConstants.CUEST_SAL_MAT_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2CuestionarioSaludMaterna de la base de datos
+    public ZpoV2CuestionarioSaludMaterna getZpoV2CuestSaludMat(String filtro, String orden) throws SQLException {
+        ZpoV2CuestionarioSaludMaterna cuestSaMat = null;
+        Cursor cursorBC = crearCursor(ZpoV2CuestSaludMaternaConstants.CUEST_SAL_MAT_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            cuestSaMat=ZpoV2CuestSaludMaternaHelper.crearZpoV2CuestSaludMaterna(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return cuestSaMat;
+    }
+    //Obtener una lista de ZpoV2CuestionarioSaludMaterna de la base de datos
+    public List<ZpoV2CuestionarioSaludMaterna> getZpoV2CuestSaludMats(String filtro, String orden) throws SQLException {
+        List<ZpoV2CuestionarioSaludMaterna> cuestSM = new ArrayList<ZpoV2CuestionarioSaludMaterna>();
+        Cursor cursorBC = crearCursor(ZpoV2CuestSaludMaternaConstants.CUEST_SAL_MAT_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            cuestSM.clear();
+            do{
+                ZpoV2CuestionarioSaludMaterna cuestSaludMat = null;
+                cuestSaludMat = ZpoV2CuestSaludMaternaHelper.crearZpoV2CuestSaludMaterna(cursorBC);
+                cuestSM.add(cuestSaludMat);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return cuestSM;
+    }
+
+    /**
+     * Metodos para ZpoV2CuestionarioSocioeconomico en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2CuestionarioSocioeconomico en la base de datos
+    public void crearZpoV2CuestSocioeco(ZpoV2CuestionarioSocioeconomico cuestSocioe) {
+        ContentValues cv = ZpoV2CuestSocioeconomicoHelper.crearZpoV2CuestSocioeconomico(cuestSocioe);
+        mDb.insert(ZpoV2CuestSocioeconomicoConstants.CUEST_SOE_TABLE, null, cv);
+    }
+    //Editar ZpoV2CuestionarioSocioeconomico existente en la base de datos
+    public boolean editarZpoV2CuestSocioeco(ZpoV2CuestionarioSocioeconomico cuestSocie) {
+        ContentValues cv = ZpoV2CuestSocioeconomicoHelper.crearZpoV2CuestSocioeconomico(cuestSocie);
+        return mDb.update(ZpoV2CuestSocioeconomicoConstants.CUEST_SOE_TABLE, cv, MainDBConstants.recordId + "='"
+                + cuestSocie.getRecordId() + "' and " + MainDBConstants.eventName + "='" + cuestSocie.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2CuestionarioSocioeconomico de la base de datos
+    public boolean borrarZpoV2CuestSocioeco() {
+        return mDb.delete(ZpoV2CuestSocioeconomicoConstants.CUEST_SOE_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2CuestionarioSocioeconomico de la base de datos
+    public ZpoV2CuestionarioSocioeconomico getZpoV2CuestSocieco(String filtro, String orden) throws SQLException {
+        ZpoV2CuestionarioSocioeconomico cuestSocioeco = null;
+        Cursor cursorBC = crearCursor(ZpoV2CuestSocioeconomicoConstants.CUEST_SOE_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            cuestSocioeco=ZpoV2CuestSocioeconomicoHelper.crearZpoV2CuestSocioeconomico(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return cuestSocioeco;
+    }
+    //Obtener una lista de ZpoV2CuestionarioSocioeconomico de la base de datos
+    public List<ZpoV2CuestionarioSocioeconomico> getZpoV2CuestSocioecos(String filtro, String orden) throws SQLException {
+        List<ZpoV2CuestionarioSocioeconomico> cuestSOE = new ArrayList<ZpoV2CuestionarioSocioeconomico>();
+        Cursor cursorBC = crearCursor(ZpoV2CuestSocioeconomicoConstants.CUEST_SOE_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            cuestSOE.clear();
+            do{
+                ZpoV2CuestionarioSocioeconomico cuestSocioeco = null;
+                cuestSocioeco = ZpoV2CuestSocioeconomicoHelper.crearZpoV2CuestSocioeconomico(cursorBC);
+                cuestSOE.add(cuestSocioeco);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return cuestSOE;
+    }
+
 }

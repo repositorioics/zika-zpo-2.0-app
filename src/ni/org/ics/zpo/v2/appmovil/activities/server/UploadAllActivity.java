@@ -44,7 +44,7 @@ public class UploadAllActivity extends Activity implements UploadListener{
 				+ getString(R.string.upload));
 
 		if (!FileUtils.storageReady()) {
-			Toast toast = Toast.makeText(getApplicationContext(),getString(R.string.error, R.string.storage_error),Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.error) + "," +   getString(R.string.storage_error),Toast.LENGTH_LONG);
 			toast.show();
 			setResult(RESULT_CANCELED);
 			finish();

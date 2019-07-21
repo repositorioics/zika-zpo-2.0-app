@@ -10,17 +10,23 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestSaludInfantil;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestionarioDemografico;
 
 public class InfantEntryAdapter extends ArrayAdapter<String> {
 
 	private final Context context;
 	private final String[] values;
+	private final ZpoV2CuestionarioDemografico zpoV2CDemo;
+	private final ZpoV2CuestSaludInfantil zpoV2CuestSaInf;
 
 	public InfantEntryAdapter(Context context, int textViewResourceId,
-                              String[] values) {
+                              String[] values, ZpoV2CuestionarioDemografico demo, ZpoV2CuestSaludInfantil cSaInf) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
+		this.zpoV2CDemo = demo;
+		this.zpoV2CuestSaInf = cSaInf;
 	}
 
 	@Override
@@ -40,11 +46,28 @@ public class InfantEntryAdapter extends ArrayAdapter<String> {
 		Drawable img = null;
 		switch (position){
             case 0:
-                textView.setTextColor(Color.RED);
-                textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
-                img=getContext().getResources().getDrawable( R.drawable.ic_sample);
-                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
-                break;
+				if(zpoV2CDemo!=null){
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+				}
+				else{
+					textView.setTextColor(Color.RED);
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+				}
+				img=getContext().getResources().getDrawable( R.drawable.ic_cdemo);
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+				break;
+
+			case 1:
+				if(zpoV2CuestSaInf!=null){
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+				}
+				else{
+					textView.setTextColor(Color.RED);
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+				}
+				img=getContext().getResources().getDrawable( R.drawable.ic_child_health);
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+				break;
 
             default:
                 img=getContext().getResources().getDrawable( R.drawable.logo);

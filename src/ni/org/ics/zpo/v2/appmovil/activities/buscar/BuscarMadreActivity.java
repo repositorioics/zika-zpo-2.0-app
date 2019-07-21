@@ -109,7 +109,7 @@ public class BuscarMadreActivity extends AbstractAsyncListActivity {
 					startActivityForResult(i, BARCODE_CAPTURE);
 				} catch (ActivityNotFoundException e) {
 					Toast t = Toast.makeText(getApplicationContext(),
-							getString(R.string.error, R.string.barcode_error),
+							getString(R.string.error) + getString(R.string.barcode_error),
 							Toast.LENGTH_LONG);
 					t.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 					t.show();

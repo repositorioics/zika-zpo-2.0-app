@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2Mullen;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
+import ni.org.ics.zpo.v2.appmovil.domain.*;
 
 public class InfantVisit4860Adapter extends ArrayAdapter<String> {
 
@@ -19,15 +18,21 @@ public class InfantVisit4860Adapter extends ArrayAdapter<String> {
 	private final String[] values;
     private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
     private final ZpoV2Mullen mZpoMullen;
+    private final ZpoV2IndCuidadoFamilia mZpoICF;
+    private final ZpoV2CuestionarioDemografico mZpoCDemo;
+    private final ZpoV2CuestSaludInfantil mZpoCuestSaInf;
 
 	public InfantVisit4860Adapter(Context context, int textViewResourceId,
                                   String[] values,
-                                  ZpoV2RecoleccionMuestra zpoMuestra, ZpoV2Mullen zpoMullen) {
+                                  ZpoV2RecoleccionMuestra zpoMuestra, ZpoV2Mullen zpoMullen, ZpoV2IndCuidadoFamilia zpoICF, ZpoV2CuestionarioDemografico zpoCDemo, ZpoV2CuestSaludInfantil zpoCSI) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
         this.mZpoV2Muestra = zpoMuestra;
         this.mZpoMullen = zpoMullen;
+        this.mZpoICF = zpoICF;
+        this.mZpoCDemo = zpoCDemo;
+        this.mZpoCuestSaInf= zpoCSI;
 	}
 
 	@Override
@@ -46,6 +51,39 @@ public class InfantVisit4860Adapter extends ArrayAdapter<String> {
 		// Change icon based on position
 		Drawable img = null;
 		switch (position) {
+			case 0:
+				if (mZpoCDemo!=null){
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+				}else{
+					textView.setTextColor(Color.RED);
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+				}
+				img=getContext().getResources().getDrawable( R.drawable.ic_demo_update);
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+				break;
+
+			case 1:
+				if(mZpoCuestSaInf!=null){
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+				}
+				else{
+					textView.setTextColor(Color.RED);
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+				}
+				img=getContext().getResources().getDrawable( R.drawable.ic_child_health_upd);
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+				break;
+			case 2:
+				if(mZpoICF!=null){
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+				}
+				else{
+					textView.setTextColor(Color.RED);
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+				}
+				img=getContext().getResources().getDrawable( R.drawable.ic_icf);
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+				break;
             case 3:
                 if(mZpoV2Muestra!=null){
                     textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
