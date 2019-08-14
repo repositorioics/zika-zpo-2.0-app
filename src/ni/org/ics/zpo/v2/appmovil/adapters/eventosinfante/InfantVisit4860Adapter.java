@@ -84,7 +84,18 @@ public class InfantVisit4860Adapter extends ArrayAdapter<String> {
 				img=getContext().getResources().getDrawable( R.drawable.ic_icf);
 				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
 				break;
-            case 3:
+			case 3:
+				if(mZpoMullen!=null){
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+				}
+				else{
+					textView.setTextColor(Color.RED);
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+				}
+				img=getContext().getResources().getDrawable( R.drawable.ic_mullen);
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+				break;
+            case 4:
                 if(mZpoV2Muestra!=null){
                     textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
                 }
@@ -96,18 +107,6 @@ public class InfantVisit4860Adapter extends ArrayAdapter<String> {
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
 
-
-			case 4:
-				if(mZpoMullen!=null){
-					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
-				}
-				else{
-					textView.setTextColor(Color.RED);
-					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
-				}
-				img=getContext().getResources().getDrawable( R.drawable.ic_mullen);
-				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
-				break;
             default:
                 img = getContext().getResources().getDrawable(R.drawable.logo);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);

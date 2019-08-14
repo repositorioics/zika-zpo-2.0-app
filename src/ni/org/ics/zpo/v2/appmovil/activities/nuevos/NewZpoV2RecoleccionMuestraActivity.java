@@ -222,45 +222,95 @@ public class NewZpoV2RecoleccionMuestraActivity extends AbstractAsyncActivity {
         }
     }
 
+  /*  private boolean validarId(String id) {
+        //Valida codigo de muestra
+        if (event.equals( Constants.MONTH24 )) {
+            String reg = "^" + mRecordId + "-\\d[30][I|R]$";
+            if (!id.matches( reg )) {
+                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
+                return false;
+            }
+        } else if (event.equals( Constants.MONTH36 )) {
+            String reg = "^" + mRecordId + "-\\d[31][I|R]$";
+            if (!id.matches( reg )) {
+                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
+                return false;
+            }
+        } else if (event.equals( Constants.MONTH48 )) {
+            String reg = "^" + mRecordId + "-\\d[32][I|R]$";
+            if (!id.matches( reg )) {
+                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
+                return false;
+            }
+        } else if (event.equals( Constants.MONTH60 )) {
+            String reg = "^" + mRecordId + "-\\d[33][I|R]$";
+            if (!id.matches( reg )) {
+                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
+                return false;
+            }
+        } else if (event.equals( Constants.MONTH72 )) {
+            String reg = "^" + mRecordId + "-\\d[34][I|R]$";
+            if (!id.matches( reg )) {
+                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
+                return false;
+            }
+        } else if (event.equals( Constants.MONTH84 )) {
+            String reg = "^" + mRecordId + "-\\d[35][I|R]$";
+            if (!id.matches( reg )) {
+                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
+                return false;
+            }
+        }else {
+           return true;
+        }
+        return true;
+    }*/
+
+
     private void parseZpo02BiospecimenCollection(Integer idInstancia, String instanceFilePath, Integer accion) {
         Serializer serializer = new Persister();
-        File source = new File(instanceFilePath);
+        File source = new File( instanceFilePath );
+        boolean validate1 = true;
+        boolean validate2 = true;
+
         try {
-            ZpoV2RecoleccionMuestraXml zp02Xml = serializer.read(ZpoV2RecoleccionMuestraXml.class, source);
-            if (accion==ADD_ZP02_ODK) mZpo02 = new ZpoV2RecoleccionMuestra();
-            mZpo02.setRecordId(mRecordId);
-            mZpo02.setEventName(event);
-            mZpo02.setBscDov(zp02Xml.getBscDov());
-            mZpo02.setBscVisit(zp02Xml.getBscVisit());
-            mZpo02.setBscMatBldCol1(zp02Xml.getBscMatBldCol1());
-            mZpo02.setBscMatBldId1(zp02Xml.getBscMatBldId1());
-            mZpo02.setBscMatBldVol1(zp02Xml.getBscMatBldVol1());
-            mZpo02.setBscMatBldRsn1(zp02Xml.getBscMatBldRsn1());
-            mZpo02.setBscMatBldRsnOther1(zp02Xml.getBscMatBldRsnOther1());
-            mZpo02.setBscMatBldCol2(zp02Xml.getBscMatBldCol2());
-            mZpo02.setBscMatBldId2(zp02Xml.getBscMatBldId2());
-            mZpo02.setBscMatBldVol2(zp02Xml.getBscMatBldVol2());
-            mZpo02.setBscMatBldRsn2(zp02Xml.getBscMatBldRsn2());
-            mZpo02.setBscMatBldRsnOther2(zp02Xml.getBscMatBldRsnOther2());
-            mZpo02.setBscPhlebotomist(zp02Xml.getBscPhlebotomist());
+            ZpoV2RecoleccionMuestraXml zp02Xml = serializer.read( ZpoV2RecoleccionMuestraXml.class, source );
 
-            mZpo02.setRecordDate(new Date());
-            mZpo02.setRecordUser(username);
-            mZpo02.setIdInstancia(idInstancia);
-            mZpo02.setInstancePath(instanceFilePath);
-            mZpo02.setEstado(Constants.STATUS_NOT_SUBMITTED);
-            mZpo02.setStart(zp02Xml.getStart());
-            mZpo02.setEnd(zp02Xml.getEnd());
-            mZpo02.setDeviceid(zp02Xml.getDeviceid());
-            mZpo02.setSimserial(zp02Xml.getSimserial());
-            mZpo02.setPhonenumber(zp02Xml.getPhonenumber());
-            mZpo02.setToday(zp02Xml.getToday());
+            if (accion == ADD_ZP02_ODK) mZpo02 = new ZpoV2RecoleccionMuestra();
+            mZpo02.setRecordId( mRecordId );
+            mZpo02.setEventName( event );
 
-            new SaveDataTask().execute(accion);
+            mZpo02.setBscDov( zp02Xml.getBscDov() );
+            mZpo02.setBscVisit( zp02Xml.getBscVisit() );
+            mZpo02.setBscMatBldCol1( zp02Xml.getBscMatBldCol1() );
+            mZpo02.setBscMatBldId1( zp02Xml.getBscMatBldId1() );
+            mZpo02.setBscMatBldVol1( zp02Xml.getBscMatBldVol1() );
+            mZpo02.setBscMatBldRsn1( zp02Xml.getBscMatBldRsn1() );
+            mZpo02.setBscMatBldRsnOther1( zp02Xml.getBscMatBldRsnOther1() );
+            mZpo02.setBscMatBldCol2( zp02Xml.getBscMatBldCol2() );
+            mZpo02.setBscMatBldId2( zp02Xml.getBscMatBldId2() );
+            mZpo02.setBscMatBldVol2( zp02Xml.getBscMatBldVol2() );
+            mZpo02.setBscMatBldRsn2( zp02Xml.getBscMatBldRsn2() );
+            mZpo02.setBscMatBldRsnOther2( zp02Xml.getBscMatBldRsnOther2() );
+            mZpo02.setBscPhlebotomist( zp02Xml.getBscPhlebotomist() );
+
+            mZpo02.setRecordDate( new Date() );
+            mZpo02.setRecordUser( username );
+            mZpo02.setIdInstancia( idInstancia );
+            mZpo02.setInstancePath( instanceFilePath );
+            mZpo02.setEstado( Constants.STATUS_NOT_SUBMITTED );
+            mZpo02.setStart( zp02Xml.getStart() );
+            mZpo02.setEnd( zp02Xml.getEnd() );
+            mZpo02.setDeviceid( zp02Xml.getDeviceid() );
+            mZpo02.setSimserial( zp02Xml.getSimserial() );
+            mZpo02.setPhonenumber( zp02Xml.getPhonenumber() );
+            mZpo02.setToday( zp02Xml.getToday() );
+
+            new SaveDataTask().execute( accion );
 
         } catch (Exception e) {
             // Presenta el error al parsear el xml
-            Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText( getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_LONG ).show();
             e.printStackTrace();
             finish();
         }

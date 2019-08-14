@@ -37,8 +37,8 @@
     <string name="infant_b_17">Cuestionario Salud Infantil</string>
     <string name="infant_b_18">Actualización Cuestionario Salud Infantil</string>
 
-    <string name="inf_id">Código del bebé</string>
-    <string name="inf_search">Buscar bebé</string>
+    <string name="inf_id">Código del niño</string>
+    <string name="inf_search">Buscar niño</string>
     <string name="inf_dob">Fecha de nacimiento</string>
     <string name="inf_retired">Infante retirado del estudio</string>
     <string name="inf_exit">Fecha de salida</string>

@@ -162,13 +162,13 @@ public class InfantVisit7284Activity extends AbstractAsyncActivity {
 						i.putExtras(arguments);
 						startActivity(i);
 						break;*/
-					case 4: //EMISIONES OTOACUSTICAS
+				/*	case 4: //EMISIONES OTOACUSTICAS
 						i = new Intent(getApplicationContext(),
 								NewZpoInfantOtoacousticEmissionsActivity.class);
 						if (zpoOtoE != null) arguments.putSerializable(Constants.OBJECTO_ZPO07OtoE, zpoOtoE);
 						i.putExtras(arguments);
 						startActivity(i);
-						break;
+						break;*/
 					/*case 9: //FACTORES DE RIESGO
 						i = new Intent(getApplicationContext(),
 								NewZpo04ExtendedSectionAtoFActivity.class);

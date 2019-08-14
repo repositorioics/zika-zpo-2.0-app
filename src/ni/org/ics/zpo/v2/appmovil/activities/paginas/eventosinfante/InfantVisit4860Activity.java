@@ -114,7 +114,7 @@ public class InfantVisit4860Activity extends AbstractAsyncActivity {
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-					case 3: //MUESTRAS
+					case 4: //MUESTRAS
 						i = new Intent(getApplicationContext(),
 								NewZpoV2RecoleccionMuestraActivity.class);
 						if (zpoV2Muestra != null) arguments.putSerializable(Constants.OBJECTO_ZP02, zpoV2Muestra);
@@ -122,7 +122,7 @@ public class InfantVisit4860Activity extends AbstractAsyncActivity {
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-					case 4: //ESCALA MULLEN
+					case 3: //ESCALA MULLEN
 						i = new Intent(getApplicationContext(),
 								NewZpoV2MullenActivity.class);
 						if (zpoMullen != null) arguments.putSerializable(Constants.OBJECTO_ZPOMULLEN, zpoMullen);

@@ -82,5 +82,7 @@
     <string name="c2bAlmMue">b. Permiso para almacenar muestras y datos para investigaciones en el futuro:</string>
     <string name="c2cEstGen">c. Permiso para realizar estudios genéticos:</string>
 
+    <string name="err_mx">El código de muestra ingresado es inválido</string>
+
     
 </resources>

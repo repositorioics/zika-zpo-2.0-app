@@ -19,19 +19,16 @@ public class MotherCallAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
     private final ZpoV2CuestionarioSaludMaterna mZpoV2CuestSaMat;
-    private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
     private final ZpoV2CuestionarioSocioeconomico mZpoV2CuestSoe;
 
     public MotherCallAdapter(Context context, int textViewResourceId,
                              String[] values, ZpoV2CuestionarioSaludMaterna zpoV2CuestSaMat,
-                             ZpoV2CuestionarioSocioeconomico zpoV2CuestSoe,
-                             ZpoV2RecoleccionMuestra zpoMuestra) {
+                             ZpoV2CuestionarioSocioeconomico zpoV2CuestSoe) {
         super(context, textViewResourceId, values);
         this.context = context;
         this.values = values;
         this.mZpoV2CuestSaMat = zpoV2CuestSaMat;
         this.mZpoV2CuestSoe = zpoV2CuestSoe;
-        this.mZpoV2Muestra = zpoMuestra;
     }
 
     @Override
@@ -70,17 +67,6 @@ public class MotherCallAdapter extends ArrayAdapter<String> {
                     textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
                 }
                 img=getContext().getResources().getDrawable( R.drawable.ic_socioec);
-                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
-                break;
-            case 2:
-                if(mZpoV2Muestra!=null){
-                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
-                }
-                else{
-                    textView.setTextColor(Color.RED);
-                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
-                }
-                img=getContext().getResources().getDrawable( R.drawable.ic_sample);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
             default:

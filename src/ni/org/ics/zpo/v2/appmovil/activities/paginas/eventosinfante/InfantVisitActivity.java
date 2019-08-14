@@ -115,15 +115,15 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-					case 5: //EVALUACION OFTALMOLOGICA
+				/*	case 5: //EVALUACION OFTALMOLOGICA
 						i = new Intent(getApplicationContext(),
 								NewZpoV2InfantAssessmentVisitOphtActivity.class);
 						if (zp07 != null) arguments.putSerializable(Constants.OBJECTO_ZP07, zp07);
 						i.putExtras(arguments);
 						startActivity(i);
-						break;
+						break;*/
 
-					case 3: //MUESTRAS
+					case 4: //MUESTRAS
 						i = new Intent(getApplicationContext(),
 								NewZpoV2RecoleccionMuestraActivity.class);
 						if (zpoV2Muestra != null) arguments.putSerializable(Constants.OBJECTO_ZP02, zpoV2Muestra);
@@ -132,20 +132,20 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 						startActivity(i);
 						break;
 
-					case 6: //EVALUACION MULLEN
+					case 3: //EVALUACION MULLEN
 						i = new Intent(getApplicationContext(),
 								NewZpoV2MullenActivity.class);
 						if (zpoMullen != null) arguments.putSerializable(Constants.OBJECTO_ZPOMULLEN, zpoMullen);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-					case 7: //RESULTADOS OFTALMOLOGICOS
+				/*	case 7: //RESULTADOS OFTALMOLOGICOS
 						i = new Intent(getApplicationContext(),
 								NewZpoV2InfantOphtResultsActivity.class);
 						if (zp07a != null) arguments.putSerializable(Constants.OBJECTO_ZP07A, zp07a);
 						i.putExtras(arguments);
 						startActivity(i);
-						break;
+						break;*/
 					/*case 5: //RESULTADOS AUDIOLOGICOS
 						i = new Intent(getApplicationContext(),
 								NewZpo07bInfantAudioResultsActivity.class);
@@ -167,13 +167,13 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 						i.putExtras(arguments);
 						startActivity(i);
 						break;*/
-					case 4: //EMISIONES OTOACUSTICAS
+				/*	case 4: //EMISIONES OTOACUSTICAS
 						i = new Intent(getApplicationContext(),
 								NewZpoInfantOtoacousticEmissionsActivity.class);
 						if (zpoOtoE != null) arguments.putSerializable(Constants.OBJECTO_ZPO07OtoE, zpoOtoE);
 						i.putExtras(arguments);
 						startActivity(i);
-						break;
+						break;*/
 					/*case 9: //FACTORES DE RIESGO
 						i = new Intent(getApplicationContext(),
 								NewZpo04ExtendedSectionAtoFActivity.class);
@@ -317,13 +317,13 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 					zipA.open();
 					filtro = MainDBConstants.recordId + "='" + zpInfante.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
 					zpoV2Muestra = zipA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
-					zp07 = zipA.getZpoV2InfantOphthalmologicEvaluation(filtro, MainDBConstants.recordId);
-					zp07a = zipA.getZpoV2InfantOphtResult(filtro, MainDBConstants.recordId);
+				//	zp07a = zipA.getZpoV2InfantOphtResult(filtro, MainDBConstants.recordId);
 					zpoMullen = zipA.getZpoV2Mullen(filtro, MainDBConstants.recordId);
 					zpoICF = zipA.getZpoV2IndCuidadoFam(filtro,MainDBConstants.recordId);
 					zpoCDemo = zipA.getZpoV2CuestDemo(filtro, MainDBConstants.recordId);
                     zpoOtoE = zipA.getZpoInfantOtoacousticE(filtro, MainDBConstants.recordId);
                     zpoCSaInf = zipA.getZpoV2CuestSaludInf(filtro, MainDBConstants.recordId);
+
 
 					if (zpoV2Muestra !=null && zpoOtoE!=null && zp07!=null && zp07a!=null && zpoMullen != null && zpoICF!=null && zpoCDemo!=null  && zpoCSaInf!=null) {// && zp07!=null && zp07a!=null && zp07b!=null && zp07c!=null && zp07d!=null && zpoOtoE!=null && zp04AF!=null){
 						/*if(eventoaFiltrar.matches(Constants.MONTH24)){

@@ -36,7 +36,6 @@ public class MotherCallActivity extends AbstractAsyncActivity {
 	private static Zpo00Screening zp00 = new Zpo00Screening();
 	private static ZpoEstadoEmbarazada zpEstado = new ZpoEstadoEmbarazada();
 	private static ZpoV2CuestionarioSaludMaterna zpoV2CuestSaMa= null;
-    private static ZpoV2RecoleccionMuestra zpoV2Muestra= null;
 	private static ZpoV2CuestionarioSocioeconomico zpoV2CuestSoe = null;
 
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -104,14 +103,6 @@ public class MotherCallActivity extends AbstractAsyncActivity {
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-                    case 2: //MUESTRAS
-                        i = new Intent(getApplicationContext(),
-                                NewZpoV2RecoleccionMuestraActivity.class);
-                        if (zpoV2Muestra!=null) arguments.putSerializable(Constants.OBJECTO_ZP02 , zpoV2Muestra);
-                        arguments.putBoolean("ES_MADRE", true);
-                        i.putExtras(arguments);
-                        startActivity(i);
-                        break;
                     default:
                         break;
 				}
@@ -250,8 +241,7 @@ public class MotherCallActivity extends AbstractAsyncActivity {
 					filtro = MainDBConstants.recordId + "='" + zp00.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
 					zpoV2CuestSaMa = zpoA.getZpoV2CuestSaludMat(filtro, MainDBConstants.recordId);
 					zpoV2CuestSoe = zpoA.getZpoV2CuestSocieco(filtro, MainDBConstants.recordId);
-                    zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
-					if (zpoV2CuestSaMa!= null && zpoV2CuestSoe!=null && zpoV2Muestra!=null){
+					if (zpoV2CuestSaMa!= null && zpoV2CuestSoe!=null){
                         if(eventoaFiltrar.matches(Constants.MONTH30)){
                             zpEstado.setMes30('1');
                         }
@@ -281,7 +271,7 @@ public class MotherCallActivity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new MotherCallAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpoV2CuestSaMa, zpoV2CuestSoe, zpoV2Muestra));
+				gridView.setAdapter(new MotherCallAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpoV2CuestSaMa, zpoV2CuestSoe));
 				dismissProgressDialog();
 			}
 

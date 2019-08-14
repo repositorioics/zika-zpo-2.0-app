@@ -96,66 +96,60 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
                         if(diff>15) habilitado = false;
                         break;*/
                     case 0:
-                        fechaIngreso.add(Calendar.MONTH, 24);fechaEvento = fechaIngreso.getTime();
-                        fechaIngreso.add(Calendar.MONTH, -24);
-                        diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
-                        if(diff<-7||diff>7) habilitado = false;
-                        break;
-                    case 1:
                         fechaIngreso.add(Calendar.MONTH, 30);fechaEvento = fechaIngreso.getTime();
                         fechaIngreso.add(Calendar.MONTH, -30);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
-                    case 2:
+                    case 1:
                         fechaIngreso.add(Calendar.MONTH, 36);fechaEvento = fechaIngreso.getTime();
                         fechaIngreso.add(Calendar.MONTH, -36);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
-                    case 3:
+                    case 2:
                         fechaIngreso.add(Calendar.MONTH, 42);fechaEvento = fechaIngreso.getTime();
                         fechaIngreso.add(Calendar.MONTH, -42);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
-                    case 4:
+                    case 3:
                         fechaIngreso.add(Calendar.MONTH, 48);fechaEvento = fechaIngreso.getTime();
                         fechaIngreso.add(Calendar.MONTH, -48);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
-                    case 5:
+                    case 4:
                         fechaIngreso.add(Calendar.MONTH, 54);fechaEvento = fechaIngreso.getTime();
                         fechaIngreso.add(Calendar.MONTH, -54);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
-                    case 6:
+                    case 5:
                         fechaIngreso.add(Calendar.MONTH, 60);fechaEvento = fechaIngreso.getTime();
                         fechaIngreso.add(Calendar.MONTH, -60);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
-                    case 7:
+                    case 6:
                         fechaIngreso.add(Calendar.MONTH, 66);fechaEvento = fechaIngreso.getTime();
                         fechaIngreso.add(Calendar.MONTH, -66);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
-                    case 8:
+                    case 7:
                         fechaIngreso.add(Calendar.MONTH, 72);fechaEvento = fechaIngreso.getTime();
                         fechaIngreso.add(Calendar.MONTH, -72);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
-                    case 9:
+                    case 8:
                         fechaIngreso.add(Calendar.MONTH, 78);fechaEvento = fechaIngreso.getTime();
                         fechaIngreso.add(Calendar.MONTH, -78);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
-                    case 10:
+                    case 9:
                         fechaIngreso.add(Calendar.MONTH, 84);fechaEvento = fechaIngreso.getTime();
                         fechaIngreso.add(Calendar.MONTH, -84);
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
@@ -290,7 +284,7 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
                 startActivity(i);
                 break;
 
-            case 8:case 10:
+            case 8:
                 i = new Intent(getApplicationContext(),
                         InfantVisit7284Activity.class);
                 //Aca se pasa evento, infante y estado
@@ -306,11 +300,10 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
                 i = new Intent(getApplicationContext(),
                         InfantCallActivity.class);
                 //Aca se pasa evento, tamizaje y estado
-                if(position==1)	arguments.putString(Constants.EVENT, Constants.MONTH30);
-                if(position==3)	arguments.putString(Constants.EVENT, Constants.MONTH42);
-                if(position==5)	arguments.putString(Constants.EVENT, Constants.MONTH54);
-                if(position==7)	arguments.putString(Constants.EVENT, Constants.MONTH66);
-                if(position==9)	arguments.putString(Constants.EVENT, Constants.MONTH78);
+                if(position==1)	arguments.putString(Constants.EVENT, Constants.MONTH42);
+                if(position==3)	arguments.putString(Constants.EVENT, Constants.MONTH54);
+                if(position==5)	arguments.putString(Constants.EVENT, Constants.MONTH66);
+                if(position==7)	arguments.putString(Constants.EVENT, Constants.MONTH78);
                 if (zpInfante!=null) arguments.putSerializable(Constants.OBJECTO_ZPINFDATA , zpInfante);
                 if (zpEstado!=null) arguments.putSerializable(Constants.OBJECTO_ZPESTINF , zpEstado);
                 i.putExtras(arguments);
