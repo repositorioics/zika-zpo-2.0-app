@@ -1,0 +1,275 @@
+package ni.org.ics.zpo.v2.appmovil.helpers;
+
+import android.content.ContentValues;
+import android.database.Cursor;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2EvaluacionVisual;
+import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
+import ni.org.ics.zpo.v2.appmovil.utils.ZpoV2EvalVisualConstants;
+
+import java.util.Date;
+
+/**
+ * @author ics
+ */
+public class ZpoV2EvalVisualHelper {
+
+    public static ContentValues crearZpoV2EvalVisual(ZpoV2EvaluacionVisual zpoV2EvalVisual){
+        ContentValues cv = new ContentValues();
+
+        cv.put(ZpoV2EvalVisualConstants.recordId, zpoV2EvalVisual.getRecordId());
+        cv.put(ZpoV2EvalVisualConstants.eventName, zpoV2EvalVisual.getEventName());
+        if (zpoV2EvalVisual.getFechaNacimientoOptho()!=null) cv.put(ZpoV2EvalVisualConstants.fechaNacimientoOptho, zpoV2EvalVisual.getFechaNacimientoOptho().getTime());
+        if (zpoV2EvalVisual.getFechaExamenOpto()!=null) cv.put(ZpoV2EvalVisualConstants.fechaExamenOpto, zpoV2EvalVisual.getFechaExamenOpto().getTime());
+        cv.put(ZpoV2EvalVisualConstants.edadOptho, zpoV2EvalVisual.getEdadOptho());
+        cv.put(ZpoV2EvalVisualConstants.examinadorOptho, zpoV2EvalVisual.getExaminadorOptho());
+        cv.put(ZpoV2EvalVisualConstants.nombreOptho, zpoV2EvalVisual.getNombreOptho());
+        cv.put(ZpoV2EvalVisualConstants.codigoIdentiOptho, zpoV2EvalVisual.getCodigoIdentiOptho());
+        cv.put(ZpoV2EvalVisualConstants.nombreMadreOptho, zpoV2EvalVisual.getNombreMadreOptho());
+        cv.put(ZpoV2EvalVisualConstants.sexoOptho, zpoV2EvalVisual.getSexoOptho());
+        cv.put(ZpoV2EvalVisualConstants.edadGestacionalOptho, zpoV2EvalVisual.getEdadGestacionalOptho());
+        cv.put(ZpoV2EvalVisualConstants.edadAjustadaOptho, zpoV2EvalVisual.getEdadAjustadaOptho());
+        cv.put(ZpoV2EvalVisualConstants.historiaOcularOptho, zpoV2EvalVisual.getHistoriaOcularOptho());
+        cv.put(ZpoV2EvalVisualConstants.microencefaliaOptho, zpoV2EvalVisual.getMicroencefaliaOptho());
+        cv.put(ZpoV2EvalVisualConstants.microencefaliaQuienOptho, zpoV2EvalVisual.getMicroencefaliaQuienOptho());
+        cv.put(ZpoV2EvalVisualConstants.catarataCongenitaOptho, zpoV2EvalVisual.getCatarataCongenitaOptho());
+        cv.put(ZpoV2EvalVisualConstants.catarataQuienOptho, zpoV2EvalVisual.getCatarataQuienOptho());
+        cv.put(ZpoV2EvalVisualConstants.glaucomaCongenitaOptho, zpoV2EvalVisual.getGlaucomaCongenitaOptho());
+        cv.put(ZpoV2EvalVisualConstants.glaucomaQuienOptho, zpoV2EvalVisual.getGlaucomaQuienOptho());
+        cv.put(ZpoV2EvalVisualConstants.cegueraOptho, zpoV2EvalVisual.getCegueraOptho());
+        cv.put(ZpoV2EvalVisualConstants.cegueraQuienOptho, zpoV2EvalVisual.getCegueraQuienOptho());
+        cv.put(ZpoV2EvalVisualConstants.myopiaOptho, zpoV2EvalVisual.getMyopiaOptho());
+        cv.put(ZpoV2EvalVisualConstants.myopiaQuienOptho, zpoV2EvalVisual.getMyopiaQuienOptho());
+        cv.put(ZpoV2EvalVisualConstants.otrosAntecedentesOptho, zpoV2EvalVisual.getOtrosAntecedentesOptho());
+        cv.put(ZpoV2EvalVisualConstants.cambioMiradaOptho, zpoV2EvalVisual.getCambioMiradaOptho());
+        cv.put(ZpoV2EvalVisualConstants.intentoAgarrarOptho, zpoV2EvalVisual.getIntentoAgarrarOptho());
+        cv.put(ZpoV2EvalVisualConstants.reaccionPalaOptho, zpoV2EvalVisual.getReaccionPalaOptho());
+        cv.put(ZpoV2EvalVisualConstants.contrasteHeidiOptho, zpoV2EvalVisual.getContrasteHeidiOptho());
+        cv.put(ZpoV2EvalVisualConstants.distanciaContrasteOptho, zpoV2EvalVisual.getDistanciaContrasteOptho());
+        cv.put(ZpoV2EvalVisualConstants.otraDistanciaOptho, zpoV2EvalVisual.getOtraDistanciaOptho());
+        cv.put(ZpoV2EvalVisualConstants.pioPalpacionOptho, zpoV2EvalVisual.getPioPalpacionOptho());
+        cv.put(ZpoV2EvalVisualConstants.motilidadOptho, zpoV2EvalVisual.getMotilidadOptho());
+        cv.put(ZpoV2EvalVisualConstants.alineacionOptho, zpoV2EvalVisual.getAlineacionOptho());
+        cv.put(ZpoV2EvalVisualConstants.pdOptho, zpoV2EvalVisual.getPdOptho());
+        cv.put(ZpoV2EvalVisualConstants.metodoPdOptho, zpoV2EvalVisual.getMetodoPdOptho());
+        cv.put(ZpoV2EvalVisualConstants.nistagmoOptho, zpoV2EvalVisual.getNistagmoOptho());
+        cv.put(ZpoV2EvalVisualConstants.tipoNystagmoOptho, zpoV2EvalVisual.getTipoNystagmoOptho());
+        cv.put(ZpoV2EvalVisualConstants.ouOptho, zpoV2EvalVisual.getOuOptho());
+        cv.put(ZpoV2EvalVisualConstants.odOptho, zpoV2EvalVisual.getOdOptho());
+        cv.put(ZpoV2EvalVisualConstants.osOptho, zpoV2EvalVisual.getOsOptho());
+        cv.put(ZpoV2EvalVisualConstants.incapazNivelJovenOptho, zpoV2EvalVisual.getIncapazNivelJovenOptho());
+        cv.put(ZpoV2EvalVisualConstants.semanasOptho, zpoV2EvalVisual.getSemanasOptho());
+        cv.put(ZpoV2EvalVisualConstants.meses3Optho, zpoV2EvalVisual.getMeses3Optho());
+        cv.put(ZpoV2EvalVisualConstants.meses5Optho, zpoV2EvalVisual.getMeses5Optho());
+        cv.put(ZpoV2EvalVisualConstants.meses7Optho, zpoV2EvalVisual.getMeses7Optho());
+        cv.put(ZpoV2EvalVisualConstants.meses12Optho, zpoV2EvalVisual.getMeses12Optho());
+        cv.put(ZpoV2EvalVisualConstants.leaGratingOptho, zpoV2EvalVisual.getLeaGratingOptho());
+        cv.put(ZpoV2EvalVisualConstants.otraLeaDistanciaOptho, zpoV2EvalVisual.getOtraLeaDistanciaOptho());
+        cv.put(ZpoV2EvalVisualConstants.odCpcmOptho, zpoV2EvalVisual.getOdCpcmOptho());
+        cv.put(ZpoV2EvalVisualConstants.osCpcmOptho, zpoV2EvalVisual.getOsCpcmOptho());
+        cv.put(ZpoV2EvalVisualConstants.ouCpcmOptho, zpoV2EvalVisual.getOuCpcmOptho());
+        cv.put(ZpoV2EvalVisualConstants.odCpdOptho, zpoV2EvalVisual.getOdCpdOptho());
+        cv.put(ZpoV2EvalVisualConstants.osCpdOptho, zpoV2EvalVisual.getOsCpdOptho());
+        cv.put(ZpoV2EvalVisualConstants.ouCpdOptho, zpoV2EvalVisual.getOuCpdOptho());
+        cv.put(ZpoV2EvalVisualConstants.reparaYSigueOptho, zpoV2EvalVisual.getReparaYSigueOptho());
+        cv.put(ZpoV2EvalVisualConstants.reaccionaLuzOptho, zpoV2EvalVisual.getReaccionaLuzOptho());
+        cv.put(ZpoV2EvalVisualConstants.reflejoAcomodativoOptho, zpoV2EvalVisual.getReflejoAcomodativoOptho());
+        cv.put(ZpoV2EvalVisualConstants.convergenciaOptho, zpoV2EvalVisual.getConvergenciaOptho());
+        cv.put(ZpoV2EvalVisualConstants.miosisOptho, zpoV2EvalVisual.getMiosisOptho());
+        cv.put(ZpoV2EvalVisualConstants.retinoscopiaOptho, zpoV2EvalVisual.getRetinoscopiaOptho());
+        cv.put(ZpoV2EvalVisualConstants.examenOjosExtOptho, zpoV2EvalVisual.getExamenOjosExtOptho());
+        cv.put(ZpoV2EvalVisualConstants.describaAnormalExtOptho, zpoV2EvalVisual.getDescribaAnormalExtOptho());
+        cv.put(ZpoV2EvalVisualConstants.microftalmiaAnoftOptho, zpoV2EvalVisual.getMicroftalmiaAnoftOptho());
+        cv.put(ZpoV2EvalVisualConstants.pupilasOptho, zpoV2EvalVisual.getPupilasOptho());
+        cv.put(ZpoV2EvalVisualConstants.describaAnormlPupilOptho, zpoV2EvalVisual.getDescribaAnormlPupilOptho());
+        cv.put(ZpoV2EvalVisualConstants.examSegmentoAntOptho, zpoV2EvalVisual.getExamSegmentoAntOptho());
+        cv.put(ZpoV2EvalVisualConstants.describaSegmAntAnormOptho, zpoV2EvalVisual.getDescribaSegmAntAnormOptho());
+        cv.put(ZpoV2EvalVisualConstants.pstosisOptho, zpoV2EvalVisual.getPstosisOptho());
+        cv.put(ZpoV2EvalVisualConstants.irisColobomaOptho, zpoV2EvalVisual.getIrisColobomaOptho());
+        cv.put(ZpoV2EvalVisualConstants.lenteCatarataSubluOptho, zpoV2EvalVisual.getLenteCatarataSubluOptho());
+        cv.put(ZpoV2EvalVisualConstants.otroLenteOptho, zpoV2EvalVisual.getOtroLenteOptho());
+        cv.put(ZpoV2EvalVisualConstants.otroCualOjoOptho, zpoV2EvalVisual.getOtroCualOjoOptho());
+        cv.put(ZpoV2EvalVisualConstants.dilatacionTiempoOptho, zpoV2EvalVisual.getDilatacionTiempoOptho());
+        cv.put(ZpoV2EvalVisualConstants.reflejoRojoOptho, zpoV2EvalVisual.getReflejoRojoOptho());
+        cv.put(ZpoV2EvalVisualConstants.crxOdOpthoSphere, zpoV2EvalVisual.getCrxOdOpthoSphere());
+        cv.put(ZpoV2EvalVisualConstants.opthoOdCyl, zpoV2EvalVisual.getOpthoOdCyl());
+        cv.put(ZpoV2EvalVisualConstants.opthoOdAxis, zpoV2EvalVisual.getOpthoOdAxis());
+        cv.put(ZpoV2EvalVisualConstants.crxOsOpthoSphere, zpoV2EvalVisual.getCrxOsOpthoSphere());
+        cv.put(ZpoV2EvalVisualConstants.opthoOsCyl, zpoV2EvalVisual.getOpthoOsCyl());
+        cv.put(ZpoV2EvalVisualConstants.opthoOsAxis, zpoV2EvalVisual.getOpthoOsAxis());
+        cv.put(ZpoV2EvalVisualConstants.vitreoOptho, zpoV2EvalVisual.getVitreoOptho());
+        cv.put(ZpoV2EvalVisualConstants.describaAnormalOptho, zpoV2EvalVisual.getDescribaAnormalOptho());
+        cv.put(ZpoV2EvalVisualConstants.nervioOpticoOptho, zpoV2EvalVisual.getNervioOpticoOptho());
+        cv.put(ZpoV2EvalVisualConstants.copaOpticoOptho, zpoV2EvalVisual.getCopaOpticoOptho());
+        cv.put(ZpoV2EvalVisualConstants.cDRatioOdOsOptho, zpoV2EvalVisual.getcDRatioOdOsOptho());
+        cv.put(ZpoV2EvalVisualConstants.atrofiaDelNervioOptho, zpoV2EvalVisual.getAtrofiaDelNervioOptho());
+        cv.put(ZpoV2EvalVisualConstants.nervioHipoplasiaOptho, zpoV2EvalVisual.getNervioHipoplasiaOptho());
+        cv.put(ZpoV2EvalVisualConstants.colobomaNervioOptho, zpoV2EvalVisual.getColobomaNervioOptho());
+        cv.put(ZpoV2EvalVisualConstants.retinaOptho, zpoV2EvalVisual.getRetinaOptho());
+        cv.put(ZpoV2EvalVisualConstants.moteadoPigmenFocalOptho, zpoV2EvalVisual.getMoteadoPigmenFocalOptho());
+        cv.put(ZpoV2EvalVisualConstants.atrofiaCoriorretinalOptho, zpoV2EvalVisual.getAtrofiaCoriorretinalOptho());
+        cv.put(ZpoV2EvalVisualConstants.lesionColobomaOptho, zpoV2EvalVisual.getLesionColobomaOptho());
+        cv.put(ZpoV2EvalVisualConstants.lesionHipopigmentOptho, zpoV2EvalVisual.getLesionHipopigmentOptho());
+        cv.put(ZpoV2EvalVisualConstants.reflejoNovelaOptho, zpoV2EvalVisual.getReflejoNovelaOptho());
+        cv.put(ZpoV2EvalVisualConstants.calcificIntracularOptho, zpoV2EvalVisual.getCalcificIntracularOptho());
+        cv.put(ZpoV2EvalVisualConstants.vasosSanguineosOdOptho, zpoV2EvalVisual.getVasosSanguineosOdOptho());
+        cv.put(ZpoV2EvalVisualConstants.vasosSanguineosOsOptho, zpoV2EvalVisual.getVasosSanguineosOsOptho());
+        cv.put(ZpoV2EvalVisualConstants.cambiosPerivascOptho, zpoV2EvalVisual.getCambiosPerivascOptho());
+        cv.put(ZpoV2EvalVisualConstants.funcionVisualOptho, zpoV2EvalVisual.getFuncionVisualOptho());
+        cv.put(ZpoV2EvalVisualConstants.refraccionApropiadoOptho, zpoV2EvalVisual.getRefraccionApropiadoOptho());
+        cv.put(ZpoV2EvalVisualConstants.hallazgosOcularesOptho, zpoV2EvalVisual.getHallazgosOcularesOptho());
+        cv.put(ZpoV2EvalVisualConstants.hallazgosZikaOptho, zpoV2EvalVisual.getHallazgosZikaOptho());
+        cv.put(ZpoV2EvalVisualConstants.seguimientoDoctorOptho, zpoV2EvalVisual.getSeguimientoDoctorOptho());
+        cv.put(ZpoV2EvalVisualConstants.gafasOptho, zpoV2EvalVisual.getGafasOptho());
+        cv.put(ZpoV2EvalVisualConstants.intervencionOptho, zpoV2EvalVisual.getIntervencionOptho());
+        cv.put(ZpoV2EvalVisualConstants.seguimientoOftalOptho, zpoV2EvalVisual.getSeguimientoOftalOptho());
+        cv.put(ZpoV2EvalVisualConstants.entreComentariosOptho, zpoV2EvalVisual.getEntreComentariosOptho());
+
+
+        if (zpoV2EvalVisual.getRecordDate() != null) cv.put(MainDBConstants.recordDate, zpoV2EvalVisual.getRecordDate().getTime());
+        cv.put(MainDBConstants.recordUser, zpoV2EvalVisual.getRecordUser());
+        cv.put(MainDBConstants.pasive, String.valueOf( zpoV2EvalVisual.getPasive()));
+        cv.put(MainDBConstants.ID_INSTANCIA, zpoV2EvalVisual.getIdInstancia());
+        cv.put(MainDBConstants.FILE_PATH, zpoV2EvalVisual.getInstancePath());
+        cv.put(MainDBConstants.STATUS, zpoV2EvalVisual.getEstado());
+        cv.put(MainDBConstants.START, zpoV2EvalVisual.getStart());
+        cv.put(MainDBConstants.END, zpoV2EvalVisual.getEnd());
+        cv.put(MainDBConstants.DEVICE_ID, zpoV2EvalVisual.getDeviceid());
+        cv.put(MainDBConstants.SIM_SERIAL, zpoV2EvalVisual.getSimserial());
+        cv.put(MainDBConstants.PHONE_NUMBER, zpoV2EvalVisual.getPhonenumber());
+        if (zpoV2EvalVisual.getToday() != null) cv.put(MainDBConstants.TODAY, zpoV2EvalVisual.getToday().getTime());
+
+        return cv;
+
+    }
+
+    public static ZpoV2EvaluacionVisual crearZpoV2EvalVisual(Cursor cursor){
+
+        ZpoV2EvaluacionVisual zpoV2EvalVisual = new ZpoV2EvaluacionVisual();
+        zpoV2EvalVisual.setRecordId(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.recordId)));
+        zpoV2EvalVisual.setEventName(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.eventName)));
+
+        zpoV2EvalVisual.setExaminadorOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.examinadorOptho)));
+        zpoV2EvalVisual.setNombreOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.nombreOptho)));
+        zpoV2EvalVisual.setCodigoIdentiOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.codigoIdentiOptho)));
+        zpoV2EvalVisual.setNombreMadreOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.nombreMadreOptho)));
+        zpoV2EvalVisual.setSexoOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.sexoOptho)));
+        zpoV2EvalVisual.setHistoriaOcularOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.historiaOcularOptho)));
+        zpoV2EvalVisual.setMicroencefaliaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.microencefaliaOptho)));
+        zpoV2EvalVisual.setMicroencefaliaQuienOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.microencefaliaQuienOptho)));
+        zpoV2EvalVisual.setCatarataCongenitaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.catarataCongenitaOptho)));
+        zpoV2EvalVisual.setCatarataQuienOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.catarataQuienOptho)));
+        zpoV2EvalVisual.setGlaucomaCongenitaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.glaucomaCongenitaOptho)));
+        zpoV2EvalVisual.setGlaucomaQuienOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.glaucomaQuienOptho)));
+        zpoV2EvalVisual.setCegueraOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.cegueraOptho)));
+        zpoV2EvalVisual.setCegueraQuienOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.cegueraQuienOptho)));
+        zpoV2EvalVisual.setMyopiaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.myopiaOptho)));
+        zpoV2EvalVisual.setMyopiaQuienOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.myopiaQuienOptho)));
+        zpoV2EvalVisual.setOtrosAntecedentesOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.otrosAntecedentesOptho)));
+        zpoV2EvalVisual.setCambioMiradaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.cambioMiradaOptho)));
+        zpoV2EvalVisual.setIntentoAgarrarOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.intentoAgarrarOptho)));
+        zpoV2EvalVisual.setReaccionPalaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.reaccionPalaOptho)));
+        zpoV2EvalVisual.setContrasteHeidiOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.contrasteHeidiOptho)));
+        zpoV2EvalVisual.setDistanciaContrasteOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.distanciaContrasteOptho)));
+        zpoV2EvalVisual.setOtraDistanciaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.otraDistanciaOptho)));
+        zpoV2EvalVisual.setPioPalpacionOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.pioPalpacionOptho)));
+        zpoV2EvalVisual.setMotilidadOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.motilidadOptho)));
+        zpoV2EvalVisual.setAlineacionOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.alineacionOptho)));
+        zpoV2EvalVisual.setPdOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.pdOptho)));
+        zpoV2EvalVisual.setMetodoPdOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.metodoPdOptho)));
+        zpoV2EvalVisual.setNistagmoOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.nistagmoOptho)));
+        zpoV2EvalVisual.setTipoNystagmoOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.tipoNystagmoOptho)));
+        zpoV2EvalVisual.setOuOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.ouOptho)));
+        zpoV2EvalVisual.setOdOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.odOptho)));
+        zpoV2EvalVisual.setOsOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.osOptho)));
+        zpoV2EvalVisual.setIncapazNivelJovenOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.incapazNivelJovenOptho)));
+        zpoV2EvalVisual.setSemanasOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.semanasOptho)));
+        zpoV2EvalVisual.setMeses3Optho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.meses3Optho)));
+        zpoV2EvalVisual.setMeses5Optho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.meses5Optho)));
+        zpoV2EvalVisual.setMeses7Optho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.meses7Optho)));
+        zpoV2EvalVisual.setMeses12Optho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.meses12Optho)));
+        zpoV2EvalVisual.setLeaGratingOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.leaGratingOptho)));
+        zpoV2EvalVisual.setOtraLeaDistanciaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.otraLeaDistanciaOptho)));
+        zpoV2EvalVisual.setOdCpcmOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.odCpcmOptho)));
+        zpoV2EvalVisual.setOsCpcmOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.osCpcmOptho)));
+        zpoV2EvalVisual.setOuCpcmOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.ouCpcmOptho)));
+        zpoV2EvalVisual.setOdCpdOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.odCpdOptho)));
+        zpoV2EvalVisual.setOsCpdOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.osCpdOptho)));
+        zpoV2EvalVisual.setOuCpdOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.ouCpdOptho)));
+        zpoV2EvalVisual.setReparaYSigueOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.reparaYSigueOptho)));
+        zpoV2EvalVisual.setReaccionaLuzOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.reaccionaLuzOptho)));
+        zpoV2EvalVisual.setReflejoAcomodativoOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.reflejoAcomodativoOptho)));
+        zpoV2EvalVisual.setConvergenciaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.convergenciaOptho)));
+        zpoV2EvalVisual.setMiosisOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.miosisOptho)));
+        zpoV2EvalVisual.setRetinoscopiaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.retinoscopiaOptho)));
+        zpoV2EvalVisual.setExamenOjosExtOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.examenOjosExtOptho)));
+        zpoV2EvalVisual.setDescribaAnormalExtOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.describaAnormalExtOptho)));
+        zpoV2EvalVisual.setMicroftalmiaAnoftOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.microftalmiaAnoftOptho)));
+        zpoV2EvalVisual.setPupilasOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.pupilasOptho)));
+        zpoV2EvalVisual.setDescribaAnormlPupilOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.describaAnormlPupilOptho)));
+        zpoV2EvalVisual.setExamSegmentoAntOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.examSegmentoAntOptho)));
+        zpoV2EvalVisual.setDescribaSegmAntAnormOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.describaSegmAntAnormOptho)));
+        zpoV2EvalVisual.setPstosisOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.pstosisOptho)));
+        zpoV2EvalVisual.setIrisColobomaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.irisColobomaOptho)));
+        zpoV2EvalVisual.setLenteCatarataSubluOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.lenteCatarataSubluOptho)));
+        zpoV2EvalVisual.setOtroLenteOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.otroLenteOptho)));
+        zpoV2EvalVisual.setOtroCualOjoOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.otroCualOjoOptho)));
+        zpoV2EvalVisual.setDilatacionTiempoOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.dilatacionTiempoOptho)));
+        zpoV2EvalVisual.setReflejoRojoOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.reflejoRojoOptho)));
+        zpoV2EvalVisual.setCrxOdOpthoSphere(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.crxOdOpthoSphere)));
+        zpoV2EvalVisual.setOpthoOdCyl(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.opthoOdCyl)));
+        zpoV2EvalVisual.setOpthoOdAxis(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.opthoOdAxis)));
+        zpoV2EvalVisual.setCrxOsOpthoSphere(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.crxOsOpthoSphere)));
+        zpoV2EvalVisual.setOpthoOsCyl(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.opthoOsCyl)));
+        zpoV2EvalVisual.setOpthoOsAxis(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.opthoOsAxis)));
+        zpoV2EvalVisual.setVitreoOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.vitreoOptho)));
+        zpoV2EvalVisual.setDescribaAnormalOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.describaAnormalOptho)));
+        zpoV2EvalVisual.setNervioOpticoOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.nervioOpticoOptho)));
+        zpoV2EvalVisual.setCopaOpticoOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.copaOpticoOptho)));
+        zpoV2EvalVisual.setcDRatioOdOsOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.cDRatioOdOsOptho)));
+        zpoV2EvalVisual.setAtrofiaDelNervioOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.atrofiaDelNervioOptho)));
+        zpoV2EvalVisual.setNervioHipoplasiaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.nervioHipoplasiaOptho)));
+        zpoV2EvalVisual.setColobomaNervioOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.colobomaNervioOptho)));
+        zpoV2EvalVisual.setRetinaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.retinaOptho)));
+        zpoV2EvalVisual.setMoteadoPigmenFocalOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.moteadoPigmenFocalOptho)));
+        zpoV2EvalVisual.setAtrofiaCoriorretinalOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.atrofiaCoriorretinalOptho)));
+        zpoV2EvalVisual.setLesionColobomaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.lesionColobomaOptho)));
+        zpoV2EvalVisual.setLesionHipopigmentOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.lesionHipopigmentOptho)));
+        zpoV2EvalVisual.setReflejoNovelaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.reflejoNovelaOptho)));
+        zpoV2EvalVisual.setCalcificIntracularOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.calcificIntracularOptho)));
+        zpoV2EvalVisual.setVasosSanguineosOdOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.vasosSanguineosOdOptho)));
+        zpoV2EvalVisual.setVasosSanguineosOsOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.vasosSanguineosOsOptho)));
+        zpoV2EvalVisual.setCambiosPerivascOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.cambiosPerivascOptho)));
+        zpoV2EvalVisual.setFuncionVisualOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.funcionVisualOptho)));
+        zpoV2EvalVisual.setRefraccionApropiadoOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.refraccionApropiadoOptho)));
+        zpoV2EvalVisual.setHallazgosOcularesOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.hallazgosOcularesOptho)));
+        zpoV2EvalVisual.setHallazgosZikaOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.hallazgosZikaOptho)));
+        zpoV2EvalVisual.setSeguimientoDoctorOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.seguimientoDoctorOptho)));
+        zpoV2EvalVisual.setGafasOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.gafasOptho)));
+        zpoV2EvalVisual.setIntervencionOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.intervencionOptho)));
+        zpoV2EvalVisual.setSeguimientoOftalOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.seguimientoOftalOptho)));
+        zpoV2EvalVisual.setEntreComentariosOptho(cursor.getString(cursor.getColumnIndex(ZpoV2EvalVisualConstants.entreComentariosOptho)));
+
+        if (cursor.getLong(cursor.getColumnIndex(ZpoV2EvalVisualConstants.fechaNacimientoOptho))>0) zpoV2EvalVisual.setFechaNacimientoOptho(new Date(cursor.getLong(cursor.getColumnIndex(ZpoV2EvalVisualConstants.fechaNacimientoOptho))));
+        if (cursor.getLong(cursor.getColumnIndex(ZpoV2EvalVisualConstants.fechaExamenOpto))>0) zpoV2EvalVisual.setFechaExamenOpto(new Date(cursor.getLong(cursor.getColumnIndex(ZpoV2EvalVisualConstants.fechaExamenOpto))));
+
+        if (cursor.getInt(cursor.getColumnIndex(ZpoV2EvalVisualConstants.edadOptho))>0) zpoV2EvalVisual.setEdadOptho(cursor.getInt(cursor.getColumnIndex(ZpoV2EvalVisualConstants.edadOptho)));
+        if (cursor.getInt(cursor.getColumnIndex(ZpoV2EvalVisualConstants.edadGestacionalOptho))>0) zpoV2EvalVisual.setEdadGestacionalOptho(cursor.getInt(cursor.getColumnIndex(ZpoV2EvalVisualConstants.edadGestacionalOptho)));
+        if (cursor.getInt(cursor.getColumnIndex(ZpoV2EvalVisualConstants.edadAjustadaOptho))>0) zpoV2EvalVisual.setEdadAjustadaOptho(cursor.getInt(cursor.getColumnIndex(ZpoV2EvalVisualConstants.edadAjustadaOptho)));
+
+        if(cursor.getLong(cursor.getColumnIndex(MainDBConstants.recordDate))>0) zpoV2EvalVisual.setRecordDate(new Date(cursor.getLong(cursor.getColumnIndex(MainDBConstants.recordDate))));
+        zpoV2EvalVisual.setRecordUser(cursor.getString(cursor.getColumnIndex(MainDBConstants.recordUser)));
+        zpoV2EvalVisual.setPasive(cursor.getString(cursor.getColumnIndex(MainDBConstants.pasive)).charAt(0));
+        zpoV2EvalVisual.setIdInstancia(cursor.getInt(cursor.getColumnIndex(MainDBConstants.ID_INSTANCIA)));
+        zpoV2EvalVisual.setInstancePath(cursor.getString(cursor.getColumnIndex(MainDBConstants.FILE_PATH)));
+        zpoV2EvalVisual.setEstado(cursor.getString(cursor.getColumnIndex(MainDBConstants.STATUS)));
+        zpoV2EvalVisual.setStart(cursor.getString(cursor.getColumnIndex(MainDBConstants.START)));
+        zpoV2EvalVisual.setEnd(cursor.getString(cursor.getColumnIndex(MainDBConstants.END)));
+        zpoV2EvalVisual.setSimserial(cursor.getString(cursor.getColumnIndex(MainDBConstants.SIM_SERIAL)));
+        zpoV2EvalVisual.setPhonenumber(cursor.getString(cursor.getColumnIndex(MainDBConstants.PHONE_NUMBER)));
+        zpoV2EvalVisual.setDeviceid(cursor.getString(cursor.getColumnIndex(MainDBConstants.DEVICE_ID)));
+        if(cursor.getLong(cursor.getColumnIndex(MainDBConstants.TODAY))>0) zpoV2EvalVisual.setToday(new Date(cursor.getLong(cursor.getColumnIndex(MainDBConstants.TODAY))));
+
+        return zpoV2EvalVisual;
+    }
+
+}
