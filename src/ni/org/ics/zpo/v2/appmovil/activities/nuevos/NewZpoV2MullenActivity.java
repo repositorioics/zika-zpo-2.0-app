@@ -17,15 +17,19 @@ import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2ExamenFisicoInfante;
 import ni.org.ics.zpo.v2.appmovil.parsers.ZpoV2MullenXml;
 import ni.org.ics.zpo.v2.appmovil.preferences.PreferencesActivity;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.FileUtils;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2Mullen;
+import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -47,6 +51,7 @@ public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
     private String mRecordId = "";
     private Integer accion = 0;
     private String event;
+    private ZpoInfantData infantData = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,9 @@ public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
         zpoA = new ZpoAdapter(this.getApplicationContext(), mPass, false, false);
         mRecordId = getIntent().getExtras().getString(Constants.RECORDID);
         event = getIntent().getExtras().getString(Constants.EVENT);
+        zpoA.open();
+        infantData = zpoA.getZpoInfantData( MainDBConstants.recordId + "='" + mRecordId + "'", null);
+        zpoA.close();
         mZpoV2Mullen = (ZpoV2Mullen) getIntent().getExtras().getSerializable(Constants.OBJECTO_ZPOMULLEN );
         createInitDialog();
     }
@@ -201,59 +209,75 @@ public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
         }
     }
 
+    public Integer getEdadMeses(Date fechaNac, Date fecha){
+        Calendar inicio = Calendar.getInstance();
+        Calendar fin = Calendar.getInstance();
+        inicio.setTime(fechaNac);
+        fin.setTime(fecha);
+        int difA = fin.get(Calendar.YEAR) - inicio.get(Calendar.YEAR);
+        int difM = difA * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH);
+        int difD = fin.get(Calendar.DAY_OF_MONTH) - inicio.get(Calendar.DAY_OF_MONTH);
+        //aun no ha cumplido mes, restar 1
+        if (difD < 0) difM -=1;
+        return difM;
+    }
+
     private void parseZpoMullen(Integer idInstancia, String instanceFilePath, Integer accion) {
         Serializer serializer = new Persister();
         File source = new File(instanceFilePath);
         try {
+            Integer meses = null;
             ZpoV2MullenXml zpoV2MullenXml = new ZpoV2MullenXml();
             zpoV2MullenXml = serializer.read(ZpoV2MullenXml.class, source);
-            if (accion==ADD_ZPOM_ODK) mZpoV2Mullen = new ZpoV2Mullen();
+
+            if (accion== ADD_ZPOM_ODK) {
+                mZpoV2Mullen = new ZpoV2Mullen();
+                mZpoV2Mullen.setActDobMsel(infantData.getInfantBirthDate());
+
+                //calcular edad en meses del infante basado en la fecha de registro del formulario
+                Date fechaNac = null;
+                if (infantData != null) fechaNac = infantData.getInfantBirthDate();
+
+                if (zpoV2MullenXml.getTestingDateMsel() != null)
+                    meses = getEdadMeses( fechaNac, zpoV2MullenXml.getTestingDateMsel() );
+                if (meses != null) mZpoV2Mullen.setAdjAgeMsel(meses);
+            }
+
+
+
             mZpoV2Mullen.setRecordId(mRecordId);
             mZpoV2Mullen.setEventName(event);
             mZpoV2Mullen.setSexMsel( zpoV2MullenXml.getSexMsel());
             mZpoV2Mullen.setRaNameMsel( zpoV2MullenXml.getRaNameMsel());
             mZpoV2Mullen.setVisitMonthsMsel( zpoV2MullenXml.getVisitMonthsMsel());
-            mZpoV2Mullen.setVisProbMsel( zpoV2MullenXml.getVisProbMsel());
-            mZpoV2Mullen.setDesVisProbMsel( zpoV2MullenXml.getDesVisProbMsel());
-            mZpoV2Mullen.setHearProbMsel(zpoV2MullenXml.getHearProbMsel());
-            mZpoV2Mullen.setDesHearProbMsel(zpoV2MullenXml.getDesHearProbMsel());
             mZpoV2Mullen.setTestingDateMsel(zpoV2MullenXml.getTestingDateMsel());
-            mZpoV2Mullen.setEddMsel(zpoV2MullenXml.getEddMsel());
-            mZpoV2Mullen.setAdjAgeMsel(zpoV2MullenXml.getAdjAgeMsel());
-            mZpoV2Mullen.setActDobMsel(zpoV2MullenXml.getActDobMsel());
             mZpoV2Mullen.setGmRaw(zpoV2MullenXml.getGmRaw());
             mZpoV2Mullen.setGmTScore(zpoV2MullenXml.getGmTScore());
-            mZpoV2Mullen.setGmBoe(zpoV2MullenXml.getGmBoe());
             mZpoV2Mullen.setGmPerRank(zpoV2MullenXml.getGmPerRank());
             mZpoV2Mullen.setGmDesCat(zpoV2MullenXml.getGmDesCat());
             mZpoV2Mullen.setGmAgeEqu(zpoV2MullenXml.getGmAgeEqu());
             mZpoV2Mullen.setVrRaw(zpoV2MullenXml.getVrRaw());
             mZpoV2Mullen.setVrTScore(zpoV2MullenXml.getVrTScore());
-            mZpoV2Mullen.setVrBoe(zpoV2MullenXml.getVrBoe());
             mZpoV2Mullen.setVrPerRank(zpoV2MullenXml.getVrPerRank());
             mZpoV2Mullen.setVrDesCat(zpoV2MullenXml.getVrDesCat());
             mZpoV2Mullen.setVrAgeEqu(zpoV2MullenXml.getVrAgeEqu());
             mZpoV2Mullen.setFmRaw(zpoV2MullenXml.getFmRaw());
             mZpoV2Mullen.setFmTScore(zpoV2MullenXml.getFmTScore());
-            mZpoV2Mullen.setFmBoe(zpoV2MullenXml.getFmBoe());
             mZpoV2Mullen.setFmPerRank(zpoV2MullenXml.getFmPerRank());
             mZpoV2Mullen.setFmDesCat(zpoV2MullenXml.getFmDesCat());
             mZpoV2Mullen.setFmAgeEqu(zpoV2MullenXml.getFmAgeEqu());
             mZpoV2Mullen.setRlRaw(zpoV2MullenXml.getRlRaw());
             mZpoV2Mullen.setRlTScore(zpoV2MullenXml.getRlTScore());
-            mZpoV2Mullen.setRlBoe(zpoV2MullenXml.getRlBoe());
             mZpoV2Mullen.setRlPerRank(zpoV2MullenXml.getRlPerRank());
             mZpoV2Mullen.setRlDesCat(zpoV2MullenXml.getRlDesCat());
             mZpoV2Mullen.setRlAgeEqu(zpoV2MullenXml.getRlAgeEqu());
             mZpoV2Mullen.setElRaw(zpoV2MullenXml.getElRaw());
             mZpoV2Mullen.setElTScore(zpoV2MullenXml.getElTScore());
-            mZpoV2Mullen.setElBoe(zpoV2MullenXml.getElBoe());
             mZpoV2Mullen.setElPerRank(zpoV2MullenXml.getElPerRank());
             mZpoV2Mullen.setElDesCat(zpoV2MullenXml.getElDesCat());
             mZpoV2Mullen.setElAgeEqu(zpoV2MullenXml.getElAgeEqu());
             mZpoV2Mullen.setCognTScoreSum(zpoV2MullenXml.getCognTScoreSum());
             mZpoV2Mullen.setElcStandScore(zpoV2MullenXml.getElcStandScore());
-            mZpoV2Mullen.setElcBoe(zpoV2MullenXml.getElcBoe());
             mZpoV2Mullen.setElcPerRank(zpoV2MullenXml.getElcPerRank());
             mZpoV2Mullen.setElcDesCat(zpoV2MullenXml.getElcDesCat());
             mZpoV2Mullen.setMselComment(zpoV2MullenXml.getMselComment());

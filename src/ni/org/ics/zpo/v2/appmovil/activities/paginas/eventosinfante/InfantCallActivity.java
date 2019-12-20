@@ -22,7 +22,6 @@ import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2ActCuestSaludInfantilActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2EdadesEtapasActivity;
-import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2InfantAssessmentVisitPsyActivity;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantCallAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.*;
@@ -47,7 +46,6 @@ public class InfantCallActivity extends AbstractAsyncActivity {
 	private static final String EXIT_SHOWING = "exitshowing";
 	String[] menu_infante_info;
 
-    private static ZpoV2InfantPsychologicalEvaluation zp07 = null;
     private static ZpoV2EdadesEtapas zpoEE = null;
     private static ZpoV2CuestSaludInfantil zpoCuestSaInf;
 
@@ -282,11 +280,10 @@ public class InfantCallActivity extends AbstractAsyncActivity {
 				try {
 					zipA.open();
 					filtro = MainDBConstants.recordId + "='" + zpInfante.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
-					zp07 = zipA.getZpoV2InfantPsychologicalEvaluation(filtro, MainDBConstants.recordId);
 					zpoEE = zipA.getZpoV2EdadesEtapas(filtro, MainDBConstants.recordId);
 					zpoCuestSaInf = zipA.getZpoV2CuestSaludInf(filtro, MainDBConstants.recordId);
 
-					if (zp07!=null && zpoEE != null && zpoCuestSaInf != null){
+					if (zpoEE != null && zpoCuestSaInf != null){
 						if(eventoaFiltrar.matches(Constants.MONTH30)){
 							zpEstado.setMes30('1');
 						}

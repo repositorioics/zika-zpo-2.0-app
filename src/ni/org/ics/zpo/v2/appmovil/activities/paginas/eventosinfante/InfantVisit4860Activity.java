@@ -37,6 +37,7 @@ public class InfantVisit4860Activity extends AbstractAsyncActivity {
 	private static ZpoV2IndCuidadoFamilia zpoICF = new ZpoV2IndCuidadoFamilia();
 	private static ZpoV2CuestionarioDemografico zpoCDemo = new ZpoV2CuestionarioDemografico();
 	private static ZpoV2CuestSaludInfantil zpoCuestSaInf = new ZpoV2CuestSaludInfantil();
+	private static ZpoV2ExamenFisicoInfante zpoExFisInf = new ZpoV2ExamenFisicoInfante();
 
 
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -114,6 +115,14 @@ public class InfantVisit4860Activity extends AbstractAsyncActivity {
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
+
+					case 3: //ESCALA MULLEN
+						i = new Intent(getApplicationContext(),
+								NewZpoV2MullenActivity.class);
+						if (zpoMullen != null) arguments.putSerializable(Constants.OBJECTO_ZPOMULLEN, zpoMullen);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;
 					case 4: //MUESTRAS
 						i = new Intent(getApplicationContext(),
 								NewZpoV2RecoleccionMuestraActivity.class);
@@ -122,36 +131,18 @@ public class InfantVisit4860Activity extends AbstractAsyncActivity {
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-					case 3: //ESCALA MULLEN
+
+					case 5: //EXAMEN FISICO INFANTE
 						i = new Intent(getApplicationContext(),
-								NewZpoV2MullenActivity.class);
-						if (zpoMullen != null) arguments.putSerializable(Constants.OBJECTO_ZPOMULLEN, zpoMullen);
+								NewZpoV2ExamFisicoInfanteActivity.class);
+						if (zpoExFisInf != null) arguments.putSerializable(Constants.OBJECT_EX_FIS_INF, zpoExFisInf);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-					/*case 6: //ESTUDIOS DE IMAGENES
-						i = new Intent(getApplicationContext(),
-								NewZpo07cInfantImageStudiesActivity.class);
-						if (zp07c != null) arguments.putSerializable(Constants.OBJECTO_ZP07C, zp07c);
-						i.putExtras(arguments);
-						startActivity(i);
-						break;
-					case 7: //ESCALA BAYLEY
-						i = new Intent(getApplicationContext(),
-								NewZpo07dInfantBayleyScalesActivity.class);
-						if (zp07d != null) arguments.putSerializable(Constants.OBJECTO_ZP07D, zp07d);
-						i.putExtras(arguments);
-						startActivity(i);
-						break;*/
-					/*case 9: //FACTORES DE RIESGO
-						i = new Intent(getApplicationContext(),
-								NewZpo04ExtendedSectionAtoFActivity.class);
-						if (zp04AF != null) arguments.putSerializable(Constants.OBJECTO_ZP04AF, zp04AF);
-						i.putExtras(arguments);
-						startActivity(i);
-						break;
+
+
 					default:
-						break;*/
+						break;
 				}
 			}
 		});
@@ -290,8 +281,9 @@ public class InfantVisit4860Activity extends AbstractAsyncActivity {
 					zpoICF = zipA.getZpoV2IndCuidadoFam(filtro, MainDBConstants.recordId);
 					zpoCDemo = zipA.getZpoV2CuestDemo(filtro, MainDBConstants.recordId);
 					zpoCuestSaInf = zipA.getZpoV2CuestSaludInf(filtro, MainDBConstants.recordId);
+					zpoExFisInf = zipA.getZpoV2ExamFisicoInfante(filtro, MainDBConstants.recordId);
 
-					if (zpoV2Muestra !=null && zpoMullen !=null && zpoICF != null && zpoCDemo!=null && zpoCuestSaInf !=null) {// && zp07!=null && zp07a!=null && zp07b!=null && zp07c!=null && zp07d!=null && zpoOtoE!=null && zp04AF!=null){
+					if (zpoV2Muestra !=null && zpoMullen !=null && zpoICF != null && zpoCDemo!=null && zpoCuestSaInf !=null && zpoExFisInf !=null) {
 						if(eventoaFiltrar.matches(Constants.MONTH48)){
 							zpEstado.setMes48('1');
 						}
@@ -310,7 +302,7 @@ public class InfantVisit4860Activity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new InfantVisit4860Adapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra, zpoMullen, zpoICF, zpoCDemo, zpoCuestSaInf));
+				gridView.setAdapter(new InfantVisit4860Adapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra, zpoMullen, zpoICF, zpoCDemo, zpoCuestSaInf, zpoExFisInf));
 				dismissProgressDialog();
 			}
 

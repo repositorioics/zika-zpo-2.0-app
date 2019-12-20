@@ -22,6 +22,7 @@ import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2CuestSaludMaternaActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2CuestSocioeconomicoActivity;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2EvalPsicologicaActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre.IngresoAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
@@ -38,6 +39,7 @@ public class IngresoActivity extends AbstractAsyncActivity {
     private static ZpoV2CuestionarioSaludMaterna zpoCuestSaMat = null;
     private static ZpoV2RecoleccionMuestra zpoV2Muestra= null;
     private static ZpoV2CuestionarioSocioeconomico zpoV2CuestSoe = null;
+    private static ZpoV2EvaluacionPsicologica zpoV2EvPsico = null;
 
 
     private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -112,7 +114,13 @@ public class IngresoActivity extends AbstractAsyncActivity {
                         i.putExtras(arguments);
                         startActivity(i);
                         break;
-
+                    case 3: //EVALUACION PSICOLOGICA
+                        i = new Intent(getApplicationContext(),
+                                NewZpoV2EvalPsicologicaActivity.class);
+                        if (zpoV2EvPsico!=null) arguments.putSerializable(Constants.OBJECT_EVAL_PSICO , zpoV2EvPsico);
+                        i.putExtras(arguments);
+                        startActivity(i);
+                        break;
                     default:
                         break;
 				}
@@ -252,7 +260,8 @@ public class IngresoActivity extends AbstractAsyncActivity {
 					zpoCuestSaMat = zpoA.getZpoV2CuestSaludMat( filtro, MainDBConstants.recordId);
                     zpoV2CuestSoe = zpoA.getZpoV2CuestSocieco(filtro, MainDBConstants.recordId);
                     zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
-                    if (zpoCuestSaMat!=null && zpoV2CuestSoe!=null && zpoV2Muestra!=null){
+                    zpoV2EvPsico = zpoA.getZpoV2EvalPsico(filtro, MainDBConstants.recordId);
+                    if (zpoCuestSaMat!=null && zpoV2CuestSoe!=null && zpoV2Muestra!=null && zpoV2EvPsico != null){
                         if(eventoaFiltrar.matches(Constants.MONTH24)){
                             zpEstado.setMes24('1');
                         }
@@ -269,7 +278,7 @@ public class IngresoActivity extends AbstractAsyncActivity {
 
         protected void onPostExecute(String resultado) {
             // after the network request completes, hide the progress indicator
-            gridView.setAdapter(new IngresoAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpoCuestSaMat, zpoV2CuestSoe, zpoV2Muestra));
+            gridView.setAdapter(new IngresoAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpoCuestSaMat, zpoV2CuestSoe, zpoV2Muestra, zpoV2EvPsico));
             dismissProgressDialog();
         }
 

@@ -262,48 +262,48 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
                 i.putExtras(arguments);
                 startActivity(i);
                 break;
-            case 2:
+            case 1:
                 i = new Intent(getApplicationContext(),
                         InfantVisitActivity.class);
                 //Aca se pasa evento, infante y estado
-                if(position==2)	arguments.putString(Constants.EVENT, Constants.MONTH36);
+                if(position==1)	arguments.putString(Constants.EVENT, Constants.MONTH36);
                 if (zpInfante!=null) arguments.putSerializable(Constants.OBJECTO_ZPINFDATA , zpInfante);
                 if (zpEstado!=null) arguments.putSerializable(Constants.OBJECTO_ZPESTINF , zpEstado);
                 i.putExtras(arguments);
                 startActivity(i);
                 break;
-            case 4:case 6:
+            case 3:case 5:
                 i = new Intent(getApplicationContext(),
                         InfantVisit4860Activity.class);
                 //Aca se pasa evento, infante y estado
-                if(position==4)	arguments.putString(Constants.EVENT, Constants.MONTH48);
-                if(position==6)	arguments.putString(Constants.EVENT, Constants.MONTH60);
+                if(position==3)	arguments.putString(Constants.EVENT, Constants.MONTH48);
+                if(position==5)	arguments.putString(Constants.EVENT, Constants.MONTH60);
                 if (zpInfante!=null) arguments.putSerializable(Constants.OBJECTO_ZPINFDATA , zpInfante);
                 if (zpEstado!=null) arguments.putSerializable(Constants.OBJECTO_ZPESTINF , zpEstado);
                 i.putExtras(arguments);
                 startActivity(i);
                 break;
 
-            case 8:
+            case 7:case 9:
                 i = new Intent(getApplicationContext(),
                         InfantVisit7284Activity.class);
                 //Aca se pasa evento, infante y estado
-                if(position==8)	arguments.putString(Constants.EVENT, Constants.MONTH72);
-                if(position==10) arguments.putString(Constants.EVENT, Constants.MONTH84);
+                if(position==7)	arguments.putString(Constants.EVENT, Constants.MONTH72);
+                if(position==9) arguments.putString(Constants.EVENT, Constants.MONTH84);
                 if (zpInfante!=null) arguments.putSerializable(Constants.OBJECTO_ZPINFDATA , zpInfante);
                 if (zpEstado!=null) arguments.putSerializable(Constants.OBJECTO_ZPESTINF , zpEstado);
                 i.putExtras(arguments);
                 startActivity(i);
                 break;
 
-            case 1: case 3:case 5:case 7:case 9:
+            case 2: case 4:case 6:case 8:
                 i = new Intent(getApplicationContext(),
                         InfantCallActivity.class);
                 //Aca se pasa evento, tamizaje y estado
-                if(position==1)	arguments.putString(Constants.EVENT, Constants.MONTH42);
-                if(position==3)	arguments.putString(Constants.EVENT, Constants.MONTH54);
-                if(position==5)	arguments.putString(Constants.EVENT, Constants.MONTH66);
-                if(position==7)	arguments.putString(Constants.EVENT, Constants.MONTH78);
+                if(position==2)	arguments.putString(Constants.EVENT, Constants.MONTH42);
+                if(position==4)	arguments.putString(Constants.EVENT, Constants.MONTH54);
+                if(position==6)	arguments.putString(Constants.EVENT, Constants.MONTH66);
+                if(position==8)	arguments.putString(Constants.EVENT, Constants.MONTH78);
                 if (zpInfante!=null) arguments.putSerializable(Constants.OBJECTO_ZPINFDATA , zpInfante);
                 if (zpEstado!=null) arguments.putSerializable(Constants.OBJECTO_ZPESTINF , zpEstado);
                 i.putExtras(arguments);

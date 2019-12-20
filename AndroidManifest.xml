@@ -77,17 +77,9 @@
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity"
                   android:screenOrientation="portrait" />
-        <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoInfantOtoacousticEmissionsActivity"
-                  android:screenOrientation="portrait" />
-        <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2InfantAssessmentVisitOphtActivity"
-                  android:screenOrientation="portrait" />
-        <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2InfantAssessmentVisitPsyActivity"
-                  android:screenOrientation="portrait" />
         <activity android:name=".activities.paginas.eventosinfante.InfantCallActivity"
                   android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2MullenActivity"
-                  android:screenOrientation="portrait" />
-        <activity android:name=".activities.nuevos.NewZpoV2InfantOphtResultsActivity"
                   android:screenOrientation="portrait" />
         <activity android:name=".activities.nuevos.NewZpoV2EdadesEtapasActivity"
                   android:screenOrientation="portrait" />
@@ -110,6 +102,14 @@
         <activity android:name=".activities.nuevos.NewZpoV2ActCuestSaludMaternaActivity"
                   android:screenOrientation="portrait" />
         <activity android:name=".activities.nuevos.NewZpoV2CuestSocioeconomicoActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2EvalPsicologicaActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2ExamFisicoInfanteActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2FormAudicionActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2EvalVisualActivity"
                   android:screenOrientation="portrait" />
 
     </application>

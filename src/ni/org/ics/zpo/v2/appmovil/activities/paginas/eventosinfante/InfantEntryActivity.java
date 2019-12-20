@@ -41,6 +41,7 @@ public class InfantEntryActivity extends AbstractAsyncActivity {
     private static ZpoV2IndCuidadoFamilia zpoICF = null;
     private static ZpoV2RecoleccionMuestra zpoV2Muestra = null;
     private static ZpoV2Mullen zpoMullen = null;
+    private static ZpoV2ExamenFisicoInfante zpoV2ExFisInf = null;
 
     private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
     private static String evento;
@@ -91,41 +92,50 @@ public class InfantEntryActivity extends AbstractAsyncActivity {
                 Intent i;
                 arguments.putString(Constants.EVENT, evento);
                 arguments.putString(Constants.RECORDID, zpInfante.getRecordId());
-                switch(position){
+                switch (position) {
                     case 0:  //CUESTIONARIO DEMOGRAFICO
-						i = new Intent(getApplicationContext(),
-								NewZpoV2CuestDemograficoActivity.class);
-						if (zpoCDemo != null) arguments.putSerializable(Constants.OBJECT_CUEST_DEMO, zpoCDemo);
-						i.putExtras(arguments);
-						startActivity(i);
+                        i = new Intent( getApplicationContext(),
+                                NewZpoV2CuestDemograficoActivity.class );
+                        if (zpoCDemo != null) arguments.putSerializable( Constants.OBJECT_CUEST_DEMO, zpoCDemo );
+                        i.putExtras( arguments );
+                        startActivity( i );
                         break;
 
                     case 1: //CUESTIONARIO SALUD INFANTIL
-                        i = new Intent(getApplicationContext(),
-                                NewZpoV2CuestSaludInfantilActivity.class);
-                        if (zpoCuestSaInf != null) arguments.putSerializable(Constants.OBJECT_CUEST_SA_INF, zpoCuestSaInf);
-                        i.putExtras(arguments);
-                        startActivity(i);
+                        i = new Intent( getApplicationContext(),
+                                NewZpoV2CuestSaludInfantilActivity.class );
+                        if (zpoCuestSaInf != null)
+                            arguments.putSerializable( Constants.OBJECT_CUEST_SA_INF, zpoCuestSaInf );
+                        i.putExtras( arguments );
+                        startActivity( i );
                         break;
                     //INDICADORES DEL CUIDADO DE LA FAMILIA
                     case 2:
-                        i = new Intent( getApplicationContext(), NewZpoV2IndCuidadoFamiliaActivity.class);
-                        if (zpoICF != null) arguments.putSerializable(Constants.OBJECT_INDCUIFAM, zpoICF);
-                        i.putExtras(arguments);
-                        startActivity(i);
+                        i = new Intent( getApplicationContext(), NewZpoV2IndCuidadoFamiliaActivity.class );
+                        if (zpoICF != null) arguments.putSerializable( Constants.OBJECT_INDCUIFAM, zpoICF );
+                        i.putExtras( arguments );
+                        startActivity( i );
                         break;
                     case 3: //EVALUACION MULLEN
-                        i = new Intent(getApplicationContext(),
-                                NewZpoV2MullenActivity.class);
-                        if (zpoMullen != null) arguments.putSerializable(Constants.OBJECTO_ZPOMULLEN, zpoMullen);
-                        i.putExtras(arguments);
-                        startActivity(i);
+                        i = new Intent( getApplicationContext(),
+                                NewZpoV2MullenActivity.class );
+                        if (zpoMullen != null) arguments.putSerializable( Constants.OBJECTO_ZPOMULLEN, zpoMullen );
+                        i.putExtras( arguments );
+                        startActivity( i );
                         break;
                     case 4: //MUESTRAS
+                        i = new Intent( getApplicationContext(),
+                                NewZpoV2RecoleccionMuestraActivity.class );
+                        if (zpoV2Muestra != null) arguments.putSerializable( Constants.OBJECTO_ZP02, zpoV2Muestra );
+                        arguments.putBoolean( "ES_MADRE", false );
+                        i.putExtras( arguments );
+                        startActivity( i );
+                        break;
+
+                    case 5: // EXAMEN FISICO INFANTE
                         i = new Intent(getApplicationContext(),
-                                NewZpoV2RecoleccionMuestraActivity.class);
-                        if (zpoV2Muestra != null) arguments.putSerializable(Constants.OBJECTO_ZP02, zpoV2Muestra);
-                        arguments.putBoolean("ES_MADRE", false);
+                                NewZpoV2ExamFisicoInfanteActivity.class);
+                        if (zpoV2ExFisInf != null) arguments.putSerializable(Constants.OBJECT_EX_FIS_INF, zpoV2ExFisInf);
                         i.putExtras(arguments);
                         startActivity(i);
                         break;
@@ -269,8 +279,9 @@ public class InfantEntryActivity extends AbstractAsyncActivity {
                     zpoV2Muestra = zipA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
                     zpoMullen = zipA.getZpoV2Mullen(filtro, MainDBConstants.recordId);
                     zpoICF = zipA.getZpoV2IndCuidadoFam(filtro,MainDBConstants.recordId);
+                    zpoV2ExFisInf = zipA.getZpoV2ExamFisicoInfante(filtro, MainDBConstants.recordId );
 
-					if (zpoCDemo !=null && zpoCuestSaInf != null && zpoICF!= null && zpoMullen!= null && zpoV2Muestra!=null){
+					if (zpoCDemo !=null && zpoCuestSaInf != null && zpoICF!= null && zpoMullen!= null && zpoV2Muestra!=null && zpoV2ExFisInf != null){
 
 						if(eventoaFiltrar.matches(Constants.MONTH24)){
 							zpEstado.setMes24('1');
@@ -287,7 +298,7 @@ public class InfantEntryActivity extends AbstractAsyncActivity {
 
         protected void onPostExecute(String resultado) {
             // after the network request completes, hide the progress indicator
-            gridView.setAdapter(new InfantEntryAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoCDemo, zpoCuestSaInf, zpoICF, zpoMullen, zpoV2Muestra));
+            gridView.setAdapter(new InfantEntryAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoCDemo, zpoCuestSaInf, zpoICF, zpoMullen, zpoV2Muestra, zpoV2ExFisInf));
             dismissProgressDialog();
         }
 

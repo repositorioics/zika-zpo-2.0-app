@@ -17,35 +17,32 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
 	private final Context context;
 	private final String[] values;
     private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
-    private final ZpoV2InfantOtoacousticEmissions mZpoOtoE;
-    private final ZpoV2InfantOphthalmologicEvaluation mZpoV2IOE;
-    private final ZpoV2InfantOphtResults mZpoIOER;
     private final ZpoV2Mullen mZpoMullen;
     private final ZpoV2IndCuidadoFamilia mZpoICF;
     private final ZpoV2CuestionarioDemografico mZpoCDemo;
     private final ZpoV2CuestSaludInfantil mZpoCuestSaInf;
+    private final ZpoV2FormAudicion mZpoEvAuditiva;
+    private final ZpoV2EvaluacionVisual mZpoEvalVisual;
 
 	public InfantVisitAdapter(Context context, int textViewResourceId,
                               String[] values,
                               ZpoV2RecoleccionMuestra zpoMuestra,
-                              ZpoV2InfantOtoacousticEmissions mZpo07OtoE,
-                              ZpoV2InfantOphthalmologicEvaluation mZpoV2IOE,
-                              ZpoV2InfantOphtResults mZpoIOER,
                               ZpoV2Mullen mZpoMullen,
                               ZpoV2IndCuidadoFamilia mZpoICF,
                               ZpoV2CuestionarioDemografico zpoCDemo,
-                              ZpoV2CuestSaludInfantil zpoCSI) {
+                              ZpoV2CuestSaludInfantil zpoCSI,
+                              ZpoV2FormAudicion zpoEAudi,
+                              ZpoV2EvaluacionVisual zpoEvalVisual) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
         this.mZpoV2Muestra = zpoMuestra;
-        this.mZpoOtoE = mZpo07OtoE;
-        this.mZpoV2IOE = mZpoV2IOE;
-        this.mZpoIOER = mZpoIOER;
         this.mZpoMullen = mZpoMullen;
         this.mZpoICF = mZpoICF;
         this.mZpoCDemo = zpoCDemo;
         this.mZpoCuestSaInf = zpoCSI;
+        this.mZpoEvAuditiva = zpoEAudi;
+        this.mZpoEvalVisual = zpoEvalVisual;
 	}
 
 	@Override
@@ -98,38 +95,6 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
             case 3:
-                if(mZpoV2Muestra!=null){
-                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
-                }
-                else{
-                    textView.setTextColor(Color.RED);
-                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
-                }
-                img=getContext().getResources().getDrawable( R.drawable.ic_sample);
-                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
-                break;
-            case 4:
-                if (mZpoOtoE != null) {
-                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.done));
-                } else {
-                    textView.setTextColor(Color.RED);
-                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.pending));
-                }
-                img = getContext().getResources().getDrawable(R.drawable.ic_oae);
-                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
-                break;
-            case 5:
-                if(mZpoV2IOE!=null){
-                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
-                }
-                else{
-                    textView.setTextColor(Color.RED);
-                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
-                }
-                img=getContext().getResources().getDrawable( R.drawable.ic_monthly);
-                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
-                break;
-            case 6:
                 if(mZpoMullen!=null){
                     textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
                 }
@@ -140,18 +105,39 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
                 img=getContext().getResources().getDrawable( R.drawable.ic_mullen);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
-
-            case 7:
-                if(mZpoIOER!=null){
-                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
-                }
-                else{
+            case 4:
+                if (mZpoV2Muestra != null) {
+                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.done));
+                } else {
                     textView.setTextColor(Color.RED);
-                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.pending));
                 }
-                img=getContext().getResources().getDrawable( R.drawable.ic_opht);
+                img = getContext().getResources().getDrawable(R.drawable.ic_sample);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
+
+            case 5:
+                if (mZpoEvAuditiva != null) {
+                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.done));
+                } else {
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.pending));
+                }
+                img = getContext().getResources().getDrawable(R.drawable.ic_audi);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
+
+            case 6:
+                if (mZpoEvalVisual != null) {
+                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.done));
+                } else {
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.pending));
+                }
+                img = getContext().getResources().getDrawable(R.drawable.ic_visual);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
+
             default:
                 img = getContext().getResources().getDrawable(R.drawable.logo);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);

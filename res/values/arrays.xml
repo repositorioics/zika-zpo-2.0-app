@@ -24,6 +24,7 @@
         <item>@string/maternal_b_1</item>
         <item>@string/maternal_b_4</item>
         <item>@string/maternal_b_3</item>
+        <item>@string/maternal_b_5</item>
     </string-array>
 
     <string-array name="menu_maternal_visit">
@@ -63,28 +64,27 @@
         <item>@string/infant_b_8</item>
         <item>@string/infant_b_9</item>
         <item>@string/infant_b_10</item>
-        <item>@string/infant_b_13</item>
+
     </string-array>
     <!--24 Y 36 MESES-->
     <string-array name="menu_infant_visit1">
         <item>@string/infant_b_16</item>
         <item>@string/infant_b_18</item>
-        <!--<item>@string/infant_b_2</item>-->
         <item>@string/infant_b_3</item>
         <item>@string/infant_b_7</item>
         <item>@string/infant_b_4</item>
-    <!--    <item>@string/infant_b_5</item>-->
-        <!--<item>@string/infant_b_6</item>-->
-
-        <!--<item>@string/infant_b_13</item>-->
+        <item>@string/infant_b_5</item>
+        <item>@string/infant_b_6</item>
     </string-array>
     <!--48 Y 60 MESES-->
     <string-array name="menu_infant_visit2">
         <item>@string/infant_b_16</item>
         <item>@string/infant_b_18</item>
         <item>@string/infant_b_3</item>
-        <item>@string/infant_b_4</item>
         <item>@string/infant_b_7</item>
+        <item>@string/infant_b_4</item>
+        <item>@string/infant_b_2</item>
+
     </string-array>
     <!--72 Y 84 MESES-->
     <string-array name="menu_infant_visit3">
@@ -93,9 +93,7 @@
         <!--<item>@string/infant_b_2</item>-->
         <item>@string/infant_b_3</item>
         <item>@string/infant_b_4</item>
-      <!--  <item>@string/infant_b_5</item>
-        <item>@string/infant_b_8</item>
-        <item>@string/infant_b_9</item>-->
+        <item>@string/infant_b_2</item>
     </string-array>
 
 
@@ -110,6 +108,7 @@
         <item>@string/infant_b_3</item>
         <item>@string/infant_b_7</item>
         <item>@string/infant_b_4</item>
+        <item>@string/infant_b_2</item>
     </string-array>
 
 

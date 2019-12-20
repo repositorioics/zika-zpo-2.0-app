@@ -19,23 +19,22 @@
     
     <!-- Formularios -->
     <string name="infant_b_1">Cuestionario Infante</string>
-    <string name="infant_b_2">Examen Físico</string>
+    <string name="infant_b_2">Examen Físico Infante</string>
     <string name="infant_b_3">Indicadores del Cuidado de la Familia</string>
     <string name="infant_b_4">Muestras</string>
-    <string name="infant_b_5">Emisiones Otoacústicas</string>
-    <string name="infant_b_6">Evaluación Oftalmológica</string>
+    <string name="infant_b_5">Evaluación Auditiva</string>
+    <string name="infant_b_6">Evaluación Visual</string>
     <string name="infant_b_7">Escala Mullen de Aprendizaje Temprano</string>
     <string name="infant_b_8">Batería de Evaluación de Kaufman II</string>
     <string name="infant_b_9">Examen de Variables de Atención</string>
     <string name="infant_b_10">Estado Socioeconómico del Hogar</string>
     <string name="infant_b_11">Tamizaje de Edades y Etapas</string>
-    <string name="infant_b_12">Factores de Riesgo</string>
-    <string name="infant_b_13">Resultados Oftalmológicos</string>
     <string name="infant_b_14">Indicadores del Cuidado de la Familia </string>
     <string name="infant_b_15">Cuestionario Demográfico</string>
     <string name="infant_b_16">Actualización Cuestionario Demográfico</string>
     <string name="infant_b_17">Cuestionario Salud Infantil</string>
     <string name="infant_b_18">Actualización Cuestionario Salud Infantil</string>
+    <string name="infant_b_19">Evaluación Psicológica</string>
 
     <string name="inf_id">Código del niño</string>
     <string name="inf_search">Buscar niño</string>

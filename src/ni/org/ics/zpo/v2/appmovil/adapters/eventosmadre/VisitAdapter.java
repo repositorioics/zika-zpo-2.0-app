@@ -12,6 +12,7 @@ import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestionarioSaludMaterna;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestionarioSocioeconomico;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2EvaluacionPsicologica;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
 
 public class VisitAdapter extends ArrayAdapter<String> {
@@ -21,6 +22,7 @@ public class VisitAdapter extends ArrayAdapter<String> {
     private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
     private final ZpoV2CuestionarioSaludMaterna mZpoV2CuestSaMat;
     private final ZpoV2CuestionarioSocioeconomico mZpoV2CuestSoe;
+
 
     public VisitAdapter(Context context, int textViewResourceId,
                         String[] values, ZpoV2CuestionarioSaludMaterna zpoV2CuestSaMat,
@@ -32,6 +34,7 @@ public class VisitAdapter extends ArrayAdapter<String> {
         this.mZpoV2CuestSaMat = zpoV2CuestSaMat;
         this.mZpoV2CuestSoe = zpoV2CuestSoe;
         this.mZpoV2Muestra = zpoMuestra;
+
     }
 
     @Override
@@ -83,6 +86,7 @@ public class VisitAdapter extends ArrayAdapter<String> {
                 img=getContext().getResources().getDrawable( R.drawable.ic_sample);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
+
             default:
                 img=getContext().getResources().getDrawable( R.drawable.logo);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);

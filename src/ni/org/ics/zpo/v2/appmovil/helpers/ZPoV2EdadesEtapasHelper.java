@@ -3,11 +3,8 @@ package ni.org.ics.zpo.v2.appmovil.helpers;
 import android.content.ContentValues;
 import android.database.Cursor;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2EdadesEtapas;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2InfantOtoacousticEmissions;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2Mullen;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 import ni.org.ics.zpo.v2.appmovil.utils.ZpoV2EdadesEtapasConstants;
-import ni.org.ics.zpo.v2.appmovil.utils.ZpoV2MullenConstants;
 
 import java.util.Date;
 

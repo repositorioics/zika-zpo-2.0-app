@@ -47,13 +47,12 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 	String[] menu_infante_info;
 
     private static ZpoV2RecoleccionMuestra zpoV2Muestra = null;
-    private static ZpoV2InfantOtoacousticEmissions zpoOtoE = null;
-    private static ZpoV2InfantOphthalmologicEvaluation zp07 = null;
-    private static ZpoV2InfantOphtResults zp07a = null;
 	private static ZpoV2Mullen zpoMullen = null;
 	private static ZpoV2IndCuidadoFamilia zpoICF = null;
 	private static ZpoV2CuestionarioDemografico zpoCDemo = null;
 	private static ZpoV2CuestSaludInfantil zpoCSaInf = null;
+	private static ZpoV2FormAudicion zpoV2EvAuditiva = null;
+	private static ZpoV2EvaluacionVisual zpoV2EvalVisual = null;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -115,14 +114,13 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-				/*	case 5: //EVALUACION OFTALMOLOGICA
+					case 3: //EVALUACION MULLEN
 						i = new Intent(getApplicationContext(),
-								NewZpoV2InfantAssessmentVisitOphtActivity.class);
-						if (zp07 != null) arguments.putSerializable(Constants.OBJECTO_ZP07, zp07);
+								NewZpoV2MullenActivity.class);
+						if (zpoMullen != null) arguments.putSerializable(Constants.OBJECTO_ZPOMULLEN, zpoMullen);
 						i.putExtras(arguments);
 						startActivity(i);
-						break;*/
-
+						break;
 					case 4: //MUESTRAS
 						i = new Intent(getApplicationContext(),
 								NewZpoV2RecoleccionMuestraActivity.class);
@@ -132,57 +130,25 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 						startActivity(i);
 						break;
 
-					case 3: //EVALUACION MULLEN
+					case 5: // EVALUACION AUDITIVA
 						i = new Intent(getApplicationContext(),
-								NewZpoV2MullenActivity.class);
-						if (zpoMullen != null) arguments.putSerializable(Constants.OBJECTO_ZPOMULLEN, zpoMullen);
+								NewZpoV2FormAudicionActivity.class);
+						if (zpoV2EvAuditiva != null) arguments.putSerializable(Constants.OBJECT_FORM_AUDI, zpoV2EvAuditiva);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-				/*	case 7: //RESULTADOS OFTALMOLOGICOS
+
+					case 6: // EVALUACION VISUAL
 						i = new Intent(getApplicationContext(),
-								NewZpoV2InfantOphtResultsActivity.class);
-						if (zp07a != null) arguments.putSerializable(Constants.OBJECTO_ZP07A, zp07a);
-						i.putExtras(arguments);
-						startActivity(i);
-						break;*/
-					/*case 5: //RESULTADOS AUDIOLOGICOS
-						i = new Intent(getApplicationContext(),
-								NewZpo07bInfantAudioResultsActivity.class);
-						if (zp07b != null) arguments.putSerializable(Constants.OBJECTO_ZP07B, zp07b);
+								NewZpoV2EvalVisualActivity.class);
+						if (zpoV2EvalVisual != null) arguments.putSerializable(Constants.OBJECT_EVAL_VIS, zpoV2EvalVisual);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-					case 6: //ESTUDIOS DE IMAGENES
-						i = new Intent(getApplicationContext(),
-								NewZpo07cInfantImageStudiesActivity.class);
-						if (zp07c != null) arguments.putSerializable(Constants.OBJECTO_ZP07C, zp07c);
-						i.putExtras(arguments);
-						startActivity(i);
-						break;
-					case 7: //ESCALA BAYLEY
-						i = new Intent(getApplicationContext(),
-								NewZpo07dInfantBayleyScalesActivity.class);
-						if (zp07d != null) arguments.putSerializable(Constants.OBJECTO_ZP07D, zp07d);
-						i.putExtras(arguments);
-						startActivity(i);
-						break;*/
-				/*	case 4: //EMISIONES OTOACUSTICAS
-						i = new Intent(getApplicationContext(),
-								NewZpoInfantOtoacousticEmissionsActivity.class);
-						if (zpoOtoE != null) arguments.putSerializable(Constants.OBJECTO_ZPO07OtoE, zpoOtoE);
-						i.putExtras(arguments);
-						startActivity(i);
-						break;*/
-					/*case 9: //FACTORES DE RIESGO
-						i = new Intent(getApplicationContext(),
-								NewZpo04ExtendedSectionAtoFActivity.class);
-						if (zp04AF != null) arguments.putSerializable(Constants.OBJECTO_ZP04AF, zp04AF);
-						i.putExtras(arguments);
-						startActivity(i);
-						break;
+
+
 					default:
-						break;*/
+						break;
 				}
 			}
 		});
@@ -317,15 +283,15 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 					zipA.open();
 					filtro = MainDBConstants.recordId + "='" + zpInfante.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
 					zpoV2Muestra = zipA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
-				//	zp07a = zipA.getZpoV2InfantOphtResult(filtro, MainDBConstants.recordId);
 					zpoMullen = zipA.getZpoV2Mullen(filtro, MainDBConstants.recordId);
 					zpoICF = zipA.getZpoV2IndCuidadoFam(filtro,MainDBConstants.recordId);
 					zpoCDemo = zipA.getZpoV2CuestDemo(filtro, MainDBConstants.recordId);
-                    zpoOtoE = zipA.getZpoInfantOtoacousticE(filtro, MainDBConstants.recordId);
                     zpoCSaInf = zipA.getZpoV2CuestSaludInf(filtro, MainDBConstants.recordId);
+                    zpoV2EvAuditiva = zipA.getZpoV2FormAudicion(filtro, MainDBConstants.recordId);
+					zpoV2EvalVisual = zipA.getZpoV2EvalVisual(filtro, MainDBConstants.recordId);
 
 
-					if (zpoV2Muestra !=null && zpoOtoE!=null && zp07!=null && zp07a!=null && zpoMullen != null && zpoICF!=null && zpoCDemo!=null  && zpoCSaInf!=null) {// && zp07!=null && zp07a!=null && zp07b!=null && zp07c!=null && zp07d!=null && zpoOtoE!=null && zp04AF!=null){
+					if (zpoV2Muestra !=null && zpoMullen != null && zpoICF!=null && zpoCDemo!=null  && zpoCSaInf!=null && zpoV2EvAuditiva !=null && zpoV2EvalVisual != null) {
 						/*if(eventoaFiltrar.matches(Constants.MONTH24)){
 							zpEstado.setMes24('1');
 						}*/
@@ -344,7 +310,7 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new InfantVisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra, zpoOtoE, zp07, zp07a, zpoMullen, zpoICF, zpoCDemo, zpoCSaInf));
+				gridView.setAdapter(new InfantVisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra, zpoMullen, zpoICF, zpoCDemo, zpoCSaInf, zpoV2EvAuditiva, zpoV2EvalVisual));
 				dismissProgressDialog();
 			}
 

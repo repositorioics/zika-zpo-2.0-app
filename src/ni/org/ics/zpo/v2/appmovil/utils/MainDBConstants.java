@@ -98,9 +98,9 @@ public class MainDBConstants {
     public static final String eventName = "eventName";
     public static final String scrVisitDate = "scrVisitDate";
     public static final String scrConsentObta = "scrConsentObta";
-    public static final String scrConsentA = "scrConsentA"; //envio muestras a EEUU
-    public static final String scrConsentB = "scrConsentB"; //USO FUTORO DE MUESTRAS BIOLOGICAS
-    public static final String scrConsentC = "scrConsentC"; //ESTUDIOS GENETICOS
+    public static final String scrConsentA = "scrConsentA"; //Muestras biologicas para investigaciones futuras
+    public static final String scrConsentB = "scrConsentB"; //Muestras biologicas para estudios geneticos
+    public static final String scrConsentC = "scrConsentC"; //Contactar para Investigacion adicional
     public static final String scrWitness = "scrWitness";
     public static final String scrAssistant = "scrAssistant";
     public static final String scrReasonNot = "scrReasonNot";
@@ -405,38 +405,32 @@ public class MainDBConstants {
     public static final String BIOCOLLECTION_TABLE = "zpoV2_recoleccion_muestra";
 
     //Campos Zp02BiospecimenCollection
-    public static final String bscDov = "bscDov";
-    public static final String bscVisit = "bscVisit";
-    public static final String bscMatBldCol1 = "bscMatBldCol1";
-    public static final String bscMatBldId1 = "bscMatBldId1";
-    public static final String bscMatBldRsn1 = "bscMatBldRsn1";
-    public static final String bscMatBldRsnOther1 = "bscMatBldRsnOther1";
-    public static final String bscMatBldVol1 = "bscMatBldVol1";
-    public static final String bscMatBldCol2 = "bscMatBldCol2";
-    public static final String bscMatBldId2 = "bscMatBldId2";
-    public static final String bscMatBldRsn2 = "bscMatBldRsn2";
-    public static final String bscMatBldRsnOther2 = "bscMatBldRsnOther2";
-    public static final String bscMatBldVol2 = "bscMatBldVol2";
-    public static final String bscPhlebotomist = "bscPhlebotomist";
+    public static final String bloodTodaysDate = "bloodTodaysDate";
+    public static final String bloodSampleCollected = "bloodSampleCollected";
+    public static final String bloodWhichPerson = "bloodWhichPerson";
+    public static final String bloodMomSampleDate = "bloodMomSampleDate";
+    public static final String bloodMomTubes = "bloodMomTubes";
+    public static final String bloodMomType = "bloodMomType";
+    public static final String bloodChildSampleDate = "bloodChildSampleDate";
+    public static final String bloodChildTubes = "bloodChildTubes";
+    public static final String bloodChildType = "bloodChildType";
+    public static final String bloodPersonnel = "bloodPersonnel";
 
     //Crear tabla Zp02BiospecimenCollection
     public static final String CREATE_BIOCOLLECTION_TABLE = "create table if not exists "
             + BIOCOLLECTION_TABLE + " ("
             + recordId + " text not null, "
             + eventName + " text, "
-            + bscDov + " date, "
-            + bscVisit + " text, "
-            + bscMatBldCol1  + " text, "
-            + bscMatBldId1 + " text, "
-            + bscMatBldRsn1  + " text, "
-            + bscMatBldRsnOther1  + " text, "
-            + bscMatBldVol1 + " double, "
-            + bscMatBldCol2 + " text, "
-            + bscMatBldId2 + " text, "
-            + bscMatBldRsn2 + " text, "
-            + bscMatBldRsnOther2 + " text, "
-            + bscMatBldVol2 + " double, "
-            + bscPhlebotomist + " text, "
+            + bloodTodaysDate + " date, "
+            + bloodSampleCollected + " text, "
+            + bloodWhichPerson  + " text, "
+            + bloodMomSampleDate + " date, "
+            + bloodMomTubes  + " integer, "
+            + bloodMomType  + " text, "
+            + bloodChildSampleDate + " date, "
+            + bloodChildTubes + " integer, "
+            + bloodChildType + " text, "
+            + bloodPersonnel + " text, "
             + MainDBConstants.recordDate + " date, "
             + MainDBConstants.recordUser + " text, "
             + MainDBConstants.pasive + " text, "

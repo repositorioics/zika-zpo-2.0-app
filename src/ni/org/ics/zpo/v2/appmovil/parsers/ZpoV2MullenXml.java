@@ -10,289 +10,79 @@ import java.util.Date;
  */
 public class ZpoV2MullenXml {
 
-    @Element(required=false)
+    @Element(required = false)
     private String sexMsel;
-    @Element(required=false)
+    @Element(required = false)
     private String raNameMsel;
-    @Element(required=false)
+    @Element(required = false)
     private String visitMonthsMsel;
-    @Element(required=false)
-    private String visProbMsel;
-    @Element(required=false)
-    private String desVisProbMsel;
-    @Element(required=false)
-    private String hearProbMsel;
-    @Element(required=false)
-    private String desHearProbMsel;
-    @Element(required=false)
+    @Element(required = false)
     private Date testingDateMsel;
-    @Element(required=false)
-    private Date eddMsel;
-    @Element(required=false)
-    private String adjAgeMsel;
-    @Element(required=false)
-    private Date actDobMsel;
-    @Element(required=false)
+    @Element(required = false)
+    private Integer adjAgeMsel;//edad infante
+    @Element(required = false)
+    private Date actDobMsel;//fecha nac
+    @Element(required = false)
     private String gmRaw;
-    @Element(required=false)
-    private String gmTScore;
-    @Element(required=false)
-    private String gmBoe;
-    @Element(required=false)
+    @Element(required = false)
+    private Integer gmTScore;
+    @Element(required = false)
     private String gmPerRank;
-    @Element(required=false)
+    @Element(required = false)
     private String gmDesCat;
-    @Element(required=false)
+    @Element(required = false)
     private String gmAgeEqu;
-    @Element(required=false)
+    @Element(required = false)
     private String vrRaw;
-    @Element(required=false)
-    private String vrTScore;
-    @Element(required=false)
-    private String vrBoe;
-    @Element(required=false)
+    @Element(required = false)
+    private Integer vrTScore;
+    @Element(required = false)
     private String vrPerRank;
-    @Element(required=false)
+    @Element(required = false)
     private String vrDesCat;
-    @Element(required=false)
+    @Element(required = false)
     private String vrAgeEqu;
-    @Element(required=false)
+    @Element(required = false)
     private String fmRaw;
-    @Element(required=false)
-    private String fmTScore;
-    @Element(required=false)
-    private String fmBoe;
-    @Element(required=false)
+    @Element(required = false)
+    private Integer fmTScore;
+    @Element(required = false)
     private String fmPerRank;
-    @Element(required=false)
+    @Element(required = false)
     private String fmDesCat;
-    @Element(required=false)
+    @Element(required = false)
     private String fmAgeEqu;
-    @Element(required=false)
+    @Element(required = false)
     private String rlRaw;
-    @Element(required=false)
+    @Element(required = false)
     private String rlTScore;
-    @Element(required=false)
-    private String rlBoe;
-    @Element(required=false)
+    @Element(required = false)
     private String rlPerRank;
-    @Element(required=false)
+    @Element(required = false)
     private String rlDesCat;
-    @Element(required=false)
+    @Element(required = false)
     private String rlAgeEqu;
-    @Element(required=false)
+    @Element(required = false)
     private String elRaw;
-    @Element(required=false)
-    private String elTScore;
-    @Element(required=false)
-    private String elBoe;
-    @Element(required=false)
+    @Element(required = false)
+    private Integer elTScore;
+    @Element(required = false)
     private String elPerRank;
-    @Element(required=false)
+    @Element(required = false)
     private String elDesCat;
-    @Element(required=false)
+    @Element(required = false)
     private String elAgeEqu;
-    @Element(required=false)
-    private String cognTScoreSum;
-    @Element(required=false)
+    @Element(required = false)
+    private Integer cognTScoreSum;
+    @Element(required = false)
     private String elcStandScore;
-    @Element(required=false)
-    private String elcBoe;
-    @Element(required=false)
+    @Element(required = false)
     private String elcPerRank;
-    @Element(required=false)
+    @Element(required = false)
     private String elcDesCat;
-    @Element(required=false)
+    @Element(required = false)
     private String mselComment;
 
-
-    public String getSexMsel() {
-        return sexMsel;
-    }
-
-    public String getRaNameMsel() {
-        return raNameMsel;
-    }
-
-    public String getVisitMonthsMsel() {
-        return visitMonthsMsel;
-    }
-
-    public String getVisProbMsel() {
-        return visProbMsel;
-    }
-
-    public String getDesVisProbMsel() {
-        return desVisProbMsel;
-    }
-
-    public String getHearProbMsel() {
-        return hearProbMsel;
-    }
-
-    public String getDesHearProbMsel() {
-        return desHearProbMsel;
-    }
-
-    public Date getTestingDateMsel() {
-        return testingDateMsel;
-    }
-
-    public Date getEddMsel() {
-        return eddMsel;
-    }
-
-    public String getAdjAgeMsel() {
-        return adjAgeMsel;
-    }
-
-    public Date getActDobMsel() {
-        return actDobMsel;
-    }
-
-    public String getGmRaw() {
-        return gmRaw;
-    }
-
-    public String getGmTScore() {
-        return gmTScore;
-    }
-
-    public String getGmBoe() {
-        return gmBoe;
-    }
-
-    public String getGmPerRank() {
-        return gmPerRank;
-    }
-
-    public String getGmDesCat() {
-        return gmDesCat;
-    }
-
-    public String getGmAgeEqu() {
-        return gmAgeEqu;
-    }
-
-    public String getVrRaw() {
-        return vrRaw;
-    }
-
-    public String getVrTScore() {
-        return vrTScore;
-    }
-
-    public String getVrBoe() {
-        return vrBoe;
-    }
-
-    public String getVrPerRank() {
-        return vrPerRank;
-    }
-
-    public String getVrDesCat() {
-        return vrDesCat;
-    }
-
-    public String getVrAgeEqu() {
-        return vrAgeEqu;
-    }
-
-    public String getFmRaw() {
-        return fmRaw;
-    }
-
-    public String getFmTScore() {
-        return fmTScore;
-    }
-
-    public String getFmBoe() {
-        return fmBoe;
-    }
-
-    public String getFmPerRank() {
-        return fmPerRank;
-    }
-
-    public String getFmDesCat() {
-        return fmDesCat;
-    }
-
-    public String getFmAgeEqu() {
-        return fmAgeEqu;
-    }
-
-    public String getRlRaw() {
-        return rlRaw;
-    }
-
-    public String getRlTScore() {
-        return rlTScore;
-    }
-
-    public String getRlBoe() {
-        return rlBoe;
-    }
-
-    public String getRlPerRank() {
-        return rlPerRank;
-    }
-
-    public String getRlDesCat() {
-        return rlDesCat;
-    }
-
-    public String getRlAgeEqu() {
-        return rlAgeEqu;
-    }
-
-    public String getElRaw() {
-        return elRaw;
-    }
-
-    public String getElTScore() {
-        return elTScore;
-    }
-
-    public String getElBoe() {
-        return elBoe;
-    }
-
-    public String getElPerRank() {
-        return elPerRank;
-    }
-
-    public String getElDesCat() {
-        return elDesCat;
-    }
-
-    public String getElAgeEqu() {
-        return elAgeEqu;
-    }
-
-    public String getCognTScoreSum() {
-        return cognTScoreSum;
-    }
-
-    public String getElcStandScore() {
-        return elcStandScore;
-    }
-
-    public String getElcBoe() {
-        return elcBoe;
-    }
-
-    public String getElcPerRank() {
-        return elcPerRank;
-    }
-
-    public String getElcDesCat() {
-        return elcDesCat;
-    }
-
-    public String getMselComment() {
-        return mselComment;
-    }
 
     @Attribute
     private String id;
@@ -315,6 +105,151 @@ public class ZpoV2MullenXml {
     private Date today;
     @Attribute(required = false)
     private String version;
+
+
+    public String getSexMsel() {
+        return sexMsel;
+    }
+
+    public String getRaNameMsel() {
+        return raNameMsel;
+    }
+
+    public String getVisitMonthsMsel() {
+        return visitMonthsMsel;
+    }
+
+    public Date getTestingDateMsel() {
+        return testingDateMsel;
+    }
+
+    public Integer getAdjAgeMsel() {
+        return adjAgeMsel;
+    }
+
+    public Date getActDobMsel() {
+        return actDobMsel;
+    }
+
+    public String getGmRaw() {
+        return gmRaw;
+    }
+
+    public Integer getGmTScore() {
+        return gmTScore;
+    }
+
+    public String getGmPerRank() {
+        return gmPerRank;
+    }
+
+    public String getGmDesCat() {
+        return gmDesCat;
+    }
+
+    public String getGmAgeEqu() {
+        return gmAgeEqu;
+    }
+
+    public String getVrRaw() {
+        return vrRaw;
+    }
+
+    public Integer getVrTScore() {
+        return vrTScore;
+    }
+
+    public String getVrPerRank() {
+        return vrPerRank;
+    }
+
+    public String getVrDesCat() {
+        return vrDesCat;
+    }
+
+    public String getVrAgeEqu() {
+        return vrAgeEqu;
+    }
+
+    public String getFmRaw() {
+        return fmRaw;
+    }
+
+    public Integer getFmTScore() {
+        return fmTScore;
+    }
+
+    public String getFmPerRank() {
+        return fmPerRank;
+    }
+
+    public String getFmDesCat() {
+        return fmDesCat;
+    }
+
+    public String getFmAgeEqu() {
+        return fmAgeEqu;
+    }
+
+    public String getRlRaw() {
+        return rlRaw;
+    }
+
+    public String getRlTScore() {
+        return rlTScore;
+    }
+
+    public String getRlPerRank() {
+        return rlPerRank;
+    }
+
+    public String getRlDesCat() {
+        return rlDesCat;
+    }
+
+    public String getRlAgeEqu() {
+        return rlAgeEqu;
+    }
+
+    public String getElRaw() {
+        return elRaw;
+    }
+
+    public Integer getElTScore() {
+        return elTScore;
+    }
+
+    public String getElPerRank() {
+        return elPerRank;
+    }
+
+    public String getElDesCat() {
+        return elDesCat;
+    }
+
+    public String getElAgeEqu() {
+        return elAgeEqu;
+    }
+
+    public Integer getCognTScoreSum() {
+        return cognTScoreSum;
+    }
+
+    public String getElcStandScore() {
+        return elcStandScore;
+    }
+
+    public String getElcPerRank() {
+        return elcPerRank;
+    }
+
+    public String getElcDesCat() {
+        return elcDesCat;
+    }
+
+    public String getMselComment() {
+        return mselComment;
+    }
 
     public String getId() {
         return id;

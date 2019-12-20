@@ -12,7 +12,6 @@ import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestSaludInfantil;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2EdadesEtapas;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2InfantPsychologicalEvaluation;
 
 public class InfantCallAdapter extends ArrayAdapter<String> {
 

@@ -27,25 +27,9 @@ public class Constants {
 	//nombres de objetos
 	public static final String TITLE = "titulo";
 	public static final String OBJECTO_ZP00 = "zp00";
-	public static final String OBJECTO_ZP01A = "zp01a";
-    public static final String OBJECTO_ZP01E = "zp01e";
-    public static final String OBJECTO_ZP01F = "zp01f";
     public static final String OBJECTO_ZP02 = "zp02";
-    public static final String OBJECTO_ZP03 = "zp03";
-    public static final String OBJECTO_ZP04A = "zp04a";
-    public static final String OBJECTO_ZP04E = "zp04e";
-    public static final String OBJECTO_ZP04F = "zp04f";
-    public static final String OBJECTO_ZP05 = "zp05";
-    public static final String OBJECTO_ZP06 = "zp06";
-    public static final String OBJECTO_ZP08 = "zp08";
     public static final String OBJECTO_ZP07 = "zp07";
-    public static final String OBJECTO_ZP02D = "zp02d";
-	public static final String OBJECTO_ZP07A = "zp07a";
-	public static final String OBJECTO_ZP07B = "zp07b";
-	public static final String OBJECTO_ZP07C = "zp07c";
-	public static final String OBJECTO_ZP07D = "zp07d";
 	public static final String OBJECTO_ZPO07OtoE = "zpo07OtoE";
-	public static final String OBJECTO_ZP04AF = "zp04af";
 	public static final String OBJECTO_ZPOMULLEN = "zpoMullen";
 	public static final String OBJECT_ZPOEDADESETAPAS = "zpoEdadesEtapas";
 	public static final String OBJECT_INDCUIFAM = "zpoIndCuidadoFamilia";
@@ -53,6 +37,10 @@ public class Constants {
 	public static final String OBJECT_CUEST_SA_INF = "zpoCuestSaludInfantil";
 	public static final String OBJECT_CUEST_SA_MAT = "zpoCuestSaludMaterna";
 	public static final String OBJECT_CUEST_SOE = "zpoCuestSocioeconomico";
+	public static final String OBJECT_EVAL_PSICO = "zpoEvaluacionPsicologica";
+	public static final String OBJECT_EX_FIS_INF = "zpoExamenFisicoInfante";
+	public static final String OBJECT_FORM_AUDI = "zpoFormAudicion";
+	public static final String OBJECT_EVAL_VIS = "zpoEvaluacionVisual";
 
 	public static final String OBJECTO_ZPEST = "zpestado";
 	public static final String OBJECTO_ZPDATA = "zpdatos";

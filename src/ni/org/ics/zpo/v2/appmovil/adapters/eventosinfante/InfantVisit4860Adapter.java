@@ -21,10 +21,16 @@ public class InfantVisit4860Adapter extends ArrayAdapter<String> {
     private final ZpoV2IndCuidadoFamilia mZpoICF;
     private final ZpoV2CuestionarioDemografico mZpoCDemo;
     private final ZpoV2CuestSaludInfantil mZpoCuestSaInf;
+    private final ZpoV2ExamenFisicoInfante mZpoExFisInf;
 
 	public InfantVisit4860Adapter(Context context, int textViewResourceId,
                                   String[] values,
-                                  ZpoV2RecoleccionMuestra zpoMuestra, ZpoV2Mullen zpoMullen, ZpoV2IndCuidadoFamilia zpoICF, ZpoV2CuestionarioDemografico zpoCDemo, ZpoV2CuestSaludInfantil zpoCSI) {
+                                  ZpoV2RecoleccionMuestra zpoMuestra,
+								  ZpoV2Mullen zpoMullen,
+								  ZpoV2IndCuidadoFamilia zpoICF,
+								  ZpoV2CuestionarioDemografico zpoCDemo,
+								  ZpoV2CuestSaludInfantil zpoCSI,
+								  ZpoV2ExamenFisicoInfante zpoEFI) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
@@ -33,6 +39,7 @@ public class InfantVisit4860Adapter extends ArrayAdapter<String> {
         this.mZpoICF = zpoICF;
         this.mZpoCDemo = zpoCDemo;
         this.mZpoCuestSaInf= zpoCSI;
+        this.mZpoExFisInf = zpoEFI;
 	}
 
 	@Override
@@ -106,6 +113,18 @@ public class InfantVisit4860Adapter extends ArrayAdapter<String> {
                 img=getContext().getResources().getDrawable( R.drawable.ic_sample);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
+
+			case 5:
+				if(mZpoExFisInf!=null){
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+				}
+				else{
+					textView.setTextColor(Color.RED);
+					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+				}
+				img=getContext().getResources().getDrawable( R.drawable.ic_inf_phys_exam);
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+				break;
 
             default:
                 img = getContext().getResources().getDrawable(R.drawable.logo);

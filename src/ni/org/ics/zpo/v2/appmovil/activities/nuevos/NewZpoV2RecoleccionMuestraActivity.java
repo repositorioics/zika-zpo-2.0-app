@@ -28,11 +28,16 @@ import ni.org.ics.zpo.v2.appmovil.utils.FileUtils;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
 import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormatter;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by FIRSTICT on 10/31/2016.
@@ -59,7 +64,7 @@ public class NewZpoV2RecoleccionMuestraActivity extends AbstractAsyncActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!FileUtils.storageReady()) {
-            Toast toast = Toast.makeText(getApplicationContext(),getString(R.string.error, R.string.storage_error),Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(),getString(R.string.error)  + "," + getString(R.string.storage_error),Toast.LENGTH_LONG);
             toast.show();
             finish();
         }
@@ -186,14 +191,9 @@ public class NewZpoV2RecoleccionMuestraActivity extends AbstractAsyncActivity {
 	            String[] projection = new String[] {
 	                    "_id","jrFormId","displayName"};
 	            //cursor que busca el formulario
-                String selection;
-                if (esMadre)
-                    selection = "jrFormId = 'zpov2_muestra_materna' and displayName = 'Continuacion Estudio ZPO Recoleccion de muestra materna'";
-                else
-                    selection = "jrFormId = 'zpov2_muestra_infante' and displayName = 'Continuacion Estudio ZPO Recoleccion de muestra infante'";
 
 	            Cursor c = getContentResolver().query(Constants.CONTENT_URI, projection,
-	                    selection, null, null);
+                        "jrFormId = 'zpov2_muestras' and displayName = 'Continuacion Estudio ZPO Recoleccion de muestra madre/infante'", null, null);
 	            c.moveToFirst();
 	            //captura el id del formulario
 	            Integer id = Integer.parseInt(c.getString(0));
@@ -222,77 +222,42 @@ public class NewZpoV2RecoleccionMuestraActivity extends AbstractAsyncActivity {
         }
     }
 
-  /*  private boolean validarId(String id) {
-        //Valida codigo de muestra
-        if (event.equals( Constants.MONTH24 )) {
-            String reg = "^" + mRecordId + "-\\d[30][I|R]$";
-            if (!id.matches( reg )) {
-                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
-                return false;
-            }
-        } else if (event.equals( Constants.MONTH36 )) {
-            String reg = "^" + mRecordId + "-\\d[31][I|R]$";
-            if (!id.matches( reg )) {
-                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
-                return false;
-            }
-        } else if (event.equals( Constants.MONTH48 )) {
-            String reg = "^" + mRecordId + "-\\d[32][I|R]$";
-            if (!id.matches( reg )) {
-                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
-                return false;
-            }
-        } else if (event.equals( Constants.MONTH60 )) {
-            String reg = "^" + mRecordId + "-\\d[33][I|R]$";
-            if (!id.matches( reg )) {
-                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
-                return false;
-            }
-        } else if (event.equals( Constants.MONTH72 )) {
-            String reg = "^" + mRecordId + "-\\d[34][I|R]$";
-            if (!id.matches( reg )) {
-                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
-                return false;
-            }
-        } else if (event.equals( Constants.MONTH84 )) {
-            String reg = "^" + mRecordId + "-\\d[35][I|R]$";
-            if (!id.matches( reg )) {
-                Toast.makeText( getApplicationContext(), getString( R.string.err_mx ), Toast.LENGTH_LONG ).show();
-                return false;
-            }
-        }else {
-           return true;
-        }
-        return true;
-    }*/
-
-
     private void parseZpo02BiospecimenCollection(Integer idInstancia, String instanceFilePath, Integer accion) {
         Serializer serializer = new Persister();
         File source = new File( instanceFilePath );
-        boolean validate1 = true;
-        boolean validate2 = true;
 
         try {
             ZpoV2RecoleccionMuestraXml zp02Xml = serializer.read( ZpoV2RecoleccionMuestraXml.class, source );
 
             if (accion == ADD_ZP02_ODK) mZpo02 = new ZpoV2RecoleccionMuestra();
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+
+            Date bloodMomSampleDate = null;
+            Date bloodChildSampleDate = null;
+
+            if (zp02Xml.getDate1() != null && zp02Xml.getTime1() != null) {
+                bloodMomSampleDate = formatter.parse(zp02Xml.getDate1() + " "+ zp02Xml.getTime1().substring(0,8));
+
+            }
+
+            if (zp02Xml.getDate2() != null && zp02Xml.getTime2() != null) {
+                bloodChildSampleDate = formatter.parse(zp02Xml.getDate2() + " "+ zp02Xml.getTime2().substring(0,8));
+            }
+
             mZpo02.setRecordId( mRecordId );
             mZpo02.setEventName( event );
-
-            mZpo02.setBscDov( zp02Xml.getBscDov() );
-            mZpo02.setBscVisit( zp02Xml.getBscVisit() );
-            mZpo02.setBscMatBldCol1( zp02Xml.getBscMatBldCol1() );
-            mZpo02.setBscMatBldId1( zp02Xml.getBscMatBldId1() );
-            mZpo02.setBscMatBldVol1( zp02Xml.getBscMatBldVol1() );
-            mZpo02.setBscMatBldRsn1( zp02Xml.getBscMatBldRsn1() );
-            mZpo02.setBscMatBldRsnOther1( zp02Xml.getBscMatBldRsnOther1() );
-            mZpo02.setBscMatBldCol2( zp02Xml.getBscMatBldCol2() );
-            mZpo02.setBscMatBldId2( zp02Xml.getBscMatBldId2() );
-            mZpo02.setBscMatBldVol2( zp02Xml.getBscMatBldVol2() );
-            mZpo02.setBscMatBldRsn2( zp02Xml.getBscMatBldRsn2() );
-            mZpo02.setBscMatBldRsnOther2( zp02Xml.getBscMatBldRsnOther2() );
-            mZpo02.setBscPhlebotomist( zp02Xml.getBscPhlebotomist() );
+            mZpo02.setBloodTodaysDate(zp02Xml.getBloodTodaysDate());
+            mZpo02.setBloodSampleCollected(zp02Xml.getBloodSampleCollected());
+            mZpo02.setBloodWhichPerson(zp02Xml.getBloodWhichPerson());
+            mZpo02.setBloodMomSampleDate(bloodMomSampleDate);
+            mZpo02.setBloodMomTubes(zp02Xml.getBloodMomTubes());
+            mZpo02.setBloodMomType(zp02Xml.getBloodMomType());
+            mZpo02.setBloodChildSampleDate(bloodChildSampleDate);
+            mZpo02.setBloodChildTubes(zp02Xml.getBloodChildTubes());
+            mZpo02.setBloodChildType(zp02Xml.getBloodChildType());
+            mZpo02.setBloodPersonnel(zp02Xml.getBloodPersonnel());
 
             mZpo02.setRecordDate( new Date() );
             mZpo02.setRecordUser( username );

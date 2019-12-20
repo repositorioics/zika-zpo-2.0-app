@@ -12,47 +12,36 @@ public class ZpoV2Mullen extends BaseMetaData {
     private String sexMsel;
     private String raNameMsel;
     private String visitMonthsMsel;
-    private String visProbMsel;
-    private String desVisProbMsel;
-    private String hearProbMsel;
-    private String desHearProbMsel;
     private Date testingDateMsel;
-    private Date eddMsel;
-    private String adjAgeMsel;
-    private Date actDobMsel;
+    private Integer adjAgeMsel;//edad infante
+    private Date actDobMsel;//fecha nac
     private String gmRaw;
-    private String gmTScore;
-    private String gmBoe;
+    private Integer gmTScore;
     private String gmPerRank;
     private String gmDesCat;
     private String gmAgeEqu;
     private String vrRaw;
-    private String vrTScore;
-    private String vrBoe;
+    private Integer vrTScore;
     private String vrPerRank;
     private String vrDesCat;
     private String vrAgeEqu;
     private String fmRaw;
-    private String fmTScore;
-    private String fmBoe;
+    private Integer fmTScore;
     private String fmPerRank;
     private String fmDesCat;
     private String fmAgeEqu;
     private String rlRaw;
     private String rlTScore;
-    private String rlBoe;
     private String rlPerRank;
     private String rlDesCat;
     private String rlAgeEqu;
     private String elRaw;
-    private String elTScore;
-    private String elBoe;
+    private Integer elTScore;
     private String elPerRank;
     private String elDesCat;
     private String elAgeEqu;
-    private String cognTScoreSum;
+    private Integer cognTScoreSum;
     private String elcStandScore;
-    private String elcBoe;
     private String elcPerRank;
     private String elcDesCat;
     private String mselComment;
@@ -97,38 +86,6 @@ public class ZpoV2Mullen extends BaseMetaData {
         this.visitMonthsMsel = visitMonthsMsel;
     }
 
-    public String getVisProbMsel() {
-        return visProbMsel;
-    }
-
-    public void setVisProbMsel(String visProbMsel) {
-        this.visProbMsel = visProbMsel;
-    }
-
-    public String getDesVisProbMsel() {
-        return desVisProbMsel;
-    }
-
-    public void setDesVisProbMsel(String desVisProbMsel) {
-        this.desVisProbMsel = desVisProbMsel;
-    }
-
-    public String getHearProbMsel() {
-        return hearProbMsel;
-    }
-
-    public void setHearProbMsel(String hearProbMsel) {
-        this.hearProbMsel = hearProbMsel;
-    }
-
-    public String getDesHearProbMsel() {
-        return desHearProbMsel;
-    }
-
-    public void setDesHearProbMsel(String desHearProbMsel) {
-        this.desHearProbMsel = desHearProbMsel;
-    }
-
     public Date getTestingDateMsel() {
         return testingDateMsel;
     }
@@ -137,19 +94,11 @@ public class ZpoV2Mullen extends BaseMetaData {
         this.testingDateMsel = testingDateMsel;
     }
 
-    public Date getEddMsel() {
-        return eddMsel;
-    }
-
-    public void setEddMsel(Date eddMsel) {
-        this.eddMsel = eddMsel;
-    }
-
-    public String getAdjAgeMsel() {
+    public Integer getAdjAgeMsel() {
         return adjAgeMsel;
     }
 
-    public void setAdjAgeMsel(String adjAgeMsel) {
+    public void setAdjAgeMsel(Integer adjAgeMsel) {
         this.adjAgeMsel = adjAgeMsel;
     }
 
@@ -169,20 +118,12 @@ public class ZpoV2Mullen extends BaseMetaData {
         this.gmRaw = gmRaw;
     }
 
-    public String getGmTScore() {
+    public Integer getGmTScore() {
         return gmTScore;
     }
 
-    public void setGmTScore(String gmTScore) {
+    public void setGmTScore(Integer gmTScore) {
         this.gmTScore = gmTScore;
-    }
-
-    public String getGmBoe() {
-        return gmBoe;
-    }
-
-    public void setGmBoe(String gmBoe) {
-        this.gmBoe = gmBoe;
     }
 
     public String getGmPerRank() {
@@ -217,20 +158,12 @@ public class ZpoV2Mullen extends BaseMetaData {
         this.vrRaw = vrRaw;
     }
 
-    public String getVrTScore() {
+    public Integer getVrTScore() {
         return vrTScore;
     }
 
-    public void setVrTScore(String vrTScore) {
+    public void setVrTScore(Integer vrTScore) {
         this.vrTScore = vrTScore;
-    }
-
-    public String getVrBoe() {
-        return vrBoe;
-    }
-
-    public void setVrBoe(String vrBoe) {
-        this.vrBoe = vrBoe;
     }
 
     public String getVrPerRank() {
@@ -265,20 +198,12 @@ public class ZpoV2Mullen extends BaseMetaData {
         this.fmRaw = fmRaw;
     }
 
-    public String getFmTScore() {
+    public Integer getFmTScore() {
         return fmTScore;
     }
 
-    public void setFmTScore(String fmTScore) {
+    public void setFmTScore(Integer fmTScore) {
         this.fmTScore = fmTScore;
-    }
-
-    public String getFmBoe() {
-        return fmBoe;
-    }
-
-    public void setFmBoe(String fmBoe) {
-        this.fmBoe = fmBoe;
     }
 
     public String getFmPerRank() {
@@ -321,14 +246,6 @@ public class ZpoV2Mullen extends BaseMetaData {
         this.rlTScore = rlTScore;
     }
 
-    public String getRlBoe() {
-        return rlBoe;
-    }
-
-    public void setRlBoe(String rlBoe) {
-        this.rlBoe = rlBoe;
-    }
-
     public String getRlPerRank() {
         return rlPerRank;
     }
@@ -361,20 +278,12 @@ public class ZpoV2Mullen extends BaseMetaData {
         this.elRaw = elRaw;
     }
 
-    public String getElTScore() {
+    public Integer getElTScore() {
         return elTScore;
     }
 
-    public void setElTScore(String elTScore) {
+    public void setElTScore(Integer elTScore) {
         this.elTScore = elTScore;
-    }
-
-    public String getElBoe() {
-        return elBoe;
-    }
-
-    public void setElBoe(String elBoe) {
-        this.elBoe = elBoe;
     }
 
     public String getElPerRank() {
@@ -401,11 +310,11 @@ public class ZpoV2Mullen extends BaseMetaData {
         this.elAgeEqu = elAgeEqu;
     }
 
-    public String getCognTScoreSum() {
+    public Integer getCognTScoreSum() {
         return cognTScoreSum;
     }
 
-    public void setCognTScoreSum(String cognTScoreSum) {
+    public void setCognTScoreSum(Integer cognTScoreSum) {
         this.cognTScoreSum = cognTScoreSum;
     }
 
@@ -415,14 +324,6 @@ public class ZpoV2Mullen extends BaseMetaData {
 
     public void setElcStandScore(String elcStandScore) {
         this.elcStandScore = elcStandScore;
-    }
-
-    public String getElcBoe() {
-        return elcBoe;
-    }
-
-    public void setElcBoe(String elcBoe) {
-        this.elcBoe = elcBoe;
     }
 
     public String getElcPerRank() {

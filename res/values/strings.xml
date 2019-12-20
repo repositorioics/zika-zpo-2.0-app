@@ -78,9 +78,9 @@
     <string name="UNSCHED">No programado</string>
     
     <string name="consents">Consentimientos:</string>
-    <string name="c2aEnvMue">a. Las muestras pueden ser enviadas a Estados Unidos:</string>
-    <string name="c2bAlmMue">b. Permiso para almacenar muestras y datos para investigaciones en el futuro:</string>
-    <string name="c2cEstGen">c. Permiso para realizar estudios genéticos:</string>
+    <string name="c2aEnvMue">a. Muestra biológica de la participante y la de su niño así como los datos sean usados en investigaciones  futuras</string>
+    <string name="c2bAlmMue">b. Muestras biológicas de la participante y las de su niño así como los datos sean usados para estudios genéticos</string>
+    <string name="c2cEstGen">c. Contactar para investigación adicional</string>
 
     <string name="err_mx">El código de muestra ingresado es inválido</string>
 

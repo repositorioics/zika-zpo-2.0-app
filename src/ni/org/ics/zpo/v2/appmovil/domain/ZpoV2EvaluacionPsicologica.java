@@ -10,7 +10,7 @@ public class ZpoV2EvaluacionPsicologica extends BaseMetaData {
     private String recordId;
     private String eventName;
     private Date fechaPsych;
-    private String trabajarPsych;
+   /* private String trabajarPsych;
     private String cocinarPsych;
     private String mercadoPsych;
     private String banarHijoPsych;
@@ -26,7 +26,7 @@ public class ZpoV2EvaluacionPsicologica extends BaseMetaData {
     private String ayudarAmigasPsych;
     private String compartirInfoPsych;
     private String tareasSaludPsych;
-    private Integer funcionamientoPuntajePsych;
+    private Integer funcionamientoPuntajePsych;*/
     private String sinEnergiaPsych;
     private String culparseMismaPsych;
     private String llorarPsych;
@@ -52,8 +52,8 @@ public class ZpoV2EvaluacionPsicologica extends BaseMetaData {
     private String dolorCabezaPsych;
     private String panicoPsych;
     private String inquietudPsych;
-    private Integer sintomasPuntajePsych;
-    private Integer scoreDepressionPsych;
+    private Double sintomasPuntajePsych;
+    private Double scoreDepressionPsych;
     private String examinadorPsych;
 
     public String getRecordId() {
@@ -78,142 +78,6 @@ public class ZpoV2EvaluacionPsicologica extends BaseMetaData {
 
     public void setFechaPsych(Date fechaPsych) {
         this.fechaPsych = fechaPsych;
-    }
-
-    public String getTrabajarPsych() {
-        return trabajarPsych;
-    }
-
-    public void setTrabajarPsych(String trabajarPsych) {
-        this.trabajarPsych = trabajarPsych;
-    }
-
-    public String getCocinarPsych() {
-        return cocinarPsych;
-    }
-
-    public void setCocinarPsych(String cocinarPsych) {
-        this.cocinarPsych = cocinarPsych;
-    }
-
-    public String getMercadoPsych() {
-        return mercadoPsych;
-    }
-
-    public void setMercadoPsych(String mercadoPsych) {
-        this.mercadoPsych = mercadoPsych;
-    }
-
-    public String getBanarHijoPsych() {
-        return banarHijoPsych;
-    }
-
-    public void setBanarHijoPsych(String banarHijoPsych) {
-        this.banarHijoPsych = banarHijoPsych;
-    }
-
-    public String getVestirHijoPsych() {
-        return vestirHijoPsych;
-    }
-
-    public void setVestirHijoPsych(String vestirHijoPsych) {
-        this.vestirHijoPsych = vestirHijoPsych;
-    }
-
-    public String getLimpiarPsych() {
-        return limpiarPsych;
-    }
-
-    public void setLimpiarPsych(String limpiarPsych) {
-        this.limpiarPsych = limpiarPsych;
-    }
-
-    public String getLavarRopaPsych() {
-        return lavarRopaPsych;
-    }
-
-    public void setLavarRopaPsych(String lavarRopaPsych) {
-        this.lavarRopaPsych = lavarRopaPsych;
-    }
-
-    public String getBanarsePsych() {
-        return banarsePsych;
-    }
-
-    public void setBanarsePsych(String banarsePsych) {
-        this.banarsePsych = banarsePsych;
-    }
-
-    public String getCuidarCabelloPsych() {
-        return cuidarCabelloPsych;
-    }
-
-    public void setCuidarCabelloPsych(String cuidarCabelloPsych) {
-        this.cuidarCabelloPsych = cuidarCabelloPsych;
-    }
-
-    public String getAtenderVisitaPsych() {
-        return atenderVisitaPsych;
-    }
-
-    public void setAtenderVisitaPsych(String atenderVisitaPsych) {
-        this.atenderVisitaPsych = atenderVisitaPsych;
-    }
-
-    public String getLavarDientesPsych() {
-        return lavarDientesPsych;
-    }
-
-    public void setLavarDientesPsych(String lavarDientesPsych) {
-        this.lavarDientesPsych = lavarDientesPsych;
-    }
-
-    public String getUsarRopaLimpiaPsych() {
-        return usarRopaLimpiaPsych;
-    }
-
-    public void setUsarRopaLimpiaPsych(String usarRopaLimpiaPsych) {
-        this.usarRopaLimpiaPsych = usarRopaLimpiaPsych;
-    }
-
-    public String getJuntarMujeresPsych() {
-        return juntarMujeresPsych;
-    }
-
-    public void setJuntarMujeresPsych(String juntarMujeresPsych) {
-        this.juntarMujeresPsych = juntarMujeresPsych;
-    }
-
-    public String getAyudarAmigasPsych() {
-        return ayudarAmigasPsych;
-    }
-
-    public void setAyudarAmigasPsych(String ayudarAmigasPsych) {
-        this.ayudarAmigasPsych = ayudarAmigasPsych;
-    }
-
-    public String getCompartirInfoPsych() {
-        return compartirInfoPsych;
-    }
-
-    public void setCompartirInfoPsych(String compartirInfoPsych) {
-        this.compartirInfoPsych = compartirInfoPsych;
-    }
-
-    public String getTareasSaludPsych() {
-        return tareasSaludPsych;
-    }
-
-    public void setTareasSaludPsych(String tareasSaludPsych) {
-        this.tareasSaludPsych = tareasSaludPsych;
-    }
-
-    public Integer getFuncionamientoPuntajePsych() {
-        return funcionamientoPuntajePsych;
-    }
-
-    public void setFuncionamientoPuntajePsych(Integer funcionamientoPuntajePsych) {
-        this.funcionamientoPuntajePsych = funcionamientoPuntajePsych;
     }
 
     public String getSinEnergiaPsych() {
@@ -416,19 +280,19 @@ public class ZpoV2EvaluacionPsicologica extends BaseMetaData {
         this.inquietudPsych = inquietudPsych;
     }
 
-    public Integer getSintomasPuntajePsych() {
+    public Double getSintomasPuntajePsych() {
         return sintomasPuntajePsych;
     }
 
-    public void setSintomasPuntajePsych(Integer sintomasPuntajePsych) {
+    public void setSintomasPuntajePsych(Double sintomasPuntajePsych) {
         this.sintomasPuntajePsych = sintomasPuntajePsych;
     }
 
-    public Integer getScoreDepressionPsych() {
+    public Double getScoreDepressionPsych() {
         return scoreDepressionPsych;
     }
 
-    public void setScoreDepressionPsych(Integer scoreDepressionPsych) {
+    public void setScoreDepressionPsych(Double scoreDepressionPsych) {
         this.scoreDepressionPsych = scoreDepressionPsych;
     }
 

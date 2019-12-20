@@ -63,14 +63,17 @@ public class ZpoAdapter {
             db.execSQL(ZpoOtoEDBConstants.CREATE_INFANT_OTO_EMS_TABLE);
             db.execSQL(ZpoOphthaEvalDBConstants.CREATE_INFANT_OPHTHALMOLOGICEVAL_TABLE);
             db.execSQL(ZpoPsychoEvalDBConstants.CREATE_INFANT_PSYCHOLOGICALEVAL_TABLE);
-            db.execSQL(ZpoOphthaResDBConstants.CREATE_AINFANT_OPHTRESULTS_TABLE);
-            db.execSQL(ZpoV2MullenConstants.CREATE_MULLEN_ADD_TABLE);
             db.execSQL(ZpoV2EdadesEtapasConstants.CREATE_EDADES_ETAPA_TABLE);
             db.execSQL(ZpoV2IndCuidadoFamConstants.CREATE_ICFAM_TABLE);
             db.execSQL(ZpoV2CuestDemograficoConstants.CREATE_CDEMO_TABLE);
             db.execSQL(ZpoV2CuestSaludInfantilConstants.CREATE_CSI_TABLE);
             db.execSQL(ZpoV2CuestSaludMaternaConstants.CREATE_CSM_TABLE);
             db.execSQL(ZpoV2CuestSocioeconomicoConstants.CREATE_CSOE_TABLE);
+            db.execSQL(ZpoV2EvalPsicologicaConstants.CREATE_CEVPSICO_TABLE);
+            db.execSQL(ZpoV2ExamFisicoInfanteConstants.CREATE_EXFISINF_TABLE);
+            db.execSQL(ZpoV2FormAudicionConstants.CREATE_FORM_AUDI_TABLE);
+            db.execSQL(ZpoV2EvalVisualConstants.CREATE_EV_VIS_TABLE);
+
 		}
 
 		@Override
@@ -211,8 +214,6 @@ public class ZpoAdapter {
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoPsychoEvalDBConstants.INFANT_PSYCHOLOGICALEVAL_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
-        c = crearCursor(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
-        if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoV2CuestDemograficoConstants.CUEST_DEMO_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoV2CuestSaludInfantilConstants.CUEST_SAL_INF_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
@@ -220,6 +221,14 @@ public class ZpoAdapter {
         c = crearCursor(ZpoV2CuestSaludMaternaConstants.CUEST_SAL_MAT_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoV2CuestSocioeconomicoConstants.CUEST_SOE_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2EvalPsicologicaConstants.EVAL_PSICO_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2ExamFisicoInfanteConstants.EXAM_FIS_INF_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2FormAudicionConstants.FORM_AUDI_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2EvalVisualConstants.EV_VIS_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c.close();
         return false;
@@ -706,194 +715,6 @@ public class ZpoAdapter {
 
 
     /**
-     * Metodos para ZpoInfantOtoacousticEmissions en la base de datos
-     *
-     */
-    //Crear nuevo ZpoInfantOtoacousticEmissions en la base de datos
-    public void crearZpoInfantOtoacousticEm(ZpoV2InfantOtoacousticEmissions infantOtoEm) {
-        ContentValues cv = ZpoInfantOtoacousticEmissionsHelper.crearZpoInfantOtoacousticEmissions(infantOtoEm);
-        mDb.insertOrThrow(ZpoOtoEDBConstants.INFANT_OTO_EMS_TABLE, null, cv);
-    }
-    //Editar ZpoInfantOtoacousticEmissions existente en la base de datos
-    public boolean editarZpoInfantOtoacousticEm(ZpoV2InfantOtoacousticEmissions infantOtoEms) {
-        ContentValues cv = ZpoInfantOtoacousticEmissionsHelper.crearZpoInfantOtoacousticEmissions(infantOtoEms);
-        return mDb.update(ZpoOtoEDBConstants.INFANT_OTO_EMS_TABLE, cv, ZpoOtoEDBConstants.recordId + "='"
-                + infantOtoEms.getRecordId() + "' and " + MainDBConstants.recordId + "='" + infantOtoEms.getEventName() +"'", null) > 0;
-    }
-    //Limpiar la tabla de ZpoInfantOtoacousticEmissions de la base de datos
-    public boolean borrarZpoInfantOtoacousticE() {
-        return mDb.delete(ZpoOtoEDBConstants.INFANT_OTO_EMS_TABLE, null, null) > 0;
-    }
-    //Obtener un ZpoInfantOtoacousticEmissions de la base de datos
-    public ZpoV2InfantOtoacousticEmissions getZpoInfantOtoacousticE(String filtro, String orden) throws SQLException {
-        ZpoV2InfantOtoacousticEmissions infantOtoEm = null;
-        Cursor cursor = crearCursor(ZpoOtoEDBConstants.INFANT_OTO_EMS_TABLE, filtro, null, orden);
-        if (cursor != null && cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            infantOtoEm = ZpoInfantOtoacousticEmissionsHelper.crearZpoInfantOtoacousticEmissions(cursor);
-        }
-        if (!cursor.isClosed()) cursor.close();
-        return infantOtoEm;
-    }
-    //Obtener una lista de ZpoInfantOtoacousticEmissions de la base de datos
-    public List<ZpoV2InfantOtoacousticEmissions> getZpoInfantOtoacousticEms(String filtro, String orden) throws SQLException {
-        List<ZpoV2InfantOtoacousticEmissions> infantOtoEms = new ArrayList<ZpoV2InfantOtoacousticEmissions>();
-        Cursor cursor = crearCursor(ZpoOtoEDBConstants.INFANT_OTO_EMS_TABLE, filtro, null, orden);
-        if (cursor != null && cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            infantOtoEms.clear();
-            do{
-                ZpoV2InfantOtoacousticEmissions infantOtoE = null;
-                infantOtoE = ZpoInfantOtoacousticEmissionsHelper.crearZpoInfantOtoacousticEmissions(cursor);
-                infantOtoEms.add(infantOtoE);
-            } while (cursor.moveToNext());
-        }
-        if (!cursor.isClosed()) cursor.close();
-        return infantOtoEms;
-    }
-
-    /**
-     * Metodos para ZpoV2InfantOphthalmologicEvaluation en la base de datos
-     *
-     */
-    //Crear nuevo ZpoV2InfantOphthalmologicEvaluation en la base de datos
-    public void crearZpoV2InfantOphthalmologicEvaluation(ZpoV2InfantOphthalmologicEvaluation infantAssessmentVisit) {
-        ContentValues cv = ZpoV2InfantOphthalmologicEvalHelper.crearZpoV2InfantOphthalmologicEvaluation(infantAssessmentVisit);
-        mDb.insertOrThrow(ZpoOphthaEvalDBConstants.INFANT_OPHTHALMOLOGICEVAL_TABLE, null, cv);
-    }
-    //Editar ZpoV2InfantOphthalmologicEvaluation existente en la base de datos
-    public boolean editarZpoV2InfantOphthalmologicEvaluation(ZpoV2InfantOphthalmologicEvaluation infantAssessmentVisit) {
-        ContentValues cv = ZpoV2InfantOphthalmologicEvalHelper.crearZpoV2InfantOphthalmologicEvaluation(infantAssessmentVisit);
-        return mDb.update(ZpoOphthaEvalDBConstants.INFANT_OPHTHALMOLOGICEVAL_TABLE, cv, ZpoOphthaEvalDBConstants.recordId + "='"
-                + infantAssessmentVisit.getRecordId() + "' and " + ZpoOphthaEvalDBConstants.eventName + "='" + infantAssessmentVisit.getEventName() +"'", null) > 0;
-    }
-    //Limpiar la tabla de ZpoV2InfantOphthalmologicEvaluation de la base de datos
-    public boolean borrarZpoV2InfantOphthalmologicEvaluation() {
-        return mDb.delete(ZpoOphthaEvalDBConstants.INFANT_OPHTHALMOLOGICEVAL_TABLE, null, null) > 0;
-    }
-    //Obtener un ZpoV2InfantOphthalmologicEvaluation de la base de datos
-    public ZpoV2InfantOphthalmologicEvaluation getZpoV2InfantOphthalmologicEvaluation(String filtro, String orden) throws SQLException {
-        ZpoV2InfantOphthalmologicEvaluation infantAssessmentVisit = null;
-        Cursor cursor = crearCursor(ZpoOphthaEvalDBConstants.INFANT_OPHTHALMOLOGICEVAL_TABLE, filtro, null, orden);
-        if (cursor != null && cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            infantAssessmentVisit= ZpoV2InfantOphthalmologicEvalHelper.crearZpoV2InfantOphthalmologicEvaluation(cursor);
-        }
-        if (!cursor.isClosed()) cursor.close();
-        return infantAssessmentVisit;
-    }
-    //Obtener una lista de ZpoV2InfantOphthalmologicEvaluation de la base de datos
-    public List<ZpoV2InfantOphthalmologicEvaluation> getZpoV2InfantOphthalmologicEvaluations(String filtro, String orden) throws SQLException {
-        List<ZpoV2InfantOphthalmologicEvaluation> infantAssessmentVisits = new ArrayList<ZpoV2InfantOphthalmologicEvaluation>();
-        Cursor cursor = crearCursor(ZpoOphthaEvalDBConstants.INFANT_OPHTHALMOLOGICEVAL_TABLE, filtro, null, orden);
-        if (cursor != null && cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            infantAssessmentVisits.clear();
-            do{
-                ZpoV2InfantOphthalmologicEvaluation infantAssessmentVisit = null;
-                infantAssessmentVisit = ZpoV2InfantOphthalmologicEvalHelper.crearZpoV2InfantOphthalmologicEvaluation(cursor);
-                infantAssessmentVisits.add(infantAssessmentVisit);
-            } while (cursor.moveToNext());
-        }
-        if (!cursor.isClosed()) cursor.close();
-        return infantAssessmentVisits;
-    }
-
-    /**
-     * Metodos para crearZpoV2InfantPsychologicalEvaluation en la base de datos
-     *
-     */
-    //Crear nuevo crearZpoV2InfantPsychologicalEvaluation en la base de datos
-    public void crearZpoV2InfantPsychologicalEvaluation(ZpoV2InfantPsychologicalEvaluation infantAssessmentVisit) {
-        ContentValues cv = ZpoV2InfantPsychologicalEvalHelper.crearZpoV2InfantPsychologicalEvaluation(infantAssessmentVisit);
-        mDb.insertOrThrow(ZpoPsychoEvalDBConstants.INFANT_PSYCHOLOGICALEVAL_TABLE, null, cv);
-    }
-    //Editar crearZpoV2InfantPsychologicalEvaluation existente en la base de datos
-    public boolean editarZpoV2InfantPsychologicalEvaluation(ZpoV2InfantPsychologicalEvaluation infantAssessmentVisit) {
-        ContentValues cv = ZpoV2InfantPsychologicalEvalHelper.crearZpoV2InfantPsychologicalEvaluation(infantAssessmentVisit);
-        return mDb.update(ZpoPsychoEvalDBConstants.INFANT_PSYCHOLOGICALEVAL_TABLE, cv, ZpoPsychoEvalDBConstants.recordId + "='"
-                + infantAssessmentVisit.getRecordId() + "' and " + ZpoPsychoEvalDBConstants.eventName + "='" + infantAssessmentVisit.getEventName() +"'", null) > 0;
-    }
-    //Limpiar la tabla de crearZpoV2InfantPsychologicalEvaluation de la base de datos
-    public boolean borrarZpoV2InfantPsychologicalEvaluation() {
-        return mDb.delete(ZpoPsychoEvalDBConstants.INFANT_PSYCHOLOGICALEVAL_TABLE, null, null) > 0;
-    }
-    //Obtener un crearZpoV2InfantPsychologicalEvaluation de la base de datos
-    public ZpoV2InfantPsychologicalEvaluation getZpoV2InfantPsychologicalEvaluation(String filtro, String orden) throws SQLException {
-        ZpoV2InfantPsychologicalEvaluation infantAssessmentVisit = null;
-        Cursor cursor = crearCursor(ZpoPsychoEvalDBConstants.INFANT_PSYCHOLOGICALEVAL_TABLE, filtro, null, orden);
-        if (cursor != null && cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            infantAssessmentVisit= ZpoV2InfantPsychologicalEvalHelper.crearZpoV2InfantPsychologicalEvaluation(cursor);
-        }
-        if (!cursor.isClosed()) cursor.close();
-        return infantAssessmentVisit;
-    }
-    //Obtener una lista de crearZpoV2InfantPsychologicalEvaluation de la base de datos
-    public List<ZpoV2InfantPsychologicalEvaluation> getZpoV2InfantPsychologicalEvaluations(String filtro, String orden) throws SQLException {
-        List<ZpoV2InfantPsychologicalEvaluation> infantAssessmentVisits = new ArrayList<ZpoV2InfantPsychologicalEvaluation>();
-        Cursor cursor = crearCursor(ZpoPsychoEvalDBConstants.INFANT_PSYCHOLOGICALEVAL_TABLE, filtro, null, orden);
-        if (cursor != null && cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            infantAssessmentVisits.clear();
-            do{
-                ZpoV2InfantPsychologicalEvaluation infantAssessmentVisit = null;
-                infantAssessmentVisit = ZpoV2InfantPsychologicalEvalHelper.crearZpoV2InfantPsychologicalEvaluation(cursor);
-                infantAssessmentVisits.add(infantAssessmentVisit);
-            } while (cursor.moveToNext());
-        }
-        if (!cursor.isClosed()) cursor.close();
-        return infantAssessmentVisits;
-    }
-
-    /**
-     * Metodos para ZpoV2InfantOphtResults en la base de datos
-     *
-     */
-    //Crear nuevo ZpoV2InfantOphtResults en la base de datos
-    public void crearZpoV2InfantOphtResults(ZpoV2InfantOphtResults aInfantOpthResults) {
-        ContentValues cv = ZpoV2InfantOphtResultsHelper.crearZpoV2InfantOpthResults(aInfantOpthResults);
-        mDb.insert(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, null, cv);
-    }
-    //Editar ZpoV2InfantOphtResults existente en la base de datos
-    public boolean editarZpoV2InfantOphtResults(ZpoV2InfantOphtResults aInfantOpthResults) {
-        ContentValues cv = ZpoV2InfantOphtResultsHelper.crearZpoV2InfantOpthResults(aInfantOpthResults);
-        return mDb.update(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, cv, ZpoOphthaResDBConstants.recordId + "='"
-                + aInfantOpthResults.getRecordId() + "' and " + ZpoOphthaResDBConstants.eventName + "='" + aInfantOpthResults.getEventName() +"'", null) > 0;
-    }
-    //Limpiar la tabla de ZpoV2InfantOphtResults de la base de datos
-    public boolean borrarZpoV2InfantOphtResults() {
-        return mDb.delete(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, null, null) > 0;
-    }
-    //Obtener un ZpoV2InfantOphtResults de la base de datos
-    public ZpoV2InfantOphtResults getZpoV2InfantOphtResult(String filtro, String orden) throws SQLException {
-        ZpoV2InfantOphtResults aInfantOpthResults = null;
-        Cursor cursor = crearCursor(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, filtro, null, orden);
-        if (cursor != null && cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            aInfantOpthResults= ZpoV2InfantOphtResultsHelper.crearZpoV2InfantOphtResults(cursor);
-        }
-        if (!cursor.isClosed()) cursor.close();
-        return aInfantOpthResults;
-    }
-    //Obtener una lista de ZpoV2InfantOphtResults de la base de datos
-    public List<ZpoV2InfantOphtResults> getZpoV2InfantOphtResults(String filtro, String orden) throws SQLException {
-        List<ZpoV2InfantOphtResults> aInfantOpthResults = new ArrayList<ZpoV2InfantOphtResults>();
-        Cursor cursor = crearCursor(ZpoOphthaResDBConstants.AINFANT_OPHTRESULTS_TABLE, filtro, null, orden);
-        if (cursor != null && cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            aInfantOpthResults.clear();
-            do{
-                ZpoV2InfantOphtResults aInfantOpthResult = null;
-                aInfantOpthResult = ZpoV2InfantOphtResultsHelper.crearZpoV2InfantOphtResults(cursor);
-                aInfantOpthResults.add(aInfantOpthResult);
-            } while (cursor.moveToNext());
-        }
-        if (!cursor.isClosed()) cursor.close();
-        return aInfantOpthResults;
-    }
-
-    /**
      * Metodos para ZpoV2EdadesEtapas en la base de datos
      *
      */
@@ -1175,6 +996,198 @@ public class ZpoAdapter {
         }
         if (!cursorBC.isClosed()) cursorBC.close();
         return cuestSOE;
+    }
+
+
+    /**
+     * Metodos para ZpoV2EvalPsicologica en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2EvaluacionPsicologica en la base de datos
+    public void crearZpoV2EvalPsicologica(ZpoV2EvaluacionPsicologica cEvPsico) {
+        ContentValues cv = ZpoV2EvalPsicologicaHelper.crearZpoV2EvalPsicologica(cEvPsico);
+        mDb.insert(ZpoV2EvalPsicologicaConstants.EVAL_PSICO_TABLE, null, cv);
+    }
+    //Editar ZpoV2EvaluacionPsicologica existente en la base de datos
+    public boolean editarZpoV2EvalPsicologica (ZpoV2EvaluacionPsicologica ePsico) {
+        ContentValues cv = ZpoV2EvalPsicologicaHelper.crearZpoV2EvalPsicologica(ePsico);
+        return mDb.update(ZpoV2EvalPsicologicaConstants.EVAL_PSICO_TABLE, cv, MainDBConstants.recordId + "='"
+                + ePsico.getRecordId() + "' and " + MainDBConstants.eventName + "='" + ePsico.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2EvaluacionPsicologica de la base de datos
+    public boolean borrarZpoV2EvalPsicologica() {
+        return mDb.delete(ZpoV2EvalPsicologicaConstants.EVAL_PSICO_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2EvaluacionPsicologica de la base de datos
+    public ZpoV2EvaluacionPsicologica getZpoV2EvalPsico(String filtro, String orden) throws SQLException {
+        ZpoV2EvaluacionPsicologica ePsico = null;
+        Cursor cursorBC = crearCursor(ZpoV2EvalPsicologicaConstants.EVAL_PSICO_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            ePsico=ZpoV2EvalPsicologicaHelper.crearZpoV2EvalPsicologica(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return ePsico;
+    }
+    //Obtener una lista de ZpoV2EvaluacionPsicologica de la base de datos
+    public List<ZpoV2EvaluacionPsicologica> getZpoV2EvalPsicologicas(String filtro, String orden) throws SQLException {
+        List<ZpoV2EvaluacionPsicologica> ePsicos = new ArrayList<ZpoV2EvaluacionPsicologica>();
+        Cursor cursorBC = crearCursor(ZpoV2EvalPsicologicaConstants.EVAL_PSICO_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            ePsicos.clear();
+            do{
+                ZpoV2EvaluacionPsicologica ePsico = null;
+                ePsico = ZpoV2EvalPsicologicaHelper.crearZpoV2EvalPsicologica(cursorBC);
+                ePsicos.add(ePsico);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return ePsicos;
+    }
+
+
+
+    /**
+     * Metodos para ZpoV2ExamenFisicoInfante en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2ExamenFisicoInfante en la base de datos
+    public void crearZpoV2ExaFisicoInfante(ZpoV2ExamenFisicoInfante cExFisInf) {
+        ContentValues cv = ZpoV2ExamFisicoInfanteHelper.crearZpoV2ExamFisicoInfante(cExFisInf);
+        mDb.insert(ZpoV2ExamFisicoInfanteConstants.EXAM_FIS_INF_TABLE, null, cv);
+    }
+    //Editar ZpoV2ExamenFisicoInfante existente en la base de datos
+    public boolean editarZpoV2ExamFisicoInfante (ZpoV2ExamenFisicoInfante eFisInf) {
+        ContentValues cv = ZpoV2ExamFisicoInfanteHelper.crearZpoV2ExamFisicoInfante(eFisInf);
+        return mDb.update(ZpoV2ExamFisicoInfanteConstants.EXAM_FIS_INF_TABLE, cv, MainDBConstants.recordId + "='"
+                + eFisInf.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eFisInf.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2ExamenFisicoInfante de la base de datos
+    public boolean borrarZpoV2ExamFisicoInfante() {
+        return mDb.delete(ZpoV2ExamFisicoInfanteConstants.EXAM_FIS_INF_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2ExamenFisicoInfante de la base de datos
+    public ZpoV2ExamenFisicoInfante getZpoV2ExamFisicoInfante(String filtro, String orden) throws SQLException {
+        ZpoV2ExamenFisicoInfante eFisInf = null;
+        Cursor cursorBC = crearCursor(ZpoV2ExamFisicoInfanteConstants.EXAM_FIS_INF_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            eFisInf=ZpoV2ExamFisicoInfanteHelper.crearZpoV2ExamFisicoInfante(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return eFisInf;
+    }
+    //Obtener una lista de ZpoV2ExamenFisicoInfante de la base de datos
+    public List<ZpoV2ExamenFisicoInfante> getZpoV2ExamFisicoInfantes(String filtro, String orden) throws SQLException {
+        List<ZpoV2ExamenFisicoInfante> eFisInf = new ArrayList<ZpoV2ExamenFisicoInfante>();
+        Cursor cursorBC = crearCursor(ZpoV2ExamFisicoInfanteConstants.EXAM_FIS_INF_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            eFisInf.clear();
+            do{
+                ZpoV2ExamenFisicoInfante exFI = null;
+                exFI = ZpoV2ExamFisicoInfanteHelper.crearZpoV2ExamFisicoInfante(cursorBC);
+                eFisInf.add(exFI);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return eFisInf;
+    }
+
+
+    /**
+     * Metodos para ZpoV2FormAudicion en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2FormAudicion en la base de datos
+    public void crearZpoV2FormAudicion(ZpoV2FormAudicion formAudi) {
+        ContentValues cv = ZpoV2FormAudicionHelper.crearZpoV2FormAudicion(formAudi);
+        mDb.insert(ZpoV2FormAudicionConstants.FORM_AUDI_TABLE, null, cv);
+    }
+    //Editar ZpoV2FormAudicion existente en la base de datos
+    public boolean editarZpoV2FormAudicion (ZpoV2FormAudicion formAudi) {
+        ContentValues cv = ZpoV2FormAudicionHelper.crearZpoV2FormAudicion(formAudi);
+        return mDb.update(ZpoV2FormAudicionConstants.FORM_AUDI_TABLE, cv, MainDBConstants.recordId + "='"
+                + formAudi.getRecordId() + "' and " + MainDBConstants.eventName + "='" + formAudi.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2FormAudicion de la base de datos
+    public boolean borrarZpoV2FormAudicion() {
+        return mDb.delete(ZpoV2FormAudicionConstants.FORM_AUDI_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2FormAudicion de la base de datos
+    public ZpoV2FormAudicion getZpoV2FormAudicion(String filtro, String orden) throws SQLException {
+        ZpoV2FormAudicion formAudi = null;
+        Cursor cursorBC = crearCursor(ZpoV2FormAudicionConstants.FORM_AUDI_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            formAudi=ZpoV2FormAudicionHelper.crearZpoV2FormAudicion(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return formAudi;
+    }
+    //Obtener una lista de ZpoV2FormAudicion de la base de datos
+    public List<ZpoV2FormAudicion> getZpoV2FormAudiciones(String filtro, String orden) throws SQLException {
+        List<ZpoV2FormAudicion> formAudi = new ArrayList<ZpoV2FormAudicion>();
+        Cursor cursorBC = crearCursor(ZpoV2FormAudicionConstants.FORM_AUDI_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            formAudi.clear();
+            do{
+                ZpoV2FormAudicion fAudi = null;
+                fAudi = ZpoV2FormAudicionHelper.crearZpoV2FormAudicion(cursorBC);
+                formAudi.add(fAudi);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return formAudi;
+    }
+
+    /**
+     * Metodos para ZpoV2EvaluacionVisual en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2EvaluacionVisual en la base de datos
+    public void crearZpoV2EvalVisual(ZpoV2EvaluacionVisual evalVisual) {
+        ContentValues cv = ZpoV2EvalVisualHelper.crearZpoV2EvalVisual(evalVisual);
+        mDb.insert(ZpoV2EvalVisualConstants.EV_VIS_TABLE, null, cv);
+    }
+    //Editar ZpoV2EvaluacionVisual existente en la base de datos
+    public boolean editarZpoV2EvalVisual (ZpoV2EvaluacionVisual evalVisual) {
+        ContentValues cv = ZpoV2EvalVisualHelper.crearZpoV2EvalVisual(evalVisual);
+        return mDb.update(ZpoV2EvalVisualConstants.EV_VIS_TABLE, cv, MainDBConstants.recordId + "='"
+                + evalVisual.getRecordId() + "' and " + MainDBConstants.eventName + "='" + evalVisual.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2EvaluacionVisual de la base de datos
+    public boolean borrarZpoV2EvalVisual() {
+        return mDb.delete(ZpoV2EvalVisualConstants.EV_VIS_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2EvaluacionVisual de la base de datos
+    public ZpoV2EvaluacionVisual getZpoV2EvalVisual(String filtro, String orden) throws SQLException {
+        ZpoV2EvaluacionVisual evalVisual = null;
+        Cursor cursorBC = crearCursor(ZpoV2EvalVisualConstants.EV_VIS_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            evalVisual=ZpoV2EvalVisualHelper.crearZpoV2EvalVisual(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return evalVisual;
+    }
+    //Obtener una lista de ZpoV2EvaluacionVisual de la base de datos
+    public List<ZpoV2EvaluacionVisual> getZpoV2EvalVisuales(String filtro, String orden) throws SQLException {
+        List<ZpoV2EvaluacionVisual> evalVisual = new ArrayList<ZpoV2EvaluacionVisual>();
+        Cursor cursorBC = crearCursor(ZpoV2EvalVisualConstants.EV_VIS_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            evalVisual.clear();
+            do{
+                ZpoV2EvaluacionVisual eVis = null;
+                eVis = ZpoV2EvalVisualHelper.crearZpoV2EvalVisual(cursorBC);
+                evalVisual.add(eVis);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return evalVisual;
     }
 
 }

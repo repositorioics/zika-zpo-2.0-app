@@ -1,5 +1,6 @@
 package ni.org.ics.zpo.v2.appmovil.parsers;
 
+import org.joda.time.DateTime;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
@@ -12,46 +13,42 @@ import java.util.Date;
 public class ZpoV2RecoleccionMuestraXml {
 
     @Element(required=false)
-    private Date bscDov;
+    private Date bloodTodaysDate;
     @Element(required=false)
-    private String bscVisit;
+    private String bloodSampleCollected;
     @Element(required=false)
-    private String bscMatBldCol1;
+    private String bloodWhichPerson;
     @Element(required=false)
-    private String bscMatBldId1;
+    private String bloodMomSampleDate;
     @Element(required=false)
-    private Double bscMatBldVol1;
+    private Integer bloodMomTubes;
     @Element(required=false)
-    private String bscMatBldRsn1;
+    private String bloodMomType;
     @Element(required=false)
-    private String bscMatBldRsnOther1;
+    private String bloodChildSampleDate;
     @Element(required=false)
-    private String bscMatBldCol2;
+    private Integer bloodChildTubes;
     @Element(required=false)
-    private String bscMatBldId2;
+    private String bloodChildType;
     @Element(required=false)
-    private Double bscMatBldVol2;
+    private String bloodPersonnel;
     @Element(required=false)
-    private String bscMatBldRsn2;
+    private String date1;
     @Element(required=false)
-    private String bscMatBldRsnOther2;
+    private String time1;
     @Element(required=false)
-    private String bscPhlebotomist;
+    private String date2;
+    @Element(required=false)
+    private String time2;
+
+
 
     @Element(required=false)
     private String note1;
     @Element(required=false)
-    private String question1;
+    private String group1;
     @Element(required=false)
-    private String text1;
-    @Element(required=false)
-    private String barcode1;
-    @Element(required=false)
-    private String question2;
-    @Element(required=false)
-    private String text2;
-    @Element(required=false)
-    private String barcode2;
+    private String group2;
 
     @Attribute
     private String id;
@@ -75,108 +72,44 @@ public class ZpoV2RecoleccionMuestraXml {
     @Attribute(required = false)
     private String version;
 
-    public Date getBscDov() {
-        return bscDov;
+    public Date getBloodTodaysDate() {
+        return bloodTodaysDate;
     }
 
-    public void setBscDov(Date bscDov) {
-        this.bscDov = bscDov;
+    public String getBloodSampleCollected() {
+        return bloodSampleCollected;
     }
 
-    public String getBscVisit() {
-        return bscVisit;
+    public String getBloodWhichPerson() {
+        return bloodWhichPerson;
     }
 
-    public void setBscVisit(String bscVisit) {
-        this.bscVisit = bscVisit;
+    public Integer getBloodMomTubes() {
+        return bloodMomTubes;
     }
 
-    public String getBscMatBldCol1() {
-        return bscMatBldCol1;
+    public String getBloodMomType() {
+        return bloodMomType;
     }
 
-    public void setBscMatBldCol1(String bscMatBldCol1) {
-        this.bscMatBldCol1 = bscMatBldCol1;
+    public Integer getBloodChildTubes() {
+        return bloodChildTubes;
     }
 
-    public String getBscMatBldId1() {
-        return bscMatBldId1;
+    public String getBloodChildType() {
+        return bloodChildType;
     }
 
-    public void setBscMatBldId1(String bscMatBldId1) {
-        this.bscMatBldId1 = bscMatBldId1;
+    public String getBloodPersonnel() {
+        return bloodPersonnel;
     }
 
-    public Double getBscMatBldVol1() {
-        return bscMatBldVol1;
+    public String getBloodMomSampleDate() {
+        return bloodMomSampleDate;
     }
 
-    public void setBscMatBldVol1(Double bscMatBldVol1) {
-        this.bscMatBldVol1 = bscMatBldVol1;
-    }
-
-    public String getBscMatBldRsn1() {
-        return bscMatBldRsn1;
-    }
-
-    public void setBscMatBldRsn1(String bscMatBldRsn1) {
-        this.bscMatBldRsn1 = bscMatBldRsn1;
-    }
-
-    public String getBscMatBldRsnOther1() {
-        return bscMatBldRsnOther1;
-    }
-
-    public void setBscMatBldRsnOther1(String bscMatBldRsnOther1) {
-        this.bscMatBldRsnOther1 = bscMatBldRsnOther1;
-    }
-
-    public String getBscMatBldCol2() {
-        return bscMatBldCol2;
-    }
-
-    public void setBscMatBldCol2(String bscMatBldCol2) {
-        this.bscMatBldCol2 = bscMatBldCol2;
-    }
-
-    public String getBscMatBldId2() {
-        return bscMatBldId2;
-    }
-
-    public void setBscMatBldId2(String bscMatBldId2) {
-        this.bscMatBldId2 = bscMatBldId2;
-    }
-
-    public Double getBscMatBldVol2() {
-        return bscMatBldVol2;
-    }
-
-    public void setBscMatBldVol2(Double bscMatBldVol2) {
-        this.bscMatBldVol2 = bscMatBldVol2;
-    }
-
-    public String getBscMatBldRsn2() {
-        return bscMatBldRsn2;
-    }
-
-    public void setBscMatBldRsn2(String bscMatBldRsn2) {
-        this.bscMatBldRsn2 = bscMatBldRsn2;
-    }
-
-    public String getBscMatBldRsnOther2() {
-        return bscMatBldRsnOther2;
-    }
-
-    public void setBscMatBldRsnOther2(String bscMatBldRsnOther2) {
-        this.bscMatBldRsnOther2 = bscMatBldRsnOther2;
-    }
-
-    public String getBscPhlebotomist() {
-        return bscPhlebotomist;
-    }
-
-    public void setBscPhlebotomist(String bscPhlebotomist) {
-        this.bscPhlebotomist = bscPhlebotomist;
+    public String getBloodChildSampleDate() {
+        return bloodChildSampleDate;
     }
 
     public String getNote1() {
@@ -187,52 +120,28 @@ public class ZpoV2RecoleccionMuestraXml {
         this.note1 = note1;
     }
 
-    public String getQuestion1() {
-        return question1;
+    public String getDate2() {
+        return date2;
     }
 
-    public void setQuestion1(String question1) {
-        this.question1 = question1;
+    public String getTime2() {
+        return time2;
     }
 
-    public String getText1() {
-        return text1;
+    public String getGroup1() {
+        return group1;
     }
 
-    public void setText1(String text1) {
-        this.text1 = text1;
+    public String getGroup2() {
+        return group2;
     }
 
-    public String getBarcode1() {
-        return barcode1;
+    public String getDate1() {
+        return date1;
     }
 
-    public void setBarcode1(String barcode1) {
-        this.barcode1 = barcode1;
-    }
-
-    public String getQuestion2() {
-        return question2;
-    }
-
-    public void setQuestion2(String question2) {
-        this.question2 = question2;
-    }
-
-    public String getText2() {
-        return text2;
-    }
-
-    public void setText2(String text2) {
-        this.text2 = text2;
-    }
-
-    public String getBarcode2() {
-        return barcode2;
-    }
-
-    public void setBarcode2(String barcode2) {
-        this.barcode2 = barcode2;
+    public String getTime1() {
+        return time1;
     }
 
     public String getId() {

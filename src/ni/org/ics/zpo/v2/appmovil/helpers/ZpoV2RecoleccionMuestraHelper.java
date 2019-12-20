@@ -18,19 +18,16 @@ public class ZpoV2RecoleccionMuestraHelper {
 
         cv.put(MainDBConstants.recordId, biospecimenCollection.getRecordId());
         cv.put(MainDBConstants.eventName, biospecimenCollection.getEventName());
-        if (biospecimenCollection.getBscDov()!=null) cv.put(MainDBConstants.bscDov, biospecimenCollection.getBscDov().getTime());
-        cv.put(MainDBConstants.bscVisit, biospecimenCollection.getBscVisit());
-        cv.put(MainDBConstants.bscMatBldCol1, biospecimenCollection.getBscMatBldCol1());
-        cv.put(MainDBConstants.bscMatBldId1, biospecimenCollection.getBscMatBldId1());
-        cv.put(MainDBConstants.bscMatBldRsn1, biospecimenCollection.getBscMatBldRsn1());
-        cv.put(MainDBConstants.bscMatBldRsnOther1, biospecimenCollection.getBscMatBldRsnOther1());
-        cv.put(MainDBConstants.bscMatBldVol1, biospecimenCollection.getBscMatBldVol1());
-        cv.put(MainDBConstants.bscMatBldCol2, biospecimenCollection.getBscMatBldCol2());
-        cv.put(MainDBConstants.bscMatBldId2, biospecimenCollection.getBscMatBldId2());
-        cv.put(MainDBConstants.bscMatBldRsn2, biospecimenCollection.getBscMatBldRsn2());
-        cv.put(MainDBConstants.bscMatBldRsnOther2, biospecimenCollection.getBscMatBldRsnOther2());
-        cv.put(MainDBConstants.bscMatBldVol2, biospecimenCollection.getBscMatBldVol2());
-        cv.put(MainDBConstants.bscPhlebotomist, biospecimenCollection.getBscPhlebotomist());
+        if (biospecimenCollection.getBloodTodaysDate()!=null) cv.put(MainDBConstants.bloodTodaysDate, biospecimenCollection.getBloodTodaysDate().getTime());
+        cv.put(MainDBConstants.bloodSampleCollected, biospecimenCollection.getBloodSampleCollected());
+        cv.put(MainDBConstants.bloodWhichPerson, biospecimenCollection.getBloodWhichPerson());
+        if (biospecimenCollection.getBloodMomSampleDate()!=null) cv.put(MainDBConstants.bloodMomSampleDate, biospecimenCollection.getBloodMomSampleDate().getTime());
+        cv.put(MainDBConstants.bloodMomTubes, biospecimenCollection.getBloodMomTubes());
+        cv.put(MainDBConstants.bloodMomType, biospecimenCollection.getBloodMomType());
+        if (biospecimenCollection.getBloodChildSampleDate()!=null) cv.put(MainDBConstants.bloodChildSampleDate, biospecimenCollection.getBloodChildSampleDate().getTime());
+        cv.put(MainDBConstants.bloodChildTubes, biospecimenCollection.getBloodChildTubes());
+        cv.put(MainDBConstants.bloodChildType, biospecimenCollection.getBloodChildType());
+        cv.put(MainDBConstants.bloodPersonnel, biospecimenCollection.getBloodPersonnel());
 
         if (biospecimenCollection.getRecordDate() != null) cv.put(MainDBConstants.recordDate, biospecimenCollection.getRecordDate().getTime());
         cv.put(MainDBConstants.recordUser, biospecimenCollection.getRecordUser());
@@ -52,22 +49,16 @@ public class ZpoV2RecoleccionMuestraHelper {
         ZpoV2RecoleccionMuestra biospecimenCollection = new ZpoV2RecoleccionMuestra();
         biospecimenCollection.setRecordId(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.recordId)));
         biospecimenCollection.setEventName(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.eventName)));
-        if (cursorBC.getLong(cursorBC.getColumnIndex(MainDBConstants.bscDov))>0) biospecimenCollection.setBscDov(new Date(cursorBC.getLong(cursorBC.getColumnIndex(MainDBConstants.bscDov))));
-        biospecimenCollection.setBscVisit(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bscVisit)));
-        biospecimenCollection.setBscMatBldCol1(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bscMatBldCol1)));
-        biospecimenCollection.setBscMatBldId1(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bscMatBldId1)));
-        biospecimenCollection.setBscMatBldRsn1(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bscMatBldRsn1)));
-        biospecimenCollection.setBscMatBldRsnOther1(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bscMatBldRsnOther1)));
-        if (cursorBC.getInt(cursorBC.getColumnIndex(MainDBConstants.bscMatBldVol1))>0)
-            biospecimenCollection.setBscMatBldVol1(cursorBC.getDouble(cursorBC.getColumnIndex(MainDBConstants.bscMatBldVol1)));
-        biospecimenCollection.setBscMatBldCol2(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bscMatBldCol2)));
-        biospecimenCollection.setBscMatBldId2(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bscMatBldId2)));
-        biospecimenCollection.setBscMatBldRsn2(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bscMatBldRsn2)));
-        biospecimenCollection.setBscMatBldRsnOther2(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bscMatBldRsnOther2)));
-        if (cursorBC.getInt(cursorBC.getColumnIndex(MainDBConstants.bscMatBldVol2))>0)
-            biospecimenCollection.setBscMatBldVol2(cursorBC.getDouble(cursorBC.getColumnIndex(MainDBConstants.bscMatBldVol2)));
-
-        biospecimenCollection.setBscPhlebotomist(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bscPhlebotomist)));
+        if (cursorBC.getLong(cursorBC.getColumnIndex(MainDBConstants.bloodTodaysDate))>0) biospecimenCollection.setBloodTodaysDate(new Date(cursorBC.getLong(cursorBC.getColumnIndex(MainDBConstants.bloodTodaysDate))));
+        biospecimenCollection.setBloodSampleCollected(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bloodSampleCollected)));
+        biospecimenCollection.setBloodWhichPerson(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bloodWhichPerson)));
+        if (cursorBC.getLong(cursorBC.getColumnIndex(MainDBConstants.bloodMomSampleDate))>0) biospecimenCollection.setBloodMomSampleDate(new Date(cursorBC.getLong(cursorBC.getColumnIndex(MainDBConstants.bloodMomSampleDate))));
+        if (cursorBC.getInt(cursorBC.getColumnIndex(MainDBConstants.bloodMomTubes))>0) biospecimenCollection.setBloodMomTubes(cursorBC.getInt(cursorBC.getColumnIndex(MainDBConstants.bloodMomTubes)));
+        biospecimenCollection.setBloodMomType(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bloodMomType)));
+        if (cursorBC.getLong(cursorBC.getColumnIndex(MainDBConstants.bloodChildSampleDate))>0) biospecimenCollection.setBloodChildSampleDate(new Date(cursorBC.getLong(cursorBC.getColumnIndex(MainDBConstants.bloodChildSampleDate))));
+        if (cursorBC.getInt(cursorBC.getColumnIndex(MainDBConstants.bloodChildTubes))>0) biospecimenCollection.setBloodChildTubes(cursorBC.getInt(cursorBC.getColumnIndex(MainDBConstants.bloodChildTubes)));
+        biospecimenCollection.setBloodChildType(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bloodChildType)));
+        biospecimenCollection.setBloodPersonnel(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.bloodPersonnel)));
 
         if(cursorBC.getLong(cursorBC.getColumnIndex(MainDBConstants.recordDate))>0) biospecimenCollection.setRecordDate(new Date(cursorBC.getLong(cursorBC.getColumnIndex(MainDBConstants.recordDate))));
         biospecimenCollection.setRecordUser(cursorBC.getString(cursorBC.getColumnIndex(MainDBConstants.recordUser)));

@@ -21,10 +21,12 @@ public class InfantEntryAdapter extends ArrayAdapter<String> {
 	private final ZpoV2Mullen mZpoMullen;
 	private final ZpoV2IndCuidadoFamilia mZpoICF;
 	private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
+	private final ZpoV2ExamenFisicoInfante mZpoExFisInf;
 
 	public InfantEntryAdapter(Context context, int textViewResourceId,
                               String[] values, ZpoV2CuestionarioDemografico demo, ZpoV2CuestSaludInfantil cSaInf,
-							  ZpoV2IndCuidadoFamilia zpoICF, ZpoV2Mullen zpoMullen, ZpoV2RecoleccionMuestra zpoMuestra) {
+							  ZpoV2IndCuidadoFamilia zpoICF, ZpoV2Mullen zpoMullen, ZpoV2RecoleccionMuestra zpoMuestra,
+							  ZpoV2ExamenFisicoInfante zpoEFI) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
@@ -33,6 +35,8 @@ public class InfantEntryAdapter extends ArrayAdapter<String> {
 		this.mZpoICF = zpoICF;
 		this.mZpoMullen = zpoMullen;
 		this.mZpoV2Muestra = zpoMuestra;
+		this.mZpoExFisInf = zpoEFI;
+
 	}
 
 	@Override
@@ -106,6 +110,17 @@ public class InfantEntryAdapter extends ArrayAdapter<String> {
 					textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
 				}
 				img=getContext().getResources().getDrawable( R.drawable.ic_sample);
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+				break;
+
+			case 5:
+				if (mZpoExFisInf != null) {
+					textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.done));
+				} else {
+					textView.setTextColor(Color.RED);
+					textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.pending));
+				}
+				img = getContext().getResources().getDrawable(R.drawable.ic_inf_phys_exam);
 				textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
 				break;
 

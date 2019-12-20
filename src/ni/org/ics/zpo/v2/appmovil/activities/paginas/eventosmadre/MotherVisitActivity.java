@@ -22,6 +22,7 @@ import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2ActCuestSaludMaternaActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2CuestSocioeconomicoActivity;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2EvalPsicologicaActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre.VisitAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
@@ -38,6 +39,7 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
     private static ZpoV2RecoleccionMuestra zpoV2Muestra= null;
 	private static ZpoV2CuestionarioSaludMaterna zpoV2CuestSaMat= null;
 	private static ZpoV2CuestionarioSocioeconomico zpoV2CuestSoe = null;
+
 
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
 	private static String evento;
@@ -251,6 +253,7 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 					zpoV2CuestSaMat = zpoA.getZpoV2CuestSaludMat(filtro, MainDBConstants.recordId);
 					zpoV2CuestSoe = zpoA.getZpoV2CuestSocieco(filtro, MainDBConstants.recordId);
 					zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
+
 
 					if (zpoV2CuestSaMat!=null && zpoV2CuestSoe!=null && zpoV2Muestra!= null){
 
