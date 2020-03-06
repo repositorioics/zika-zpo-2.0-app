@@ -25,7 +25,7 @@ public class DownloadAllTask extends DownloadTask {
 	
 	protected static final String TAG = DownloadAllTask.class.getSimpleName();
 	private ZpoAdapter zpoA = null;
-    private static final String TOTAL_TASK = "17";
+    private static final String TOTAL_TASK = "18";
 
     private List<ZpoDatosEmbarazada> mDatosEmb = null;
     private List<Zpo00Screening> mTamizajes = null;
@@ -44,6 +44,7 @@ public class DownloadAllTask extends DownloadTask {
     private List<ZpoV2ExamenFisicoInfante> mExFisInf = null;
     private List<ZpoV2FormAudicion> mEvAudi = null;
     private List<ZpoV2EvaluacionVisual> mEvalVisual = null;
+    private List<ZpoV2StudyExit> mStudyExit = null;
 
 
     public static final int DAT_MADRE = 1;
@@ -63,6 +64,7 @@ public class DownloadAllTask extends DownloadTask {
     public static final int EX_FIS_INF = 15;
     public static final int EV_AUDI = 16;
     public static final int EV_VIS = 17;
+    public static final int ST_EX = 18;
     
 	private String error = null;
 	private String url = null;
@@ -107,6 +109,7 @@ public class DownloadAllTask extends DownloadTask {
         zpoA.borrarZpoV2ExamFisicoInfante();
         zpoA.borrarZpoV2FormAudicion();
         zpoA.borrarZpoV2EvalVisual();
+        zpoA.borrarZpoV2StudyExit();
         try {
 
             if (mDatosEmb != null){
@@ -272,6 +275,16 @@ public class DownloadAllTask extends DownloadTask {
                 while (iter.hasNext()) {
                     zpoA.crearZpoV2EvalVisual(iter.next());
                     publishProgress( "Insertando Evaluaciones Visuales...", Integer.valueOf( iter.nextIndex() ).toString(), Integer
+                            .valueOf( v ).toString() );
+                }
+            }
+
+            if (mStudyExit != null) {
+                v = mStudyExit.size();
+                ListIterator<ZpoV2StudyExit> iter = mStudyExit.listIterator();
+                while (iter.hasNext()) {
+                    zpoA.crearZpoV2StudyExit(iter.next());
+                    publishProgress( "Insertando Salidas de Estudio...", Integer.valueOf( iter.nextIndex() ).toString(), Integer
                             .valueOf( v ).toString() );
                 }
             }
@@ -457,6 +470,15 @@ public class DownloadAllTask extends DownloadTask {
                     ZpoV2EvaluacionVisual[].class, username);
             // convert the array to a list and return it
             mEvalVisual = Arrays.asList(responseZpoEvalVis.getBody());
+
+            //Descargar salidas de estudio
+            urlRequest = url + "/movil/zpoStudyExits";
+            publishProgress("Solicitando Salidas de Estudio",String.valueOf(ST_EX),TOTAL_TASK);
+            // Perform the HTTP GET request
+            ResponseEntity<ZpoV2StudyExit[]> responseZpoStudyExit = restTemplate.exchange(urlRequest, HttpMethod.GET, requestEntity,
+                    ZpoV2StudyExit[].class, username);
+            // convert the array to a list and return it
+            mStudyExit = Arrays.asList(responseZpoStudyExit.getBody());
 
 
             return null;

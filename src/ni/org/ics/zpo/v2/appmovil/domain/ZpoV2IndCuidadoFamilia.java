@@ -11,11 +11,12 @@ public class ZpoV2IndCuidadoFamilia extends BaseMetaData {
     private String eventName;
     private Date fechaHoyFci;
     private String cuantosLibrosFci;
-    private String cuantasRevistasFui;
-    private String materialesJugarMonth;
+    private String cuantasRevistasFci;
     private String materialesJugarFci;
     private String variedadJugarFci;
-    private String nombreEncuestadorFci;
+    private String actividadesJugarFci;
+    private String encuestadorFci;
+
 
     public String getRecordId() {
         return recordId;
@@ -49,21 +50,6 @@ public class ZpoV2IndCuidadoFamilia extends BaseMetaData {
         this.cuantosLibrosFci = cuantosLibrosFci;
     }
 
-    public String getCuantasRevistasFui() {
-        return cuantasRevistasFui;
-    }
-
-    public void setCuantasRevistasFui(String cuantasRevistasFui) {
-        this.cuantasRevistasFui = cuantasRevistasFui;
-    }
-
-    public String getMaterialesJugarMonth() {
-        return materialesJugarMonth;
-    }
-
-    public void setMaterialesJugarMonth(String materialesJugarMonth) {
-        this.materialesJugarMonth = materialesJugarMonth;
-    }
 
     public String getMaterialesJugarFci() {
         return materialesJugarFci;
@@ -81,11 +67,27 @@ public class ZpoV2IndCuidadoFamilia extends BaseMetaData {
         this.variedadJugarFci = variedadJugarFci;
     }
 
-    public String getNombreEncuestadorFci() {
-        return nombreEncuestadorFci;
+    public String getCuantasRevistasFci() {
+        return cuantasRevistasFci;
     }
 
-    public void setNombreEncuestadorFci(String nombreEncuestadorFci) {
-        this.nombreEncuestadorFci = nombreEncuestadorFci;
+    public void setCuantasRevistasFci(String cuantasRevistasFci) {
+        this.cuantasRevistasFci = cuantasRevistasFci;
+    }
+
+    public String getActividadesJugarFci() {
+        return actividadesJugarFci;
+    }
+
+    public void setActividadesJugarFci(String actividadesJugarFci) {
+        this.actividadesJugarFci = actividadesJugarFci;
+    }
+
+    public String getEncuestadorFci() {
+        return encuestadorFci;
+    }
+
+    public void setEncuestadorFci(String encuestadorFci) {
+        this.encuestadorFci = encuestadorFci;
     }
 }

@@ -21,8 +21,8 @@ import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2IndCuidadoFamilia;
-import ni.org.ics.zpo.v2.appmovil.parsers.ZpoV2IndCuidadoFamiliaXml;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2StudyExit;
+import ni.org.ics.zpo.v2.appmovil.parsers.ZpoV2StudyExitXml;
 import ni.org.ics.zpo.v2.appmovil.preferences.PreferencesActivity;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.FileUtils;
@@ -35,22 +35,20 @@ import java.util.Date;
 /**
  * @author ics
  */
-public class NewZpoV2IndCuidadoFamiliaActivity extends AbstractAsyncActivity {
+public class NewZpoV2StudyExitActivity extends AbstractAsyncActivity {
 
-    protected static final String TAG = NewZpoV2IndCuidadoFamiliaActivity.class.getSimpleName();
+    protected static final String TAG = NewZpoV2StudyExitActivity.class.getSimpleName();
 
     private ZpoAdapter zpoA;
-    private static ZpoV2IndCuidadoFamilia mZpoV2IndCFam = new ZpoV2IndCuidadoFamilia();
+    private static ZpoV2StudyExit mZpoV2StudyExit = new ZpoV2StudyExit();
 
-    public static final int ADD_ZPOICF_ODK = 1;
-    public static final int EDIT_ZPOICF_ODK = 2;
+    public static final int ADD_ZPO_SE_ODK = 1;
 
     Dialog dialogInit;
     private SharedPreferences settings;
     private String username;
     private String mRecordId = "";
-    private Integer accion = 0;
-    private String event;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +66,7 @@ public class NewZpoV2IndCuidadoFamiliaActivity extends AbstractAsyncActivity {
         String mPass = ((MyZpoApplication) this.getApplication()).getPassApp();
         zpoA = new ZpoAdapter(this.getApplicationContext(), mPass, false, false);
         mRecordId = getIntent().getExtras().getString(Constants.RECORDID);
-        event = getIntent().getExtras().getString(Constants.EVENT);
-        mZpoV2IndCFam = (ZpoV2IndCuidadoFamilia) getIntent().getExtras().getSerializable(Constants.OBJECT_INDCUIFAM);
+        mZpoV2StudyExit = (ZpoV2StudyExit) getIntent().getExtras().getSerializable(Constants.OBJECT_STUDY_EX);
         createInitDialog();
     }
 
@@ -84,11 +81,7 @@ public class NewZpoV2IndCuidadoFamiliaActivity extends AbstractAsyncActivity {
 
         //to set the message
         TextView message = (TextView) dialogInit.findViewById(R.id.yesnotext);
-        if (mZpoV2IndCFam != null) {
-            message.setText(getString(R.string.edit) + " " + getString(R.string.infant_b_14) + "?");
-        } else {
-            message.setText(getString(R.string.add) + " " + getString(R.string.infant_b_14) + "?");
-        }
+        message.setText(getString(R.string.add) + " " + getString(R.string.infant_b_20) + "?");
 
         //add some action to the buttons
 
@@ -97,7 +90,7 @@ public class NewZpoV2IndCuidadoFamiliaActivity extends AbstractAsyncActivity {
 
             public void onClick(View v) {
                 dialogInit.dismiss();
-                addZpoIndCuidadoFam();
+                addZpoStudyExit();
             }
         });
 
@@ -139,7 +132,7 @@ public class NewZpoV2IndCuidadoFamiliaActivity extends AbstractAsyncActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent intent) {
-        if (requestCode == ADD_ZPOICF_ODK || requestCode == EDIT_ZPOICF_ODK) {
+        if (requestCode == ADD_ZPO_SE_ODK ) {
             if (resultCode == RESULT_OK) {
                 Uri instanceUri = intent.getData();
                 //Busca la instancia resultado
@@ -158,7 +151,7 @@ public class NewZpoV2IndCuidadoFamiliaActivity extends AbstractAsyncActivity {
                 }
                 if (complete.matches("complete")) {
                     //Parsear el resultado obteniendo un tamizaje si esta completo
-                    parseZpoIndCuidadoFam(idInstancia, instanceFilePath, accion);
+                    parseZpoStudyExit(idInstancia, instanceFilePath);
                 } else {
                     Toast.makeText(getApplicationContext(), getString(R.string.err_not_completed), Toast.LENGTH_LONG).show();
                 }
@@ -169,16 +162,14 @@ public class NewZpoV2IndCuidadoFamiliaActivity extends AbstractAsyncActivity {
         super.onActivityResult(requestCode, resultCode, intent);
     }
 
-    private void addZpoIndCuidadoFam() {
+    private void addZpoStudyExit() {
         try {
-            Uri formUri;
-            if (mZpoV2IndCFam == null) {
                 //campos de proveedor de collect
                 String[] projection = new String[]{
                         "_id", "jrFormId", "displayName"};
                 //cursor que busca el formulario
                 Cursor c = getContentResolver().query(Constants.CONTENT_URI, projection,
-                        "jrFormId = 'ZpoV2_IndicadoresCuidadoFamilia' and displayName = 'Encuesta de indicadores del Cuidado de la Familia'", null, null);
+                        "jrFormId = 'ZpoV2_Study_Exit' and displayName = 'Continuacion Estudio ZPO Salida del Estudio'", null, null);
                 c.moveToFirst();
                 //captura el id del formulario
                 Integer id = Integer.parseInt(c.getString(0));
@@ -186,17 +177,11 @@ public class NewZpoV2IndCuidadoFamiliaActivity extends AbstractAsyncActivity {
                 if (c != null) {
                     c.close();
                 }
-                formUri = ContentUris.withAppendedId(Constants.CONTENT_URI, id);
-                accion = ADD_ZPOICF_ODK;
-            } else {
-                //forma el uri para la instancia en ODK Collect
-                Integer id = mZpoV2IndCFam.getIdInstancia();
-                formUri = ContentUris.withAppendedId(Constants.CONTENT_URI_I, id);
-                accion = EDIT_ZPOICF_ODK;
-            }
-            Intent odkA = new Intent(Intent.ACTION_EDIT, formUri);
-            //Arranca la actividad proveedor de instancias de ODK Collect en busca de resultado
-            startActivityForResult(odkA, accion);
+            //forma el uri para ODK Collect
+            Uri formUri = ContentUris.withAppendedId(Constants.CONTENT_URI, id);
+            //Arranca la actividad ODK Collect en busca de resultado
+            Intent odkA =  new Intent(Intent.ACTION_EDIT,formUri);
+            startActivityForResult(odkA, ADD_ZPO_SE_ODK);
         } catch (Exception e) {
             //No existe el formulario en el equipo
             Log.e(TAG, e.getMessage(), e);
@@ -205,35 +190,39 @@ public class NewZpoV2IndCuidadoFamiliaActivity extends AbstractAsyncActivity {
         }
     }
 
-    private void parseZpoIndCuidadoFam(Integer idInstancia, String instanceFilePath, Integer accion) {
+    private void parseZpoStudyExit(Integer idInstancia, String instanceFilePath) {
         Serializer serializer = new Persister();
         File source = new File(instanceFilePath);
         try {
-            ZpoV2IndCuidadoFamiliaXml zpoV2ICFXml = new ZpoV2IndCuidadoFamiliaXml();
-            zpoV2ICFXml = serializer.read(ZpoV2IndCuidadoFamiliaXml.class, source);
-            if (accion== ADD_ZPOICF_ODK) mZpoV2IndCFam = new ZpoV2IndCuidadoFamilia();
-            mZpoV2IndCFam.setRecordId(mRecordId);
-            mZpoV2IndCFam.setEventName(event);
-            mZpoV2IndCFam.setFechaHoyFci(zpoV2ICFXml.getFechaHoyFci());
-            mZpoV2IndCFam.setCuantosLibrosFci(zpoV2ICFXml.getCuantosLibrosFci());
-            mZpoV2IndCFam.setCuantasRevistasFci(zpoV2ICFXml.getCuantasRevistasFci());
-            mZpoV2IndCFam.setMaterialesJugarFci(zpoV2ICFXml.getMaterialesJugarFci());
-            mZpoV2IndCFam.setVariedadJugarFci(zpoV2ICFXml.getVariedadJugarFci());
-            mZpoV2IndCFam.setActividadesJugarFci(zpoV2ICFXml.getActividadesJugarFci());
-            mZpoV2IndCFam.setEncuestadorFci(zpoV2ICFXml.getEncuestadorFci());
+            ZpoV2StudyExitXml zpoV2StudyExitXml = serializer.read(ZpoV2StudyExitXml.class, source);
+            mZpoV2StudyExit = new ZpoV2StudyExit();
 
-            mZpoV2IndCFam.setRecordDate(new Date());
-            mZpoV2IndCFam.setRecordUser(username);
-            mZpoV2IndCFam.setIdInstancia(idInstancia);
-            mZpoV2IndCFam.setInstancePath(instanceFilePath);
-            mZpoV2IndCFam.setEstado(Constants.STATUS_NOT_SUBMITTED);
-            mZpoV2IndCFam.setStart( zpoV2ICFXml.getStart());
-            mZpoV2IndCFam.setEnd( zpoV2ICFXml.getEnd());
-            mZpoV2IndCFam.setDeviceid( zpoV2ICFXml.getDeviceid());
-            mZpoV2IndCFam.setSimserial( zpoV2ICFXml.getSimserial());
-            mZpoV2IndCFam.setPhonenumber( zpoV2ICFXml.getPhonenumber());
-            mZpoV2IndCFam.setToday( zpoV2ICFXml.getToday());
-            new SaveDataTask().execute(accion);
+            mZpoV2StudyExit.setRecordId(mRecordId);
+
+            if (mRecordId.matches("^ZPO-\\d{3}[0]$")){
+                mZpoV2StudyExit.setEventName(Constants.EXIT);
+            }else{
+                mZpoV2StudyExit.setEventName(Constants.INFEXIT);
+            }
+
+            mZpoV2StudyExit.setFechaHoyDiscont(zpoV2StudyExitXml.getFechaHoyDiscont());
+            mZpoV2StudyExit.setRazonPorDiscont(zpoV2StudyExitXml.getRazonPorDiscont());
+            mZpoV2StudyExit.setOtraRazonDiscontin(zpoV2StudyExitXml.getOtraRazonDiscontin());
+            mZpoV2StudyExit.setEncuestadorDiscont(zpoV2StudyExitXml.getEncuestadorDiscont());
+
+            mZpoV2StudyExit.setRecordDate(new Date());
+            mZpoV2StudyExit.setRecordUser(username);
+            mZpoV2StudyExit.setIdInstancia(idInstancia);
+            mZpoV2StudyExit.setInstancePath(instanceFilePath);
+            mZpoV2StudyExit.setEstado(Constants.STATUS_NOT_SUBMITTED);
+            mZpoV2StudyExit.setStart(zpoV2StudyExitXml.getStart());
+            mZpoV2StudyExit.setEnd(zpoV2StudyExitXml.getEnd());
+            mZpoV2StudyExit.setDeviceid(zpoV2StudyExitXml.getDeviceid());
+            mZpoV2StudyExit.setSimserial(zpoV2StudyExitXml.getSimserial());
+            mZpoV2StudyExit.setPhonenumber(zpoV2StudyExitXml.getPhonenumber());
+            mZpoV2StudyExit.setToday(zpoV2StudyExitXml.getToday());
+
+            new SaveDataTask().execute();
 
         } catch (Exception e) {
             // Presenta el error al parsear el xml
@@ -247,7 +236,6 @@ public class NewZpoV2IndCuidadoFamiliaActivity extends AbstractAsyncActivity {
     // Private classes
     // ***************************************
     private class SaveDataTask extends AsyncTask<Integer, Void, String> {
-        private Integer accionaRealizar = null;
         @Override
         protected void onPreExecute() {
             // before the request begins, show a progress indicator
@@ -256,15 +244,9 @@ public class NewZpoV2IndCuidadoFamiliaActivity extends AbstractAsyncActivity {
 
         @Override
         protected String doInBackground(Integer... values) {
-            accionaRealizar = values[0];
             try {
                 zpoA.open();
-                if (accionaRealizar == ADD_ZPOICF_ODK){
-                    zpoA.crearZpoV2IndCuidadoFamilia(mZpoV2IndCFam );
-                }
-                else{
-                    zpoA.editarZpoV2IndCuidadoFam(mZpoV2IndCFam);
-                }
+                zpoA.crearZpoV2StudyExit(mZpoV2StudyExit);
                 zpoA.close();
             } catch (Exception e) {
                 Log.e(TAG, e.getLocalizedMessage(), e);

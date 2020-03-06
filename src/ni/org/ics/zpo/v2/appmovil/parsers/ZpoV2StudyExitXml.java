@@ -8,31 +8,22 @@ import java.util.Date;
 /**
  * @author ics
  */
-public class ZpoV2IndCuidadoFamiliaXml {
+public class ZpoV2StudyExitXml {
 
     @Element(required=false)
-    private Date fechaHoyFci;
+    private Date fechaHoyDiscont;
     @Element(required=false)
-    private String cuantosLibrosFci;
+    private String razonPorDiscont;
     @Element(required=false)
-    private String cuantasRevistasFci;
+    private String otraRazonDiscontin;
     @Element(required=false)
-    private String materialesJugarFci;
-    @Element(required=false)
-    private String variedadJugarFci;
-    @Element(required=false)
-    private String actividadesJugarFci;
-    @Element(required=false)
-    private String encuestadorFci;
-
-
-    @Element(required=false)
-    private String group1;
+    private String encuestadorDiscont;
 
     @Attribute
     private String id;
     @Element(required=false)
     private Meta meta;
+
     @Element(required=false)
     private String start;
     @Element(required=false)
@@ -50,61 +41,20 @@ public class ZpoV2IndCuidadoFamiliaXml {
     @Attribute(required = false)
     private String version;
 
-
-    public Date getFechaHoyFci() {
-        return fechaHoyFci;
+    public Date getFechaHoyDiscont() {
+        return fechaHoyDiscont;
     }
 
-    public void setFechaHoyFci(Date fechaHoyFci) {
-        this.fechaHoyFci = fechaHoyFci;
+    public String getRazonPorDiscont() {
+        return razonPorDiscont;
     }
 
-    public String getCuantosLibrosFci() {
-        return cuantosLibrosFci;
+    public String getOtraRazonDiscontin() {
+        return otraRazonDiscontin;
     }
 
-    public void setCuantosLibrosFci(String cuantosLibrosFci) {
-        this.cuantosLibrosFci = cuantosLibrosFci;
-    }
-
-    public String getMaterialesJugarFci() {
-        return materialesJugarFci;
-    }
-
-    public void setMaterialesJugarFci(String materialesJugarFci) {
-        this.materialesJugarFci = materialesJugarFci;
-    }
-
-    public String getVariedadJugarFci() {
-        return variedadJugarFci;
-    }
-
-    public void setVariedadJugarFci(String variedadJugarFci) {
-        this.variedadJugarFci = variedadJugarFci;
-    }
-
-    public String getCuantasRevistasFci() {
-        return cuantasRevistasFci;
-    }
-
-    public void setCuantasRevistasFci(String cuantasRevistasFci) {
-        this.cuantasRevistasFci = cuantasRevistasFci;
-    }
-
-    public String getActividadesJugarFci() {
-        return actividadesJugarFci;
-    }
-
-    public void setActividadesJugarFci(String actividadesJugarFci) {
-        this.actividadesJugarFci = actividadesJugarFci;
-    }
-
-    public String getEncuestadorFci() {
-        return encuestadorFci;
-    }
-
-    public void setEncuestadorFci(String encuestadorFci) {
-        this.encuestadorFci = encuestadorFci;
+    public String getEncuestadorDiscont() {
+        return encuestadorDiscont;
     }
 
     public String getId() {
@@ -186,5 +136,4 @@ public class ZpoV2IndCuidadoFamiliaXml {
     public void setVersion(String version) {
         this.version = version;
     }
-
 }

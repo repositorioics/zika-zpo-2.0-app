@@ -22,12 +22,14 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2StudyExitActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosmadre.*;
 import ni.org.ics.zpo.v2.appmovil.adapters.MenuMadresAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoEmbarazada;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2StudyExit;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
@@ -43,6 +45,7 @@ public class MenuMadresActivity extends AbstractAsyncActivity {
 	private static Zpo00Screening zp00 = new Zpo00Screening();
 	private static ZpoEstadoEmbarazada zpEstado = new ZpoEstadoEmbarazada();
     private static List<ZpoInfantData> mDatosInfantes = null;
+	private static ZpoV2StudyExit zpoSalida= new ZpoV2StudyExit();
 	private GridView gridView;
 	private TextView textView;
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -163,6 +166,7 @@ public class MenuMadresActivity extends AbstractAsyncActivity {
                         diff = getDateDiff(fechaEvento,todayDate,TimeUnit.DAYS);
                         if(diff<-7||diff>7) habilitado = false;
                         break;
+
 				default:
 					habilitado = true;
 					break;
@@ -321,6 +325,18 @@ public class MenuMadresActivity extends AbstractAsyncActivity {
                 i.putExtras(arguments);
                 startActivity(i);
                 break;
+
+			case 10:
+				i = new Intent(getApplicationContext(),
+						NewZpoV2StudyExitActivity.class);
+				//Aca se pasa evento, tamizaje y estado
+				if (zp00!=null) arguments.putSerializable(Constants.OBJECTO_ZP00 , zp00);
+				arguments.putString(Constants.RECORDID, zp00.getRecordId());
+				//if (zp00!=null) arguments.putSerializable(Constants.OBJECTO_ZP00 , zp00);
+				i.putExtras(arguments);
+				startActivity(i);
+				break;
+
 		default:
 			break;
 		}
@@ -356,6 +372,7 @@ public class MenuMadresActivity extends AbstractAsyncActivity {
 				zipA.open();
 				zpEstado = zipA.getZpoEstadoMadre(filtro, MainDBConstants.recordId);
                 mDatosInfantes = zipA.getZpoInfantDatas(MainDBConstants.pregnantId + "='" + zp00.getRecordId() + "'", null);
+				zpoSalida = zipA.getZpoV2StudyExit(filtro, null);
                 zipA.close();
                 if (mDatosInfantes!=null && mDatosInfantes.get(0).getInfantBirthDate()!=null)
                     fechaIngreso.setTime(mDatosInfantes.get(0).getInfantBirthDate());
@@ -383,12 +400,12 @@ public class MenuMadresActivity extends AbstractAsyncActivity {
 
 			textView.setText(Html.fromHtml(textView.getText().toString()+ labelHeader));
 			
-			gridView.setAdapter(new MenuMadresAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpEstado, zp00, fechaIngreso));
-			/*if (zpSalida != null){
+			gridView.setAdapter(new MenuMadresAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpEstado, zp00, fechaIngreso, zpoSalida));
+			if (zpoSalida != null){
 				textView.setTextColor(Color.RED);
 				textView.setText(textView.getText()+"\n"+getString(R.string.mat_retired)
-						+"\n"+getString(R.string.mat_exit)+": "+ mDateFormat.format(zpSalida.getExtStudyExitDate()));
-			}*/
+						+"\n"+getString(R.string.mat_exit)+": "+ mDateFormat.format(zpoSalida.getFechaHoyDiscont()));
+			}
 			dismissProgressDialog();
 		}
 

@@ -25,7 +25,7 @@ public class UploadAllTask extends UploadTask {
 	}
 
 	protected static final String TAG = UploadAllTask.class.getSimpleName();
-    private static final String TOTAL_TASK = "17";
+    private static final String TOTAL_TASK = "18";
 	private ZpoAdapter zpoA = null;
 
     private List<Zpo00Screening> mTamizajes = new ArrayList<Zpo00Screening>();
@@ -45,6 +45,7 @@ public class UploadAllTask extends UploadTask {
     private List<ZpoV2ExamenFisicoInfante> mExFisInf = new ArrayList<ZpoV2ExamenFisicoInfante>();
     private List<ZpoV2FormAudicion> mEvAudi = new ArrayList<ZpoV2FormAudicion>();
     private List<ZpoV2EvaluacionVisual> mEvalVis = new ArrayList<ZpoV2EvaluacionVisual>();
+    private List<ZpoV2StudyExit> mStudyExit = new ArrayList<ZpoV2StudyExit>();
 
 	private String url = null;
 	private String username = null;
@@ -69,6 +70,7 @@ public class UploadAllTask extends UploadTask {
     public static final int EX_FIS_INF = 15;
     public static final int EV_AUDI = 16;
     public static final int EVAL_VIS = 17;
+    public static final int ST_EX = 18;
 
 
     @Override
@@ -100,6 +102,7 @@ public class UploadAllTask extends UploadTask {
             mExFisInf = zpoA.getZpoV2ExamFisicoInfantes(filtro,null);
             mEvAudi = zpoA.getZpoV2FormAudiciones(filtro, null);
             mEvalVis = zpoA.getZpoV2EvalVisuales(filtro, null);
+            mStudyExit = zpoA.getZpoV2StudyExits(filtro,null );
 
 			publishProgress("Datos completos!", "2", "2");
             actualizarBaseDatos(Constants.STATUS_SUBMITTED, TAMIZAJE);
@@ -210,6 +213,14 @@ public class UploadAllTask extends UploadTask {
             error = uploadEvalVisual(url, username, password);
             if (!error.matches("Datos recibidos!")){
                 actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, EVAL_VIS);
+                return error;
+            }
+
+
+            actualizarBaseDatos(Constants.STATUS_SUBMITTED, ST_EX);
+            error = uploadStudyExit(url, username, password);
+            if (!error.matches("Datos recibidos!")){
+                actualizarBaseDatos(Constants.STATUS_NOT_SUBMITTED, ST_EX);
                 return error;
             }
 
@@ -375,6 +386,18 @@ public class UploadAllTask extends UploadTask {
                    eVis.setEstado(estado);
                    zpoA.editarZpoV2EvalVisual(eVis);
                    publishProgress("Actualizando Evaluaciones Visuales de base de datos local", Integer.valueOf(mEvalVis.indexOf(eVis)).toString(), Integer
+                           .valueOf(c).toString());
+               }
+           }
+       }
+
+       else if(opcion==ST_EX){
+           c = mStudyExit.size();
+           if(c>0){
+               for (ZpoV2StudyExit stEx : mStudyExit) {
+                   stEx.setEstado(estado);
+                   zpoA.editarZpoV2StudyExit(stEx);
+                   publishProgress("Actualizando Salidas de Estudio de base de datos local", Integer.valueOf(mStudyExit.indexOf(stEx)).toString(), Integer
                            .valueOf(c).toString());
                }
            }
@@ -974,6 +997,44 @@ public class UploadAllTask extends UploadTask {
                 requestHeaders.setAuthorization(authHeader);
                 HttpEntity<ZpoV2EvaluacionVisual[]> requestEntity =
                         new HttpEntity<ZpoV2EvaluacionVisual[]>(envio, requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+                // Hace la solicitud a la red, pone la vivienda y espera un mensaje de respuesta del servidor
+                ResponseEntity<String> response = restTemplate.exchange(urlRequest, HttpMethod.POST, requestEntity,
+                        String.class);
+                return response.getBody();
+            }
+            else{
+                return "Datos recibidos!";
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
+
+
+
+
+    /***************************************************/
+    /********************* ZpoV2StudyExit******/
+    /***************************************************/
+    // url, username, password
+    protected String uploadStudyExit(String url, String username,
+                                      String password) throws Exception {
+        try {
+            if(mStudyExit.size()>0){
+                publishProgress("Enviando Salidas de Estudio!", String.valueOf(ST_EX), TOTAL_TASK);
+                // La URL de la solicitud POST
+                final String urlRequest = url + "/movil/saveStudyExit";
+                ZpoV2StudyExit[] envio = mStudyExit.toArray(new ZpoV2StudyExit[mStudyExit.size()]);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+                requestHeaders.setAuthorization(authHeader);
+                HttpEntity<ZpoV2StudyExit[]> requestEntity =
+                        new HttpEntity<ZpoV2StudyExit[]>(envio, requestHeaders);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
                 restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());

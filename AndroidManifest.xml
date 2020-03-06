@@ -111,6 +111,8 @@
                   android:screenOrientation="portrait" />
         <activity android:name=".activities.nuevos.NewZpoV2EvalVisualActivity"
                   android:screenOrientation="portrait" />
+        <activity android:name=".activities.nuevos.NewZpoV2StudyExitActivity"
+                  android:screenOrientation="portrait" />
 
     </application>
 

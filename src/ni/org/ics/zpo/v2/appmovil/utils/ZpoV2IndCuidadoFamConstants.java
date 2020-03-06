@@ -15,11 +15,11 @@ public class ZpoV2IndCuidadoFamConstants {
     //Campos ZpoV2IndicadoreCuidadoFamilia
     public static final String fechaHoyFci = "fechaHoyFci";
     public static final String cuantosLibrosFci = "cuantosLibrosFci";
-    public static final String cuantasRevistasFui = "cuantasRevistasFui";
-    public static final String materialesJugarMonth = "materialesJugarMonth";
+    public static final String cuantasRevistasFci = "cuantasRevistasFci";
     public static final String materialesJugarFci = "materialesJugarFci";
     public static final String variedadJugarFci = "variedadJugarFci";
-    public static final String nombreEncuestadorFci = "nombreEncuestadorFci";
+    public static final String actividadesJugarFci = "actividadesJugarFci";
+    public static final String encuestadorFci = "encuestadorFci";
 
     //Crear tabla ZpoV2Mullen
 
@@ -29,11 +29,11 @@ public class ZpoV2IndCuidadoFamConstants {
             + eventName + " text, "
             + fechaHoyFci + " date, "
             + cuantosLibrosFci + " text, "
-            + cuantasRevistasFui + " text, "
-            + materialesJugarMonth + " text, "
+            + cuantasRevistasFci + " text, "
             + materialesJugarFci + " text, "
             + variedadJugarFci + " text, "
-            + nombreEncuestadorFci + " text, "
+            + actividadesJugarFci + " text, "
+            + encuestadorFci + " text, "
             + MainDBConstants.recordDate + " date, "
             + MainDBConstants.recordUser + " text, "
             + MainDBConstants.pasive + " text, "

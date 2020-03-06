@@ -41,6 +41,8 @@ public class Constants {
 	public static final String OBJECT_EX_FIS_INF = "zpoExamenFisicoInfante";
 	public static final String OBJECT_FORM_AUDI = "zpoFormAudicion";
 	public static final String OBJECT_EVAL_VIS = "zpoEvaluacionVisual";
+	public static final String OBJECT_STUDY_EX = "zpoStudyExit";
+
 
 	public static final String OBJECTO_ZPEST = "zpestado";
 	public static final String OBJECTO_ZPDATA = "zpdatos";
@@ -54,6 +56,7 @@ public class Constants {
 	public static final String SCREENING = "screening_arm_1";
 	public static final String ENTRY = "entry_arm_1";
 	public static final String EXIT = "study_exit_arm_1";
+	public static final String INFEXIT = "exit_arm_2";
 	
 	public static final String MONTH24 = "24_months_visit";
     public static final String MONTH36 = "36_months_visit";

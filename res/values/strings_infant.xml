@@ -35,6 +35,7 @@
     <string name="infant_b_17">Cuestionario Salud Infantil</string>
     <string name="infant_b_18">Actualización Cuestionario Salud Infantil</string>
     <string name="infant_b_19">Evaluación Psicológica</string>
+    <string name="infant_b_20">Formulario de Descontinuación</string>
 
     <string name="inf_id">Código del niño</string>
     <string name="inf_search">Buscar niño</string>

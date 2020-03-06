@@ -13,6 +13,7 @@ import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2StudyExit;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,19 +30,22 @@ public class MenuInfantesAdapter extends ArrayAdapter<String> {
     private final ZpoInfantData mZpInfante;
     private final ZpoEstadoInfante mZpEstado;
     private final Zpo00Screening mScreening;
+    private final ZpoV2StudyExit mZpoSalida;
 
     private Date fechaEvento;
     private Date todayDate;
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     public MenuInfantesAdapter(Context context, int textViewResourceId,
-                               String[] values, ZpoInfantData zp00, ZpoEstadoInfante zpEstado, Zpo00Screening screening) {
+                               String[] values, ZpoInfantData zp00, ZpoEstadoInfante zpEstado, Zpo00Screening screening,
+                               ZpoV2StudyExit zpoSalida) {
         super(context, textViewResourceId, values);
         this.context = context;
         this.values = values;
         this.mZpInfante = zp00;
         this.mZpEstado = zpEstado;
         this.mScreening = screening;
+        this.mZpoSalida = zpoSalida;
         try {
             this.todayDate = formatter.parse(formatter.format(new Date()));
         } catch (ParseException e) {
@@ -58,6 +62,9 @@ public class MenuInfantesAdapter extends ArrayAdapter<String> {
     public boolean isEnabled(int position) {
         // Disable the first item of GridView
         boolean habilitado = true;
+        if(mZpoSalida!= null){
+            return false;
+        }
         return habilitado;
     }
 
@@ -398,9 +405,15 @@ public class MenuInfantesAdapter extends ArrayAdapter<String> {
                 fechaIngreso.add(Calendar.MONTH, -78);
                 break;
             case 10:
+                textView.setTextColor(Color.BLACK);
+                if(mZpoSalida!=null){
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.mat_retired)+"\n\n");
+                }
+                else{
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.available)+"\n\n");
+                }
                 img=getContext().getResources().getDrawable( R.drawable.ic_exit);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
-                textView.setTextColor(Color.BLACK);
                 break;
             default:
                 img=getContext().getResources().getDrawable( R.drawable.logo);

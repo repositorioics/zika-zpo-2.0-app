@@ -73,6 +73,7 @@ public class ZpoAdapter {
             db.execSQL(ZpoV2ExamFisicoInfanteConstants.CREATE_EXFISINF_TABLE);
             db.execSQL(ZpoV2FormAudicionConstants.CREATE_FORM_AUDI_TABLE);
             db.execSQL(ZpoV2EvalVisualConstants.CREATE_EV_VIS_TABLE);
+            db.execSQL(ZpoV2StudyExitConstants.CREATE_STUDYEX_ADD_TABLE);
 
 		}
 
@@ -229,6 +230,8 @@ public class ZpoAdapter {
         c = crearCursor(ZpoV2FormAudicionConstants.FORM_AUDI_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoV2EvalVisualConstants.EV_VIS_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2StudyExitConstants.STUDY_EXIT_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c.close();
         return false;
@@ -1188,6 +1191,55 @@ public class ZpoAdapter {
         }
         if (!cursorBC.isClosed()) cursorBC.close();
         return evalVisual;
+    }
+
+
+    /*** Metodos para ZpoV2StudyExit en la base de datos
+     *
+     *
+     */
+
+    //Crear nuevo ZpoV2StudyExit en la base de datos
+    public void crearZpoV2StudyExit(ZpoV2StudyExit studyEx) {
+        ContentValues cv = ZpoV2StudyExitHelper.crearZpoV2StudyExit(studyEx);
+        mDb.insert(ZpoV2StudyExitConstants.STUDY_EXIT_TABLE, null, cv);
+    }
+    //Editar ZpoV2StudyExit existente en la base de datos
+    public boolean editarZpoV2StudyExit (ZpoV2StudyExit studyEx) {
+        ContentValues cv = ZpoV2StudyExitHelper.crearZpoV2StudyExit(studyEx);
+        return mDb.update(ZpoV2StudyExitConstants.STUDY_EXIT_TABLE, cv, MainDBConstants.recordId + "='"
+                + studyEx.getRecordId() + "' and " + MainDBConstants.eventName + "='" + studyEx.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2StudyExit de la base de datos
+    public boolean borrarZpoV2StudyExit() {
+        return mDb.delete(ZpoV2StudyExitConstants.STUDY_EXIT_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2StudyExit de la base de datos
+    public ZpoV2StudyExit getZpoV2StudyExit(String filtro, String orden) throws SQLException {
+        ZpoV2StudyExit studyEx = null;
+        Cursor cursorBC = crearCursor(ZpoV2StudyExitConstants.STUDY_EXIT_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            studyEx=ZpoV2StudyExitHelper.crearZpoV2StudyExit(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return studyEx;
+    }
+    //Obtener una lista de ZpoV2StudyExit de la base de datos
+    public List<ZpoV2StudyExit> getZpoV2StudyExits(String filtro, String orden) throws SQLException {
+        List<ZpoV2StudyExit> studyExit = new ArrayList<ZpoV2StudyExit>();
+        Cursor cursorBC = crearCursor(ZpoV2StudyExitConstants.STUDY_EXIT_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            studyExit.clear();
+            do{
+                ZpoV2StudyExit sExit = null;
+                sExit = ZpoV2StudyExitHelper.crearZpoV2StudyExit(cursorBC);
+                studyExit.add(sExit);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return studyExit;
     }
 
 }

@@ -20,11 +20,11 @@ public class ZpoV2IndCuidadoFamHelper {
         cv.put(ZpoV2IndCuidadoFamConstants.eventName, zpoV2IndCuidadoFam.getEventName());
         if (zpoV2IndCuidadoFam.getFechaHoyFci()!=null) cv.put(ZpoV2IndCuidadoFamConstants.fechaHoyFci, zpoV2IndCuidadoFam.getFechaHoyFci().getTime());
         cv.put(ZpoV2IndCuidadoFamConstants.cuantosLibrosFci, zpoV2IndCuidadoFam.getCuantosLibrosFci());
-        cv.put(ZpoV2IndCuidadoFamConstants.cuantasRevistasFui, zpoV2IndCuidadoFam.getCuantasRevistasFui());
-        cv.put(ZpoV2IndCuidadoFamConstants.materialesJugarMonth, zpoV2IndCuidadoFam.getMaterialesJugarMonth());
+        cv.put(ZpoV2IndCuidadoFamConstants.cuantasRevistasFci, zpoV2IndCuidadoFam.getCuantasRevistasFci());
         cv.put(ZpoV2IndCuidadoFamConstants.materialesJugarFci, zpoV2IndCuidadoFam.getMaterialesJugarFci());
         cv.put(ZpoV2IndCuidadoFamConstants.variedadJugarFci, zpoV2IndCuidadoFam.getVariedadJugarFci());
-        cv.put(ZpoV2IndCuidadoFamConstants.nombreEncuestadorFci, zpoV2IndCuidadoFam.getNombreEncuestadorFci());
+        cv.put(ZpoV2IndCuidadoFamConstants.actividadesJugarFci, zpoV2IndCuidadoFam.getActividadesJugarFci());
+        cv.put(ZpoV2IndCuidadoFamConstants.encuestadorFci, zpoV2IndCuidadoFam.getEncuestadorFci());
 
         if (zpoV2IndCuidadoFam.getRecordDate() != null) cv.put(MainDBConstants.recordDate, zpoV2IndCuidadoFam.getRecordDate().getTime());
         cv.put(MainDBConstants.recordUser, zpoV2IndCuidadoFam.getRecordUser());
@@ -50,11 +50,11 @@ public class ZpoV2IndCuidadoFamHelper {
         zpoICF.setEventName(cursor.getString(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.eventName)));
         if (cursor.getLong(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.fechaHoyFci))>0) zpoICF.setFechaHoyFci(new Date(cursor.getLong(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.fechaHoyFci))));
         zpoICF.setCuantosLibrosFci(cursor.getString(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.cuantosLibrosFci)));
-        zpoICF.setCuantasRevistasFui(cursor.getString(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.cuantasRevistasFui)));
-        zpoICF.setMaterialesJugarMonth(cursor.getString(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.materialesJugarMonth)));
-        zpoICF.setVariedadJugarFci(cursor.getString(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.materialesJugarFci)));
+        zpoICF.setCuantasRevistasFci(cursor.getString(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.cuantasRevistasFci)));
+        zpoICF.setMaterialesJugarFci(cursor.getString(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.materialesJugarFci)));
         zpoICF.setVariedadJugarFci(cursor.getString(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.variedadJugarFci)));
-        zpoICF.setNombreEncuestadorFci(cursor.getString(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.nombreEncuestadorFci)));
+        zpoICF.setActividadesJugarFci(cursor.getString(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.actividadesJugarFci)));
+        zpoICF.setEncuestadorFci(cursor.getString(cursor.getColumnIndex(ZpoV2IndCuidadoFamConstants.encuestadorFci)));
 
         if(cursor.getLong(cursor.getColumnIndex(MainDBConstants.recordDate))>0) zpoICF.setRecordDate(new Date(cursor.getLong(cursor.getColumnIndex(MainDBConstants.recordDate))));
         zpoICF.setRecordUser(cursor.getString(cursor.getColumnIndex(MainDBConstants.recordUser)));

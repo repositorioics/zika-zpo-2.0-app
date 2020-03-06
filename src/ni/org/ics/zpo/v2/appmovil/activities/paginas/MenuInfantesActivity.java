@@ -21,12 +21,14 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2StudyExitActivity;
 import ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante.*;
 import ni.org.ics.zpo.v2.appmovil.adapters.MenuInfantesAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2StudyExit;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
@@ -41,6 +43,7 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
     private static ZpoInfantData zpInfante = new ZpoInfantData();
     private static ZpoEstadoInfante zpEstado = new ZpoEstadoInfante();
     private static Zpo00Screening screening = new Zpo00Screening();
+    private static ZpoV2StudyExit zpoSalida= new ZpoV2StudyExit();
     private GridView gridView;
     private TextView textView;
     private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -309,6 +312,16 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
                 i.putExtras(arguments);
                 startActivity(i);
                 break;
+
+            case 10:
+                i = new Intent(getApplicationContext(),
+                        NewZpoV2StudyExitActivity.class);
+                //Aca se pasa evento, tamizaje y estado
+                if (screening!=null) arguments.putSerializable(Constants.OBJECTO_ZP00 , screening);
+                arguments.putString(Constants.RECORDID, screening.getRecordId());
+                i.putExtras(arguments);
+                startActivity(i);
+                break;
             default:
                 break;
         }
@@ -344,6 +357,7 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
                 zipA.open();
                 zpEstado = zipA.getZpoEstadoInfante(filtro, MainDBConstants.recordId);
                 screening = zipA.getZpo00Screening(filtro, MainDBConstants.recordId);
+                zpoSalida = zipA.getZpoV2StudyExit(filtro, null);
                 //zpSalida = zipA.getZpo08StudyExit(filtro, null);
                 //entryD = zipA.getZpo01StudyEntrySectionDtoF(MainDBConstants.recordId + "='" + zpInfante.getPregnantId() + "'", null);
                 zipA.close();
@@ -361,12 +375,12 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
             textView.setText(getString(R.string.infant_events)+"\n"+
                     getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
                     getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(zpInfante.getInfantBirthDate()):"ND"));
-            gridView.setAdapter(new MenuInfantesAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpInfante, zpEstado, screening));
-            /*if (zpSalida != null){
+            gridView.setAdapter(new MenuInfantesAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpInfante, zpEstado, screening, zpoSalida));
+            if (zpoSalida != null){
                 textView.setTextColor(Color.RED);
                 textView.setText(textView.getText()+"\n"+getString(R.string.inf_retired)
-                        +"\n"+getString(R.string.inf_exit)+": "+ mDateFormat.format(zpSalida.getExtStudyExitDate()));
-            }*/
+                        +"\n"+getString(R.string.inf_exit)+": "+ mDateFormat.format(zpoSalida.getFechaHoyDiscont()));
+            }
             dismissProgressDialog();
         }
 

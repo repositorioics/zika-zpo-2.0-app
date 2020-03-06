@@ -256,8 +256,8 @@ public class IngresoActivity extends AbstractAsyncActivity {
             eventoaFiltrar = values[0];
 				try {
 					zpoA.open();
-					filtro = MainDBConstants.recordId + "='" + zp00.getRecordId() + "'";
-					zpoCuestSaMat = zpoA.getZpoV2CuestSaludMat( filtro, MainDBConstants.recordId);
+					filtro = filtro = MainDBConstants.recordId + "='" + zp00.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
+					zpoCuestSaMat = zpoA.getZpoV2CuestSaludMat(filtro, MainDBConstants.recordId);
                     zpoV2CuestSoe = zpoA.getZpoV2CuestSocieco(filtro, MainDBConstants.recordId);
                     zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
                     zpoV2EvPsico = zpoA.getZpoV2EvalPsico(filtro, MainDBConstants.recordId);
