@@ -18,7 +18,7 @@ public class ZpoInfantDataHelper {
 
         cv.put(MainDBConstants.recordId, zpInfantData.getRecordId());
         cv.put(MainDBConstants.pregnantId, zpInfantData.getPregnantId());
-        if (zpInfantData.getInfantBirthDate()!=null) cv.put(MainDBConstants.infantBirthDate, zpInfantData.getInfantBirthDate().getTime());
+        cv.put(MainDBConstants.infantBirthDate, zpInfantData.getInfantBirthDate());
         cv.put(MainDBConstants.infantMode, zpInfantData.getInfantMode());
         cv.put(MainDBConstants.infantDeliveryWho, zpInfantData.getInfantDeliveryWho());
         cv.put(MainDBConstants.infantDeliveryOccur, zpInfantData.getInfantDeliveryOccur());
@@ -55,7 +55,7 @@ public class ZpoInfantDataHelper {
         ZpoInfantData zpInfantData = new ZpoInfantData();
         zpInfantData.setRecordId(cursor.getString(cursor.getColumnIndex(MainDBConstants.recordId)));
         zpInfantData.setPregnantId(cursor.getString(cursor.getColumnIndex(MainDBConstants.pregnantId)));
-        if (cursor.getLong(cursor.getColumnIndex(MainDBConstants.infantBirthDate))>0) zpInfantData.setInfantBirthDate(new Date(cursor.getLong(cursor.getColumnIndex(MainDBConstants.infantBirthDate))));
+        zpInfantData.setInfantBirthDate(cursor.getString(cursor.getColumnIndex(MainDBConstants.infantBirthDate)));
         zpInfantData.setInfantMode(cursor.getString(cursor.getColumnIndex(MainDBConstants.infantMode)));
         zpInfantData.setInfantDeliveryWho(cursor.getString(cursor.getColumnIndex(MainDBConstants.infantDeliveryWho)));
         zpInfantData.setInfantDeliveryOccur(cursor.getString(cursor.getColumnIndex(MainDBConstants.infantDeliveryOccur)));

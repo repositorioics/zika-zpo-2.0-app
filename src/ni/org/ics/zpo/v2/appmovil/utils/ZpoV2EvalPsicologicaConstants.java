@@ -6,7 +6,7 @@ package ni.org.ics.zpo.v2.appmovil.utils;
 public class ZpoV2EvalPsicologicaConstants {
 
     //Tabla ZpoV2EvaluacionPsicologica
-    public static final String EVAL_PSICO_TABLE = "zpo_eval_pscicologica";
+    public static final String EVAL_PSICO_TABLE = "zpo_eval_psicologica";
 
     //Campos comunes
     public static final String recordId = "recordId";

@@ -79,6 +79,8 @@
                   android:screenOrientation="portrait" />
         <activity android:name=".activities.paginas.eventosinfante.InfantCallActivity"
                   android:screenOrientation="portrait" />
+        <activity android:name=".activities.paginas.eventosinfante.InfantCall78Activity"
+                  android:screenOrientation="portrait" />
         <activity android:name="ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2MullenActivity"
                   android:screenOrientation="portrait" />
         <activity android:name=".activities.nuevos.NewZpoV2EdadesEtapasActivity"

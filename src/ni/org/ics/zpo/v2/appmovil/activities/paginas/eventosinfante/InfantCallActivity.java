@@ -26,8 +26,10 @@ import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantCallAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.*;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
+import ni.org.ics.zpo.v2.appmovil.utils.DateUtil;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class InfantCallActivity extends AbstractAsyncActivity {
@@ -74,9 +76,13 @@ public class InfantCallActivity extends AbstractAsyncActivity {
 		//Aca se recupera los datos de los formularios para ver si estan realizados o no...
 		new FetchUnscheduledVisitInfanteTask().execute(evento);
 		textView = (TextView) findViewById(R.id.label);
-		textView.setText(getString(R.string.forms)+"\n"+
-				getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
-						getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(zpInfante.getInfantBirthDate()):"ND"));
+		try {
+			textView.setText(getString(R.string.forms)+"\n"+
+					getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
+							getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(DateUtil.StringToDate(zpInfante.getInfantBirthDate(), "dd/MM/yyyy")):"ND"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		menu_infante_info = getResources().getStringArray(R.array.menu_infant_call);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		gridView.setOnItemClickListener(new OnItemClickListener() {

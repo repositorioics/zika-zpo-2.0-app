@@ -70,6 +70,9 @@ public class ZpoV2CuestSocioeconomicoHelper {
         cv.put(ZpoV2CuestSocioeconomicoConstants.persona8GradoSes, zpoV2CuestSocioeco.getPersona8GradoSes());
         cv.put(ZpoV2CuestSocioeconomicoConstants.persona8OcupacionSes, zpoV2CuestSocioeco.getPersona8OcupacionSes());
         cv.put(ZpoV2CuestSocioeconomicoConstants.nombreEncuestadorSes, zpoV2CuestSocioeco.getNombreEncuestadorSes());
+        cv.put(ZpoV2CuestSocioeconomicoConstants.preescolarSes, zpoV2CuestSocioeco.getPreescolarSes());
+        cv.put(ZpoV2CuestSocioeconomicoConstants.cuandoPreescolarSes, zpoV2CuestSocioeco.getCuandoPreescolarSes());
+        cv.put(ZpoV2CuestSocioeconomicoConstants.ambosPadresSes, zpoV2CuestSocioeco.getAmbosPadresSes());
 
 
         if (zpoV2CuestSocioeco.getRecordDate() != null) cv.put(MainDBConstants.recordDate, zpoV2CuestSocioeco.getRecordDate().getTime());
@@ -146,6 +149,10 @@ public class ZpoV2CuestSocioeconomicoHelper {
         zpoCSOE.setPersona8GradoSes(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.persona8GradoSes)));
         zpoCSOE.setPersona8OcupacionSes(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.persona8OcupacionSes)));
         zpoCSOE.setNombreEncuestadorSes(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.nombreEncuestadorSes)));
+        zpoCSOE.setPreescolarSes(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.preescolarSes)));
+        zpoCSOE.setCuandoPreescolarSes(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.cuandoPreescolarSes)));
+        zpoCSOE.setAmbosPadresSes(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.ambosPadresSes)));
+
 
         if(cursor.getLong(cursor.getColumnIndex(MainDBConstants.recordDate))>0) zpoCSOE.setRecordDate(new Date(cursor.getLong(cursor.getColumnIndex(MainDBConstants.recordDate))));
         zpoCSOE.setRecordUser(cursor.getString(cursor.getColumnIndex(MainDBConstants.recordUser)));

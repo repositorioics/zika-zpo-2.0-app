@@ -22,18 +22,21 @@ public class VisitAdapter extends ArrayAdapter<String> {
     private final ZpoV2RecoleccionMuestra mZpoV2Muestra;
     private final ZpoV2CuestionarioSaludMaterna mZpoV2CuestSaMat;
     private final ZpoV2CuestionarioSocioeconomico mZpoV2CuestSoe;
+    private final ZpoV2EvaluacionPsicologica mZpoV2EvPsico;
 
 
     public VisitAdapter(Context context, int textViewResourceId,
                         String[] values, ZpoV2CuestionarioSaludMaterna zpoV2CuestSaMat,
                         ZpoV2CuestionarioSocioeconomico zpoV2CuestSoe,
-                        ZpoV2RecoleccionMuestra zpoMuestra) {
+                        ZpoV2RecoleccionMuestra zpoMuestra,
+                        ZpoV2EvaluacionPsicologica zpoEvPsico) {
         super(context, textViewResourceId, values);
         this.context = context;
         this.values = values;
         this.mZpoV2CuestSaMat = zpoV2CuestSaMat;
         this.mZpoV2CuestSoe = zpoV2CuestSoe;
         this.mZpoV2Muestra = zpoMuestra;
+        this.mZpoV2EvPsico = zpoEvPsico;
 
     }
 
@@ -84,6 +87,18 @@ public class VisitAdapter extends ArrayAdapter<String> {
                     textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
                 }
                 img=getContext().getResources().getDrawable( R.drawable.ic_sample);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
+
+            case 3:
+                if(mZpoV2EvPsico!=null){
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+                }
+                else{
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+                }
+                img=getContext().getResources().getDrawable( R.drawable.ic_mental_health);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
 

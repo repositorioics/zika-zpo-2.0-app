@@ -31,6 +31,7 @@ import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoEmbarazada;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2StudyExit;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
+import ni.org.ics.zpo.v2.appmovil.utils.DateUtil;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
 import java.text.ParseException;
@@ -375,7 +376,7 @@ public class MenuMadresActivity extends AbstractAsyncActivity {
 				zpoSalida = zipA.getZpoV2StudyExit(filtro, null);
                 zipA.close();
                 if (mDatosInfantes!=null && mDatosInfantes.get(0).getInfantBirthDate()!=null)
-                    fechaIngreso.setTime(mDatosInfantes.get(0).getInfantBirthDate());
+                    fechaIngreso.setTime(DateUtil.StringToDate(mDatosInfantes.get(0).getInfantBirthDate(), "dd/MM/yyyy"));
 			} catch (Exception e) {
 				Log.e(TAG, e.getLocalizedMessage(), e);
 				return "error";

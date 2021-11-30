@@ -214,4 +214,5 @@ public class ZpoV2CuestionarioDemografico extends BaseMetaData {
     public void setNombreEncuestadorDemogr(String nombreEncuestadorDemogr) {
         this.nombreEncuestadorDemogr = nombreEncuestadorDemogr;
     }
+
 }

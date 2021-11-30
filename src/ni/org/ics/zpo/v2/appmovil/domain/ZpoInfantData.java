@@ -11,7 +11,7 @@ public class ZpoInfantData extends BaseMetaData {
     private static final long serialVersionUID = 1L;
     private String recordId;
     private String pregnantId;
-    private Date infantBirthDate;
+    private String infantBirthDate;
     private String infantMode;
     private String infantDeliveryWho;
     private String infantDeliveryOccur;
@@ -44,16 +44,14 @@ public class ZpoInfantData extends BaseMetaData {
         this.pregnantId = pregnantId;
     }
 
-    
-    public Date getInfantBirthDate() {
+    public String getInfantBirthDate() {
         return infantBirthDate;
     }
 
-    public void setInfantBirthDate(Date infantBirthDate) {
+    public void setInfantBirthDate(String infantBirthDate) {
         this.infantBirthDate = infantBirthDate;
     }
 
-    
     public String getInfantMode() {
         return infantMode;
     }

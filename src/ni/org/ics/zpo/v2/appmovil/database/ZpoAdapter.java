@@ -60,9 +60,6 @@ public class ZpoAdapter {
             db.execSQL(MainDBConstants.CREATE_FAIL_VISIT_TABLE);
             db.execSQL(MainDBConstants.CREATE_BIOCOLLECTION_TABLE);
             db.execSQL(ZpoV2MullenConstants.CREATE_MULLEN_ADD_TABLE);
-            db.execSQL(ZpoOtoEDBConstants.CREATE_INFANT_OTO_EMS_TABLE);
-            db.execSQL(ZpoOphthaEvalDBConstants.CREATE_INFANT_OPHTHALMOLOGICEVAL_TABLE);
-            db.execSQL(ZpoPsychoEvalDBConstants.CREATE_INFANT_PSYCHOLOGICALEVAL_TABLE);
             db.execSQL(ZpoV2EdadesEtapasConstants.CREATE_EDADES_ETAPA_TABLE);
             db.execSQL(ZpoV2IndCuidadoFamConstants.CREATE_ICFAM_TABLE);
             db.execSQL(ZpoV2CuestDemograficoConstants.CREATE_CDEMO_TABLE);
@@ -205,15 +202,9 @@ public class ZpoAdapter {
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(MainDBConstants.BIOCOLLECTION_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
-        c = crearCursor(ZpoOtoEDBConstants.INFANT_OTO_EMS_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
-        if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoV2EdadesEtapasConstants.EDADES_ETAPAS_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoV2IndCuidadoFamConstants.IND_CFAM_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
-        if (c != null && c.getCount()>0) {c.close();return true;}
-        c = crearCursor(ZpoOphthaEvalDBConstants.INFANT_OPHTHALMOLOGICEVAL_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
-        if (c != null && c.getCount()>0) {c.close();return true;}
-        c = crearCursor(ZpoPsychoEvalDBConstants.INFANT_PSYCHOLOGICALEVAL_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoV2CuestDemograficoConstants.CUEST_DEMO_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}

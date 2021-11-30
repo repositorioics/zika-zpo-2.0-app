@@ -268,6 +268,9 @@ public class NewZpoV2CuestSocioeconomicoActivity extends AbstractAsyncActivity {
             mZpoV2CuestSocioec.setPersona8GradoSes(zpoV2CDEMXml.getPersona8GradoSes());
             mZpoV2CuestSocioec.setPersona8OcupacionSes(zpoV2CDEMXml.getPersona8OcupacionSes());
             mZpoV2CuestSocioec.setNombreEncuestadorSes(zpoV2CDEMXml.getNombreEncuestadorSes());
+            mZpoV2CuestSocioec.setPreescolarSes(zpoV2CDEMXml.getPreescolarSes());
+            mZpoV2CuestSocioec.setCuandoPreescolarSes(zpoV2CDEMXml.getCuandoPreescolarSes());
+            mZpoV2CuestSocioec.setAmbosPadresSes(zpoV2CDEMXml.getAmbosPadresSes());
 
             mZpoV2CuestSocioec.setRecordDate(new Date());
             mZpoV2CuestSocioec.setRecordUser(username);

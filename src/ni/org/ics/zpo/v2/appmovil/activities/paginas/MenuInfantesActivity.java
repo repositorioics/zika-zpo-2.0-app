@@ -30,6 +30,7 @@ import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2StudyExit;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
+import ni.org.ics.zpo.v2.appmovil.utils.DateUtil;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
 import java.text.ParseException;
@@ -83,8 +84,13 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
             e.printStackTrace();
         }
         this.fechaIngreso = Calendar.getInstance();
-        if (zpInfante.getInfantBirthDate()!=null)
-            fechaIngreso.setTime(zpInfante.getInfantBirthDate());
+        if (zpInfante.getInfantBirthDate()!=null) {
+            try {
+                fechaIngreso.setTime(DateUtil.StringToDate(zpInfante.getInfantBirthDate(), "dd/MM/yyyy"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
         gridView.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -299,14 +305,14 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
                 startActivity(i);
                 break;
 
-            case 2: case 4:case 6:case 8:
+            case 2: case 4: case 6:
                 i = new Intent(getApplicationContext(),
                         InfantCallActivity.class);
                 //Aca se pasa evento, tamizaje y estado
                 if(position==2)	arguments.putString(Constants.EVENT, Constants.MONTH42);
                 if(position==4)	arguments.putString(Constants.EVENT, Constants.MONTH54);
                 if(position==6)	arguments.putString(Constants.EVENT, Constants.MONTH66);
-                if(position==8)	arguments.putString(Constants.EVENT, Constants.MONTH78);
+              //  if(position==8)	arguments.putString(Constants.EVENT, Constants.MONTH78);
                 if (zpInfante!=null) arguments.putSerializable(Constants.OBJECTO_ZPINFDATA , zpInfante);
                 if (zpEstado!=null) arguments.putSerializable(Constants.OBJECTO_ZPESTINF , zpEstado);
                 i.putExtras(arguments);
@@ -319,6 +325,17 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
                 //Aca se pasa evento, tamizaje y estado
                 if (screening!=null) arguments.putSerializable(Constants.OBJECTO_ZP00 , screening);
                 arguments.putString(Constants.RECORDID, screening.getRecordId());
+                i.putExtras(arguments);
+                startActivity(i);
+                break;
+
+            case 8:
+                i = new Intent(getApplicationContext(),
+                        InfantCall78Activity.class);
+                //Aca se pasa evento, tamizaje y estado
+                if(position==8)	arguments.putString(Constants.EVENT, Constants.MONTH78);
+                if (zpInfante!=null) arguments.putSerializable(Constants.OBJECTO_ZPINFDATA , zpInfante);
+                if (zpEstado!=null) arguments.putSerializable(Constants.OBJECTO_ZPESTINF , zpEstado);
                 i.putExtras(arguments);
                 startActivity(i);
                 break;
@@ -372,10 +389,18 @@ public class MenuInfantesActivity extends AbstractAsyncActivity {
             // after the network request completes, hide the progress indicator
             textView.setText("");
             textView.setTextColor(Color.BLUE);
-            textView.setText(getString(R.string.infant_events)+"\n"+
-                    getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
-                    getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(zpInfante.getInfantBirthDate()):"ND"));
-            gridView.setAdapter(new MenuInfantesAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpInfante, zpEstado, screening, zpoSalida));
+            try {
+                textView.setText(getString(R.string.infant_events)+"\n"+
+                        getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
+                        getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(DateUtil.StringToDate(zpInfante.getInfantBirthDate(), "dd/MM/yyyy")):"ND"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            try {
+                gridView.setAdapter(new MenuInfantesAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpInfante, zpEstado, screening, zpoSalida));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             if (zpoSalida != null){
                 textView.setTextColor(Color.RED);
                 textView.setText(textView.getText()+"\n"+getString(R.string.inf_retired)

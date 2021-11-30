@@ -252,7 +252,7 @@ public class MainDBConstants {
             + INFANTDATA_TABLE + " ("
             + recordId + " text not null, "
             + pregnantId + " text, "
-            + infantBirthDate + " date, "
+            + infantBirthDate + " text, "
             + infantMode + " text, "
             + infantDeliveryWho + " text, "
             + infantDeliveryOccur + " text, "

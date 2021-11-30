@@ -31,6 +31,7 @@
         <item>@string/maternal_b_2</item>
         <item>@string/maternal_b_4</item>
         <item>@string/maternal_b_3</item>
+        <item>@string/maternal_b_5</item>
     </string-array>
 
     <string-array name="menu_maternal_call">
@@ -75,6 +76,7 @@
         <item>@string/infant_b_4</item>
         <item>@string/infant_b_5</item>
         <item>@string/infant_b_6</item>
+        <item>@string/infant_b_2</item>
     </string-array>
     <!--48 Y 60 MESES-->
     <string-array name="menu_infant_visit2">
@@ -100,6 +102,10 @@
     <string-array name="menu_infant_call">
         <item>@string/infant_b_18</item>
         <item>@string/infant_b_11</item>
+    </string-array>
+
+    <string-array name="menu_infant_call78">
+        <item>@string/infant_b_18</item>
     </string-array>
 
     <string-array name="menu_infant_entry">

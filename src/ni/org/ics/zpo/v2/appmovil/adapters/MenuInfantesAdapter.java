@@ -14,6 +14,7 @@ import ni.org.ics.zpo.v2.appmovil.domain.Zpo00Screening;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2StudyExit;
+import ni.org.ics.zpo.v2.appmovil.utils.DateUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,7 +39,7 @@ public class MenuInfantesAdapter extends ArrayAdapter<String> {
 
     public MenuInfantesAdapter(Context context, int textViewResourceId,
                                String[] values, ZpoInfantData zp00, ZpoEstadoInfante zpEstado, Zpo00Screening screening,
-                               ZpoV2StudyExit zpoSalida) {
+                               ZpoV2StudyExit zpoSalida) throws ParseException {
         super(context, textViewResourceId, values);
         this.context = context;
         this.values = values;
@@ -54,7 +55,7 @@ public class MenuInfantesAdapter extends ArrayAdapter<String> {
         }
         this.fechaIngreso = Calendar.getInstance();
         if (mZpInfante.getInfantBirthDate()!=null)
-            fechaIngreso.setTime(mZpInfante.getInfantBirthDate());
+            fechaIngreso.setTime(DateUtil.StringToDate(mZpInfante.getInfantBirthDate(), "dd/MM/yyyy"));
     }
 
 

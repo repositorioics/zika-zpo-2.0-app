@@ -25,8 +25,10 @@ import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantVisitAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.*;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
+import ni.org.ics.zpo.v2.appmovil.utils.DateUtil;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 //activity para mostrar menú para visitas 36 meses de edad
@@ -34,6 +36,7 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 	private ZpoAdapter zipA;
 	private static ZpoInfantData zpInfante = new ZpoInfantData();
 	private static ZpoEstadoInfante zpEstado = new ZpoEstadoInfante();
+	private static ZpoV2ExamenFisicoInfante zpoV2ExFisInf = null;
 
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
 	private static String evento;
@@ -79,9 +82,13 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 		//Aca se recupera los datos de los formularios para ver si estan realizados o no...
 		new FetchVisitInfanteTask().execute(evento);
 		textView = (TextView) findViewById(R.id.label);
-		textView.setText(getString(R.string.forms)+"\n"+
-				getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
-						getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(zpInfante.getInfantBirthDate()):"ND"));
+		try {
+			textView.setText(getString(R.string.forms)+"\n"+
+					getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
+							getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(DateUtil.StringToDate(zpInfante.getInfantBirthDate(), "dd/MM/yyyy")):"ND"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		menu_infante_info = getResources().getStringArray(R.array.menu_infant_visit1);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
@@ -142,6 +149,13 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 						i = new Intent(getApplicationContext(),
 								NewZpoV2EvalVisualActivity.class);
 						if (zpoV2EvalVisual != null) arguments.putSerializable(Constants.OBJECT_EVAL_VIS, zpoV2EvalVisual);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;
+					case 7: // EXAMEN FISICO INFANTE
+						i = new Intent(getApplicationContext(),
+								NewZpoV2ExamFisicoInfanteActivity.class);
+						if (zpoV2ExFisInf != null) arguments.putSerializable(Constants.OBJECT_EX_FIS_INF, zpoV2ExFisInf);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
@@ -289,9 +303,10 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
                     zpoCSaInf = zipA.getZpoV2CuestSaludInf(filtro, MainDBConstants.recordId);
                     zpoV2EvAuditiva = zipA.getZpoV2FormAudicion(filtro, MainDBConstants.recordId);
 					zpoV2EvalVisual = zipA.getZpoV2EvalVisual(filtro, MainDBConstants.recordId);
+					zpoV2ExFisInf = zipA.getZpoV2ExamFisicoInfante(filtro, MainDBConstants.recordId );
 
 
-					if (zpoV2Muestra !=null && zpoMullen != null && zpoICF!=null && zpoCDemo!=null  && zpoCSaInf!=null && zpoV2EvAuditiva !=null && zpoV2EvalVisual != null) {
+					if (zpoV2Muestra !=null && zpoMullen != null && zpoICF!=null && zpoCDemo!=null  && zpoCSaInf!=null && zpoV2EvAuditiva !=null && zpoV2EvalVisual != null && zpoV2ExFisInf != null) {
 						/*if(eventoaFiltrar.matches(Constants.MONTH24)){
 							zpEstado.setMes24('1');
 						}*/
@@ -310,7 +325,7 @@ public class InfantVisitActivity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new InfantVisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra, zpoMullen, zpoICF, zpoCDemo, zpoCSaInf, zpoV2EvAuditiva, zpoV2EvalVisual));
+				gridView.setAdapter(new InfantVisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoV2Muestra, zpoMullen, zpoICF, zpoCDemo, zpoCSaInf, zpoV2EvAuditiva, zpoV2EvalVisual, zpoV2ExFisInf));
 				dismissProgressDialog();
 			}
 

@@ -1,4 +1,4 @@
-package ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosmadre;
+package ni.org.ics.zpo.v2.appmovil.activities.paginas.eventosinfante;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -20,27 +20,24 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
-import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2ActCuestSaludMaternaActivity;
-import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2CuestSocioeconomicoActivity;
-import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2EvalPsicologicaActivity;
-import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
-import ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre.VisitAdapter;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2ActCuestSaludInfantilActivity;
+import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantCall78Adapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
-import ni.org.ics.zpo.v2.appmovil.domain.*;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoEstadoInfante;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestSaludInfantil;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2EdadesEtapas;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
+import ni.org.ics.zpo.v2.appmovil.utils.DateUtil;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class MotherVisitActivity extends AbstractAsyncActivity {
-	private ZpoAdapter zpoA;
-	private static Zpo00Screening zp00 = new Zpo00Screening();
-	private static ZpoEstadoEmbarazada zpEstado = new ZpoEstadoEmbarazada();
-    private static ZpoV2RecoleccionMuestra zpoV2Muestra= null;
-	private static ZpoV2CuestionarioSaludMaterna zpoV2CuestSaMat= null;
-	private static ZpoV2CuestionarioSocioeconomico zpoV2CuestSoe = null;
-	private static ZpoV2EvaluacionPsicologica zpoV2EvPsico = null;
-
+public class InfantCall78Activity extends AbstractAsyncActivity {
+	private ZpoAdapter zipA;
+	private static ZpoInfantData zpInfante = new ZpoInfantData();
+	private static ZpoEstadoInfante zpEstado = new ZpoEstadoInfante();
 
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
 	private static String evento;
@@ -51,7 +48,10 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 	private boolean mExitShowing;
 	private boolean pendiente = false;
 	private static final String EXIT_SHOWING = "exitshowing";
-	String[] menu_maternal_info;
+	String[] menu_infante_info;
+
+    private static ZpoV2EdadesEtapas zpoEE = null;
+    private static ZpoV2CuestSaludInfantil zpoCuestSaInf;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -70,18 +70,22 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 			}
 		}
 		String mPass = ((MyZpoApplication) this.getApplication()).getPassApp();
-		zpoA = new ZpoAdapter(this.getApplicationContext(),mPass,false,false);
+		zipA = new ZpoAdapter(this.getApplicationContext(),mPass,false,false);
 		/*Aca se recupera evento, tamizaje y estado*/
 		evento = getIntent().getStringExtra(Constants.EVENT);
-		zp00 = (Zpo00Screening) getIntent().getExtras().getSerializable(Constants.OBJECTO_ZP00);
-		zpEstado = (ZpoEstadoEmbarazada) getIntent().getExtras().getSerializable(Constants.OBJECTO_ZPEST);
+		zpInfante = (ZpoInfantData) getIntent().getExtras().getSerializable(Constants.OBJECTO_ZPINFDATA);
+		zpEstado = (ZpoEstadoInfante) getIntent().getExtras().getSerializable(Constants.OBJECTO_ZPESTINF);
 		//Aca se recupera los datos de los formularios para ver si estan realizados o no...
-		new FetchDataIngresoTask().execute(evento);
+		new FetchUnscheduledVisitInfanteTask().execute(evento);
 		textView = (TextView) findViewById(R.id.label);
-		textView.setText(getString(R.string.forms)+"\n"+
-				getString(R.string.mat_id)+": "+zp00.getRecordId()+"\n"+
-						getString(R.string.mat_fec)+": "+ mDateFormat.format(zp00.getScrVisitDate()));
-		menu_maternal_info = getResources().getStringArray(R.array.menu_maternal_visit);
+		try {
+			textView.setText(getString(R.string.forms)+"\n"+
+					getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
+							getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(DateUtil.StringToDate(zpInfante.getInfantBirthDate(), "dd/MM/yyyy")):"ND"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		menu_infante_info = getResources().getStringArray(R.array.menu_infant_call78);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -90,41 +94,67 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 				Bundle arguments = new Bundle();
 				Intent i;
 				arguments.putString(Constants.EVENT, evento);
-                arguments.putString(Constants.RECORDID, zp00.getRecordId());
+                arguments.putString(Constants.RECORDID, zpInfante.getRecordId());
 				switch(position){
-					case 0: //ACTUALIZACION CUESTIONARIO SALUD MATERNA
+                case 0: //ACTUALIZACION CUESTIONARIO SALUD INFANTIL
+                	i = new Intent(getApplicationContext(),
+                			NewZpoV2ActCuestSaludInfantilActivity.class);
+                    if (zpoCuestSaInf!=null) arguments.putSerializable(Constants.OBJECT_CUEST_SA_INF , zpoCuestSaInf);
+					i.putExtras(arguments);
+					startActivity(i);
+					break;
+				/*	case 1: //EVALUACION OFTALMOLOGICA
 						i = new Intent(getApplicationContext(),
-								NewZpoV2ActCuestSaludMaternaActivity.class);
-						if (zpoV2CuestSaMat!=null) arguments.putSerializable(Constants.OBJECT_CUEST_SA_MAT , zpoV2CuestSaMat);
+								NewZpo07InfantAssessmentVisitOphtActivity.class);
+						if (zp07 != null) arguments.putSerializable(Constants.OBJECTO_ZP07, zp07);
 						i.putExtras(arguments);
 						startActivity(i);
-						break;
+						break;*/
 
-					case 1: // CUESTIONARIO SOCIECONOMIGO DEL HOGAR
+				/*	case 1: //EDADES Y ETAPAS
 						i = new Intent(getApplicationContext(),
-								NewZpoV2CuestSocioeconomicoActivity.class);
-						if (zpoV2CuestSoe!=null) arguments.putSerializable(Constants.OBJECT_CUEST_SOE, zpoV2CuestSoe);
+								NewZpoV2EdadesEtapasActivity.class);
+						if (zpoEE != null) arguments.putSerializable(Constants.OBJECT_ZPOEDADESETAPAS, zpoEE);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;*/
+/*					case 4: //RESULTADOS OFTALMOLOGICOS
+						i = new Intent(getApplicationContext(),
+								NewZpoV2InfantOphtResultsActivity.class);
+						if (zp07a != null) arguments.putSerializable(Constants.OBJECTO_ZP07A, zp07a);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-                    case 2: //MUESTRAS
-                        i = new Intent(getApplicationContext(),
-                                NewZpoV2RecoleccionMuestraActivity.class);
-                        if (zpoV2Muestra!=null) arguments.putSerializable(Constants.OBJECTO_ZP02 , zpoV2Muestra);
-                        arguments.putBoolean("ES_MADRE", true);
-                        i.putExtras(arguments);
-                        startActivity(i);
-                        break;
-
-					case 3: //EVALUACION PSICOLOGICA
+					case 5: //RESULTADOS AUDIOLOGICOS
 						i = new Intent(getApplicationContext(),
-								NewZpoV2EvalPsicologicaActivity.class);
-						if (zpoV2EvPsico!=null) arguments.putSerializable(Constants.OBJECT_EVAL_PSICO , zpoV2EvPsico);
+								NewZpo07bInfantAudioResultsActivity.class);
+						if (zp07b != null) arguments.putSerializable(Constants.OBJECTO_ZP07B, zp07b);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
-                    default:
-                        break;
+					case 6: //ESTUDIOS DE IMAGENES
+						i = new Intent(getApplicationContext(),
+								NewZpo07cInfantImageStudiesActivity.class);
+						if (zp07c != null) arguments.putSerializable(Constants.OBJECTO_ZP07C, zp07c);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;
+					case 7: //ESCALA BAYLEY
+						i = new Intent(getApplicationContext(),
+								NewZpo07dInfantBayleyScalesActivity.class);
+						if (zp07d != null) arguments.putSerializable(Constants.OBJECTO_ZP07D, zp07d);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;
+					case 9: //FACTORES DE RIESGO
+						i = new Intent(getApplicationContext(),
+								NewZpo04ExtendedSectionAtoFActivity.class);
+						if (zp04AF != null) arguments.putSerializable(Constants.OBJECTO_ZP04AF, zp04AF);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;*/
+					default:
+						break;
 				}
 			}
 		});
@@ -155,7 +185,7 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 		if (mExitShowing) {
 			createDialog(EXIT);
 		}
-		new FetchDataIngresoTask().execute(evento);
+		new FetchUnscheduledVisitInfanteTask().execute(evento);
 		super.onResume();
 	}
 
@@ -219,7 +249,6 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 				public void onClick(DialogInterface dialog, int which) {
 					// Finish app
 					dialog.dismiss();
-					
 					mExitShowing=false;
 				}
 
@@ -244,7 +273,7 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 	// ***************************************
 		// Private classes
 		// ***************************************
-		private class FetchDataIngresoTask extends AsyncTask<String, Void, String> {
+		private class FetchUnscheduledVisitInfanteTask extends AsyncTask<String, Void, String> {
 			private String eventoaFiltrar = null;
 			private String filtro = null;
 			@Override
@@ -257,38 +286,30 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 			protected String doInBackground(String... values) {
 				eventoaFiltrar = values[0];
 				try {
-					zpoA.open();
-					filtro = MainDBConstants.recordId + "='" + zp00.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
-					zpoV2CuestSaMat = zpoA.getZpoV2CuestSaludMat(filtro, MainDBConstants.recordId);
-					zpoV2CuestSoe = zpoA.getZpoV2CuestSocieco(filtro, MainDBConstants.recordId);
-					zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
-					zpoV2EvPsico = zpoA.getZpoV2EvalPsico(filtro, MainDBConstants.recordId);
+					zipA.open();
+					filtro = MainDBConstants.recordId + "='" + zpInfante.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
+					zpoEE = zipA.getZpoV2EdadesEtapas(filtro, MainDBConstants.recordId);
+					zpoCuestSaInf = zipA.getZpoV2CuestSaludInf(filtro, MainDBConstants.recordId);
 
-					if (zpoV2CuestSaMat!=null && zpoV2CuestSoe!=null && zpoV2Muestra!= null && zpoV2EvPsico!=null){
-
-                        if(eventoaFiltrar.matches(Constants.MONTH36)){
-                            zpEstado.setMes36('1');
+					if (zpoCuestSaInf != null){
+						if(eventoaFiltrar.matches(Constants.MONTH30)){
+							zpEstado.setMes30('1');
+						}
+						if(eventoaFiltrar.matches(Constants.MONTH42)){
+							zpEstado.setMes42('1');
+						}
+                        if(eventoaFiltrar.matches(Constants.MONTH54)){
+                            zpEstado.setMes54('1');
                         }
-						if(eventoaFiltrar.matches(Constants.MONTH48)){
-							zpEstado.setMes48('1');
-						}
-
-						if(eventoaFiltrar.matches(Constants.MONTH60)){
-							zpEstado.setMes60('1');
-						}
-
-						if(eventoaFiltrar.matches(Constants.MONTH72)){
-							zpEstado.setMes72('1');
-						}
-
-						if(eventoaFiltrar.matches(Constants.MONTH84)){
-							zpEstado.setMes84('1');
-						}
-
-
-						zpoA.editarZpoEstadoMadre(zpEstado);
+                        if(eventoaFiltrar.matches(Constants.MONTH66)){
+                            zpEstado.setMes66('1');
+                        }
+                        if(eventoaFiltrar.matches(Constants.MONTH78)){
+                            zpEstado.setMes78('1');
+                        }
+                        zipA.editarZpoEstadoInfante(zpEstado);
 					}
-					zpoA.close();
+					zipA.close();
 				} catch (Exception e) {
 					Log.e(TAG, e.getLocalizedMessage(), e);
 					return "Error";
@@ -298,7 +319,7 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new VisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpoV2CuestSaMat, zpoV2CuestSoe, zpoV2Muestra, zpoV2EvPsico));
+				gridView.setAdapter(new InfantCall78Adapter(getApplicationContext(), R.layout.menu_item_2, menu_infante_info, zpoCuestSaInf));
 				dismissProgressDialog();
 			}
 

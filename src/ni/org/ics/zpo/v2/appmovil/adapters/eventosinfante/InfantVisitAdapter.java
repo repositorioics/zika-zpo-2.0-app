@@ -23,6 +23,7 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
     private final ZpoV2CuestSaludInfantil mZpoCuestSaInf;
     private final ZpoV2FormAudicion mZpoEvAuditiva;
     private final ZpoV2EvaluacionVisual mZpoEvalVisual;
+    private final ZpoV2ExamenFisicoInfante mZpoExFisInf;
 
 	public InfantVisitAdapter(Context context, int textViewResourceId,
                               String[] values,
@@ -32,7 +33,8 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
                               ZpoV2CuestionarioDemografico zpoCDemo,
                               ZpoV2CuestSaludInfantil zpoCSI,
                               ZpoV2FormAudicion zpoEAudi,
-                              ZpoV2EvaluacionVisual zpoEvalVisual) {
+                              ZpoV2EvaluacionVisual zpoEvalVisual,
+                              ZpoV2ExamenFisicoInfante zpoEFI) {
 		super(context, textViewResourceId, values);
 		this.context = context;
 		this.values = values;
@@ -43,6 +45,7 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
         this.mZpoCuestSaInf = zpoCSI;
         this.mZpoEvAuditiva = zpoEAudi;
         this.mZpoEvalVisual = zpoEvalVisual;
+        this.mZpoExFisInf = zpoEFI;
 	}
 
 	@Override
@@ -135,6 +138,17 @@ public class InfantVisitAdapter extends ArrayAdapter<String> {
                     textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.pending));
                 }
                 img = getContext().getResources().getDrawable(R.drawable.ic_visual);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
+
+            case 7:
+                if (mZpoExFisInf != null) {
+                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.done));
+                } else {
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText() + "\n" + context.getResources().getString(R.string.pending));
+                }
+                img = getContext().getResources().getDrawable(R.drawable.ic_inf_phys_exam);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
 

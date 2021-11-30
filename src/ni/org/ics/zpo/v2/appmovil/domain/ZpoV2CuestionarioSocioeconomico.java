@@ -63,6 +63,9 @@ public class ZpoV2CuestionarioSocioeconomico extends BaseMetaData {
     private String persona8GradoSes;
     private String persona8OcupacionSes;
     private String nombreEncuestadorSes;
+    private String preescolarSes;
+    private String cuandoPreescolarSes;
+    private String ambosPadresSes;
 
     public String getRecordId() {
         return recordId;
@@ -494,5 +497,29 @@ public class ZpoV2CuestionarioSocioeconomico extends BaseMetaData {
 
     public void setNombreEncuestadorSes(String nombreEncuestadorSes) {
         this.nombreEncuestadorSes = nombreEncuestadorSes;
+    }
+
+    public String getPreescolarSes() {
+        return preescolarSes;
+    }
+
+    public void setPreescolarSes(String preescolarSes) {
+        this.preescolarSes = preescolarSes;
+    }
+
+    public String getCuandoPreescolarSes() {
+        return cuandoPreescolarSes;
+    }
+
+    public void setCuandoPreescolarSes(String cuandoPreescolarSes) {
+        this.cuandoPreescolarSes = cuandoPreescolarSes;
+    }
+
+    public String getAmbosPadresSes() {
+        return ambosPadresSes;
+    }
+
+    public void setAmbosPadresSes(String ambosPadresSes) {
+        this.ambosPadresSes = ambosPadresSes;
     }
 }

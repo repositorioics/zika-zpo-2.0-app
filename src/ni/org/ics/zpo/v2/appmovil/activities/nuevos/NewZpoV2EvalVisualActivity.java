@@ -26,6 +26,7 @@ import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2EvaluacionVisual;
 import ni.org.ics.zpo.v2.appmovil.parsers.ZpoV2EvalVisualXml;
 import ni.org.ics.zpo.v2.appmovil.preferences.PreferencesActivity;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
+import ni.org.ics.zpo.v2.appmovil.utils.DateUtil;
 import ni.org.ics.zpo.v2.appmovil.utils.FileUtils;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 import org.simpleframework.xml.Serializer;
@@ -239,7 +240,7 @@ public class NewZpoV2EvalVisualActivity extends AbstractAsyncActivity {
                 //calcular edad en meses del infante basado en la fecha de registro del formulario
                 Date fechaNac = null;
                 if (infantData != null) {
-                    fechaNac = infantData.getInfantBirthDate();
+                    fechaNac = DateUtil.StringToDate(infantData.getInfantBirthDate(), "dd/MM/yyyy");
                     mZpoV2EvalVisual.setFechaNacimientoOptho(fechaNac);
                 }
 

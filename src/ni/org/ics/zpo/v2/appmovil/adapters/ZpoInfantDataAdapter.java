@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
+import ni.org.ics.zpo.v2.appmovil.utils.DateUtil;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -40,7 +42,11 @@ public class ZpoInfantDataAdapter extends ArrayAdapter<ZpoInfantData> {
 
 			textView = (TextView) v.findViewById(R.id.identifier_text);
 			if (textView != null) {
-				textView.setText(this.getContext().getString(R.string.inf_dob) + ": " + (p.getInfantBirthDate()!=null?mDateFormat.format(p.getInfantBirthDate()):"ND"));
+				try {
+					textView.setText(this.getContext().getString(R.string.inf_dob) + ": " + (p.getInfantBirthDate()!=null?mDateFormat.format(DateUtil.StringToDate(p.getInfantBirthDate(), "dd/MM/yyyy")):"ND"));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			ImageView imageView = (ImageView) v.findViewById(R.id.image);

@@ -26,6 +26,7 @@ import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2ExamenFisicoInfante;
 import ni.org.ics.zpo.v2.appmovil.parsers.ZpoV2ExamFisicoInfanteXml;
 import ni.org.ics.zpo.v2.appmovil.preferences.PreferencesActivity;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
+import ni.org.ics.zpo.v2.appmovil.utils.DateUtil;
 import ni.org.ics.zpo.v2.appmovil.utils.FileUtils;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 import org.simpleframework.xml.Serializer;
@@ -238,7 +239,7 @@ public class NewZpoV2ExamFisicoInfanteActivity extends AbstractAsyncActivity {
 
                 //calcular edad en meses del infante basado en la fecha de registro del formulario
                 Date fechaNac = null;
-                if (infantData != null) fechaNac = infantData.getInfantBirthDate();
+                if (infantData != null) fechaNac = DateUtil.StringToDate(infantData.getInfantBirthDate(), "dd/MM/yyyy");
 
             if (zpoV2ExamFisicoInfanteXml.getChildExamFecha() != null)
                 meses = getEdadMeses( fechaNac, zpoV2ExamFisicoInfanteXml.getChildExamFecha() );

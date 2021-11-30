@@ -22,6 +22,7 @@ import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2ExamenFisicoInfante;
 import ni.org.ics.zpo.v2.appmovil.parsers.ZpoV2MullenXml;
 import ni.org.ics.zpo.v2.appmovil.preferences.PreferencesActivity;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
+import ni.org.ics.zpo.v2.appmovil.utils.DateUtil;
 import ni.org.ics.zpo.v2.appmovil.utils.FileUtils;
 import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2Mullen;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
@@ -232,11 +233,11 @@ public class NewZpoV2MullenActivity extends AbstractAsyncActivity {
 
             if (accion== ADD_ZPOM_ODK) {
                 mZpoV2Mullen = new ZpoV2Mullen();
-                mZpoV2Mullen.setActDobMsel(infantData.getInfantBirthDate());
+                mZpoV2Mullen.setActDobMsel(DateUtil.StringToDate(infantData.getInfantBirthDate(), "dd/MM/yyyy"));
 
                 //calcular edad en meses del infante basado en la fecha de registro del formulario
                 Date fechaNac = null;
-                if (infantData != null) fechaNac = infantData.getInfantBirthDate();
+                if (infantData != null) fechaNac = DateUtil.StringToDate(infantData.getInfantBirthDate(), "dd/MM/yyyy");
 
                 if (zpoV2MullenXml.getTestingDateMsel() != null)
                     meses = getEdadMeses( fechaNac, zpoV2MullenXml.getTestingDateMsel() );

@@ -25,8 +25,10 @@ import ni.org.ics.zpo.v2.appmovil.adapters.eventosinfante.InfantVisit4860Adapter
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.*;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
+import ni.org.ics.zpo.v2.appmovil.utils.DateUtil;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 //activity para mostrar menú para visitas 24, 36, 48 y 60 meses de edad
@@ -38,6 +40,7 @@ public class InfantVisit4860Activity extends AbstractAsyncActivity {
 	private static ZpoV2CuestionarioDemografico zpoCDemo = new ZpoV2CuestionarioDemografico();
 	private static ZpoV2CuestSaludInfantil zpoCuestSaInf = new ZpoV2CuestSaludInfantil();
 	private static ZpoV2ExamenFisicoInfante zpoExFisInf = new ZpoV2ExamenFisicoInfante();
+
 
 
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -79,9 +82,13 @@ public class InfantVisit4860Activity extends AbstractAsyncActivity {
 		//Aca se recupera los datos de los formularios para ver si estan realizados o no...
 		new FetchVisitInfanteTask().execute(evento);
 		textView = (TextView) findViewById(R.id.label);
-		textView.setText(getString(R.string.forms)+"\n"+
-				getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
-						getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(zpInfante.getInfantBirthDate()):"ND"));
+		try {
+			textView.setText(getString(R.string.forms)+"\n"+
+					getString(R.string.inf_id)+": "+zpInfante.getRecordId()+"\n"+
+							getString(R.string.inf_dob)+": "+ (zpInfante.getInfantBirthDate()!=null?mDateFormat.format(DateUtil.StringToDate(zpInfante.getInfantBirthDate(), "dd/MM/yyyy")):"ND"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		menu_infante_info = getResources().getStringArray(R.array.menu_infant_visit2);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
@@ -95,15 +102,15 @@ public class InfantVisit4860Activity extends AbstractAsyncActivity {
 				switch(position){
 					case 0: //ACTUALIZACION CUESTIONARIO DEMOGRAFICO
 						i = new Intent(getApplicationContext(),
-								NewZpoV2ActCuestSaludInfantilActivity.class);
-						if (zpoCuestSaInf!=null) arguments.putSerializable(Constants.OBJECT_CUEST_SA_INF , zpoCuestSaInf);
+								NewZpoV2ActCuestDemogActivity.class);
+						if (zpoCDemo!=null) arguments.putSerializable(Constants.OBJECT_CUEST_DEMO , zpoCDemo);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
 						//ACTUALIZACION CUESTIONARIO INFANTIL
 					case 1:
-						i = new Intent( getApplicationContext(), NewZpoV2IndCuidadoFamiliaActivity.class);
-						if (zpoICF != null) arguments.putSerializable(Constants.OBJECT_INDCUIFAM, zpoICF);
+						i = new Intent( getApplicationContext(), NewZpoV2ActCuestSaludInfantilActivity.class);
+						if (zpoCuestSaInf != null) arguments.putSerializable(Constants.OBJECT_CUEST_SA_INF, zpoCuestSaInf);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;

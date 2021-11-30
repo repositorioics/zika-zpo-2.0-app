@@ -114,6 +114,12 @@ public class ZpoV2CuestSocioeconomicoXml {
     private String persona8OcupacionSes;
     @Element(required=false)
     private String nombreEncuestadorSes;
+    @Element(required=false)
+    private String preescolarSes;
+    @Element(required=false)
+    private String cuandoPreescolarSes;
+    @Element(required=false)
+    private String ambosPadresSes;
 
     @Element(required=false)
     private String group1;
@@ -426,6 +432,18 @@ public class ZpoV2CuestSocioeconomicoXml {
 
     public String getNombreEncuestadorSes() {
         return nombreEncuestadorSes;
+    }
+
+    public String getPreescolarSes() {
+        return preescolarSes;
+    }
+
+    public String getCuandoPreescolarSes() {
+        return cuandoPreescolarSes;
+    }
+
+    public String getAmbosPadresSes() {
+        return ambosPadresSes;
     }
 
 }
