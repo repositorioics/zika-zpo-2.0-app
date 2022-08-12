@@ -52,7 +52,7 @@ public class ZpoV2ExamFisicoInfanteHelper {
         cv.put(ZpoV2ExamFisicoInfanteConstants.childExamLeftEyeFinds, zpoV2ExaFisicoInfante.getChildExamLeftEyeFinds());
         cv.put(ZpoV2ExamFisicoInfanteConstants.childExamRightEyeFinds, zpoV2ExaFisicoInfante.getChildExamRightEyeFinds());
         cv.put(ZpoV2ExamFisicoInfanteConstants.childExamReferral, zpoV2ExaFisicoInfante.getChildExamReferral());
-        cv.put(ZpoV2ExamFisicoInfanteConstants.childExamReferral, zpoV2ExaFisicoInfante.getChildExamReferralType());
+        cv.put(ZpoV2ExamFisicoInfanteConstants.childExamReferralType, zpoV2ExaFisicoInfante.getChildExamReferralType());
         cv.put(ZpoV2ExamFisicoInfanteConstants.childExamPersonal, zpoV2ExaFisicoInfante.getChildExamPersonal());
 
         if (zpoV2ExaFisicoInfante.getRecordDate() != null) cv.put(MainDBConstants.recordDate, zpoV2ExaFisicoInfante.getRecordDate().getTime());
