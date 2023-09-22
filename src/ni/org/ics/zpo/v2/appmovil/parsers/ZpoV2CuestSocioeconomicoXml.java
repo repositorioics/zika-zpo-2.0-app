@@ -122,7 +122,20 @@ public class ZpoV2CuestSocioeconomicoXml {
     private String ambosPadresSes;
 
     @Element(required=false)
+    private String pri;
+    @Element(required=false)
+    private String sec;
+    @Element(required=false)
+    private String third;
+    @Element(required=false)
+    private String schCovid;
+    @Element(required=false)
+    private String primarySch;
+
+    @Element(required=false)
     private String group1;
+    @Element(required=false)
+    private String group2;
 
     @Attribute
     private String id;
@@ -446,4 +459,43 @@ public class ZpoV2CuestSocioeconomicoXml {
         return ambosPadresSes;
     }
 
+    public String getPri() {
+        return pri;
+    }
+
+    public void setPri(String pri) {
+        this.pri = pri;
+    }
+
+    public String getSec() {
+        return sec;
+    }
+
+    public void setSec(String sec) {
+        this.sec = sec;
+    }
+
+    public String getThird() {
+        return third;
+    }
+
+    public void setThird(String third) {
+        this.third = third;
+    }
+
+    public String getSchCovid() {
+        return schCovid;
+    }
+
+    public void setSchCovid(String schCovid) {
+        this.schCovid = schCovid;
+    }
+
+    public String getPrimarySch() {
+        return primarySch;
+    }
+
+    public void setPrimarySch(String primarySch) {
+        this.primarySch = primarySch;
+    }
 }

@@ -73,6 +73,11 @@ public class ZpoV2CuestSocioeconomicoHelper {
         cv.put(ZpoV2CuestSocioeconomicoConstants.preescolarSes, zpoV2CuestSocioeco.getPreescolarSes());
         cv.put(ZpoV2CuestSocioeconomicoConstants.cuandoPreescolarSes, zpoV2CuestSocioeco.getCuandoPreescolarSes());
         cv.put(ZpoV2CuestSocioeconomicoConstants.ambosPadresSes, zpoV2CuestSocioeco.getAmbosPadresSes());
+        cv.put(ZpoV2CuestSocioeconomicoConstants.pri, zpoV2CuestSocioeco.getPri());
+        cv.put(ZpoV2CuestSocioeconomicoConstants.sec, zpoV2CuestSocioeco.getSec());
+        cv.put(ZpoV2CuestSocioeconomicoConstants.third, zpoV2CuestSocioeco.getThird());
+        cv.put(ZpoV2CuestSocioeconomicoConstants.schCovid, zpoV2CuestSocioeco.getSchCovid());
+        cv.put(ZpoV2CuestSocioeconomicoConstants.primarySch, zpoV2CuestSocioeco.getPrimarySch());
 
 
         if (zpoV2CuestSocioeco.getRecordDate() != null) cv.put(MainDBConstants.recordDate, zpoV2CuestSocioeco.getRecordDate().getTime());
@@ -153,6 +158,11 @@ public class ZpoV2CuestSocioeconomicoHelper {
         zpoCSOE.setCuandoPreescolarSes(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.cuandoPreescolarSes)));
         zpoCSOE.setAmbosPadresSes(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.ambosPadresSes)));
 
+        zpoCSOE.setPri(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.pri)));
+        zpoCSOE.setSec(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.sec)));
+        zpoCSOE.setThird(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.third)));
+        zpoCSOE.setSchCovid(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.schCovid)));
+        zpoCSOE.setPrimarySch(cursor.getString(cursor.getColumnIndex(ZpoV2CuestSocioeconomicoConstants.primarySch)));
 
         if(cursor.getLong(cursor.getColumnIndex(MainDBConstants.recordDate))>0) zpoCSOE.setRecordDate(new Date(cursor.getLong(cursor.getColumnIndex(MainDBConstants.recordDate))));
         zpoCSOE.setRecordUser(cursor.getString(cursor.getColumnIndex(MainDBConstants.recordUser)));

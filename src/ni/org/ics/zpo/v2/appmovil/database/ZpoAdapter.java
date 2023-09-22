@@ -71,6 +71,7 @@ public class ZpoAdapter {
             db.execSQL(ZpoV2FormAudicionConstants.CREATE_FORM_AUDI_TABLE);
             db.execSQL(ZpoV2EvalVisualConstants.CREATE_EV_VIS_TABLE);
             db.execSQL(ZpoV2StudyExitConstants.CREATE_STUDYEX_ADD_TABLE);
+            db.execSQL(ZpoV2CuestVisitaTerrenoConstants.CREATE_CVT_TABLE);
 
 		}
 
@@ -223,6 +224,8 @@ public class ZpoAdapter {
         c = crearCursor(ZpoV2EvalVisualConstants.EV_VIS_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c = crearCursor(ZpoV2StudyExitConstants.STUDY_EXIT_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
+        if (c != null && c.getCount()>0) {c.close();return true;}
+        c = crearCursor(ZpoV2CuestVisitaTerrenoConstants.CUEST_VIS_TER_TABLE, MainDBConstants.STATUS + "='"  + Constants.STATUS_NOT_SUBMITTED+ "'", null, null);
         if (c != null && c.getCount()>0) {c.close();return true;}
         c.close();
         return false;
@@ -1231,6 +1234,53 @@ public class ZpoAdapter {
         }
         if (!cursorBC.isClosed()) cursorBC.close();
         return studyExit;
+    }
+
+    /**
+     * Metodos para ZpoV2CuestionarioVisitaTerreno en la base de datos
+     *
+     */
+    //Crear nuevo ZpoV2CuestionarioVisitaTerreno en la base de datos
+    public void crearZpoV2CuestVisitaTerreno(ZpoV2CuestVisitaTerreno cuestVisitaTerreno) {
+        ContentValues cv = ZpoV2CuestVisitaTerrenoHelper.crearZpoV2CuestVisitaTerreno(cuestVisitaTerreno);
+        mDb.insert(ZpoV2CuestVisitaTerrenoConstants.CUEST_VIS_TER_TABLE, null, cv);
+    }
+    //Editar ZpoV2CuestionarioVisitaTerreno existente en la base de datos
+    public boolean editarZpoV2CuestVisitaTerreno(ZpoV2CuestVisitaTerreno cuestVisT) {
+        ContentValues cv = ZpoV2CuestVisitaTerrenoHelper.crearZpoV2CuestVisitaTerreno(cuestVisT);
+        return mDb.update(ZpoV2CuestVisitaTerrenoConstants.CUEST_VIS_TER_TABLE, cv, MainDBConstants.recordId + "='"
+                + cuestVisT.getRecordId() + "' and "  + MainDBConstants.fechaVisita + "='" + cuestVisT.getFechaVisita() + "' and "  + MainDBConstants.eventName + "='" + cuestVisT.getEventName() +"'", null) > 0;
+    }
+    //Limpiar la tabla de ZpoV2CuestionarioVisitaTerreno de la base de datos
+    public boolean borrarZpoV2CuestVisitaTerreno() {
+        return mDb.delete(ZpoV2CuestVisitaTerrenoConstants.CUEST_VIS_TER_TABLE, null, null) > 0;
+    }
+    //Obtener un ZpoV2CuestionarioVisitaTerreno de la base de datos
+    public ZpoV2CuestVisitaTerreno getZpoV2CuestVisitaTerreno(String filtro, String orden) throws SQLException {
+        ZpoV2CuestVisitaTerreno cuestVisitaTerreno = null;
+        Cursor cursorBC = crearCursor(ZpoV2CuestVisitaTerrenoConstants.CUEST_VIS_TER_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            cuestVisitaTerreno=ZpoV2CuestVisitaTerrenoHelper.crearZpoV2CuestVisitaTerreno(cursorBC);
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return cuestVisitaTerreno;
+    }
+    //Obtener una lista de ZpoV2CuestionarioVisitaTerreno de la base de datos
+    public List<ZpoV2CuestVisitaTerreno> getZpoV2CuestVisitaTerrenos(String filtro, String orden) throws SQLException {
+        List<ZpoV2CuestVisitaTerreno> cuestVT = new ArrayList<ZpoV2CuestVisitaTerreno>();
+        Cursor cursorBC = crearCursor(ZpoV2CuestVisitaTerrenoConstants.CUEST_VIS_TER_TABLE, filtro, null, orden);
+        if (cursorBC != null && cursorBC.getCount() > 0) {
+            cursorBC.moveToFirst();
+            cuestVT.clear();
+            do{
+                ZpoV2CuestVisitaTerreno cuestVisTer = null;
+                cuestVisTer = ZpoV2CuestVisitaTerrenoHelper.crearZpoV2CuestVisitaTerreno(cursorBC);
+                cuestVT.add(cuestVisTer);
+            } while (cursorBC.moveToNext());
+        }
+        if (!cursorBC.isClosed()) cursorBC.close();
+        return cuestVT;
     }
 
 }

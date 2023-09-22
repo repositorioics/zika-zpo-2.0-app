@@ -10,10 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ni.org.ics.zpo.v2.appmovil.R;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestionarioSaludMaterna;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestionarioSocioeconomico;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2EvaluacionPsicologica;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2RecoleccionMuestra;
+import ni.org.ics.zpo.v2.appmovil.domain.*;
 
 public class VisitAdapter extends ArrayAdapter<String> {
 
@@ -23,13 +20,15 @@ public class VisitAdapter extends ArrayAdapter<String> {
     private final ZpoV2CuestionarioSaludMaterna mZpoV2CuestSaMat;
     private final ZpoV2CuestionarioSocioeconomico mZpoV2CuestSoe;
     private final ZpoV2EvaluacionPsicologica mZpoV2EvPsico;
+    private final ZpoV2CuestVisitaTerreno mZpoV2VisTerreno;
 
 
     public VisitAdapter(Context context, int textViewResourceId,
                         String[] values, ZpoV2CuestionarioSaludMaterna zpoV2CuestSaMat,
                         ZpoV2CuestionarioSocioeconomico zpoV2CuestSoe,
                         ZpoV2RecoleccionMuestra zpoMuestra,
-                        ZpoV2EvaluacionPsicologica zpoEvPsico) {
+                        ZpoV2EvaluacionPsicologica zpoEvPsico,
+                        ZpoV2CuestVisitaTerreno zpoV2CuestVisitaTerreno) {
         super(context, textViewResourceId, values);
         this.context = context;
         this.values = values;
@@ -37,6 +36,7 @@ public class VisitAdapter extends ArrayAdapter<String> {
         this.mZpoV2CuestSoe = zpoV2CuestSoe;
         this.mZpoV2Muestra = zpoMuestra;
         this.mZpoV2EvPsico = zpoEvPsico;
+        this.mZpoV2VisTerreno = zpoV2CuestVisitaTerreno;
 
     }
 
@@ -99,6 +99,18 @@ public class VisitAdapter extends ArrayAdapter<String> {
                     textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
                 }
                 img=getContext().getResources().getDrawable( R.drawable.ic_mental_health);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+                break;
+
+            case 4:
+                if(mZpoV2VisTerreno!=null){
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.done));
+                }
+                else{
+                    textView.setTextColor(Color.RED);
+                    textView.setText(textView.getText()+"\n"+ context.getResources().getString(R.string.pending));
+                }
+                img=getContext().getResources().getDrawable( R.drawable.ic_door);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
                 break;
 

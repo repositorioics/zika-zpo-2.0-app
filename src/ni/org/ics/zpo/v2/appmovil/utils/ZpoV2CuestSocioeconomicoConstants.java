@@ -69,6 +69,12 @@ public class ZpoV2CuestSocioeconomicoConstants {
     public static final String cuandoPreescolarSes = "cuandoPreescolarSes";
     public static final String ambosPadresSes = "ambosPadresSes";
 
+    public static final String pri = "pri";
+    public static final String sec = "sec";
+    public static final String third = "third";
+    public static final String schCovid = "schCovid";
+    public static final String primarySch = "primarySch";
+
 
     //Crear tabla ZpoV2CuestSocioeconomico
 
@@ -131,6 +137,11 @@ public class ZpoV2CuestSocioeconomicoConstants {
             + preescolarSes + " text, "
             + cuandoPreescolarSes + " text, "
             + ambosPadresSes + " text, "
+            + pri + " text, "
+            + sec + " text, "
+            + third + " text, "
+            + schCovid + " text, "
+            + primarySch + " text, "
 
             + MainDBConstants.recordDate + " date, "
             + MainDBConstants.recordUser + " text, "

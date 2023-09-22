@@ -20,17 +20,20 @@ import ni.org.ics.zpo.v2.appmovil.AbstractAsyncActivity;
 import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
-import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2ActCuestSaludMaternaActivity;
-import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2CuestSocioeconomicoActivity;
-import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2EvalPsicologicaActivity;
-import ni.org.ics.zpo.v2.appmovil.activities.nuevos.NewZpoV2RecoleccionMuestraActivity;
+import ni.org.ics.zpo.v2.appmovil.activities.nuevos.*;
 import ni.org.ics.zpo.v2.appmovil.adapters.eventosmadre.VisitAdapter;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
 import ni.org.ics.zpo.v2.appmovil.domain.*;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import static android.provider.Settings.System.DATE_FORMAT;
 
 public class MotherVisitActivity extends AbstractAsyncActivity {
 	private ZpoAdapter zpoA;
@@ -40,6 +43,7 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 	private static ZpoV2CuestionarioSaludMaterna zpoV2CuestSaMat= null;
 	private static ZpoV2CuestionarioSocioeconomico zpoV2CuestSoe = null;
 	private static ZpoV2EvaluacionPsicologica zpoV2EvPsico = null;
+	private static ZpoV2CuestVisitaTerreno zpoV2CuestVisitaTerreno;
 
 
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -120,6 +124,14 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 						i = new Intent(getApplicationContext(),
 								NewZpoV2EvalPsicologicaActivity.class);
 						if (zpoV2EvPsico!=null) arguments.putSerializable(Constants.OBJECT_EVAL_PSICO , zpoV2EvPsico);
+						i.putExtras(arguments);
+						startActivity(i);
+						break;
+
+					case 4: //CUESTIONARIO VISITA TERRENO
+						i = new Intent(getApplicationContext(),
+								NewZpoV2CuestVisitaTerrenoActivity.class);
+						if (zpoV2CuestVisitaTerreno!=null) arguments.putSerializable(Constants.OBJECT_VIS_TER , zpoV2CuestVisitaTerreno);
 						i.putExtras(arguments);
 						startActivity(i);
 						break;
@@ -247,6 +259,10 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 		private class FetchDataIngresoTask extends AsyncTask<String, Void, String> {
 			private String eventoaFiltrar = null;
 			private String filtro = null;
+			private Date todayWithZeroTime = null;
+
+
+		private String filtro2 = null;
 			@Override
 			protected void onPreExecute() {
 				// before the request begins, show a progress indicator
@@ -257,14 +273,37 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 			protected String doInBackground(String... values) {
 				eventoaFiltrar = values[0];
 				try {
+					/*DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					String date = formatter.format(new Date());*/
+
+					SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+					Date today = new Date();
+
 					zpoA.open();
+					todayWithZeroTime =formatter.parse(formatter.format(today));
+					String date = "1689185713092";
+
+					//Establecemos la fecha que deseamos en un Calendario
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(todayWithZeroTime);
+
+					//Desplegamos la fecha
+					Date tempDate = cal.getTime();
+
+					//Le cambiamos la hora y minutos
+					cal.set(Calendar.HOUR, cal.get(Calendar.HOUR)+ 23);
+					cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE)+ 59);
+					tempDate = cal.getTime();
+
 					filtro = MainDBConstants.recordId + "='" + zp00.getRecordId() + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
+					filtro2 = MainDBConstants.recordId + "='" + zp00.getRecordId() + "' and " + MainDBConstants.recordDate + " BETWEEN '" + todayWithZeroTime.getTime() + "' and '" + tempDate.getTime()  + "' and " + MainDBConstants.eventName + "='" + eventoaFiltrar +"'";
 					zpoV2CuestSaMat = zpoA.getZpoV2CuestSaludMat(filtro, MainDBConstants.recordId);
 					zpoV2CuestSoe = zpoA.getZpoV2CuestSocieco(filtro, MainDBConstants.recordId);
 					zpoV2Muestra = zpoA.getZpoV2RecoleccionMuestra(filtro, MainDBConstants.recordId);
 					zpoV2EvPsico = zpoA.getZpoV2EvalPsico(filtro, MainDBConstants.recordId);
+					zpoV2CuestVisitaTerreno = zpoA.getZpoV2CuestVisitaTerreno(filtro2, MainDBConstants.recordId);
 
-					if (zpoV2CuestSaMat!=null && zpoV2CuestSoe!=null && zpoV2Muestra!= null && zpoV2EvPsico!=null){
+					if (zpoV2CuestSaMat!=null && zpoV2CuestSoe!=null && zpoV2Muestra!= null && zpoV2EvPsico!=null && zpoV2CuestVisitaTerreno!=null){
 
                         if(eventoaFiltrar.matches(Constants.MONTH36)){
                             zpEstado.setMes36('1');
@@ -298,7 +337,7 @@ public class MotherVisitActivity extends AbstractAsyncActivity {
 
 			protected void onPostExecute(String resultado) {
 				// after the network request completes, hide the progress indicator
-				gridView.setAdapter(new VisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpoV2CuestSaMat, zpoV2CuestSoe, zpoV2Muestra, zpoV2EvPsico));
+				gridView.setAdapter(new VisitAdapter(getApplicationContext(), R.layout.menu_item_2, menu_maternal_info, zpoV2CuestSaMat, zpoV2CuestSoe, zpoV2Muestra, zpoV2EvPsico,zpoV2CuestVisitaTerreno));
 				dismissProgressDialog();
 			}
 

@@ -41,7 +41,7 @@ public class MenuControlConsentimientosActivity extends AbstractAsyncActivity {
 		textView = (TextView) findViewById(R.id.label);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		menu_consent_info = getResources().getStringArray(R.array.menu_consent);
-		Drawable img =getResources().getDrawable( R.drawable.ic_briefcase);
+		Drawable img = getResources().getDrawable(R.drawable.ic_briefcase);
 		textView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
 		textView.setText(R.string.main_consent);
 		gridView.setAdapter(new MenuControlConsentimientosAdapter(getApplicationContext(), R.layout.menu_item_2, menu_consent_info));

@@ -32,6 +32,7 @@
         <item>@string/maternal_b_4</item>
         <item>@string/maternal_b_3</item>
         <item>@string/maternal_b_5</item>
+        <item>@string/maternal_b_6</item>
     </string-array>
 
     <string-array name="menu_maternal_call">

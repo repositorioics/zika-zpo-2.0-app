@@ -115,7 +115,8 @@
                   android:screenOrientation="portrait" />
         <activity android:name=".activities.nuevos.NewZpoV2StudyExitActivity"
                   android:screenOrientation="portrait" />
-
+        <activity android:name=".activities.nuevos.NewZpoV2CuestVisitaTerrenoActivity"
+                  android:screenOrientation="portrait" />
     </application>
 
 </manifest>

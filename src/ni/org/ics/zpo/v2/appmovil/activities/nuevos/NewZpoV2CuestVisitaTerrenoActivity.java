@@ -21,13 +21,11 @@ import ni.org.ics.zpo.v2.appmovil.MainActivity;
 import ni.org.ics.zpo.v2.appmovil.MyZpoApplication;
 import ni.org.ics.zpo.v2.appmovil.R;
 import ni.org.ics.zpo.v2.appmovil.database.ZpoAdapter;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoInfantData;
-import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestionarioSocioeconomico;
-import ni.org.ics.zpo.v2.appmovil.parsers.ZpoV2CuestSocioeconomicoXml;
+import ni.org.ics.zpo.v2.appmovil.domain.ZpoV2CuestVisitaTerreno;
+import ni.org.ics.zpo.v2.appmovil.parsers.ZpoV2CuestVisitaTerrenoXml;
 import ni.org.ics.zpo.v2.appmovil.preferences.PreferencesActivity;
 import ni.org.ics.zpo.v2.appmovil.utils.Constants;
 import ni.org.ics.zpo.v2.appmovil.utils.FileUtils;
-import ni.org.ics.zpo.v2.appmovil.utils.MainDBConstants;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
@@ -37,15 +35,15 @@ import java.util.Date;
 /**
  * @author ics
  */
-public class NewZpoV2CuestSocioeconomicoActivity extends AbstractAsyncActivity {
+public class NewZpoV2CuestVisitaTerrenoActivity extends AbstractAsyncActivity {
 
-    protected static final String TAG = NewZpoV2CuestSocioeconomicoActivity.class.getSimpleName();
+    protected static final String TAG = NewZpoV2CuestVisitaTerrenoActivity.class.getSimpleName();
 
     private ZpoAdapter zpoA;
-    private static ZpoV2CuestionarioSocioeconomico mZpoV2CuestSocioec = new ZpoV2CuestionarioSocioeconomico();
+    private static ZpoV2CuestVisitaTerreno mZpoV2CuestVisitaTerreno = new ZpoV2CuestVisitaTerreno();
 
-    public static final int ADD_ZPOCSOC_ODK = 1;
-    public static final int EDIT_ZPOCSOC_ODK = 2;
+    public static final int ADD_ZPOCS_VISTER_ODK = 1;
+    public static final int EDIT_ZPOCS_VISTER_ODK = 2;
 
     Dialog dialogInit;
     private SharedPreferences settings;
@@ -71,7 +69,7 @@ public class NewZpoV2CuestSocioeconomicoActivity extends AbstractAsyncActivity {
         zpoA = new ZpoAdapter(this.getApplicationContext(),mPass,false,false);
         mRecordId = getIntent().getExtras().getString(Constants.RECORDID);
         event = getIntent().getExtras().getString(Constants.EVENT);
-        mZpoV2CuestSocioec = (ZpoV2CuestionarioSocioeconomico) getIntent().getExtras().getSerializable(Constants.OBJECT_CUEST_SOE);
+        mZpoV2CuestVisitaTerreno = (ZpoV2CuestVisitaTerreno) getIntent().getExtras().getSerializable(Constants.OBJECT_VIS_TER);
         createInitDialog();
     }
 
@@ -86,10 +84,10 @@ public class NewZpoV2CuestSocioeconomicoActivity extends AbstractAsyncActivity {
 
         //to set the message
         TextView message = (TextView) dialogInit.findViewById(R.id.yesnotext);
-        if (mZpoV2CuestSocioec != null) {
-            message.setText(getString(R.string.edit) + " " + getString(R.string.maternal_b_4) + "?");
+        if (mZpoV2CuestVisitaTerreno != null) {
+            message.setText(getString(R.string.edit) + " " + getString(R.string.maternal_b_6) + "?");
         } else {
-            message.setText(getString(R.string.add) + " " + getString(R.string.maternal_b_4) + "?");
+            message.setText(getString(R.string.add) + " " + getString(R.string.maternal_b_6) + "?");
         }
 
         //add some action to the buttons
@@ -99,7 +97,7 @@ public class NewZpoV2CuestSocioeconomicoActivity extends AbstractAsyncActivity {
 
             public void onClick(View v) {
                 dialogInit.dismiss();
-                addZpoCuestDemografico();
+                addZpoCuestVisitaTerreno();
             }
         });
 
@@ -141,7 +139,7 @@ public class NewZpoV2CuestSocioeconomicoActivity extends AbstractAsyncActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent intent) {
-        if (requestCode == ADD_ZPOCSOC_ODK || requestCode == EDIT_ZPOCSOC_ODK) {
+        if (requestCode == ADD_ZPOCS_VISTER_ODK || requestCode == EDIT_ZPOCS_VISTER_ODK) {
             if (resultCode == RESULT_OK) {
                 Uri instanceUri = intent.getData();
                 //Busca la instancia resultado
@@ -160,7 +158,7 @@ public class NewZpoV2CuestSocioeconomicoActivity extends AbstractAsyncActivity {
                 }
                 if (complete.matches("complete")) {
                     //Parsear el resultado obteniendo un tamizaje si esta completo
-                    parseZpoCuestDemografico(idInstancia, instanceFilePath, accion);
+                    parseZpoCuestVisitaTerreno(idInstancia, instanceFilePath, accion);
                 } else {
                     Toast.makeText(getApplicationContext(), getString(R.string.err_not_completed), Toast.LENGTH_LONG).show();
                 }
@@ -171,16 +169,16 @@ public class NewZpoV2CuestSocioeconomicoActivity extends AbstractAsyncActivity {
         super.onActivityResult(requestCode, resultCode, intent);
     }
 
-    private void addZpoCuestDemografico() {
+    private void addZpoCuestVisitaTerreno() {
         try {
             Uri formUri;
-            if (mZpoV2CuestSocioec == null) {
+            if (mZpoV2CuestVisitaTerreno == null) {
                 //campos de proveedor de collect
                 String[] projection = new String[]{
                         "_id", "jrFormId", "displayName"};
                 //cursor que busca el formulario
                 Cursor c = getContentResolver().query(Constants.CONTENT_URI, projection,
-                        "jrFormId = 'ZpoV2_Cuestionario_Socioeconomico' and displayName = 'Continuacion Estudio ZPO Cuestionario Socioeconomico del Hogar'", null, null);
+                        "jrFormId = 'ZpoV2_Cuestionario_Visita_Terreno' and displayName = 'Continuacion Estudio ZPO Cuestionario de Visita de Terreno'", null, null);
                 c.moveToFirst();
                 //captura el id del formulario
                 Integer id = Integer.parseInt(c.getString(0));
@@ -189,12 +187,12 @@ public class NewZpoV2CuestSocioeconomicoActivity extends AbstractAsyncActivity {
                     c.close();
                 }
                 formUri = ContentUris.withAppendedId(Constants.CONTENT_URI, id);
-                accion = ADD_ZPOCSOC_ODK;
+                accion = ADD_ZPOCS_VISTER_ODK;
             } else {
                 //forma el uri para la instancia en ODK Collect
-                Integer id = mZpoV2CuestSocioec.getIdInstancia();
+                Integer id = mZpoV2CuestVisitaTerreno.getIdInstancia();
                 formUri = ContentUris.withAppendedId(Constants.CONTENT_URI_I, id);
-                accion = EDIT_ZPOCSOC_ODK;
+                accion = EDIT_ZPOCS_VISTER_ODK;
             }
             Intent odkA = new Intent(Intent.ACTION_EDIT, formUri);
             //Arranca la actividad proveedor de instancias de ODK Collect en busca de resultado
@@ -207,88 +205,35 @@ public class NewZpoV2CuestSocioeconomicoActivity extends AbstractAsyncActivity {
         }
     }
 
-    private void parseZpoCuestDemografico(Integer idInstancia, String instanceFilePath, Integer accion) {
+    private void parseZpoCuestVisitaTerreno(Integer idInstancia, String instanceFilePath, Integer accion) {
         Serializer serializer = new Persister();
         File source = new File(instanceFilePath);
         try {
-            ZpoV2CuestSocioeconomicoXml zpoV2CDEMXml = new ZpoV2CuestSocioeconomicoXml();
-            zpoV2CDEMXml = serializer.read(ZpoV2CuestSocioeconomicoXml.class, source);
-            if (accion== ADD_ZPOCSOC_ODK) mZpoV2CuestSocioec = new ZpoV2CuestionarioSocioeconomico();
-            mZpoV2CuestSocioec.setRecordId(mRecordId);
-            mZpoV2CuestSocioec.setEventName(event);
-            mZpoV2CuestSocioec.setFechaHoySes(zpoV2CDEMXml.getFechaHoySes());
-            mZpoV2CuestSocioec.setParedesCasaSes(zpoV2CDEMXml.getParedesCasaSes());
-            mZpoV2CuestSocioec.setParedesCasaOtraSes(zpoV2CDEMXml.getParedesCasaOtraSes());
-            mZpoV2CuestSocioec.setFuenteAguaSes(zpoV2CDEMXml.getFuenteAguaSes());
-            mZpoV2CuestSocioec.setFuenteAguaOtraSes(zpoV2CDEMXml.getFuenteAguaOtraSes());
-            mZpoV2CuestSocioec.setAguaIntermitenteSes(zpoV2CDEMXml.getAguaIntermitenteSes());
-            mZpoV2CuestSocioec.setGuardadoAguaSes(zpoV2CDEMXml.getGuardadoAguaSes());
-            mZpoV2CuestSocioec.setTipoBanoSes(zpoV2CDEMXml.getTipoBanoSes());
-            mZpoV2CuestSocioec.setPisoSes(zpoV2CDEMXml.getPisoSes());
-            mZpoV2CuestSocioec.setPisoOtroSes(zpoV2CDEMXml.getPisoOtroSes());
-            mZpoV2CuestSocioec.setElectricidadSes(zpoV2CDEMXml.getElectricidadSes());
-            mZpoV2CuestSocioec.setAireAcondicionadoSes(zpoV2CDEMXml.getAireAcondicionadoSes());
-            mZpoV2CuestSocioec.setAbanicoSes(zpoV2CDEMXml.getAbanicoSes());
-            mZpoV2CuestSocioec.setMosquiterosSes(zpoV2CDEMXml.getMosquiterosSes());
-            mZpoV2CuestSocioec.setAnimalesSes(zpoV2CDEMXml.getAnimalesSes());
-            mZpoV2CuestSocioec.setDormitoriosSes(zpoV2CDEMXml.getDormitoriosSes());
-            mZpoV2CuestSocioec.setCuantosDuermenSes(zpoV2CDEMXml.getCuantosDuermenSes());
-            mZpoV2CuestSocioec.setCuantosAdultosSes(zpoV2CDEMXml.getCuantosAdultosSes());
-            mZpoV2CuestSocioec.setCuantosNinosSes(zpoV2CDEMXml.getCuantosNinosSes());
-            mZpoV2CuestSocioec.setPersona1NombreSes(zpoV2CDEMXml.getPersona1NombreSes());
-            mZpoV2CuestSocioec.setPersona1EdadSes(zpoV2CDEMXml.getPersona1EdadSes());
-            mZpoV2CuestSocioec.setPersona1GradoSes(zpoV2CDEMXml.getPersona1GradoSes());
-            mZpoV2CuestSocioec.setPersona1OcupacionSes(zpoV2CDEMXml.getPersona1OcupacionSes());
-            mZpoV2CuestSocioec.setPersona2NombreSes(zpoV2CDEMXml.getPersona2NombreSes());
-            mZpoV2CuestSocioec.setPersona2EdadSes(zpoV2CDEMXml.getPersona2EdadSes());
-            mZpoV2CuestSocioec.setPersona2GradoSes(zpoV2CDEMXml.getPersona2GradoSes());
-            mZpoV2CuestSocioec.setPersona2OcupacionSes(zpoV2CDEMXml.getPersona2OcupacionSes());
-            mZpoV2CuestSocioec.setPersona3NombreSes(zpoV2CDEMXml.getPersona3NombreSes());
-            mZpoV2CuestSocioec.setPersona3EdadSes(zpoV2CDEMXml.getPersona3EdadSes());
-            mZpoV2CuestSocioec.setPersona3GradoSes(zpoV2CDEMXml.getPersona3GradoSes());
-            mZpoV2CuestSocioec.setPersona3OcupacionSes(zpoV2CDEMXml.getPersona3OcupacionSes());
-            mZpoV2CuestSocioec.setPersona4NombreSes(zpoV2CDEMXml.getPersona4NombreSes());
-            mZpoV2CuestSocioec.setPersona4EdadSes(zpoV2CDEMXml.getPersona4EdadSes());
-            mZpoV2CuestSocioec.setPersona4GradoSes(zpoV2CDEMXml.getPersona4GradoSes());
-            mZpoV2CuestSocioec.setPersona4OcupacionSes(zpoV2CDEMXml.getPersona4OcupacionSes());
-            mZpoV2CuestSocioec.setPersona5NombreSes(zpoV2CDEMXml.getPersona5NombreSes());
-            mZpoV2CuestSocioec.setPersona5EdadSes(zpoV2CDEMXml.getPersona5EdadSes());
-            mZpoV2CuestSocioec.setPersona5GradoSes(zpoV2CDEMXml.getPersona5GradoSes());
-            mZpoV2CuestSocioec.setPersona5OcupacionSes(zpoV2CDEMXml.getPersona5OcupacionSes());
-            mZpoV2CuestSocioec.setPersona6NombreSes(zpoV2CDEMXml.getPersona6NombreSes());
-            mZpoV2CuestSocioec.setPersona6EdadSes(zpoV2CDEMXml.getPersona6EdadSes());
-            mZpoV2CuestSocioec.setPersona6GradoSes(zpoV2CDEMXml.getPersona6GradoSes());
-            mZpoV2CuestSocioec.setPersona6OcupacionSes(zpoV2CDEMXml.getPersona6OcupacionSes());
-            mZpoV2CuestSocioec.setPersona7NombreSes(zpoV2CDEMXml.getPersona7NombreSes());
-            mZpoV2CuestSocioec.setPersona7EdadSes(zpoV2CDEMXml.getPersona7EdadSes());
-            mZpoV2CuestSocioec.setPersona7GradoSes(zpoV2CDEMXml.getPersona7GradoSes());
-            mZpoV2CuestSocioec.setPersona7OcupacionSes(zpoV2CDEMXml.getPersona7OcupacionSes());
-            mZpoV2CuestSocioec.setPersona8NombreSes(zpoV2CDEMXml.getPersona8NombreSes());
-            mZpoV2CuestSocioec.setPersona8EdadSes(zpoV2CDEMXml.getPersona8EdadSes());
-            mZpoV2CuestSocioec.setPersona8GradoSes(zpoV2CDEMXml.getPersona8GradoSes());
-            mZpoV2CuestSocioec.setPersona8OcupacionSes(zpoV2CDEMXml.getPersona8OcupacionSes());
-            mZpoV2CuestSocioec.setNombreEncuestadorSes(zpoV2CDEMXml.getNombreEncuestadorSes());
-            mZpoV2CuestSocioec.setPreescolarSes(zpoV2CDEMXml.getPreescolarSes());
-            mZpoV2CuestSocioec.setCuandoPreescolarSes(zpoV2CDEMXml.getCuandoPreescolarSes());
-            mZpoV2CuestSocioec.setAmbosPadresSes(zpoV2CDEMXml.getAmbosPadresSes());
+            ZpoV2CuestVisitaTerrenoXml zpoV2CVTXml = new ZpoV2CuestVisitaTerrenoXml();
+            zpoV2CVTXml = serializer.read(ZpoV2CuestVisitaTerrenoXml.class, source);
+            if (accion== ADD_ZPOCS_VISTER_ODK) mZpoV2CuestVisitaTerreno = new ZpoV2CuestVisitaTerreno();
+            mZpoV2CuestVisitaTerreno.setRecordId(mRecordId);
+            mZpoV2CuestVisitaTerreno.setEventName(event);
+            mZpoV2CuestVisitaTerreno.setFechaVisita(zpoV2CVTXml.getFechaVisita());
+            mZpoV2CuestVisitaTerreno.setAreaCS(zpoV2CVTXml.getAreaCS());
+            mZpoV2CuestVisitaTerreno.setResultadoVisita(zpoV2CVTXml.getResultadoVisita());
+            mZpoV2CuestVisitaTerreno.setOtroResultadoVisita(zpoV2CVTXml.getOtroResultadoVisita());
+            mZpoV2CuestVisitaTerreno.setFechaCita(zpoV2CVTXml.getFechaCita());
+            mZpoV2CuestVisitaTerreno.setHoraCita(zpoV2CVTXml.getHoraCita());
+            mZpoV2CuestVisitaTerreno.setPersCitaEntregada(zpoV2CVTXml.getPersCitaEntregada());
+            mZpoV2CuestVisitaTerreno.setPersCompletaForm(zpoV2CVTXml.getPersCompletaForm());
 
-            mZpoV2CuestSocioec.setPri(zpoV2CDEMXml.getPri());
-            mZpoV2CuestSocioec.setSec(zpoV2CDEMXml.getSec());
-            mZpoV2CuestSocioec.setThird(zpoV2CDEMXml.getThird());
-            mZpoV2CuestSocioec.setSchCovid(zpoV2CDEMXml.getSchCovid());
-            mZpoV2CuestSocioec.setPrimarySch(zpoV2CDEMXml.getPrimarySch());
-
-            mZpoV2CuestSocioec.setRecordDate(new Date());
-            mZpoV2CuestSocioec.setRecordUser(username);
-            mZpoV2CuestSocioec.setIdInstancia(idInstancia);
-            mZpoV2CuestSocioec.setInstancePath(instanceFilePath);
-            mZpoV2CuestSocioec.setEstado(Constants.STATUS_NOT_SUBMITTED);
-            mZpoV2CuestSocioec.setStart( zpoV2CDEMXml.getStart());
-            mZpoV2CuestSocioec.setEnd( zpoV2CDEMXml.getEnd());
-            mZpoV2CuestSocioec.setDeviceid( zpoV2CDEMXml.getDeviceid());
-            mZpoV2CuestSocioec.setSimserial( zpoV2CDEMXml.getSimserial());
-            mZpoV2CuestSocioec.setPhonenumber( zpoV2CDEMXml.getPhonenumber());
-            mZpoV2CuestSocioec.setToday( zpoV2CDEMXml.getToday());
+            mZpoV2CuestVisitaTerreno.setRecordDate(new Date());
+            mZpoV2CuestVisitaTerreno.setRecordUser(username);
+            mZpoV2CuestVisitaTerreno.setIdInstancia(idInstancia);
+            mZpoV2CuestVisitaTerreno.setInstancePath(instanceFilePath);
+            mZpoV2CuestVisitaTerreno.setEstado(Constants.STATUS_NOT_SUBMITTED);
+            mZpoV2CuestVisitaTerreno.setStart( zpoV2CVTXml.getStart());
+            mZpoV2CuestVisitaTerreno.setEnd( zpoV2CVTXml.getEnd());
+            mZpoV2CuestVisitaTerreno.setDeviceid( zpoV2CVTXml.getDeviceid());
+            mZpoV2CuestVisitaTerreno.setSimserial( zpoV2CVTXml.getSimserial());
+            mZpoV2CuestVisitaTerreno.setPhonenumber( zpoV2CVTXml.getPhonenumber());
+            mZpoV2CuestVisitaTerreno.setToday( zpoV2CVTXml.getToday());
             new SaveDataTask().execute(accion);
 
         } catch (Exception e) {
@@ -315,11 +260,11 @@ public class NewZpoV2CuestSocioeconomicoActivity extends AbstractAsyncActivity {
             accionaRealizar = values[0];
             try {
                 zpoA.open();
-                if (accionaRealizar == ADD_ZPOCSOC_ODK){
-                    zpoA.crearZpoV2CuestSocioeco(mZpoV2CuestSocioec);
+                if (accionaRealizar == ADD_ZPOCS_VISTER_ODK){
+                    zpoA.crearZpoV2CuestVisitaTerreno(mZpoV2CuestVisitaTerreno);
                 }
                 else{
-                    zpoA.editarZpoV2CuestSocioeco(mZpoV2CuestSocioec);
+                    zpoA.editarZpoV2CuestVisitaTerreno(mZpoV2CuestVisitaTerreno);
                 }
                 zpoA.close();
             } catch (Exception e) {

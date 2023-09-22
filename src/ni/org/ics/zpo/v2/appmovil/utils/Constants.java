@@ -42,6 +42,7 @@ public class Constants {
 	public static final String OBJECT_FORM_AUDI = "zpoFormAudicion";
 	public static final String OBJECT_EVAL_VIS = "zpoEvaluacionVisual";
 	public static final String OBJECT_STUDY_EX = "zpoStudyExit";
+	public static final String OBJECT_VIS_TER = "zpoCuestVisitaTerreno";
 
 
 	public static final String OBJECTO_ZPEST = "zpestado";
